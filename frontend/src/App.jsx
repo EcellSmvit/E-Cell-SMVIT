@@ -7,8 +7,8 @@ import Particles from './components/Particlesbackground';
 import TextHome from './components/TextHome';
 import ThreeScene from './components/ThreeScene';
 import Section2 from './components/Section2';
-import SmoothScrollWrapper from './components/SmoothScrollWrapper';
 import Section3 from './components/Section3';
+import Loding from './components/Loding';
 
 
 function App() {
@@ -17,9 +17,8 @@ function App() {
       {/* <SmoothScrollWrapper>
 
       </SmoothScrollWrapper> */}
-
+      {/* <Loding/> */}
       <Navbar/>
-      
       <TextHome/>
       <Background/>
       <ThreeScene />

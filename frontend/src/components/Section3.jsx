@@ -10,7 +10,7 @@ const Section3 = () => {
                 trigger: "#page1",
                 start: "top top",
                 end: "bottom top",
-                scrub: true,
+                scrub: 2,
                 pin:true,
                 // markers: true,
               }
@@ -21,7 +21,7 @@ const Section3 = () => {
                   trigger: "#page1",
                   start: "top top",
                   end: "bottom top",
-                  scrub: true,
+                  scrub: 2,
                 }
               });
               
@@ -83,7 +83,7 @@ const Section3 = () => {
             </div>
             <div id="card3" className="flex items-center flex-col gap-10 z-20 justify-center w-[40rem] h-[20rem] absolute text-white bg-gradient-to-b from-black to-[#4F46E5] rounded-xl">
                 <h1 className="text-2xl font-black">STATISTICS</h1>
-                <div className="flex items-center justify-center gap-10 text-2xl font-medium text-center">
+                <div className="flex gap-10 justify-center items-center text-2xl font-medium text-center">
                     <p>4+ <br /> Years</p>
                     <p>20+ <br /> Speakers</p>
                     <p>15+ <br /> Events</p>

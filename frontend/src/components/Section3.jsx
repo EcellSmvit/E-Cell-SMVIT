@@ -41,12 +41,12 @@ const Section3 = () => {
                   y: -700,
                   duration: 0.2,
                   ease: "power2.out"
-                }, 0.4)
-                .to("#img1", {
-                  y: -700,
-                  duration: 0.2,
-                  ease: "power2.out"
-                }, 0.6);
+                }, 0.4);
+                // .to("#img1", {
+                //   y: -700,
+                //   duration: 0.2,
+                //   ease: "power2.out"
+                // }, 0.6);
               
                 imgTimeline
                 .to("#card3", {
@@ -58,12 +58,12 @@ const Section3 = () => {
                   y: -700,
                   duration: 0.2,
                   ease: "power2.out"
-                }, 0.2)
-                .to("#card1", {
-                  y: -700,
-                  duration: 0.2,
-                  ease: "power2.out"
-                }, 0.4);
+                }, 0.2);
+                // .to("#card1", {
+                //   y: -700,
+                //   duration: 0.2,
+                //   ease: "power2.out"
+                // }, 0.4);
                 
     },[])
 
@@ -71,19 +71,19 @@ const Section3 = () => {
     <div id="page1" className="bg-black w-[100%] h-[100vh] relative flex">
         <div id="right" className="h-[100vh] w-1/2 flex items-center justify-center ">
             <div id="card1" className="flex items-center justify-center flex-col z-0 gap-10 p-4 w-[40rem] h-[20rem] absolute text-white bg-gradient-to-b from-black to-[#4F46E5] rounded-xl">
-            <h1 className="font-black text-2xl">OUR VISION</h1>
+            <h1 className="text-2xl font-black">OUR VISION</h1>
             <p>
             Our vision is to create a self-sustaining club that supports entrepreneurs through workshops, innovation labs, and networking opportunities like ideathons and hackathons. We aim to host an annual E-Summit, building partnerships, generating revenue, and showcasing our ability to manage large-scale projects. Additionally, we will offer micro-grant programs, on-campus incubators, and a strong alumni network for mentorship, investment, and partnerships to support ventures beyond campus.
             </p>
 
             </div>
             <div id="card2" className="flex items-center justify-center z-10 flex-col gap-10 p-4 w-[40rem] h-[20rem] absolute text-white bg-gradient-to-b from-black to-[#4F46E5] rounded-xl">
-            <h1 className="font-black text-2xl">OUR MISSION</h1>
+            <h1 className="text-2xl font-black">OUR MISSION</h1>
             <p>Our mission is to create a self-sustaining campus hub that fosters entrepreneurship by connecting students with industry experts, understanding market demands, and providing hands-on training to launch start-ups seamlessly.</p>
             </div>
             <div id="card3" className="flex items-center flex-col gap-10 z-20 justify-center w-[40rem] h-[20rem] absolute text-white bg-gradient-to-b from-black to-[#4F46E5] rounded-xl">
-                <h1 className="font-black text-2xl">STATISTICS</h1>
-                <div className="font-medium text-2xl flex items-center justify-center gap-10 text-center">
+                <h1 className="text-2xl font-black">STATISTICS</h1>
+                <div className="flex items-center justify-center gap-10 text-2xl font-medium text-center">
                     <p>4+ <br /> Years</p>
                     <p>20+ <br /> Speakers</p>
                     <p>15+ <br /> Events</p>

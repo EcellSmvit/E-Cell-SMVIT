@@ -48,8 +48,8 @@ useEffect(() => {
   scene.traverse((child) => {
     if (child.isMesh) {
       child.material = new THREE.MeshStandardMaterial({
-        color: new THREE.Color('#746df9'),
-        metalness: 0.9,
+        color: new THREE.Color('#9893fd'),
+        metalness: 0.1,
         roughness: 0.01,
       });
       child.material.needsUpdate = true;

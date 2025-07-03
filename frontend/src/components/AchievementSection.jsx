@@ -74,7 +74,7 @@ const AchievementSection = () => {
         id="page2"
         className="bg-[radial-gradient(circle,_#6C4DFF_0%,_#000000_100%)] w-full h-[200vh] relative flex items-center justify-center"
       >
-        <div id="scroll-container" className="  absolute inset-0 w-full h-full pointer-events-none z-5">
+        <div id="scroll-container" className="  absolute inset-0 w-full h-full pointer-events-none z-50">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />
           </div>

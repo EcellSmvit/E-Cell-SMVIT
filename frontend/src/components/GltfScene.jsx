@@ -1,4 +1,3 @@
-// src/components/GltfScene.jsx
 import React, { useEffect, useRef } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
@@ -63,27 +62,20 @@ const Model = () => {
       group.current.rotation.set(0, 0, 0);
     }
 
-    // Animate: when first bg comes, then go right
-    // We'll use the scroll position where #bg1 is fully visible to start the right movement.
-    // #bg1 is the topmost, z-3, so it appears first as user scrolls down.
-    // We'll use ScrollTrigger to start the right movement when #bg1 enters the viewport.
-
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: '#bg4',
-          start: 'top center', // when #bg1 top hits center of viewport
-          end: 'bottom center', // when #bg1 bottom hits center
-          scrub: 1,
+          trigger: '#page2',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 2,
         },
       });
 
       if (group.current) {
-        // Move right (x: 0 -> 3) as #bg1 is visible
         tl.to(group.current.position, { x: 3, y: 1.5, z: 0, ease: 'power2.out' });
       }
 
-      // After that, as user scrolls further (when #scroll-container is scrolled), move down
       const tl2 = gsap.timeline({
         scrollTrigger: {
           trigger: '#bg4',
@@ -94,7 +86,6 @@ const Model = () => {
       });
 
       if (group.current) {
-        // Move right (x: 0 -> 3), then down (y: 1.5 -> -2)
         tl.to(group.current.position, { x: 3, y: 1.5, z: 0, ease: 'power2.out' })
           .to(group.current.position, { x: 0, y: -2, z: 0, ease: 'power2.out' });
       }
@@ -102,7 +93,6 @@ const Model = () => {
     return () => ctx.revert();
   }, [scene]);
 
-  // Rotate the model on its own axis
   useFrame(() => {
     if (group.current) {
       group.current.rotation.y += 0.01;
@@ -123,8 +113,6 @@ export default function GltfScene() {
         enablePan={false}
         enableZoom={false}
         enableRotate={false}
-        // autoRotate={true}
-        // autoRotateSpeed={5}
       />
 
       <Model />

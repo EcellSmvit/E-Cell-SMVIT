@@ -204,7 +204,7 @@ const AchievementSection = () => {
         </div>
         <div
           id="page2-text"
-          className="fixed bottom-60 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full pointer-events-none select-none"
+          className="absolute bottom-60 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full pointer-events-none select-none"
           style={{ fontFamily: 'Anton, sans-serif' }}
         >
           <h1 className="text-[4vw] text-white tracking-[0.2vw] whitespace-nowrap mb-8">

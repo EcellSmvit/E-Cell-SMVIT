@@ -68,7 +68,7 @@ const Section3 = () => {
     },[])
 
   return (
-    <div id="page1" className="bg-black w-[100%] h-[100vh] relative flex">
+    <div id="page1" className="bg-gradient-to-t to-[#6C4DFF] via-[#1f1c4d] from-black w-[100%] h-[100vh] relative flex">
         <div id="right" className="h-[100vh] w-1/2 flex items-center justify-center ">
             <div id="card1" className="flex items-center justify-center flex-col z-0 gap-10 p-4 w-[40rem] h-[20rem] absolute text-white bg-white/20 backdrop-blur-lg border border-white/20 rounded-xl">
             <h1 className="text-2xl font-black">OUR VISION</h1>
@@ -100,9 +100,6 @@ const Section3 = () => {
 
             <img className="w-[40rem] absolute z-30 rounded-[2vw] border-[10px] border-white" id="img4" src="https://ik.imagekit.io/96gea10vb/Gallery%20Images/ideaExpo-11.avif?updatedAt=1747310806941" alt="" />
         </div>
-        <h1 className="text-[14rem] -z-10 text-gray-400 font-black absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none select-none">
-          E-CELL
-        </h1>
     </div>
   )
 }

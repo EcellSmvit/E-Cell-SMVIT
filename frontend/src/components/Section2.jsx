@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from 'lenis'
+// import { TextReveal } from "@/components/magicui/text-reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,27 +52,28 @@ const lenis = new Lenis({
       <div id="pages" className="relative z-[1]">
         <div
           id="page6"
-          className="w-full h-screen bg-black flex items-center justify-center relative"
+          className="flex relative justify-center items-center w-full h-screen bg-black"
         >
           <video
             src="https://ik.imagekit.io/96gea10vb/images/videos/ecellintro.mp4?updatedAt=1747323394315"
             autoPlay
             muted
             loop
-            className="absolute w-[80%] h-[80vh] object-cover rounded-[1vw]"
+            className="absolute w-[80%] h-[80vh] object-cover rounded-[1vw] shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
             aria-label="Promotional video for leadership program"
             preload="auto" // Optimize loading
           />
         </div>
-        <div id="page7" className="w-full  h-[100vh] bg-gradient-to-b from-black to-[#4F46E5]
+        <div id="page7" className="w-full  h-[100vh] bg-gradient-to-b from-black via-[#1f1c4d] to-[#6C4DFF]
 ">
           <div id="txt-7" className="pt-[10vw] pl-[2vw] relative ">
-            <h1 className="text-white text-3xl font-black ">About E-CELL SMVIT</h1>
-            <p className="pt-[4vw] text-xl font-medium text-white text-wrap w-1/3 ">
+            <h1 className="text-3xl font-black text-white">About E-CELL SMVIT</h1>
+            <p className="pt-[4vw]  text-xl font-medium text-white text-wrap w-1/3 ">
             The SMVIT Entrepreneurship Cell (E-Cell) is a dynamic platform for aspiring entrepreneurs. Re-established in 2021, it has represented SMVIT at top events like NEC by IIT Madras & Bombay, securing 16th place at IIT Bombay, and gaining exposure through startup expos.On campus, E-Cell organizes competitions and networking events to help students turn ideas into impactful ventures.More than just a club, E-Cell is a launchpad for students building innovative and meaningful startups.
             </p>
           </div>
         </div>
+        
       </div>
     </div>
   );

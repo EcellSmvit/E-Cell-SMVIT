@@ -72,9 +72,9 @@ const AchievementSection = () => {
     <div className="overflow-hidden">
       <div
         id="page2"
-        className="bg-[radial-gradient(circle,_#6C4DFF_0%,_#000000_100%)] w-full h-[200vh] relative flex items-center justify-center"
+        className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center"
       >
-        <div id="scroll-container" className="  absolute inset-0 w-full h-full pointer-events-none z-50">
+        <div id="scroll-container" className="absolute inset-0 z-50 w-full h-full pointer-events-none">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />
           </div>
@@ -204,13 +204,13 @@ const AchievementSection = () => {
         </div>
         <div
           id="page2-text"
-          className="absolute bottom-60 left-1/2 -translate-x-1/2 flex flex-col items-center z-10 w-full pointer-events-none select-none"
+          className="flex absolute bottom-60 left-1/2 z-10 flex-col items-center w-full -translate-x-1/2 pointer-events-none select-none"
           style={{ fontFamily: 'Anton, sans-serif' }}
         >
           <h1 className="text-[4vw] text-white tracking-[0.2vw] whitespace-nowrap mb-8">
             STARTUP BACKED BY E-CELL
           </h1>
-          <div className="flex flex-row justify-center items-end w-full gap-40 pointer-events-auto">
+          <div className="flex flex-row gap-40 justify-center items-end w-full pointer-events-auto">
             {/* Left Images */}
             <div className="flex flex-col gap-10">
               <div className="w-[8vw] rounded-[1vw] overflow-hidden">

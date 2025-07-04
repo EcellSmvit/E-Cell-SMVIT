@@ -4,7 +4,7 @@ import ChromaGrid from './ChromeGrid';
 function About() {
   const items = [
     {
-      image: "https://ik.imagekit.io/96gea10vb/images/webp/Shashidhar.webp?updatedAt=1747321666205",
+      image: "https://ik.imagekit.io/96gea10vb/NewTeam%20Folder_Vv_GqiSji?updatedAt=1751668659681",
       title: "SHASHIDHAR HEGDE",
       subtitle: "Secretary",
       handle: "@shashidhar-hegde",
@@ -13,7 +13,7 @@ function About() {
       url: "https://www.linkedin.com/in/shashidhar-hegde-9b4645270/"
     },
     {
-      image: "https://ik.imagekit.io/96gea10vb/images/webp/Tanish.webp?updatedAt=1747321668374",
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage2_kICuVoV6G?updatedAt=1751668825602",
       title: "TANISH RAJ",
       subtitle: "Head Of Corporate Relations",
       handle: "@tanish-raj",
@@ -40,7 +40,7 @@ function About() {
       url: "https://www.linkedin.com/in/hansikha-venkatesh-6733a7225/"
     },
     {
-      image: "https://ik.imagekit.io/96gea10vb/images/webp/carol.webp?updatedAt=1747321661667",
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage3_Q-t9OzulN?updatedAt=1751668914209",
       title: "CAROL DSILVA",
       subtitle: "Head Of Design & Media",
       handle: "@caroldsillva",
@@ -51,7 +51,115 @@ function About() {
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/Bikesh.webp?updatedAt=1747321659844",
       title: "BIKESH KUMAR",
-      subtitle: "Corporate Relations and Tech Executive",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage4_XdCP9rn0Z?updatedAt=1751669076681",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/stavik.webp?updatedAt=1747321668434",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/Sarthak.webp?updatedAt=1747321666221",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage5_QWhyGVmKO?updatedAt=1751669182004",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/dhruv.webp?updatedAt=1747321661417",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage6_JXFJM82pj?updatedAt=1751669231610",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/Ashish.webp?updatedAt=1747321657369",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/shashwatS.webp?updatedAt=1747321667249",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/images/webp/ShashwatR.webp?updatedAt=1747321667103",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage7_W3oI3NhNh?updatedAt=1751669417474",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
+      handle: "@bikesh-kumar",
+      borderColor: "#10B981",
+      gradient: "linear-gradient(180deg, #10B981, #000)",
+      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    },
+    {
+      image: "https://ik.imagekit.io/96gea10vb/NewTeamImage8_hsKp8XbWO?updatedAt=1751669911879",
+      title: "BIKESH KUMAR",
+      subtitle: "Corporate Relations Executive",
       handle: "@bikesh-kumar",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
@@ -60,7 +168,7 @@ function About() {
   ];
 
   return (
-    <div className="flex w-full h-auto bg-black justify-cenrter items-cente">
+    <div className="flex w-full h-auto text-white bg-gradient-to-bl from-black via-black to-[#6C4DFF] justify-cenrter items-cente p-8">
       <div style={{ position: 'relative' }}>
         <ChromaGrid 
           items={items}

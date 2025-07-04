@@ -67,7 +67,7 @@ const Model = () => {
         scrollTrigger: {
           trigger: '#page2',
           start: 'top top',
-          end: 'bottom top',
+          end: '+=350%', // extend scroll distance so animation ends further down
           scrub: 2,
         },
       });
@@ -76,14 +76,6 @@ const Model = () => {
         tl.to(group.current.position, { x: 3, y: 1.5, z: 0, ease: 'power2.out' });
       }
 
-      const tl2 = gsap.timeline({
-        scrollTrigger: {
-          trigger: '#bg4',
-          start: 'top top',
-          end: 'bottom bottom',
-          scrub: 1,
-        },
-      });
 
       if (group.current) {
         tl.to(group.current.position, { x: 3, y: 1.5, z: 0, ease: 'power2.out' })

@@ -59,66 +59,66 @@ function About() {
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/NewTeamImage4_XdCP9rn0Z?updatedAt=1751669076681",
-      title: "BIKESH KUMAR",
+      title: "MARIAM SHUAIB",
       subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      handle: "@mariam-shuaib",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/mariam-shuaib-003362328/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/stavik.webp?updatedAt=1747321668434",
-      title: "BIKESH KUMAR",
+      title: "SATVIK GUPTA",
       subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      handle: "@satvik--gupta",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/satvik--gupta/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
-      title: "BIKESH KUMAR",
-      subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      title: "BHOOMI NAYAK",
+      subtitle: "Operations Executive",
+      handle: "@bhoomi-nayak",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/bhoomi-nayak-943083305/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/Sarthak.webp?updatedAt=1747321666221",
-      title: "BIKESH KUMAR",
-      subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      title: "SARTHAK TRIPATHI",
+      subtitle: "Operations Executive",
+      handle: "@sarthak-tripathi",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/sarthak-tripathi-b11458295/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/NewTeamImage5_QWhyGVmKO?updatedAt=1751669182004",
-      title: "BIKESH KUMAR",
-      subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      title: "ANUJ DIXIT",
+      subtitle: "Events & Marketing Executive",
+      handle: "@anuj-dixit",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/anuj-kumar-dixit-668437280/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/dhruv.webp?updatedAt=1747321661417",
-      title: "BIKESH KUMAR",
-      subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      title: "DHRUV KUMAR",
+      subtitle: "Events & Marketing Executive",
+      handle: "@dhruv-kumar",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/dhruv-kumar-589a33314/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/NewTeamImage6_JXFJM82pj?updatedAt=1751669231610",
-      title: "BIKESH KUMAR",
+      title: "ANANT SRIVASTAVA",
       subtitle: "Corporate Relations Executive",
-      handle: "@bikesh-kumar",
+      handle: "@anant-srivastava",
       borderColor: "#10B981",
       gradient: "linear-gradient(180deg, #10B981, #000)",
-      url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      url: "https://www.linkedin.com/in/anant-srivastava-709174293/"
     },
     {
       image: "https://ik.imagekit.io/96gea10vb/images/webp/Ashish.webp?updatedAt=1747321657369",
@@ -168,14 +168,16 @@ function About() {
   ];
 
   return (
-    <div className="flex w-full h-auto text-white bg-gradient-to-bl from-black via-black to-[#6C4DFF] justify-cenrter items-cente p-8">
+    <div className="flex w-full h-auto text-white bg-gradient-to-bl from-black via-black to-[#6C4DFF] justify-center items-center p-8">
       <div style={{ position: 'relative' }}>
+        <h1 className='text-[#ffffff] font-black text-center p-4 text-4xl'>MEET OUT <span className='text-[#6c4dff]'>TEAM</span></h1>
         <ChromaGrid 
           items={items}
           radius={300}
           damping={0.45}
           fadeOut={0.6}
           ease="power3.out"
+          className="gap-8"
         />
       </div>
     </div>

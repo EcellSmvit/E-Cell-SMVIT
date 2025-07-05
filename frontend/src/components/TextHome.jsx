@@ -7,20 +7,19 @@ function TextHome() {
   console.log('Animation completed!');
 };
 
-  return (
-    <div className='absolute z-20 font-black transform -translate-x-1/2 left-1/2 bottom-20'>
-        
+return (
+  <div className="absolute z-20 font-black left-1/2 bottom-20 w-[90vw] max-w-3xl text-center px-4 flex justify-center items-center transform -translate-x-1/2">
+    <BlurText
+      text="WHERE ASPIRATION MEETS OPPORTUNITY"
+      delay={150}
+      animateBy="words"
+      direction="top"
+      onAnimationComplete={handleAnimationComplete}
+      className="mb-8 text-lg sm:text-xl md:text-2xl lg:text-3xl text-white"
+    />
+  </div>
+);
 
-<BlurText
-  text="WHERE ASPIRATION MEETS OPPORTUNITY"
-  delay={150}
-  animateBy="words"
-  direction="top"
-  onAnimationComplete={handleAnimationComplete}
-  className="mb-8 text-2xl text-white"
-/>
-    </div>
-  )
 }
 
 export default TextHome

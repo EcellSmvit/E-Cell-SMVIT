@@ -1,12 +1,13 @@
 import userModel from '../models/userModel.js';
 
-export const getUserData = async(req,res) =>{
+export const getUserData = async (req, res) => {
     try {
         const userId = req.user.id;
-       const user = await userModel.findById(userId).populate('friends', 'name _id').populate('friendRequests', 'name _id');
+        // Adjust field names if your schema uses different casing
+        const user = await userModel.findById(userId);
         if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
-    }
+            return res.status(404).json({ success: false, message: "User not found" });
+        }
 
         res.json({
             success: true,
@@ -16,17 +17,15 @@ export const getUserData = async(req,res) =>{
                 email: user.email,
                 mobileNumber: user.mobileNumber,
                 username: user.username,
-                dateOfBirth: user.dateOfBirth,
+                // Use the correct field name as per your schema
+                dateOfBirth: user.dateOfBirth || user.dateofBirth,
                 isVerified: user.isVerified,
                 createdAt: user.createdAt,
-                updatedAt: user.updatedAt,
-                friendRequests: user.friendRequests,
-                friends: user.friends,
-                sentRequests: user.sentRequests
+                updatedAt: user.updatedAt
             }
         });
-        
+
     } catch (error) {
-    return res.status(500).json({ success: false, message: "Internal Server Error" }); // ✅ Proper error response
-  }
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
 }

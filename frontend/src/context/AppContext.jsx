@@ -14,7 +14,7 @@ export const AppContextProvider = ({ children }) => {
 
   const getUserData = async () => {
     try {
-      const res = await axios.get(`${backendUrl}api/user/data`, {
+      const res = await axios.get(`${backendUrl}/api/user/data`, {
         withCredentials: true, 
       });
 
@@ -37,7 +37,7 @@ export const AppContextProvider = ({ children }) => {
 useEffect(() => {
   const checkAuth = async () => {
     try {
-      const res = await axios.get(`${backendUrl}api/auth/is-auth`, {
+      const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
         withCredentials: true, 
       });
 

@@ -28,7 +28,7 @@ const Section3 = () => {
               
               imgTimeline
                 .to("#img4", {
-                  y: -700,
+                  y: -900,
                   duration:0.2,
                   ease: "power2.out"
                 }, 0)
@@ -68,7 +68,7 @@ const Section3 = () => {
     },[])
 
   return (
-    <div id="page1" className="bg-gradient-to-t to-[#6C4DFF] via-[#1f1c4d] from-black w-[100%] h-[100vh] relative flex">
+    <div id="page1" className="bg-gradient-to-t to-[#6C4DFF] via-[#1f1c4d] from-black w-[100%] sm:min-h-screen relative flex">
         <div id="right" className="h-[100vh] w-1/2 flex items-center justify-center ">
             <div id="card1" className="flex items-center justify-center flex-col z-0 gap-10 p-4 w-[40rem] h-[20rem] absolute text-white bg-white/20 backdrop-blur-lg border border-white/20 rounded-xl">
             <h1 className="text-2xl font-black">OUR VISION</h1>

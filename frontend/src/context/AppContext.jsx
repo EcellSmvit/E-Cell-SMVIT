@@ -2,8 +2,6 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-
-
 export const AppContent = createContext();
 
 export const AppContextProvider = ({ children }) => {
@@ -15,7 +13,7 @@ export const AppContextProvider = ({ children }) => {
   const getUserData = async () => {
     try {
       const res = await axios.get(`${backendUrl}/api/user/data`, {
-        withCredentials: true, 
+        withCredentials: true,
       });
 
       if (res.data.success) {
@@ -33,36 +31,29 @@ export const AppContextProvider = ({ children }) => {
     }
   };
 
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
+          withCredentials: true,
+        });
 
-useEffect(() => {
-  const checkAuth = async () => {
-    try {
-      const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
-        withCredentials: true, 
-      });
-
-      if (res.data.success) {
-        await getUserData();       
-        setIsLoggedin(true);       
-      } else {
+        if (res.data.success) {
+          await getUserData();
+          setIsLoggedin(true);
+        } else {
+          setIsLoggedin(false);
+          setUserData(null);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error.message);
         setIsLoggedin(false);
         setUserData(null);
       }
-    } catch (error) {
-      console.error("Auth check failed:", error.message);
-      setIsLoggedin(false);
-      setUserData(null);
-    }
-  };
+    };
 
-  checkAuth();
-}, []);
-
-useEffect(() => {
-  if (userData?._id) {
-    connectSocket(userData._id);
-  }
-}, [userData]);
+    checkAuth();
+  }, []);
 
   return (
     <AppContent.Provider

@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from 'react'
-import AppContent from '../context/AppContext';
+import React, { useContext, useEffect, useRef } from 'react';
+import { AppContent } from '../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function EmailVerify() {
-
   axios.defaults.withCredentials = true;
   const { backendUrl, isLoggedIn, userData, getUserData } = useContext(AppContent);
   const navigate = useNavigate();
 
-  const inputRefs = React.useRef([]);
+  const inputRefs = useRef([]);
 
   const handleInput = (e, index) => {
     if (e.target.value.length > 0 && index < inputRefs.current.length - 1) {
@@ -39,16 +38,19 @@ function EmailVerify() {
     try {
       const otpArray = inputRefs.current.map((el) => el.value);
       const otp = otpArray.join('');
-      console.log("Submitting OTP:", otp);
+      // console.log("Submitting OTP:", otp);
 
-      const { data } = await axios.post(backendUrl + 'api/auth/verify-account', {
-        otp,
-        email: userData?.email,  // send email to backend
-      });
+      const { data } = await axios.post(
+        backendUrl + '/api/auth/verify-account',
+        {
+          otp,
+          email: userData?.email,
+        }
+      );
 
       if (data.success) {
         toast.success(data.message);
-        getUserData();
+        await getUserData();
         navigate('/');
       } else {
         toast.error(data.message);
@@ -62,42 +64,29 @@ function EmailVerify() {
     if (isLoggedIn && userData?.isVerified) {
       navigate('/');
     }
-  }, [isLoggedIn, userData]);
+  }, [isLoggedIn, userData, navigate]);
 
   return (
     <div>
-      <form
-        onSubmit={onSubmitHandler}
-        
-      >
-        <h1 >
-          Email Verification
-        </h1>
-        <p >
-          Enter the 6-digit code sent to your email.
-        </p>
-
-        <div  onPaste={handlePaste}>
-          {Array(6).fill(0).map((_, index) => (
-            <input
-              type="text"
-              maxLength="1"
-              key={index}
-              required
-              ref={(el) => (inputRefs.current[index] = el)}
-              onInput={(e) => handleInput(e, index)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              
-            />
-          ))}
+      <form onSubmit={onSubmitHandler}>
+        <h1>Email Verification</h1>
+        <p>Enter the 6-digit code sent to your email.</p>
+        <div onPaste={handlePaste}>
+          {Array(6)
+            .fill(0)
+            .map((_, index) => (
+              <input
+                type="text"
+                maxLength="1"
+                key={index}
+                required
+                ref={(el) => (inputRefs.current[index] = el)}
+                onInput={(e) => handleInput(e, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+              />
+            ))}
         </div>
-
-        <button
-          type="submit"
-          
-        >
-          Verify Email
-        </button>
+        <button type="submit">Verify Email</button>
       </form>
     </div>
   );

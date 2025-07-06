@@ -1,40 +1,49 @@
-import { useAuthStore } from "../store/authStore";
-import { formatDate } from "../utils/date";
+import { useContext } from "react";
+import { AppContent } from "../context/AppContext";
+import { useNavigate } from "react-router-dom";
 
-const DashboardPage = () => {
-	const { user, logout } = useAuthStore();
+const Dashboard = () => {
+  const { userData, setIsLoggedin } = useContext(AppContent);
+  const navigate = useNavigate();
 
-	const handleLogout = () => {
-		logout();
-	};
+  const handleLogout = () => {
+    setIsLoggedin(false);
+    navigate("/login");
+  };
 
-	return (
-		<>
-			<h2>Dashboard</h2>
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
-			<div>
-				<h3>Profile Information</h3>
-				<p>Name: {user.name}</p>
-				<p>Email: {user.email}</p>
+  return (
+    <>
+      <h2>Dashboard</h2>
+      <div>
+        <h3>Profile Information</h3>
+        <p>Name: {userData.name}</p>
+        <p>Email: {userData.email}</p>
 
-				<h3>Account Activity</h3>
-				<p>
-					<span>Joined: </span>
-					{new Date(user.createdAt).toLocaleDateString("en-US", {
-						year: "numeric",
-						month: "long",
-						day: "numeric",
-					})}
-				</p>
-				<p>
-					<span>Last Login: </span>
-					{formatDate(user.lastLogin)}
-				</p>
-			</div>
-
-			<button onClick={handleLogout}>Logout</button>
-		</>
-	);
+        <h3>Account Activity</h3>
+        <p>
+          <span>Joined: </span>
+          {userData.createdAt
+            ? new Date(userData.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            : "N/A"}
+        </p>
+        <p>
+          <span>Last Login: </span>
+          {userData.lastLogin
+            ? new Date(userData.lastLogin).toLocaleString("en-US")
+            : "N/A"}
+        </p>
+      </div>
+      <button onClick={handleLogout}>Logout</button>
+    </>
+  );
 };
 
-export default DashboardPage;
+export default Dashboard;

@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 
-// ✅ Unified and corrected middleware
+// Middleware to authenticate user using JWT from cookies
 const userAuth = async (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies?.token;
 
   if (!token) {
     return res.status(401).json({
@@ -15,7 +15,7 @@ const userAuth = async (req, res, next) => {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    if (!decoded?.id) {
+    if (!decoded || !decoded.id) {
       return res.status(401).json({
         success: false,
         message: "Invalid token, please login again"
@@ -30,6 +30,7 @@ const userAuth = async (req, res, next) => {
       });
     }
 
+    // Attach user info to request for downstream use
     req.user = { id: user._id };
     next();
   } catch (err) {

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +7,6 @@
 
 html, body {
   @apply p-0 m-0 bg-black;
+  overflow-x: hidden;
 }
+

@@ -1,46 +1,28 @@
-
-import './App.css'
-import About from './components/About'
-import Background from './components/Background';
-import Navbar from './components/Navbar'
-import Particles from './components/Particlesbackground';
-import TextHome from './components/TextHome';
-import ThreeScene from './components/ThreeScene';
-import Section2 from './components/Section2';
-import Section3 from './components/Section3';
-import Loding from './components/Loding';
-// import Section4 from './components/Section4';
-import AchievementSection from './components/AchievementSection';
-import Section5 from './components/Section5';
-import Section6 from './components/Section6';
-// import Section6 from './components/Section6';
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import EmailVerify from './pages/EmailVerify'
+import ResetPassword from './pages/ResetPassword'
+import {ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Dashboard from './pages/Dashboard'
 
 
-function App() {
+const App = () => {
   return (
     <div>
-      {/* <SmoothScrollWrapper>
+      <ToastContainer/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/email-verify' element={<EmailVerify/>}/>
+        <Route path='/reset-passsword' element={<ResetPassword/>}/>
+        <Route path='/dashboard' element={<Dashboard/>}/>
 
-      </SmoothScrollWrapper> */}
-      {/* <Loding/> */}
-      <Navbar/>
-      <TextHome/>
-      <Background/>
-      <ThreeScene />
-      <Section2/>
-      <Section3/>
-
-      
-      <AchievementSection/>
-    <Section5/>
-    {/* <Section6/> */}
-    <About/>
-    <Section6/>
-      
-      {/* <Section4/> */}
-      
+        
+      </Routes>
     </div>
-    
   )
 }
 

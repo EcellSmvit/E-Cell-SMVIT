@@ -1,24 +1,27 @@
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
-import cookieParser from "cookie-parser";
-import path from "path";
+import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
+import cookieParser from 'cookie-parser';
+import connectDB from './config/mongodb.js';
+import authRouter from './routes/authRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
-import { connectDB } from "./db/connectDB.js";
-
-dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-const __dirname = path.resolve();
+const PORT = process.env.PORT || 4000;
+connectDB();
 
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+const allowedOrigins = ['http://localhost:5173', 'https://e-cell-smvit.onrender.com'];
 
-app.use(express.json()); 
-app.use(cookieParser()); 
+app.use(express.json());
+app.use(cookieParser());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
+
+app.use('/api/auth', authRouter);
+app.use('/api/user', userRouter);
 
 
-app.listen(PORT, () => {
-	connectDB();
-	console.log("Server is running on port no: ", PORT);
-});
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

@@ -3,14 +3,9 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 import transporter from '../config/nodemailer.js';
 import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailTemplates.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
-// The code is mostly correct, but there are a few issues and improvements to consider:
-
-// 1. Inconsistent field naming: Sometimes "dateofBirth" is used, sometimes "dateOfBirth".
-// 2. In isAuthenticated, "User" is used instead of "userModel" (should be consistent).
-// 3. OTP generation in sendVerifyOtp uses 5 digits, but the formula is off (should be 6 digits for consistency).
-// 4. Error handling could be improved (e.g., always returning status codes).
-// 5. Some minor code style improvements.
 
 export const register = async (req, res) => {
     const { name, email, password, username, mobileNumber, dateofBirth } = req.body;
@@ -58,7 +53,12 @@ export const register = async (req, res) => {
             subject: 'Welcome to ShareWallet',
             text: `Hello ${name},\n\nThank you for registering with ShareWallet! We're excited to have you on board.\nYour Username : ${username}\n\nBest regards,\nShareWallet Team`
         };
-        await transporter.sendMail(mailOptions);
+        try {
+            await transporter.sendMail(mailOptions);
+          } catch (err) {
+            console.error("Email sending error:", err);
+            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
+          }
 
         return res.json({ success: true });
 
@@ -144,7 +144,12 @@ export const sendVerifyOtp = async (req, res) => {
             subject: 'Verify your ShareWallet account',
             html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
         };
-        await transporter.sendMail(mailOptions);
+        try {
+            await transporter.sendMail(mailOptions);
+          } catch (err) {
+            console.error("Email sending error:", err);
+            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
+          }
 
         res.json({ success: true, message: "OTP sent to your email" });
 
@@ -225,8 +230,12 @@ export const sendResetOtp = async (req, res) => {
             html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
         };
 
-        await transporter.sendMail(mailOptions);
-
+        try {
+            await transporter.sendMail(mailOptions);
+          } catch (err) {
+            console.error("Email sending error:", err);
+            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
+          }
         return res.json({ success: true, message: "OTP sent to your email" });
 
     } catch (error) {

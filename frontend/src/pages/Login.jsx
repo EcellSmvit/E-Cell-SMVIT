@@ -52,7 +52,7 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className='bg-white'>
       <div>
         
         {/* Logo */}

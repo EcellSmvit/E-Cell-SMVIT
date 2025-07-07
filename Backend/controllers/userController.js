@@ -3,7 +3,6 @@ import userModel from '../models/userModel.js';
 export const getUserData = async (req, res) => {
     try {
         const userId = req.user.id;
-        // Adjust field names if your schema uses different casing
         const user = await userModel.findById(userId);
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });
@@ -17,8 +16,7 @@ export const getUserData = async (req, res) => {
                 email: user.email,
                 mobileNumber: user.mobileNumber,
                 username: user.username,
-                // Use the correct field name as per your schema
-                dateOfBirth: user.dateOfBirth || user.dateofBirth,
+                dateOfBirth: user.dateofBirth, // Use the field as defined in your schema
                 isVerified: user.isVerified,
                 createdAt: user.createdAt,
                 updatedAt: user.updatedAt

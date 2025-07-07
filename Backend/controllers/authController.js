@@ -50,8 +50,8 @@ export const register = async (req, res) => {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: email,
-            subject: 'Welcome to ShareWallet',
-            text: `Hello ${name},\n\nThank you for registering with ShareWallet! We're excited to have you on board.\nYour Username : ${username}\n\nBest regards,\nShareWallet Team`
+            subject: 'Welcome to E-CELL SMVIT',
+            text: `Hello ${name},\n\nThank you for registering with E-CELL! We're excited to have you on board.\nYour Username : ${username}\n\nBest regards,\nE-CELL Tech Team`
         };
         try {
             await transporter.sendMail(mailOptions);

@@ -79,8 +79,8 @@ function Login() {
           <h2 className="text-2xl font-bold mb-2 text-center">
             
           </h2>
-          <p className="mb-6 text-center font-bold" style={{ color: '#4B43D9' }}>
-            {state === 'Sign Up' ? 'Let’s get started' : 'Please login to your account'}
+          <p className="mb-6 text-center text-2xl font-bold" style={{ color: '#4B43D9' }}>
+            {state === 'Sign Up' ? 'SIGNUP ' : 'LOGIN'}
           </p>
 
           {/* Form */}

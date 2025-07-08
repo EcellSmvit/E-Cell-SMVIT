@@ -6,7 +6,6 @@ import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailT
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 export const register = async (req, res) => {
     const { name, email, password, username, mobileNumber, dateofBirth } = req.body;
 
@@ -47,6 +46,7 @@ export const register = async (req, res) => {
             path: '/'
         });
 
+        // Send welcome email
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: email,
@@ -55,10 +55,31 @@ export const register = async (req, res) => {
         };
         try {
             await transporter.sendMail(mailOptions);
-          } catch (err) {
+        } catch (err) {
             console.error("Email sending error:", err);
             return res.status(500).json({ success: false, message: "Failed to send welcome email" });
-          }
+        }
+
+        // Send verification OTP after registration
+        try {
+            // Generate 6-digit OTP
+            const otp = String(Math.floor(100000 + Math.random() * 900000));
+            newUser.verifyotp = otp;
+            newUser.verifyotpExpireAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+            await newUser.save();
+
+            const verifyMailOptions = {
+                from: process.env.SENDER_EMAIL,
+                to: email,
+                subject: 'Verify your E-CELL SMVIT account',
+                html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", email)
+            };
+            await transporter.sendMail(verifyMailOptions);
+        } catch (err) {
+            console.error("Verification OTP email sending error:", err);
+            // Don't block registration on OTP failure, but inform client
+            return res.status(500).json({ success: false, message: "Failed to send verification OTP" });
+        }
 
         return res.json({ success: true });
 
@@ -142,15 +163,15 @@ export const sendVerifyOtp = async (req, res) => {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: user.email,
-            subject: 'Verify your ShareWallet account',
+            subject: 'Verify your E-CELL SMVIT account',
             html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
         };
         try {
             await transporter.sendMail(mailOptions);
-          } catch (err) {
+        } catch (err) {
             console.error("Email sending error:", err);
-            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
-          }
+            return res.status(500).json({ success: false, message: "Failed to send verification OTP" });
+        }
 
         res.json({ success: true, message: "OTP sent to your email" });
 
@@ -162,15 +183,15 @@ export const sendVerifyOtp = async (req, res) => {
 export const verifyEmail = async (req, res) => {
     const { otp, email } = req.body;
 
-    if (!otp) {
-        return res.status(400).json({ success: false, message: "User ID and OTP are required" });
+    if (!otp || !email) {
+        return res.status(400).json({ success: false, message: "Email and OTP are required" });
     }
     try {
         const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found" });
         }
-        if (user.verifyotp === '' || user.verifyotp !== otp) {
+        if (!user.verifyotp || user.verifyotp !== otp) {
             return res.status(400).json({ success: false, message: "Invalid OTP" });
         }
         if (user.verifyotpExpireAt < Date.now()) {
@@ -189,7 +210,6 @@ export const verifyEmail = async (req, res) => {
 
 export const isAuthenticated = async (req, res) => {
     try {
-        // Should use userModel, not User
         const user = await userModel.findById(req.userId).select("-password");
         if (!user) {
             return res.status(400).json({ success: false, message: "User not found" });
@@ -227,16 +247,16 @@ export const sendResetOtp = async (req, res) => {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: user.email,
-            subject: 'Reset your ShareWallet password',
+            subject: 'Reset your E-CELL SMVIT password',
             html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
         };
 
         try {
             await transporter.sendMail(mailOptions);
-          } catch (err) {
+        } catch (err) {
             console.error("Email sending error:", err);
-            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
-          }
+            return res.status(500).json({ success: false, message: "Failed to send password reset OTP" });
+        }
         return res.json({ success: true, message: "OTP sent to your email" });
 
     } catch (error) {
@@ -258,7 +278,7 @@ export const resetPassword = async (req, res) => {
             return res.status(404).json({ success: false, message: "User not found with this email" });
         }
 
-        if (user.resetOtp === '' || user.resetOtp !== otp) {
+        if (!user.resetOtp || user.resetOtp !== otp) {
             return res.status(400).json({ success: false, message: "Invalid OTP" });
         }
 

@@ -51,7 +51,7 @@ function EmailVerify() {
       if (data.success) {
         toast.success(data.message);
         await getUserData();
-        navigate('/');
+        navigate('/dashboard');
       } else {
         toast.error(data.message);
       }

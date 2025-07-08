@@ -90,14 +90,15 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-    const { email, username, mobileNumber, password } = req.body;
-
-    const identifier = email || username || mobileNumber;
-
-    if (!identifier || !password) {
-        return res.status(400).json({ success: false, message: "Email, username or mobile number and password are required" });
-    }
     try {
+        const { email, username, mobileNumber, password } = req.body;
+
+        const identifier = email || username || mobileNumber;
+
+        if (!identifier || !password) {
+            return res.status(400).json({ success: false, message: "Email, username or mobile number and password are required" });
+        }
+
         const user = await userModel.findOne({
             $or: [
                 { email: identifier },
@@ -115,9 +116,10 @@ export const login = async (req, res) => {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
         res.cookie('token', token, {
             httpOnly: true,
-            secure: true,
-            sameSite: 'None',
-            maxAge: 7 * 24 * 60 * 60 * 1000
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            path: '/'
         });
 
         return res.json({
@@ -141,11 +143,23 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-    res.clearCookie("token");
-    res.status(200).json({ success: true, message: "Logged out successfully" });
+    try {
+        res.clearCookie("token", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+            path: '/'
+        });
+        res.status(200).json({ success: true, message: "Logged out successfully" });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
+    }
 };
 
 export const sendVerifyOtp = async (req, res) => {
+    if (!req.body.email) {
+        return res.status(400).json({ success: false, message: "Email is required" });
+    }
     try {
         const { email } = req.body;
         const user = await userModel.findOne({ email });
@@ -241,16 +255,16 @@ export const isAuthenticated = async (req, res) => {
 
 // send password reset otp
 export const sendResetOtp = async (req, res) => {
-    const { email } = req.body;
+    try {
+        const { email } = req.body;
 
-    if (!email) {
+        if (!email) {
         return res.status(400).json({ success: false, message: "Email is required" });
     }
 
-    try {
-        const user = await userModel.findOne({ email });
+            const user = await userModel.findOne({ email });
 
-        if (!user) {
+                if (!user) {
             return res.status(404).json({ success: false, message: "User not found with this email" });
         }
 
@@ -283,13 +297,13 @@ export const sendResetOtp = async (req, res) => {
 
 // reset password
 export const resetPassword = async (req, res) => {
-    const { email, otp, newPassword } = req.body;
-
-    if (!email || !otp || !newPassword) {
-        return res.status(400).json({ success: false, message: "Email, OTP and new password are required" });
-    }
-
     try {
+        const { email, otp, newPassword } = req.body;
+
+        if (!email || !otp || !newPassword) {
+            return res.status(400).json({ success: false, message: "Email, OTP and new password are required" });
+        }
+
         const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(404).json({ success: false, message: "User not found with this email" });
@@ -310,8 +324,7 @@ export const resetPassword = async (req, res) => {
         await user.save();
 
         return res.json({ success: true, message: "Password reset successfully" });
-
     } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+        return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
     }
 };

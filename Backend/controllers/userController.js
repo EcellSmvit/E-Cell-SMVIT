@@ -2,28 +2,39 @@ import userModel from '../models/userModel.js';
 
 export const getUserData = async (req, res) => {
     try {
-        const userId = req.user.id;
-        const user = await userModel.findById(userId);
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found" });
+        if (!req.user || !req.user.id) {
+            return res.status(401).json({ success: false, message: "Unauthorized access" });
         }
+        const userId = req.user.id;
+
+        if (!userId.match(/^[0-9a-fA-F]{24}$/)) {
+            return res.status(400).json({ success: false, message: "Invalid user ID format" });
+        }
+
+        const user = await userModel.findById(userId).select('-password -resetOtp -resetOtpExpireAt -verifyotp -verifyotpExpireAt');
+        if (!user) {
+            return res.status(404).json({ success: false, message: "User not found or deleted" });
+        }
+
+        const sanitizedUser = {
+            _id: user._id,
+            name: user.name || '',
+            email: user.email || '',
+            mobileNumber: user.mobileNumber || '',
+            username: user.username || '',
+            dateOfBirth: user.dateofBirth || null,
+            isVerified: Boolean(user.isVerified),
+            createdAt: user.createdAt || new Date(),
+            updatedAt: user.updatedAt || new Date()
+        };
 
         res.json({
             success: true,
-            user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                mobileNumber: user.mobileNumber,
-                username: user.username,
-                dateOfBirth: user.dateofBirth, // Use the field as defined in your schema
-                isVerified: user.isVerified,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt
-            }
+            user: sanitizedUser
         });
 
     } catch (error) {
-        return res.status(500).json({ success: false, message: "Internal Server Error" });
+        console.error('Error in getUserData:', error);
+        return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
     }
 }

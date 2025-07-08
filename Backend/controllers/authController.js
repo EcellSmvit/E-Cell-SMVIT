@@ -181,32 +181,39 @@ export const sendVerifyOtp = async (req, res) => {
 };
 
 export const verifyEmail = async (req, res) => {
-    const { otp, email } = req.body;
-
-    if (!otp || !email) {
-        return res.status(400).json({ success: false, message: "Email and OTP are required" });
+    const { otp } = req.body;
+  
+    if (!otp) {
+      return res.status(400).json({ success: false, message: "OTP is required" });
     }
+  
     try {
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found" });
-        }
-        if (!user.verifyotp || user.verifyotp !== otp) {
-            return res.status(400).json({ success: false, message: "Invalid OTP" });
-        }
-        if (user.verifyotpExpireAt < Date.now()) {
-            return res.status(400).json({ success: false, message: "OTP has expired" });
-        }
-        user.isVerified = true;
-        user.verifyotp = '';
-        user.verifyotpExpireAt = 0;
-        await user.save();
-        return res.json({ success: true, message: "Email verified successfully" });
-
+      const user = await userModel.findById(req.user.id);
+  
+      if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+      }
+  
+      if (!user.verifyotp || user.verifyotp !== otp) {
+        return res.status(400).json({ success: false, message: "Invalid OTP" });
+      }
+  
+      if (user.verifyotpExpireAt < Date.now()) {
+        return res.status(400).json({ success: false, message: "OTP has expired" });
+      }
+  
+      user.isVerified = true;
+      user.verifyotp = '';
+      user.verifyotpExpireAt = 0;
+      await user.save();
+  
+      return res.json({ success: true, message: "Email verified successfully" });
+  
     } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+      return res.status(500).json({ success: false, message: error.message });
     }
-};
+  };
+  
 
 export const isAuthenticated = async (req, res) => {
     try {

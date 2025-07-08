@@ -17,7 +17,6 @@ function Login() {
   const [dateofBirth, setDateofBirth] = useState('')
   const [username, setUsername] = useState('')
 
-  // Clear login fields when switching between Login/Sign Up
   const handleStateChange = (newState) => {
     setState(newState)
     setName('')
@@ -28,7 +27,6 @@ function Login() {
     setUsername('')
   }
 
-  // Helper to fetch user data and return it
   const fetchUserData = async () => {
     try {
       const res = await axios.get(backendUrl + '/api/user/data', { withCredentials: true })
@@ -47,7 +45,7 @@ function Login() {
       if (state === 'Sign Up') {
         const { data } = await axios.post(backendUrl + '/api/auth/register', {
           name, email, password, mobileNumber, dateofBirth, username
-        }, { withCredentials: true })
+        })
 
         if (data.success) {
           setIsLoggedIn(true)
@@ -57,28 +55,28 @@ function Login() {
         } else {
           toast.error(data.message)
         }
+
       } else {
-        // Allow login with email, username, or mobile number
         const loginPayload = {}
         if (email) loginPayload.email = email
         if (username) loginPayload.username = username
         if (mobileNumber) loginPayload.mobileNumber = mobileNumber
         loginPayload.password = password
 
-        const { data } = await axios.post(backendUrl + '/api/auth/login', loginPayload, { withCredentials: true })
+        if (!email && !username && !mobileNumber) {
+          toast.error('Please enter Email, Username or Mobile Number to login.')
+          return
+        }
+
+        const { data } = await axios.post(backendUrl + '/api/auth/login', loginPayload)
 
         if (data.success) {
           setIsLoggedIn(true)
-          // Always fetch user data after login and use the returned value
           const user = await fetchUserData()
-          await getUserData() // still update context
-
-          // Store email in localStorage for verification page fallback
-          let verifyEmail = email
-          if (!verifyEmail && user?.email) verifyEmail = user.email
+          await getUserData()
+          let verifyEmail = email || user?.email
           if (verifyEmail) localStorage.setItem('verify_email', verifyEmail)
 
-          // Use the freshly fetched user data to determine where to navigate
           if (user && user.isVerified) {
             navigate('/dashboard')
           } else {
@@ -95,32 +93,31 @@ function Login() {
 
   return (
     <div className="flex min-h-screen">
-      {/* Left Side (Image or Color) */}
+      {/* Left Side */}
       <div className="hidden relative md:block md:w-1/2">
         <Background />
         <div className="flex absolute inset-0 flex-col gap-5 justify-center items-center">
           <img
             className="absolute top-6 left-6 z-20 w-20"
             src="https://www.ecellsmvit.in/images/ecellwhite.png"
-            alt=""
+            alt="Ecell Logo"
           />
           <h1 className="z-10 text-5xl font-black text-white drop-shadow-lg">
             {state === 'Sign Up' ? 'CREATE ACCOUNT' : 'LOGIN'}
           </h1>
           <p className="z-10 text-2xl font-medium text-white drop-shadow-lg">
-            {state === 'Sign Up' ? 'CONNECT WITH STUDENT,ALUMNI AND ECELL MEMBER' : 'TO ACCESS ECELL CONNECT'}
+            {state === 'Sign Up' ? 'CONNECT WITH STUDENTS, ALUMNI AND ECELL MEMBERS' : 'TO ACCESS ECELL CONNECT'}
           </p>
         </div>
       </div>
-      {/* Right Side (Form) */}
-      <div className="w-full md:w-1/2 flex items-center justify-center bg-[#ffffff] min-h-screen">
+
+      {/* Right Side */}
+      <div className="flex justify-center items-center w-full min-h-screen bg-white md:w-1/2">
         <div className="w-full max-w-md">
-          <h2 className="mb-2 text-2xl font-bold text-center"></h2>
           <p className="mb-6 text-2xl font-bold text-center" style={{ color: '#4B43D9' }}>
-            {state === 'Sign Up' ? 'SIGNUP ' : 'LOGIN'}
+            {state === 'Sign Up' ? 'SIGN UP' : 'LOGIN'}
           </p>
 
-          {/* Form */}
           <form onSubmit={onSubmitHandler} className="flex flex-col gap-4">
             {state === 'Sign Up' && (
               <>
@@ -134,7 +131,7 @@ function Login() {
                 />
 
                 <input
-                  type="number"
+                  type="tel"
                   required
                   placeholder="Mobile Number"
                   value={mobileNumber}
@@ -154,7 +151,6 @@ function Login() {
                 <input
                   type="date"
                   required
-                  placeholder="Date of Birth"
                   value={dateofBirth}
                   onChange={e => setDateofBirth(e.target.value)}
                   className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
@@ -180,8 +176,9 @@ function Login() {
                   onChange={e => setUsername(e.target.value)}
                   className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
                 />
+
                 <input
-                  type="number"
+                  type="tel"
                   placeholder="Mobile Number (optional)"
                   value={mobileNumber}
                   onChange={e => setMobileNumber(e.target.value)}
@@ -216,7 +213,6 @@ function Login() {
             </div>
           </form>
 
-          {/* Footer */}
           <div className="mt-4 text-center text-gray-700">
             {state === 'Sign Up' ? (
               <>

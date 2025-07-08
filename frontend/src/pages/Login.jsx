@@ -7,7 +7,7 @@ import Background from '@/components/Background'
 
 function Login() {
   const navigate = useNavigate()
-  const { backendUrl, setIsLoggedIn, getUserData, userData } = useContext(AppContent)
+  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent)
 
   const [state, setState] = useState('Sign Up')
   const [name, setName] = useState('')
@@ -28,6 +28,16 @@ function Login() {
     setUsername('')
   }
 
+  // Helper to fetch user data and return it
+  const fetchUserData = async () => {
+    try {
+      const res = await axios.get(`${backendUrl}/api/user/data`, { withCredentials: true })
+      return res.data?.user
+    } catch (err) {
+      return null
+    }
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     axios.defaults.withCredentials = true
@@ -40,9 +50,7 @@ function Login() {
 
         if (data.success) {
           setIsLoggedIn(true)
-          // Always fetch user data after registration
           await getUserData()
-          // Store email in localStorage for verification page fallback
           if (email) localStorage.setItem('verify_email', email)
           navigate('/email-verify')
         } else {
@@ -60,24 +68,21 @@ function Login() {
 
         if (data.success) {
           setIsLoggedIn(true)
-          // Always fetch user data after login
-          await getUserData()
+          // Always fetch user data after login and use the returned value
+          const user = await fetchUserData()
+          await getUserData() // still update context
+
           // Store email in localStorage for verification page fallback
-          // Use the identifier that was used for login, fallback to userData after getUserData
           let verifyEmail = email
-          if (!verifyEmail && userData?.email) verifyEmail = userData.email
+          if (!verifyEmail && user?.email) verifyEmail = user.email
           if (verifyEmail) localStorage.setItem('verify_email', verifyEmail)
 
-          // Wait for userData to update in context before navigating
-          setTimeout(() => {
-            // Use updated userData from context
-            const verified = userData?.isVerified
-            if (verified) {
-              navigate('/dashboard')
-            } else {
-              navigate('/email-verify')
-            }
-          }, 200)
+          // Use the freshly fetched user data to determine where to navigate
+          if (user && user.isVerified) {
+            navigate('/dashboard')
+          } else {
+            navigate('/email-verify')
+          }
         } else {
           toast.error(data.message)
         }

@@ -80,7 +80,7 @@ function Login() {
           if (user && user.isVerified) {
             navigate('/dashboard')
           } else {
-            navigate('/email-verify')
+            navigate('/')
           }
         } else {
           toast.error(data.message)

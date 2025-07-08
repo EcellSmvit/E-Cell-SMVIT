@@ -7,14 +7,14 @@ import Background from '@/components/Background'
 
 function Login() {
   const navigate = useNavigate()
-  const { backendUrl, setIsLoggedIn, getUserData } = useContext(AppContent)
+  const { backendUrl, setIsLoggedin, getUserData } = useContext(AppContent)
 
   const [state, setState] = useState('Sign Up')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [mobileNumber, setMobileNumber] = useState('')
-  const [dateofBirth, setDateofBirth] = useState('')
+  const [mobileNumber, setmobileNumber] = useState('')
+  const [dateofBirth, setdateofBirth] = useState('')
   const [username, setUsername] = useState('')
 
   const handleStateChange = (newState) => {
@@ -22,72 +22,57 @@ function Login() {
     setName('')
     setEmail('')
     setPassword('')
-    setMobileNumber('')
-    setDateofBirth('')
+    setmobileNumber('')
+    setdateofBirth('')
     setUsername('')
   }
 
-  const fetchUserData = async () => {
-    try {
-      const res = await axios.get(backendUrl + '/api/user/data', { withCredentials: true })
-      return res.data?.user
-    } catch (error) {
-      toast.error(error?.response?.data?.message || error.message)
-      return null
-    }
-  }
-
   const onSubmitHandler = async (e) => {
-    e.preventDefault()
-    axios.defaults.withCredentials = true
-
     try {
+      e.preventDefault()
+      axios.defaults.withCredentials = true
+
       if (state === 'Sign Up') {
-        const { data } = await axios.post(backendUrl + '/api/auth/register', {
-          name, email, password, mobileNumber, dateofBirth, username
-        })
+        const { data } = await axios.post(
+          backendUrl + 'api/auth/register',
+          {
+            name,
+            email,
+            password,
+            mobileNumber,
+            dateofBirth,
+            username
+          },
+          { withCredentials: true }
+        )
 
         if (data.success) {
-          setIsLoggedIn(true)
+          setIsLoggedin(true)
           await getUserData()
-          if (email) localStorage.setItem('verify_email', email)
-          navigate('/email-verify')
+          navigate('/dashboard')
         } else {
           toast.error(data.message)
         }
-
       } else {
-        const loginPayload = {}
-        if (email) loginPayload.email = email
-        if (username) loginPayload.username = username
-        if (mobileNumber) loginPayload.mobileNumber = mobileNumber
-        loginPayload.password = password
-
-        if (!email && !username && !mobileNumber) {
-          toast.error('Please enter Email, Username or Mobile Number to login.')
-          return
-        }
-
-        const { data } = await axios.post(backendUrl + '/api/auth/login', loginPayload)
+        const { data } = await axios.post(
+          backendUrl + 'api/auth/login',
+          {
+            email,
+            password
+          },
+          { withCredentials: true }
+        )
 
         if (data.success) {
-          setIsLoggedIn(true)
-          const user = await fetchUserData()
+          setIsLoggedin(true)
           await getUserData()
-          let verifyEmail = email || user?.email
-          if (verifyEmail) localStorage.setItem('verify_email', verifyEmail)
-
-          if (user && user.isVerified) {
-            navigate('/dashboard')
-          } else {
-            navigate('/')
-          }
+          navigate('/dashboard')
         } else {
           toast.error(data.message)
         }
       }
     } catch (error) {
-      toast.error(error?.response?.data?.message || error.message)
+      toast.error(error.message)
     }
   }
 
@@ -106,7 +91,9 @@ function Login() {
             {state === 'Sign Up' ? 'CREATE ACCOUNT' : 'LOGIN'}
           </h1>
           <p className="z-10 text-2xl font-medium text-white drop-shadow-lg">
-            {state === 'Sign Up' ? 'CONNECT WITH STUDENTS, ALUMNI AND ECELL MEMBERS' : 'TO ACCESS ECELL CONNECT'}
+            {state === 'Sign Up'
+              ? 'CONNECT WITH STUDENTS, ALUMNI AND ECELL MEMBERS'
+              : 'TO ACCESS ECELL CONNECT'}
           </p>
         </div>
       </div>
@@ -135,7 +122,7 @@ function Login() {
                   required
                   placeholder="Mobile Number"
                   value={mobileNumber}
-                  onChange={e => setMobileNumber(e.target.value)}
+                  onChange={e => setmobileNumber(e.target.value)}
                   className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
                 />
 
@@ -152,7 +139,7 @@ function Login() {
                   type="date"
                   required
                   value={dateofBirth}
-                  onChange={e => setDateofBirth(e.target.value)}
+                  onChange={e => setdateofBirth(e.target.value)}
                   className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
                 />
               </>
@@ -166,26 +153,6 @@ function Login() {
               onChange={e => setEmail(e.target.value)}
               className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
             />
-
-            {state === 'Login' && (
-              <>
-                <input
-                  type="text"
-                  placeholder="Username (optional)"
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                  className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
-                />
-
-                <input
-                  type="tel"
-                  placeholder="Mobile Number (optional)"
-                  value={mobileNumber}
-                  onChange={e => setMobileNumber(e.target.value)}
-                  className="input-style-adv border-2 border-[#4B43D9] rounded-full p-2 w-full"
-                />
-              </>
-            )}
 
             <input
               type="password"

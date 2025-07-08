@@ -67,7 +67,7 @@ function EmailVerify() {
   }, [isLoggedIn, userData, navigate]);
 
   return (
-    <div>
+    <div className='bg-white'>
       <form onSubmit={onSubmitHandler}>
         <h1>Email Verification</h1>
         <p>Enter the 6-digit code sent to your email.</p>

@@ -9,15 +9,16 @@ export const AppContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  // Set axios defaults only once
+  // Set axios defaults
   useEffect(() => {
     axios.defaults.withCredentials = true;
   }, []);
 
-  // Always fetch user data after successful auth check
   const getUserData = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/api/user/data`);
+      const res = await axios.get(`${backendUrl}/api/user/data`, {
+        withCredentials: true,
+      });
       if (res.data.success && res.data.user) {
         setUserData(res.data.user);
         setIsLoggedIn(true);
@@ -27,7 +28,6 @@ export const AppContextProvider = ({ children }) => {
         toast.error(res.data.message || "Failed to fetch user");
       }
     } catch (error) {
-      // If user not found, show a more specific error
       if (error.response && error.response.status === 404) {
         toast.error("User not found. Please login again.");
       } else {
@@ -41,23 +41,24 @@ export const AppContextProvider = ({ children }) => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(`${backendUrl}/api/auth/is-auth`);
+        const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
+          withCredentials: true,
+        });
         if (res.data.success) {
-          // Always fetch user data after auth check
           await getUserData();
         } else {
           setIsLoggedIn(false);
           setUserData(null);
         }
       } catch (error) {
+        toast.error(error?.response?.data?.message || error.message)
         setIsLoggedIn(false);
         setUserData(null);
       }
     };
 
     checkAuth();
-    // eslint-disable-next-line
-  }, []);
+  }, [backendUrl]);
 
   return (
     <AppContent.Provider

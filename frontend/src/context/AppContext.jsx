@@ -6,7 +6,7 @@ const AppContent = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedin, setIsLoggedin] = useState(false);
   const [userData, setUserData] = useState(null);
 
   // Set axios defaults
@@ -16,15 +16,15 @@ export const AppContextProvider = ({ children }) => {
 
   const getUserData = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/api/user/data`, {
+      const res = await axios.get(`${backendUrl}api/user/data`, {
         withCredentials: true,
       });
       if (res.data.success && res.data.user) {
         setUserData(res.data.user);
-        setIsLoggedIn(true);
+        setIsLoggedin(true);
       } else {
         setUserData(null);
-        setIsLoggedIn(false);
+        setIsLoggedin(false);
         toast.error(res.data.message || "Failed to fetch user");
       }
     } catch (error) {
@@ -34,38 +34,39 @@ export const AppContextProvider = ({ children }) => {
         toast.error(error.response?.data?.message || "Error fetching user");
       }
       setUserData(null);
-      setIsLoggedIn(false);
+      setIsLoggedin(false);
     }
   };
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
+        const res = await axios.get(`${backendUrl}api/auth/is-auth`, {
           withCredentials: true,
         });
         if (res.data.success) {
           await getUserData();
         } else {
-          setIsLoggedIn(false);
+          setIsLoggedin(false);
           setUserData(null);
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message || error.message)
-        setIsLoggedIn(false);
+        toast.error(error?.response?.data?.message || error.message);
+        setIsLoggedin(false);
         setUserData(null);
       }
     };
 
     checkAuth();
+    // eslint-disable-next-line
   }, [backendUrl]);
 
   return (
     <AppContent.Provider
       value={{
         backendUrl,
-        isLoggedIn,
-        setIsLoggedIn,
+        isLoggedin,
+        setIsLoggedin,
         userData,
         setUserData,
         getUserData,

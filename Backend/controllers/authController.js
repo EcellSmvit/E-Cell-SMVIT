@@ -181,14 +181,14 @@ export const sendVerifyOtp = async (req, res) => {
 };
 
 export const verifyEmail = async (req, res) => {
-    const { otp } = req.body;
+    const { otp, email } = req.body;
   
-    if (!otp) {
-      return res.status(400).json({ success: false, message: "OTP is required" });
+    if (!otp || !email) {
+      return res.status(400).json({ success: false, message: "Email and OTP are required" });
     }
   
     try {
-      const user = await userModel.findById(req.user.id);
+      const user = await userModel.findOne({ email });
   
       if (!user) {
         return res.status(404).json({ success: false, message: "User not found" });
@@ -206,6 +206,16 @@ export const verifyEmail = async (req, res) => {
       user.verifyotp = '';
       user.verifyotpExpireAt = 0;
       await user.save();
+  
+      // Optional: Log user in after verification (issue token)
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+  
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      });
   
       return res.json({ success: true, message: "Email verified successfully" });
   

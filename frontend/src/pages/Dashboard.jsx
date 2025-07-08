@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   const handleLogout = () => {
     setIsLoggedin(false);
-    navigate("/login");
+    navigate("/");
   };
 
   if (!userData) {

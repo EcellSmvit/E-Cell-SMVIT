@@ -5,45 +5,32 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function EmailVerify() {
-  // Use context, but fallback to localStorage for email if userData is not loaded
   const { backendUrl, isLoggedIn, userData, getUserData } = useContext(AppContent);
   const navigate = useNavigate();
-
   const inputRefs = useRef([]);
 
-  // Ensure axios only sets withCredentials once, not on every render
+  // Set axios to include credentials
   useEffect(() => {
     axios.defaults.withCredentials = true;
   }, []);
 
-  // Store email in localStorage if available
-  useEffect(() => {
-    if (userData?.email) {
-      localStorage.setItem('verify_email', userData.email);
-    }
-  }, [userData?.email]);
-
-  // Move focus to next input on input
+  // Move focus to next input
   const handleInput = (e, index) => {
-    const value = e.target.value;
-    // Only allow digits
-    if (!/^\d*$/.test(value)) {
-      e.target.value = value.replace(/\D/g, '');
-      return;
-    }
-    if (value.length === 1 && index < inputRefs.current.length - 1) {
+    const value = e.target.value.replace(/\D/g, '');
+    e.target.value = value;
+    if (value && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus();
     }
   };
 
-  // Move focus to previous input on backspace
+  // Move focus back on backspace
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && e.target.value.length === 0 && index > 0) {
       inputRefs.current[index - 1].focus();
     }
   };
 
-  // Handle pasting OTP
+  // Handle OTP paste
   const handlePaste = (e) => {
     e.preventDefault();
     const paste = e.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
@@ -52,84 +39,54 @@ function EmailVerify() {
         inputRefs.current[index].value = char;
       }
     });
-    // Focus the next empty input
-    for (let i = 0; i < 6; i++) {
-      if (inputRefs.current[i] && inputRefs.current[i].value === '') {
-        inputRefs.current[i].focus();
-        break;
-      }
-    }
+    const nextEmpty = inputRefs.current.findIndex((el) => el && !el.value);
+    if (nextEmpty !== -1) inputRefs.current[nextEmpty].focus();
   };
 
-  // Submit OTP
+  // Handle OTP submit
   const onSubmitHandler = async (e) => {
     e.preventDefault();
+    const otp = inputRefs.current.map((el) => el?.value || '').join('');
+
+    if (otp.length !== 6) {
+      toast.error('Please enter the 6-digit code.');
+      return;
+    }
+
+    const email = localStorage.getItem('verify_email');
+    if (!email) {
+      toast.error('User email not found. Please login again.');
+      return;
+    }
+
     try {
-      const otpArray = inputRefs.current.map((el) => el?.value || '');
-      const otp = otpArray.join('');
-      if (otp.length !== 6) {
-        toast.error('Please enter the 6-digit code.');
-        return;
-      }
-
-      // Try to get email from userData, fallback to localStorage
-      let email = userData?.email;
-      if (!email) {
-        email = localStorage.getItem('verify_email');
-      }
-      if (!email) {
-        toast.error('User email not found. Please login again.');
-        return;
-      }
-
-      // Defensive: check if user exists in database before submitting OTP
-      // (This is a client-side check, but the real check is on the backend)
-      try {
-        const userRes = await axios.get(`${backendUrl}/api/user/data`);
-        if (!userRes.data.success || !userRes.data.user) {
-          toast.error('User not found in database. Please login again.');
-          localStorage.removeItem('verify_email');
-          return;
-        }
-      } catch (err) {
-        toast.error('User not found in database. Please login again.');
-        localStorage.removeItem('verify_email');
-        return;
-      }
-
-      const { data } = await axios.post(
-        backendUrl + '/api/auth/verify-account',
-        {
-          otp,
-          email,
-        }
-      );
+      const { data } = await axios.post(`${backendUrl}/api/auth/verify-account`, {
+        otp,
+        email,
+      });
 
       if (data.success) {
         toast.success(data.message);
-        await getUserData();
-        // Remove email from localStorage after successful verification
         localStorage.removeItem('verify_email');
+        await getUserData();
         navigate('/dashboard');
       } else {
         toast.error(data.message);
       }
     } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
+      toast.error(error.response?.data?.message || 'Verification failed');
     }
   };
 
   // Redirect if already verified
   useEffect(() => {
     if (isLoggedIn && userData?.isVerified) {
-      // Remove email from localStorage if user is already verified
       localStorage.removeItem('verify_email');
       navigate('/');
     }
   }, [isLoggedIn, userData, navigate]);
 
-  // Show email from userData or localStorage
-  const displayEmail = userData?.email || localStorage.getItem('verify_email') || '';
+  const displayEmail = localStorage.getItem('verify_email') || '';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
@@ -148,25 +105,21 @@ function EmailVerify() {
           Enter the 6-digit code sent to your email
           {displayEmail ? ` (${displayEmail})` : ''}.
         </p>
-        <div
-          className="flex gap-2 mb-6"
-          onPaste={handlePaste}
-        >
+        <div className="flex gap-2 mb-6" onPaste={handlePaste}>
           {Array(6)
             .fill(0)
             .map((_, index) => (
               <input
+                key={index}
                 type="text"
                 inputMode="numeric"
                 pattern="[0-9]*"
                 maxLength="1"
-                key={index}
                 required
                 ref={(el) => (inputRefs.current[index] = el)}
                 onInput={(e) => handleInput(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 className="w-10 h-12 text-center text-xl border-2 border-[#4B43D9] rounded focus:outline-none focus:border-blue-500 bg-white"
-                autoComplete="off"
               />
             ))}
         </div>

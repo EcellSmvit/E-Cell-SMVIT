@@ -4,7 +4,8 @@ import { AppContent } from '../context/AppContext'
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import Background from '@/components/Background'
-import ThreeScene from '@/components/ThreeScene'
+// import ThreeScene from '@/components/ThreeScene'
+// import EmailVerify from '@/pages/EmailVerify'
 
 function Login() {
   const navigate = useNavigate()
@@ -31,7 +32,7 @@ function Login() {
         if (data.success) {
           setIsLoggedin(true)
           await getUserData()
-          navigate('/dashboard')
+          navigate('/email-verify')
         } else {
           toast.error(data.message)
         }

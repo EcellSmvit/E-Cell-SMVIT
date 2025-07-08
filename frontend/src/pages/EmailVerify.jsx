@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 function EmailVerify() {
+  // Use context, but fallback to localStorage for email if userData is not loaded
   const { backendUrl, isLoggedIn, userData, getUserData } = useContext(AppContent);
   const navigate = useNavigate();
 
@@ -14,6 +15,13 @@ function EmailVerify() {
   useEffect(() => {
     axios.defaults.withCredentials = true;
   }, []);
+
+  // Store email in localStorage if available
+  useEffect(() => {
+    if (userData?.email) {
+      localStorage.setItem('verify_email', userData.email);
+    }
+  }, [userData?.email]);
 
   // Move focus to next input on input
   const handleInput = (e, index) => {
@@ -63,8 +71,29 @@ function EmailVerify() {
         toast.error('Please enter the 6-digit code.');
         return;
       }
-      if (!userData?.email) {
-        toast.error('User email not found.');
+
+      // Try to get email from userData, fallback to localStorage
+      let email = userData?.email;
+      if (!email) {
+        email = localStorage.getItem('verify_email');
+      }
+      if (!email) {
+        toast.error('User email not found. Please login again.');
+        return;
+      }
+
+      // Defensive: check if user exists in database before submitting OTP
+      // (This is a client-side check, but the real check is on the backend)
+      try {
+        const userRes = await axios.get(`${backendUrl}/api/user/data`);
+        if (!userRes.data.success || !userRes.data.user) {
+          toast.error('User not found in database. Please login again.');
+          localStorage.removeItem('verify_email');
+          return;
+        }
+      } catch (err) {
+        toast.error('User not found in database. Please login again.');
+        localStorage.removeItem('verify_email');
         return;
       }
 
@@ -72,13 +101,15 @@ function EmailVerify() {
         backendUrl + '/api/auth/verify-account',
         {
           otp,
-          email: userData.email,
+          email,
         }
       );
 
       if (data.success) {
         toast.success(data.message);
         await getUserData();
+        // Remove email from localStorage after successful verification
+        localStorage.removeItem('verify_email');
         navigate('/dashboard');
       } else {
         toast.error(data.message);
@@ -91,9 +122,14 @@ function EmailVerify() {
   // Redirect if already verified
   useEffect(() => {
     if (isLoggedIn && userData?.isVerified) {
+      // Remove email from localStorage if user is already verified
+      localStorage.removeItem('verify_email');
       navigate('/');
     }
   }, [isLoggedIn, userData, navigate]);
+
+  // Show email from userData or localStorage
+  const displayEmail = userData?.email || localStorage.getItem('verify_email') || '';
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-white">
@@ -109,7 +145,8 @@ function EmailVerify() {
         />
         <h1 className="text-2xl font-bold mb-2 text-[#4B43D9]">Email Verification</h1>
         <p className="mb-6 text-center text-gray-700">
-          Enter the 6-digit code sent to your email{userData?.email ? ` (${userData.email})` : ''}.
+          Enter the 6-digit code sent to your email
+          {displayEmail ? ` (${displayEmail})` : ''}.
         </p>
         <div
           className="flex gap-2 mb-6"

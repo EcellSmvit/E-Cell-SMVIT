@@ -2,57 +2,61 @@ import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-export const AppContent = createContext();
+const AppContent = createContext();
 
 export const AppContextProvider = ({ children }) => {
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  axios.defaults.withCredentials = true;
-  const [isLoggedIn, setIsLoggedin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
 
+  // Set axios defaults only once
+  useEffect(() => {
+    axios.defaults.withCredentials = true;
+  }, []);
+
+  // Always fetch user data after successful auth check
   const getUserData = async () => {
     try {
-      const res = await axios.get(`${backendUrl}/api/user/data`, {
-        withCredentials: true,
-      });
-
-      if (res.data.success) {
+      const res = await axios.get(`${backendUrl}/api/user/data`);
+      if (res.data.success && res.data.user) {
         setUserData(res.data.user);
-        setIsLoggedin(true);
+        setIsLoggedIn(true);
       } else {
         setUserData(null);
-        setIsLoggedin(false);
-        toast.error("Failed to fetch user");
+        setIsLoggedIn(false);
+        toast.error(res.data.message || "Failed to fetch user");
       }
     } catch (error) {
-      console.error("Error fetching user:", error.message);
+      // If user not found, show a more specific error
+      if (error.response && error.response.status === 404) {
+        toast.error("User not found. Please login again.");
+      } else {
+        toast.error(error.response?.data?.message || "Error fetching user");
+      }
       setUserData(null);
-      setIsLoggedin(false);
+      setIsLoggedIn(false);
     }
   };
 
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
-          withCredentials: true,
-        });
-
+        const res = await axios.get(`${backendUrl}/api/auth/is-auth`);
         if (res.data.success) {
+          // Always fetch user data after auth check
           await getUserData();
-          setIsLoggedin(true);
         } else {
-          setIsLoggedin(false);
+          setIsLoggedIn(false);
           setUserData(null);
         }
       } catch (error) {
-        console.error("Auth check failed:", error.message);
-        setIsLoggedin(false);
+        setIsLoggedIn(false);
         setUserData(null);
       }
     };
 
     checkAuth();
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -60,7 +64,7 @@ export const AppContextProvider = ({ children }) => {
       value={{
         backendUrl,
         isLoggedIn,
-        setIsLoggedin,
+        setIsLoggedIn,
         userData,
         setUserData,
         getUserData,
@@ -71,4 +75,5 @@ export const AppContextProvider = ({ children }) => {
   );
 };
 
+export { AppContent };
 export default AppContent;

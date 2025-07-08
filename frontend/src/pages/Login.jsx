@@ -1,13 +1,3 @@
-// The code is mostly correct, but there are a few issues and improvements to consider:
-
-// 1. The default state is set to 'Sign Up', which means the form opens in sign up mode. This is fine if intentional.
-// 2. The login POST only sends email and password, but your backend allows login with email, username, or mobileNumber. You may want to allow login with username or mobile number as well.
-// 3. The getUserData function from context does not return the user object; it only sets state. So `const user = await getUserData()` will always be undefined. You should rely on the context's userData instead.
-// 4. The fallback logic for isVerified is convoluted and not robust. You should use the context's userData directly after calling getUserData.
-// 5. The input for dateofBirth is missing in the sign up form, but it is required by the backend.
-// 6. The route for reset password is misspelled: '/reset-passsword' should probably be '/reset-password'.
-// 7. The context import is named `AppContent` but the context provider is `AppContextProvider`. The naming is a bit confusing but not technically wrong.
-
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AppContent } from '../context/AppContext'
@@ -17,7 +7,7 @@ import Background from '@/components/Background'
 
 function Login() {
   const navigate = useNavigate()
-  const { backendUrl, setIsLoggedin, getUserData, userData } = useContext(AppContent)
+  const { backendUrl, setIsLoggedIn, getUserData, userData } = useContext(AppContent)
 
   const [state, setState] = useState('Sign Up')
   const [name, setName] = useState('')
@@ -26,6 +16,17 @@ function Login() {
   const [mobileNumber, setMobileNumber] = useState('')
   const [dateofBirth, setDateofBirth] = useState('')
   const [username, setUsername] = useState('')
+
+  // Clear login fields when switching between Login/Sign Up
+  const handleStateChange = (newState) => {
+    setState(newState)
+    setName('')
+    setEmail('')
+    setPassword('')
+    setMobileNumber('')
+    setDateofBirth('')
+    setUsername('')
+  }
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -38,8 +39,11 @@ function Login() {
         }, { withCredentials: true })
 
         if (data.success) {
-          setIsLoggedin(true)
+          setIsLoggedIn(true)
+          // Always fetch user data after registration
           await getUserData()
+          // Store email in localStorage for verification page fallback
+          if (email) localStorage.setItem('verify_email', email)
           navigate('/email-verify')
         } else {
           toast.error(data.message)
@@ -55,17 +59,25 @@ function Login() {
         const { data } = await axios.post(backendUrl + '/api/auth/login', loginPayload, { withCredentials: true })
 
         if (data.success) {
-          setIsLoggedin(true)
+          setIsLoggedIn(true)
+          // Always fetch user data after login
           await getUserData()
-          // Use userData from context after getUserData updates it
+          // Store email in localStorage for verification page fallback
+          // Use the identifier that was used for login, fallback to userData after getUserData
+          let verifyEmail = email
+          if (!verifyEmail && userData?.email) verifyEmail = userData.email
+          if (verifyEmail) localStorage.setItem('verify_email', verifyEmail)
+
+          // Wait for userData to update in context before navigating
           setTimeout(() => {
+            // Use updated userData from context
             const verified = userData?.isVerified
             if (verified) {
               navigate('/dashboard')
             } else {
               navigate('/email-verify')
             }
-          }, 100) // Small delay to allow context to update
+          }, 200)
         } else {
           toast.error(data.message)
         }
@@ -204,7 +216,7 @@ function Login() {
               <>
                 Already have an account?{' '}
                 <span
-                  onClick={() => setState('Login')}
+                  onClick={() => handleStateChange('Login')}
                   className="text-blue-600 hover:underline cursor-pointer"
                 >
                   Login here
@@ -214,7 +226,7 @@ function Login() {
               <>
                 Don’t have an account?{' '}
                 <span
-                  onClick={() => setState('Sign Up')}
+                  onClick={() => handleStateChange('Sign Up')}
                   className="text-blue-600 hover:underline cursor-pointer"
                 >
                   Sign up

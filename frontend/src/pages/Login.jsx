@@ -43,8 +43,38 @@ function Login() {
 
         if (data.success) {
           setIsLoggedin(true)
-          await getUserData()
-          navigate('/dashboard')
+          // Fetch user data to check verification status
+          const user = await getUserData()
+          // If user is verified, go to dashboard, else go to email verify
+          // getUserData may not return user, so fallback to AppContent context if needed
+          let isVerified = false
+          if (user && typeof user === 'object' && 'isVerified' in user) {
+            isVerified = user.isVerified
+          } else if (
+            typeof window !== 'undefined' &&
+            window.localStorage &&
+            window.localStorage.getItem('userData')
+          ) {
+            try {
+              const localUser = JSON.parse(window.localStorage.getItem('userData'))
+              isVerified = localUser?.isVerified
+            } catch {}
+          }
+          // If getUserData does not return, try to use context (AppContent) if available
+          if (!isVerified && typeof AppContent !== 'undefined') {
+            try {
+              // Try to get from context if possible
+              const contextUser = AppContent._currentValue?.userData
+              if (contextUser && typeof contextUser === 'object' && 'isVerified' in contextUser) {
+                isVerified = contextUser.isVerified
+              }
+            } catch {}
+          }
+          if (isVerified) {
+            navigate('/dashboard')
+          } else {
+            navigate('/email-verify')
+          }
         } else {
           toast.error(data.message)
         }

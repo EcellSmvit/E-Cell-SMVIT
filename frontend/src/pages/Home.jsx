@@ -13,7 +13,11 @@ import Section3 from '../components/Section3';
 import AchievementSection from '../components/AchievementSection';
 import Section5 from '../components/Section5';
 import Section6 from '../components/Section6';
+import ImageSection from '@/components/Image';
+import Text from '@/components/Text';
+import InfinityComponent from '@/components/Infinity';
 // import Section6 from './components/Section6';
+
 
 
 function Home() {
@@ -28,8 +32,11 @@ function Home() {
       <Background/>
       <ThreeScene />
       <Section2/>
-      <Section3/>
-
+      <InfinityComponent/>
+      <ImageSection/>
+      <Text/>
+      {/* <Section3/> */}
+       
       
       <AchievementSection/>
     <Section5/>

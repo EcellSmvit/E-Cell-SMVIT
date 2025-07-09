@@ -36,7 +36,7 @@ const ThreeScene = () => {
     controls.enablePan = true;   
     controls.update()
 
-    let light = new THREE.AmbientLight("white",1);
+    let light = new THREE.AmbientLight("white",2);
     scene.add(light)
 
     const light1 = new THREE.PointLight(0x4F46E5,1,100)

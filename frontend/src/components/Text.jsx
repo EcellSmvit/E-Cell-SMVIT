@@ -11,16 +11,12 @@ function Text() {
   const tlRef = useRef(null)
 
   useEffect(() => {
-    // Set initial state
     gsap.set([h1Ref.current, pRef.current], { y: 50, opacity: 0 })
-
-    // Create timeline with ScrollTrigger
     tlRef.current = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
-        start: 'top 50%', // when top of div hits 80% of viewport
+        start: 'top 50%', 
         toggleActions: 'play none none none',
-        // markers: true, // Uncomment for debugging
       }
     })
     tlRef.current.to(h1Ref.current, {
@@ -34,7 +30,7 @@ function Text() {
       opacity: 1,
       duration: 1,
       ease: 'power3.out'
-    }, "-=0.7") // overlap for a slight delay
+    }, "-=0.7") 
 
     return () => {
       if (tlRef.current) {

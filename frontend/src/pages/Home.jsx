@@ -31,10 +31,12 @@ function Home() {
       <TextHome/>
       <Background/>
       <ThreeScene />
-      <Section2/>
       <InfinityComponent/>
-      <ImageSection/>
       <Text/>
+      <Section2/>
+      
+      <ImageSection/>
+      
       {/* <Section3/> */}
        
       

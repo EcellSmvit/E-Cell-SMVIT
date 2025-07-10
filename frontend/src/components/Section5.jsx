@@ -31,8 +31,10 @@ export default function Section5() {
   return (
     <div
       className="relative w-full h-full text-white"
-      style={{ background: 'linear-gradient(to bottom, #4E46E4, black)'}}
     >
+      <h1 className="text-base font-medium text-left mb-4 mt-2 text-gray-300 italic">
+        Drag to view more events
+      </h1>
       <InfiniteMenu items={items} />
     </div>
   );

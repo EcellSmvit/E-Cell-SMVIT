@@ -20,7 +20,7 @@ const items = [
     description: 'This is pretty cool, right?'
   },
   {
-    image: 'https://picsum.photos/600/600?grayscale',
+    image: 'https://ik.imagekit.io/96gea10vb/Gallery%20Images/NEC%20IIT%20Bombay-2.avif?updatedAt=1747310810989',
     link: 'https://google.com/',
     title: 'Item 4',
     description: 'This is pretty cool, right?'
@@ -30,11 +30,10 @@ const items = [
 export default function Section5() {
   return (
     <div
-  className="relative h-screen text-white"
-  style={{background: 'linear-gradient(to bottom, #4E46E4, black)',}}
->
-  <InfiniteMenu items={items} />
-</div>
-
+      className="relative h-screen text-white"
+      
+    >
+      <InfiniteMenu items={items} />
+    </div>
   );
 }

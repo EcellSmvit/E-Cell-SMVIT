@@ -16,6 +16,7 @@ import Section6 from '../components/Section6';
 import ImageSection from '@/components/Image';
 import Text from '@/components/Text';
 import InfinityComponent from '@/components/Infinity';
+import Footer from '@/components/Footer';
 // import Section6 from './components/Section6';
 
 
@@ -23,10 +24,6 @@ import InfinityComponent from '@/components/Infinity';
 function Home() {
   return (
     <div>
-      {/* <SmoothScrollWrapper>
-
-      </SmoothScrollWrapper> */}
-      {/* <Loding/> */}
       <Navbar/>
       <TextHome/>
       <Background/>
@@ -34,20 +31,12 @@ function Home() {
       <InfinityComponent/>
       <Text/>
       <Section2/>
-      
       <ImageSection/>
-      
-      {/* <Section3/> */}
-       
-      
       <AchievementSection/>
-    <Section5/>
-    {/* <Section6/> */}
-    <About/>
-    <Section6/>
-      
-      {/* <Section4/> */}
-      
+      <Section5/>
+      <About/>
+      <Section6/>
+      <Footer/>
     </div>
     
   )

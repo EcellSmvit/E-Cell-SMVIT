@@ -30,8 +30,8 @@ const items = [
 export default function Section5() {
   return (
     <div
-      className="relative h-screen text-white"
-      
+      className="relative w-full h-full text-white"
+      style={{ background: 'linear-gradient(to bottom, #4E46E4, black)'}}
     >
       <InfiniteMenu items={items} />
     </div>

@@ -170,7 +170,7 @@ function About() {
   return (
     <div className="flex w-full h-auto text-white bg-gradient-to-bl from-black via-black to-[#6C4DFF] justify-center items-center p-8">
       <div style={{ position: 'relative' }}>
-        <h1 className='text-[#ffffff] font-black text-center p-4 text-4xl'>MEET OUT <span className='text-[#6c4dff]'>TEAM</span></h1>
+        <h1 className='text-[#ffffff] font-black text-center p-4 text-4xl'>MEET OUR <span className='text-[#6c4dff]'>TEAM</span></h1>
         <ChromaGrid 
           items={items}
           radius={300}

@@ -8,17 +8,19 @@ const userAuth = async (req, res, next) => {
 
   if (!token) {
     console.log('❌ No accessToken found in cookies');
-    return res.status(200).json({ success: false, message: 'Not logged in' });
+    return res.status(401).json({ success: false, message: 'Not logged in' });
   }
+
+  console.log('🧪 Verifying token now...');
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     console.log('✅ Token verified:', decoded);
 
     req.body.userId = decoded.id;
-    next();
+    return next();
   } catch (error) {
-    console.log('❌ JWT verification failed:', error.message);
+    console.log('❌ JWT verification failed:', error.message); // ✅ You MUST see this now
     return res.status(401).json({ success: false, message: error.message });
   }
 };

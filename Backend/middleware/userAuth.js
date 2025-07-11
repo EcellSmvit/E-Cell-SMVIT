@@ -7,17 +7,20 @@ const userAuth = async (req, res, next) => {
   if (!token) {
     return res.status(401).json({
       success: false,
-      message: "Unauthorized access, please login first"
+      message: "Unauthorized access, please login first",
     });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
+    // The token should have _id, not id, based on your authController.js
+    // In your createToken: jwt.sign({ _id: userId }, ...)
+    // So, check for _id, not id
     if (!decoded?._id) {
       return res.status(401).json({
         success: false,
-        message: "Invalid token, please login again"
+        message: "Invalid token, please login again",
       });
     }
 
@@ -25,16 +28,17 @@ const userAuth = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "User not found"
+        message: "User not found",
       });
     }
 
-    req.user = user; // Attach full user to req
+    req.user = user; // attach full user
     next();
   } catch (err) {
+    console.error("JWT error:", err);
     return res.status(403).json({
       success: false,
-      message: "Session expired or invalid. Please login again."
+      message: "Session expired or invalid. Please login again.",
     });
   }
 };

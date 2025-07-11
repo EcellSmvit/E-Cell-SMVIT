@@ -4,7 +4,7 @@ import { asyncHandler } from '../utils/ayncHandler.js';
 import { ApiError } from '../utils/ApiError.js';
 
 
-export const userAuth = asyncHandler(async(req, _, next) => {
+const userAuth = asyncHandler(async(req, _, next) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
         
@@ -29,3 +29,6 @@ export const userAuth = asyncHandler(async(req, _, next) => {
     }
     
 })
+
+
+export default userAuth;

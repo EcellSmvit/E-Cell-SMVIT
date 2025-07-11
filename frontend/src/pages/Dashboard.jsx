@@ -11,13 +11,18 @@ const Dashboard = () => {
     navigate("/");
   };
 
+  // Show a full black background with centered loading spinner if userData is not loaded yet
   if (!userData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-black">
+        <div className="text-white text-xl font-semibold">Loading...</div>
+      </div>
+    );
   }
 
   return (
-    <>
-      <div className="max-w-xl mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
+    <div className="min-h-screen bg-black flex items-center justify-center">
+      <div className="max-w-xl w-full mx-auto mt-10 bg-white shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold mb-6 text-center text-blue-700">Dashboard</h2>
         <div className="mb-8">
           <h3 className="text-xl font-semibold mb-4 text-gray-700 border-b pb-2">Profile Information</h3>
@@ -81,7 +86,7 @@ const Dashboard = () => {
           Logout
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

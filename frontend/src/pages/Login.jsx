@@ -24,7 +24,7 @@ const Login = () => {
           email,
           password,
         });
-
+        console.log('📝 Sign Up response:', data);
         if (data.success) {
           setIsLogin(true);
           getUserData();
@@ -37,6 +37,7 @@ const Login = () => {
           email,
           password,
         });
+        console.log('🔐 Login response:', data);
 
         if (data.success) {
           setIsLogin(true);

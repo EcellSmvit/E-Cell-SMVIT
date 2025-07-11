@@ -28,13 +28,20 @@ export const AppContextProvider = ({ children }) => {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
+        // Unauthenticated – silent fail
+        setUserData(null);
+        setIsLoggedin(false);
+      } else if (error.response && error.response.status === 404) {
+        // Logged-in token but user no longer exists
+        toast.error("User not found. Please login again.");
         setUserData(null);
         setIsLoggedin(false);
       } else {
         toast.error(error.response?.data?.message || "Error fetching user");
+        setUserData(null);
+        setIsLoggedin(false);
       }
-      setUserData(null);
-      setIsLoggedin(false);
+      
     }
   };
 

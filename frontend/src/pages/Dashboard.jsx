@@ -1,17 +1,16 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { userData, setIsLoggedin } = useContext(AppContext);
+  const { userData, setIsLogin } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setIsLoggedin(false);
+    setIsLogin(false);
     navigate("/");
   };
 
-  // Show a full black background with centered loading spinner if userData is not loaded yet
   if (!userData) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black">

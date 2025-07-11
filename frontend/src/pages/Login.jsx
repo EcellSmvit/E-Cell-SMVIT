@@ -61,7 +61,6 @@ const Login = () => {
         <form onSubmit={onSubmitHandler}>
           {state === 'Sign Up' && (
             <div>
-              <img src={assets.person_icon} alt="Person" />
               <input
                 onChange={(e) => setName(e.target.value)}
                 value={name}

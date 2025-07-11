@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/authStore";
-import { Mail, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
@@ -41,9 +40,7 @@ const ForgotPasswordPage = () => {
 				</form>
 			) : (
 				<div>
-					<div>
-						<Mail />
-					</div>
+					
 					<p>
 						If an account exists for {email}, you will receive a password reset link shortly.
 					</p>
@@ -52,7 +49,7 @@ const ForgotPasswordPage = () => {
 
 			<div>
 				<Link to={"/login"}>
-					<ArrowLeft /> Back to Login
+					 Back to Login
 				</Link>
 			</div>
 		</div>

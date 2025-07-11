@@ -23,17 +23,22 @@ export const AppContextProvider = (props) => {
         }
     }
 
-    const getAuthStatus = async()=>{
+    const getAuthStatus = async () => {
         try {
-            const {data} = await axios.get(backendUrl + '/api/auth/is-auth')
-            if(data.success){
-                setIsLogin(true)
-                getUserData()
-            }
-        }catch(error) {
-            toast.error(error.message)
+          const { data } = await axios.get(backendUrl + '/api/auth/is-auth');
+          console.log('✅ Auth status response:', data);
+      
+          if (data.success) {
+            setIsLogin(true);
+            getUserData();
+          } else {
+            console.log('⚠️ Not logged in (auth check failed):', data.message);
+          }
+        } catch (error) {
+          console.error('❌ Auth status request failed:', error.response?.data || error.message);
         }
-    }
+      };
+      
 
     useEffect(()=>{
         getAuthStatus()

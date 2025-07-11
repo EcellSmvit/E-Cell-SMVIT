@@ -2,7 +2,7 @@ import userModel from "../models/userModel";
 
 export const getUserData = async (req, res) => {
     try {
-        const userId = req.user.id;
+        const userId = req.userId;
         const user = await userModel.findById(userId).populate( 'name _id').populate('name _id');
   
         if (!user) {

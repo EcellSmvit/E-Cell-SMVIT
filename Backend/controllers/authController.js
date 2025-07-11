@@ -6,325 +6,253 @@ import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailT
 import dotenv from 'dotenv';
 dotenv.config();
 
+const createToken = (userId) => {
+  return jwt.sign({ _id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
+};
+
+const setTokenCookie = (res, token) => {
+  res.cookie('accessToken', token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    path: '/'
+  });
+};
+
 export const register = async (req, res) => {
-    const { name, email, password, username, mobileNumber, dateofBirth } = req.body;
+  const { name, email, password, username, mobileNumber, dateofBirth } = req.body;
 
-    if (!name || !email || !password || !username || !mobileNumber || !dateofBirth) {
-        return res.status(400).json({ success: false, message: "All fields are required" });
+  if (!name || !email || !password || !username || !mobileNumber || !dateofBirth) {
+    return res.status(400).json({ success: false, message: "All fields are required" });
+  }
+
+  try {
+    const existingUser = await userModel.findOne({
+      $or: [{ email }, { username }, { mobileNumber }]
+    });
+
+    if (existingUser) {
+      return res.status(409).json({
+        success: false,
+        message: "User already exists with this email, username or mobile number"
+      });
     }
 
-    try {
-        const existingUser = await userModel.findOne({
-            $or: [
-                { email: email },
-                { username: username },
-                { mobileNumber: mobileNumber }
-            ]
-        });
-        if (existingUser) {
-            return res.status(409).json({ success: false, message: "User already exists with this email, username or mobile number" });
-        }
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new userModel({
-            name,
-            email,
-            password: hashedPassword,
-            username,
-            mobileNumber,
-            dateofBirth
-        });
-        await newUser.save();
+    const newUser = new userModel({
+      name,
+      email,
+      password: hashedPassword,
+      username,
+      mobileNumber,
+      dateofBirth
+    });
 
-        const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    await newUser.save();
 
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/'
-        });
+    const token = createToken(newUser._id);
+    setTokenCookie(res, token);
 
-        // Send welcome email
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: email,
-            subject: 'Welcome to E-CELL SMVIT',
-            text: `Hello ${name},\n\nThank you for registering with E-CELL! We're excited to have you on board.\nYour Username : ${username}\n\nBest regards,\nE-CELL Tech Team`
-        };
-        try {
-            await transporter.sendMail(mailOptions);
-        } catch (err) {
-            console.error("Email sending error:", err);
-            return res.status(500).json({ success: false, message: "Failed to send welcome email" });
-        }
+    // Send welcome email
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: 'Welcome to E-CELL SMVIT',
+      text: `Hello ${name},\n\nThank you for registering with E-CELL!\nYour Username: ${username}\n\nRegards,\nE-CELL Team`
+    });
 
-        // Send verification OTP after registration
-        try {
-            // Generate 6-digit OTP
-            const otp = String(Math.floor(100000 + Math.random() * 900000));
-            newUser.verifyotp = otp;
-            newUser.verifyotpExpireAt = Date.now() + 10 * 60 * 1000; // 10 minutes
-            await newUser.save();
+    // Send verification OTP
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    newUser.verifyotp = otp;
+    newUser.verifyotpExpireAt = Date.now() + 10 * 60 * 1000; // 10 minutes
+    await newUser.save();
 
-            const verifyMailOptions = {
-                from: process.env.SENDER_EMAIL,
-                to: email,
-                subject: 'Verify your E-CELL SMVIT account',
-                html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", email)
-            };
-            await transporter.sendMail(verifyMailOptions);
-        } catch (err) {
-            console.error("Verification OTP email sending error:", err);
-            // Don't block registration on OTP failure, but inform client
-            return res.status(500).json({ success: false, message: "Failed to send verification OTP" });
-        }
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to: email,
+      subject: 'Verify your E-CELL SMVIT account',
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", email)
+    });
 
-        return res.json({ success: true });
-
-    } catch (error) {
-        console.error("Registration error:", error);
-        return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-    }
+    return res.json({ success: true });
+  } catch (error) {
+    console.error("Registration error:", error);
+    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
+  }
 };
 
 export const login = async (req, res) => {
-    try {
-        const { email, username, mobileNumber, password } = req.body;
+  const { email, username, mobileNumber, password } = req.body;
+  const identifier = email || username || mobileNumber;
 
-        const identifier = email || username || mobileNumber;
+  if (!identifier || !password) {
+    return res.status(400).json({
+      success: false,
+      message: "Email, username or mobile number and password are required"
+    });
+  }
 
-        if (!identifier || !password) {
-            return res.status(400).json({ success: false, message: "Email, username or mobile number and password are required" });
-        }
+  try {
+    const user = await userModel.findOne({
+      $or: [{ email: identifier }, { username: identifier }, { mobileNumber: identifier }]
+    });
 
-        const user = await userModel.findOne({
-            $or: [
-                { email: identifier },
-                { username: identifier },
-                { mobileNumber: identifier }
-            ]
-        });
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found with this email, username or mobile number" });
-        }
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(401).json({ success: false, message: "Invalid password" });
-        }
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-        res.cookie('token', token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            path: '/'
-        });
-
-        return res.json({
-            success: true,
-            user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                mobileNumber: user.mobileNumber,
-                username: user.username,
-                dateOfBirth: user.dateofBirth, // keep consistent with model
-                isVerified: user.isVerified,
-                createdAt: user.createdAt,
-                updatedAt: user.updatedAt
-            }
-        });
-
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ success: false, message: "Invalid password" });
+    }
+
+    const token = createToken(user._id);
+    setTokenCookie(res, token);
+
+    return res.json({
+      success: true,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        mobileNumber: user.mobileNumber,
+        username: user.username,
+        dateOfBirth: user.dateofBirth,
+        isVerified: user.isVerified,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt
+      }
+    });
+
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
+  }
 };
 
 export const logout = async (req, res) => {
-    try {
-        res.clearCookie("token", {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-            path: '/'
-        });
-        res.status(200).json({ success: true, message: "Logged out successfully" });
-    } catch (error) {
-        res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-    }
+  try {
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+      path: '/'
+    });
+    return res.status(200).json({ success: true, message: "Logged out successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
+  }
 };
 
 export const sendVerifyOtp = async (req, res) => {
-    if (!req.body.email) {
-        return res.status(400).json({ success: false, message: "Email is required" });
-    }
-    try {
-        const { email } = req.body;
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found" });
-        }
-        if (user.isVerified) {
-            return res.status(400).json({ success: false, message: "User is already verified" });
-        }
-        // Generate 6-digit OTP
-        const otp = String(Math.floor(100000 + Math.random() * 900000));
-        user.verifyotp = otp;
-        user.verifyotpExpireAt = Date.now() + 10 * 60 * 1000; // 10 minutes
-        await user.save();
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: user.email,
-            subject: 'Verify your E-CELL SMVIT account',
-            html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
-        };
-        try {
-            await transporter.sendMail(mailOptions);
-        } catch (err) {
-            console.error("Email sending error:", err);
-            return res.status(500).json({ success: false, message: "Failed to send verification OTP" });
-        }
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ success: false, message: "Email is required" });
 
-        res.json({ success: true, message: "OTP sent to your email" });
+  try {
+    const user = await userModel.findOne({ email });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+    if (user.isVerified) return res.status(400).json({ success: false, message: "Already verified" });
 
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
-    }
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    user.verifyotp = otp;
+    user.verifyotpExpireAt = Date.now() + 10 * 60 * 1000;
+    await user.save();
+
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: 'Verify your E-CELL SMVIT account',
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
+    });
+
+    return res.json({ success: true, message: "OTP sent to your email" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
 
 export const verifyEmail = async (req, res) => {
-    const { otp, email } = req.body;
-  
-    if (!otp || !email) {
-      return res.status(400).json({ success: false, message: "Email and OTP are required" });
-    }
-  
-    try {
-      const user = await userModel.findOne({ email });
-  
-      if (!user) {
-        return res.status(404).json({ success: false, message: "User not found" });
-      }
-  
-      if (!user.verifyotp || user.verifyotp !== otp) {
-        return res.status(400).json({ success: false, message: "Invalid OTP" });
-      }
-  
-      if (user.verifyotpExpireAt < Date.now()) {
-        return res.status(400).json({ success: false, message: "OTP has expired" });
-      }
-  
-      user.isVerified = true;
-      user.verifyotp = '';
-      user.verifyotpExpireAt = 0;
-      await user.save();
-  
-      // Optional: Log user in after verification (issue token)
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  
-      res.cookie('token', token, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-        maxAge: 7 * 24 * 60 * 60 * 1000
-      });
-  
-      return res.json({ success: true, message: "Email verified successfully" });
-  
-    } catch (error) {
-      return res.status(500).json({ success: false, message: error.message });
-    }
-  };
-  
+  const { email, otp } = req.body;
+  if (!email || !otp) return res.status(400).json({ success: false, message: "Email and OTP required" });
+
+  try {
+    const user = await userModel.findOne({ email });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+    if (user.verifyotp !== otp) return res.status(400).json({ success: false, message: "Invalid OTP" });
+    if (user.verifyotpExpireAt < Date.now()) return res.status(400).json({ success: false, message: "OTP expired" });
+
+    user.isVerified = true;
+    user.verifyotp = '';
+    user.verifyotpExpireAt = 0;
+    await user.save();
+
+    const token = createToken(user._id);
+    setTokenCookie(res, token);
+
+    return res.json({ success: true, message: "Email verified successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
 
 export const isAuthenticated = async (req, res) => {
-    try {
-        const user = await userModel.findById(req.userId).select("-password");
-        if (!user) {
-            return res.status(400).json({ success: false, message: "User not found" });
-        }
-
-        res.status(200).json({ success: true, user });
-    } catch (error) {
-        console.log("Error in checkAuth ", error);
-        res.status(400).json({ success: false, message: error.message });
+  try {
+    const user = await userModel.findById(req.user?._id).select("-password");
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
     }
+    return res.status(200).json({ success: true, user });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
 };
 
-// send password reset otp
 export const sendResetOtp = async (req, res) => {
-    try {
-        const { email } = req.body;
+  const { email } = req.body;
+  if (!email) return res.status(400).json({ success: false, message: "Email is required" });
 
-        if (!email) {
-        return res.status(400).json({ success: false, message: "Email is required" });
-    }
+  try {
+    const user = await userModel.findOne({ email });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
 
-            const user = await userModel.findOne({ email });
+    const otp = String(Math.floor(100000 + Math.random() * 900000));
+    user.resetOtp = otp;
+    user.resetOtpExpireAt = Date.now() + 10 * 60 * 1000;
+    await user.save();
 
-                if (!user) {
-            return res.status(404).json({ success: false, message: "User not found with this email" });
-        }
+    await transporter.sendMail({
+      from: process.env.SENDER_EMAIL,
+      to: user.email,
+      subject: 'Reset your E-CELL SMVIT password',
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
+    });
 
-        const otp = String(Math.floor(100000 + Math.random() * 900000)); // 6-digit OTP
-
-        user.resetOtp = otp;
-        user.resetOtpExpireAt = Date.now() + 10 * 60 * 1000; // expires in 10 mins
-
-        await user.save();
-
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: user.email,
-            subject: 'Reset your E-CELL SMVIT password',
-            html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
-        };
-
-        try {
-            await transporter.sendMail(mailOptions);
-        } catch (err) {
-            console.error("Email sending error:", err);
-            return res.status(500).json({ success: false, message: "Failed to send password reset OTP" });
-        }
-        return res.json({ success: true, message: "OTP sent to your email" });
-
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
-    }
+    return res.json({ success: true, message: "OTP sent to your email" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
 
-// reset password
 export const resetPassword = async (req, res) => {
-    try {
-        const { email, otp, newPassword } = req.body;
+  const { email, otp, newPassword } = req.body;
+  if (!email || !otp || !newPassword) {
+    return res.status(400).json({ success: false, message: "Email, OTP and new password are required" });
+  }
 
-        if (!email || !otp || !newPassword) {
-            return res.status(400).json({ success: false, message: "Email, OTP and new password are required" });
-        }
+  try {
+    const user = await userModel.findOne({ email });
+    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+    if (user.resetOtp !== otp) return res.status(400).json({ success: false, message: "Invalid OTP" });
+    if (user.resetOtpExpireAt < Date.now()) return res.status(400).json({ success: false, message: "OTP expired" });
 
-        const user = await userModel.findOne({ email });
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found with this email" });
-        }
+    user.password = await bcrypt.hash(newPassword, 10);
+    user.resetOtp = '';
+    user.resetOtpExpireAt = 0;
+    await user.save();
 
-        if (!user.resetOtp || user.resetOtp !== otp) {
-            return res.status(400).json({ success: false, message: "Invalid OTP" });
-        }
-
-        if (user.resetOtpExpireAt < Date.now()) {
-            return res.status(400).json({ success: false, message: "OTP has expired" });
-        }
-
-        const hashedPassword = await bcrypt.hash(newPassword, 10);
-        user.password = hashedPassword;
-        user.resetOtp = '';
-        user.resetOtpExpireAt = 0;
-        await user.save();
-
-        return res.json({ success: true, message: "Password reset successfully" });
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-    }
+    return res.json({ success: true, message: "Password reset successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };

@@ -1,258 +1,263 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import userModel from '../models/userModel.js';
+import userModel from '../models/UserModel.js';
 import transporter from '../config/nodemailer.js';
-import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailTemplates.js';
-import dotenv from 'dotenv';
-dotenv.config();
+import { EMAIL_VERIFY_TEMPLATE, PASSWORD_RESET_TEMPLATE } from '../config/emailTemplets.js';
 
-const createToken = (userId) => {
-  return jwt.sign({ _id: userId }, process.env.JWT_SECRET, { expiresIn: '7d' });
-};
 
-const setTokenCookie = (res, token) => {
-  res.cookie('accessToken', token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    path: '/'
-  });
-};
+export const register = async (req, res)=>{
 
-export const register = async (req, res) => {
-  const { name, email, password, username, mobileNumber, dateofBirth } = req.body;
-
-  if (!name || !email || !password || !username || !mobileNumber || !dateofBirth) {
-    return res.status(400).json({ success: false, message: "All fields are required" });
-  }
-
-  try {
-    const existingUser = await userModel.findOne({
-      $or: [{ email }, { username }, { mobileNumber }]
-    });
-
-    if (existingUser) {
-      return res.status(409).json({
-        success: false,
-        message: "User already exists with this email, username or mobile number"
-      });
+    const{name, email, password} = req.body;
+    if(!name || !email || !password){
+        return res.json({success:false,message:"Missing Details"});
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    try{
+        const existingUser = await userModel.findOne({email})
 
-    const newUser = new userModel({
-      name,
-      email,
-      password: hashedPassword,
-      username,
-      mobileNumber,
-      dateofBirth
-    });
+        if(existingUser){
+            return res.json({success:false, message:"User already exists"})
+        }
+        const hashedPassword = await bcrypt.hash(password, 10)
 
-    await newUser.save();
+        const user = new userModel({
+            name,
+            email,
+            password: hashedPassword
+        })
+        await user.save()
 
-    const token = createToken(newUser._id);
-    setTokenCookie(res, token);
+        //+++++++++++++++++ Now Generate Token For Auth++++++++++++++++++++++++
 
-    // Send welcome email
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: email,
-      subject: 'Welcome to E-CELL SMVIT',
-      text: `Hello ${name},\n\nThank you for registering with E-CELL!\nYour Username: ${username}\n\nRegards,\nE-CELL Team`
-    });
+        //we are send this token using cookie.
+         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
 
-    // Send verification OTP
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
-    newUser.verifyotp = otp;
-    newUser.verifyotpExpireAt = Date.now() + 10 * 60 * 1000; // 10 minutes
-    await newUser.save();
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            maxAge: 1*24*60*60*1000
+        });
 
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: email,
-      subject: 'Verify your E-CELL SMVIT account',
-      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", email)
-    });
+        //we are send wellcome email to user...
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: 'Welcome to our site',
+            text: `Hello ${name}, Welcome to our site. 
+            We are happy to see you here.Your account has been created successfully with email id: ${email}.`
 
-    return res.json({ success: true });
-  } catch (error) {
-    console.error("Registration error:", error);
-    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-  }
-};
+        }
+        await transporter.sendMail(mailOptions)
 
-export const login = async (req, res) => {
-  const { email, username, mobileNumber, password } = req.body;
-  const identifier = email || username || mobileNumber;
+        return res.json({success:true, })
 
-  if (!identifier || !password) {
-    return res.status(400).json({
-      success: false,
-      message: "Email, username or mobile number and password are required"
-    });
-  }
 
-  try {
-    const user = await userModel.findOne({
-      $or: [{ email: identifier }, { username: identifier }, { mobileNumber: identifier }]
-    });
+    } catch(err) {
+        res.json({success:false, messsage: err.message})
+    }
+}
 
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+export const login = async(req, res)=>{
+    const {email, password} = req.body;
+
+    if(!email || !password){
+        return res.json({success:false, message:"Email and Password are required"});
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ success: false, message: "Invalid password" });
+    try {
+        const user = await userModel.findOne({email})
+        if(!user){
+            return res.json({success:false, message:"Invalid Email"})
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, user.password)
+
+        if(!isPasswordValid){
+            return res.json({success:false, message:"Invalid Password"})
+        }
+
+        //if password is Matched then generate token.
+         //we are send this token using cookie.
+
+
+         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            maxAge: 1*24*60*60*1000
+        });
+
+        return res.json({success:true, })
+
+    } catch(err) {
+        res.json({success:false, messsage: err.message}) 
+    }
+}
+
+export const logout = (req, res)=>{
+    try {
+        res.clearCookie('token',{
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+        });
+        return res.json({success:true, message:"Logged Out"})
+    }catch (err) {
+        res.json({success:false, messsage: err.message})
+    }
+}
+
+
+//Send verification OPT to user email
+export const sendVerifyOtp = async(req, res)=>{
+    try {
+        //fist we get the user id to verify the user.
+        const {userId} = req.body;
+
+        const user = await userModel.findById(userId)
+        if(user.isAccountVerified){
+            return res.json({success:false, message:"Account already verified"})
+        }
+
+        //generate OTP send user email.
+        const otp = String(Math.floor(100000 + Math.random() * 900000)) //6 digits random number
+        user.verifyOtp = otp
+        user.verifyOtpExpireAt = Date.now() + 24*60*60*1000 //1day
+        await user.save()
+
+        //now send otp to user email.
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: user.email,
+            subject: 'Account Verification OTP',
+            // text: `Hello ${user.name}, Your OTP for account verification is ${otp}. It will expire in 1 day`,
+            html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
+        }
+        //send email
+        await transporter.sendMail(mailOptions)
+
+        return res.json({success:true, message:"Verification OTP sent to your email"})
+
+    }catch(err) {
+        res.json({success:false, messsage: err.message})
+        
+    }
+}
+
+
+//Verify OTP and update user account to verified
+export const verifyEmail = async(req, res)=>{
+    const {userId, otp} = req.body;
+    if(!userId || !otp){
+        return res.json({success:false, message:"Missing Details"})
     }
 
-    const token = createToken(user._id);
-    setTokenCookie(res, token);
+    try {
+        const user = await userModel.findById(userId)
 
-    return res.json({
-      success: true,
-      user: {
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        mobileNumber: user.mobileNumber,
-        username: user.username,
-        dateOfBirth: user.dateofBirth,
-        isVerified: user.isVerified,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt
-      }
-    });
+        if(!user){
+            return res.json({success:false, message:"User not found"})
+        }
 
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-  }
-};
+        if(user.verifyOtp === '' || user.verifyOtp!== otp){
+            return res.json({success:false, message:"Invalid OTP"})
+        }
 
-export const logout = async (req, res) => {
-  try {
-    res.clearCookie("accessToken", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-      path: '/'
-    });
-    return res.status(200).json({ success: true, message: "Logged out successfully" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
-  }
-};
+        if(user.verifyOtpExpireAt < Date.now()){
+            return res.json({success:false, message:"OTP expired. Please request a new OTP"})
+        }
 
-export const sendVerifyOtp = async (req, res) => {
-  const { email } = req.body;
-  if (!email) return res.status(400).json({ success: false, message: "Email is required" });
+        user.isAccountVerified = true
+        user.verifyOtp = ''
+        user.verifyOtpExpireAt = 0
+        await user.save()
 
-  try {
-    const user = await userModel.findOne({ email });
-    if (!user) return res.status(404).json({ success: false, message: "User not found" });
-    if (user.isVerified) return res.status(400).json({ success: false, message: "Already verified" });
-
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
-    user.verifyotp = otp;
-    user.verifyotpExpireAt = Date.now() + 10 * 60 * 1000;
-    await user.save();
-
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: 'Verify your E-CELL SMVIT account',
-      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
-    });
-
-    return res.json({ success: true, message: "OTP sent to your email" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-export const verifyEmail = async (req, res) => {
-  const { email, otp } = req.body;
-  if (!email || !otp) return res.status(400).json({ success: false, message: "Email and OTP required" });
-
-  try {
-    const user = await userModel.findOne({ email });
-    if (!user) return res.status(404).json({ success: false, message: "User not found" });
-    if (user.verifyotp !== otp) return res.status(400).json({ success: false, message: "Invalid OTP" });
-    if (user.verifyotpExpireAt < Date.now()) return res.status(400).json({ success: false, message: "OTP expired" });
-
-    user.isVerified = true;
-    user.verifyotp = '';
-    user.verifyotpExpireAt = 0;
-    await user.save();
-
-    const token = createToken(user._id);
-    setTokenCookie(res, token);
-
-    return res.json({ success: true, message: "Email verified successfully" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-export const isAuthenticated = async (req, res) => {
-  try {
-    const user = await userModel.findById(req.user?._id).select("-password");
-    if (!user) {
-      return res.status(404).json({ success: false, message: "User not found" });
+        return res.json({success:true, message:"Account verified successfully"})
+    }catch(err) {
+        return res.json({success:false, message: err.message})
     }
-    return res.status(200).json({ success: true, user });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-};
+}
 
-export const sendResetOtp = async (req, res) => {
-  const { email } = req.body;
-  if (!email) return res.status(400).json({ success: false, message: "Email is required" });
 
-  try {
-    const user = await userModel.findOne({ email });
-    if (!user) return res.status(404).json({ success: false, message: "User not found" });
+//check user is Authenticated or not.
+export const isAuthenticated = async(req, res)=>{
+    try {
+        return res.json({success:true})
+    }catch(error) {
+        return res.json({success:false, message: error.message})
+    }
+}
 
-    const otp = String(Math.floor(100000 + Math.random() * 900000));
-    user.resetOtp = otp;
-    user.resetOtpExpireAt = Date.now() + 10 * 60 * 1000;
-    await user.save();
+//send RESET PASSWORD OTP to user email
+export const sendRestOtp = async(req, res)=>{
+    const {email} = req.body;
+    if(!email){
+        return res.json({success:false, message:"Email is required"})
+    }
 
-    await transporter.sendMail({
-      from: process.env.SENDER_EMAIL,
-      to: user.email,
-      subject: 'Reset your E-CELL SMVIT password',
-      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
-    });
+    try {
+        const user = await userModel.findOne({email})
+        if(!user){
+            return res.json({success:false, message:"User not found"})
+        }
+                //generate OTP send user email.
+                const otp = String(Math.floor(100000 + Math.random() * 900000)) //6 digits random number
+                user.resetOtp = otp
+                user.resetOtpExpireAt = Date.now() + 15*60*1000 //15 minutes
+                await user.save()
+        
+                //now send otp to user email.
+                const mailOptions = {
+                    from: process.env.SENDER_EMAIL,
+                    to: user.email,
+                    subject: 'Password Reset OTP',
+                    // text: `Hello ${user.name}, Your OTP for password reset is ${otp}. It will expire in 15 minutes`
+                    html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
+                }
+                //send email
+                await transporter.sendMail(mailOptions)
 
-    return res.json({ success: true, message: "OTP sent to your email" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
+                return res.json({success:true, message:"Password Reset OTP sent to your email"})
+        
+    }catch(err) {
+        return res.json({success:false, message: err.message})
+    }
+}
 
-export const resetPassword = async (req, res) => {
-  const { email, otp, newPassword } = req.body;
-  if (!email || !otp || !newPassword) {
-    return res.status(400).json({ success: false, message: "Email, OTP and new password are required" });
-  }
+//Verify OTP and update user password
+export const resetPassword = async(req, res)=>{
+    const {email, otp, newPassword} = req.body;
+    if(!email || !otp || !newPassword){
+        return res.json({success:false, message:"Email, OTP and New Password required"})
+    }
 
-  try {
-    const user = await userModel.findOne({ email });
-    if (!user) return res.status(404).json({ success: false, message: "User not found" });
-    if (user.resetOtp !== otp) return res.status(400).json({ success: false, message: "Invalid OTP" });
-    if (user.resetOtpExpireAt < Date.now()) return res.status(400).json({ success: false, message: "OTP expired" });
+    try {
+        const user = await userModel.findOne({email})
 
-    user.password = await bcrypt.hash(newPassword, 10);
-    user.resetOtp = '';
-    user.resetOtpExpireAt = 0;
-    await user.save();
+        if(!user){
+            return res.json({success:false, message:"User not found"})
+        }
 
-    return res.json({ success: true, message: "Password reset successfully" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
+        if(user.resetOtp === '' || user.resetOtp!== otp){
+            return res.json({success:false, message:"Invalid OTP"})
+        }
+
+        if(user.resetOtpExpireAt < Date.now()){
+            return res.json({success:false, message:"OTP expired. Please request a new OTP"})
+        }
+
+        //if OTP is valid.
+        const hashedPassword = await bcrypt.hash(newPassword, 10)
+        user.password = hashedPassword
+        user.resetOtp = ''
+        user.resetOtpExpireAt = 0
+        await user.save()
+
+        return res.json({success:true, message:"Password has been reset successfully"})
+    }catch(err) {
+        return res.json({success:false, message: err.message})
+    }
+}

@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { AppContent } from "../context/AppContext";
+import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  const { userData, setIsLoggedin } = useContext(AppContent);
+  const { userData, setIsLoggedin } = useContext(AppContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {

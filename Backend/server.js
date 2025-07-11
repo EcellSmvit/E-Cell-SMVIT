@@ -10,7 +10,10 @@ import UserRouter from './routes/UserRoutes.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
-const allowedOrigins = ['https://e-cell-smvit.onrender.com/']
+const allowedOrigins = [
+    'https://e-cell-smvit.onrender.com',
+    'http://localhost:5173/'
+]
 //call the DB fun.
 connectDB()
 

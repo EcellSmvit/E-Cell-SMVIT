@@ -60,7 +60,7 @@ function Navbar() {
           onClick={() => navigate('/login')}
           className="px-4 py-2 text-sm md:text-base font-semibold text-white transition-all duration-200 bg-[#4F46E5] rounded-full hover:bg-gray-200 hover:text-[#4F46E5] flex items-center justify-center"
         >
-          Login/Signup
+         Login/Signup
         </button>
       </div>
     </div>

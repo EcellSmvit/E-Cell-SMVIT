@@ -1,81 +1,56 @@
-import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import axios from 'axios'
 import { toast } from "react-toastify";
 
-const AppContent = createContext();
+export const AppContext = createContext()
 
-export const AppContextProvider = ({ children }) => {
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
-  const [isLoggedin, setIsLoggedin] = useState(false);
-  const [userData, setUserData] = useState(null);
+export const AppContextProvider = (props) => {
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-  }, []);
+    axios.defaults.withCredentials = true
 
-  const getUserData = async () => {
-    try {
-      console.log("Fetching user data...");
-      const res = await axios.get(`${backendUrl}/api/user/data`, {
-        withCredentials: true,
-      });
-      console.log("User data response:", res.data);
+    const backendUrl = import.meta.env.VITE_BACKEND_URL
+    const [isLogin, setIsLogin] = useState(false)
+    const [userData, setUserData] = useState(false)
 
-      if (res.data.success && res.data.user) {
-        setUserData(res.data.user);
-        setIsLoggedin(true);
-      } else {
-        console.warn("Unable to fetch user data:", res.data.message);
-        toast.error("Unable to fetch user data");
-        setUserData(null);
-        setIsLoggedin(false);
-      }
-    } catch (error) {
-      console.error("getUserData error:", error?.response?.data || error.message);
-      toast.error("Unable to fetch user data");
-      setUserData(null);
-      setIsLoggedin(false);
-    }
-  };
 
-  useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await axios.get(`${backendUrl}/api/auth/is-auth`, {
-          withCredentials: true,
-        });
-        if (res.data.success) {
-          await getUserData();
-        } else {
-          setIsLoggedin(false);
-          setUserData(null);
+    //+++++++++Create a fun that give the user data +++++++++
+    const getUserData = async()=>{
+        try {
+            const {data} = await axios.get(backendUrl + '/api/user/data')
+            data.success ? setUserData(data.userData) : toast.error(data.message)
+        } catch (error) {
+            toast.error(error.message)
         }
-      } catch (error) {
-        toast.error("Unable to fetch user data");
-        setIsLoggedin(false);
-        setUserData(null);
-      }
-    };
+    }
 
-    checkAuth();
-    // eslint-disable-next-line
-  }, [backendUrl]);
+    const getAuthStatus = async()=>{
+        try {
+            const {data} = await axios.get(backendUrl + '/api/auth/is-auth')
+            if(data.success){
+                setIsLogin(true)
+                getUserData()
+            }
+        }catch(error) {
+            toast.error(error.message)
+        }
+    }
 
-  return (
-    <AppContent.Provider
-      value={{
-        backendUrl,
-        isLoggedin,
-        setIsLoggedin,
+    useEffect(()=>{
+        getAuthStatus()
+    }, [])
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    const value ={
+        backendUrl, 
+        isLogin, 
+        setIsLogin, 
         userData,
-        setUserData,
-        getUserData,
-      }}
-    >
-      {children}
-    </AppContent.Provider>
-  );
-};
+        setUserData, 
+        getUserData
+    }
 
-export { AppContent };
-export default AppContent;
+    return(
+        <AppContext.Provider value={value}>
+            {props.children}
+        </AppContext.Provider>
+    )
+}

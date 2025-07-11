@@ -27,8 +27,9 @@ export const AppContextProvider = ({ children }) => {
         toast.error(res.data.message || "Failed to fetch user");
       }
     } catch (error) {
-      if (error.response && error.response.status === 404) {
-        toast.error("User not found. Please login again.");
+      if (error.response && error.response.status === 401) {
+        setUserData(null);
+        setIsLoggedin(false);
       } else {
         toast.error(error.response?.data?.message || "Error fetching user");
       }

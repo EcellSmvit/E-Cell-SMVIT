@@ -20,22 +20,23 @@ export const AppContextProvider = ({ children }) => {
         withCredentials: true,
       });
       console.log("User data response:", res.data);
-  
+
       if (res.data.success && res.data.user) {
         setUserData(res.data.user);
         setIsLoggedin(true);
       } else {
-        console.warn("Failed to fetch user:", res.data.message);
+        console.warn("Unable to fetch user data:", res.data.message);
+        toast.error("Unable to fetch user data");
         setUserData(null);
         setIsLoggedin(false);
       }
     } catch (error) {
       console.error("getUserData error:", error?.response?.data || error.message);
+      toast.error("Unable to fetch user data");
       setUserData(null);
       setIsLoggedin(false);
     }
   };
-  
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -50,7 +51,7 @@ export const AppContextProvider = ({ children }) => {
           setUserData(null);
         }
       } catch (error) {
-        toast.error(error?.response?.data?.message || error.message);
+        toast.error("Unable to fetch user data");
         setIsLoggedin(false);
         setUserData(null);
       }

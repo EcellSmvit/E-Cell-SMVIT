@@ -3,9 +3,6 @@ import userModel from '../models/userModel.js';
 
 const userAuth = async (req, res, next) => {
   const token = req.cookies?.accessToken;
-
-  // Instead of returning 401 for missing token, just set req.user = null and call next()
-  // This allows the frontend to check auth status without triggering an error on home page
   if (!token) {
     req.user = null;
     return next();

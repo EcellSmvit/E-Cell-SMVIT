@@ -19,7 +19,7 @@ const userAuth = async (req, res, next) => {
     next();
   } catch (error) {
     console.log('❌ JWT verification failed:', error.message);
-    return res.status(200).json({ success: false, message: 'Invalid or expired token' });
+    return res.status(401).json({ success: false, message: error.message });
   }
 };
 

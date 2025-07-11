@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     username: { type: String, required: true, unique: true },
     mobileNumber: { type: String, required: true, unique: true },
-    dateofBirth: { type: String, required: true }, // Note: field is 'dateofBirth', not 'dateOfBirth'
+    dateofBirth: { type: String, required: true }, 
     verifyotp: { type: String, default: '' },
     verifyotpExpireAt: { type: Number, default: 0 },
     isVerified: { type: Boolean, default: false },

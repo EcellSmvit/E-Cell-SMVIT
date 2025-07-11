@@ -1,24 +1,39 @@
+import mongoose from 'mongoose';
 import userModel from '../models/userModel.js';
-import { asyncHandler } from '../utils/ayncHandler.js';
-import { ApiError } from '../utils/ApiError.js';
-import {ApiResponse} from '../utils/ApiResponse.js'
 
 export const getUserData = async (req, res) => {
     try {
-        if (!req.user || !req.user.id) {
-            return res.status(401).json({ success: false, message: "Unauthorized access" });
+        // Check if user info exists on request
+        if (!req.user || !req.user._id) {
+            return res.status(401).json({
+                success: false,
+                message: "Unauthorized access"
+            });
         }
-        const userId = req.user.id;
 
-        if (!userId.match(/^[0-9a-fA-F]{24}$/)) {
-            return res.status(400).json({ success: false, message: "Invalid user ID format" });
+        const userId = req.user._id;
+
+        // Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid user ID format"
+            });
         }
 
-        const user = await userModel.findById(userId).select('-password -resetOtp -resetOtpExpireAt -verifyotp -verifyotpExpireAt');
+        // Fetch user
+        const user = await userModel.findById(userId).select(
+            '-password -resetOtp -resetOtpExpireAt -verifyotp -verifyotpExpireAt'
+        );
+
         if (!user) {
-            return res.status(404).json({ success: false, message: "User not found or deleted" });
+            return res.status(404).json({
+                success: false,
+                message: "User not found or deleted"
+            });
         }
 
+        // Format response
         const sanitizedUser = {
             _id: user._id,
             name: user.name || '',
@@ -31,13 +46,17 @@ export const getUserData = async (req, res) => {
             updatedAt: user.updatedAt || new Date()
         };
 
-        res.json({
+        // Send response
+        return res.status(200).json({
             success: true,
             user: sanitizedUser
         });
 
     } catch (error) {
         console.error('Error in getUserData:', error);
-        return res.status(500).json({ success: false, message: error.message || "Internal Server Error" });
+        return res.status(500).json({
+            success: false,
+            message: error.message || "Internal Server Error"
+        });
     }
-}
+};

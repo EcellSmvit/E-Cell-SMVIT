@@ -16,7 +16,7 @@ export const AppContextProvider = (props) => {
     //+++++++++Create a fun that give the user data +++++++++
     const getUserData = async () => {
       try {
-        const { data } = await axios.get(backendUrl + '/api/user/data', {
+        const { data } = await axios.get(`${backendUrl}/api/user/data`, {
           withCredentials: true,
         });
     

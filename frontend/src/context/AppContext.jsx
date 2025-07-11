@@ -15,35 +15,27 @@ export const AppContextProvider = ({ children }) => {
 
   const getUserData = async () => {
     try {
+      console.log("Fetching user data...");
       const res = await axios.get(`${backendUrl}/api/user/data`, {
         withCredentials: true,
       });
+      console.log("User data response:", res.data);
+  
       if (res.data.success && res.data.user) {
         setUserData(res.data.user);
         setIsLoggedin(true);
       } else {
+        console.warn("Failed to fetch user:", res.data.message);
         setUserData(null);
         setIsLoggedin(false);
-        toast.error(res.data.message || "Failed to fetch user");
       }
     } catch (error) {
-      if (error.response && error.response.status === 401) {
-        // Unauthenticated – silent fail
-        setUserData(null);
-        setIsLoggedin(false);
-      } else if (error.response && error.response.status === 404) {
-        // Logged-in token but user no longer exists
-        toast.error("User not found. Please login again.");
-        setUserData(null);
-        setIsLoggedin(false);
-      } else {
-        toast.error(error.response?.data?.message || "Error fetching user");
-        setUserData(null);
-        setIsLoggedin(false);
-      }
-      
+      console.error("getUserData error:", error?.response?.data || error.message);
+      setUserData(null);
+      setIsLoggedin(false);
     }
   };
+  
 
   useEffect(() => {
     const checkAuth = async () => {

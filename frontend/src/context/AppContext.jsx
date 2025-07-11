@@ -9,7 +9,6 @@ export const AppContextProvider = ({ children }) => {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [userData, setUserData] = useState(null);
 
-  // Set axios defaults
   useEffect(() => {
     axios.defaults.withCredentials = true;
   }, []);

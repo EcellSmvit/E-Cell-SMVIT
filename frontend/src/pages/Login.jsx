@@ -14,12 +14,12 @@ const Login = () => {
   const { backendUrl, setIsLogin, getUserData } = useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
-    try {
-      e.preventDefault();
-      axios.defaults.withCredentials = true;
+    e.preventDefault();
+    axios.defaults.withCredentials = true;
 
+    try {
       if (state === 'Sign Up') {
-        const { data } = await axios.post(backendUrl + '/api/auth/register', {
+        const { data } = await axios.post(`${backendUrl}/api/auth/register`, {
           name,
           email,
           password,
@@ -33,7 +33,7 @@ const Login = () => {
           toast.error(data.message);
         }
       } else {
-        const { data } = await axios.post(backendUrl + '/api/auth/login', {
+        const { data } = await axios.post(`${backendUrl}/api/auth/login`, {
           email,
           password,
         });
@@ -47,66 +47,88 @@ const Login = () => {
         }
       }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
   return (
-    <div className='bg-white'>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-black to-[#4E46E4]">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8 space-y-6">
+        <h2 className="text-3xl font-bold text-center">
+          {state === 'Sign Up' ? 'Create Account' : 'Login'}
+        </h2>
+        <p className="text-center text-gray-500">
+          {state === 'Sign Up' ? 'Create your account' : 'Login to your account!'}
+        </p>
 
-      <div>
-        <h2>{state === 'Sign Up' ? 'Create Account' : 'Login'}</h2>
-        <p>{state === 'Sign Up' ? 'Create your account' : 'Login to your account!'}</p>
-
-        <form onSubmit={onSubmitHandler}>
+        <form onSubmit={onSubmitHandler} className="space-y-4">
           {state === 'Sign Up' && (
-            <div>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                type="text"
-                placeholder="Full Name"
-                required
-              />
-            </div>
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg"
+              required
+            />
           )}
 
-          <div>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              placeholder="Email id"
-              required
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Email id"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg"
+            required
+          />
 
-          <div>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password"
-              placeholder="Password"
-              required
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 border rounded-lg"
+            required
+          />
 
-          <p onClick={() => navigate('/reset-password')}>Forgot password?</p>
+          <p
+            className="text-right text-sm text-blue-600 cursor-pointer"
+            onClick={() => navigate('/reset-password')}
+          >
+            Forgot password?
+          </p>
 
-          <button type="submit">{state}</button>
+          <button
+            type="submit"
+            className="w-full bg-[#4E46E4] text-white py-2 rounded-lg hover:bg-indigo-700 transition"
+          >
+            {state}
+          </button>
         </form>
 
-        {state === 'Sign Up' ? (
-          <p>
-            Already have an account?{' '}
-            <span onClick={() => setState('Login')}>Login here</span>
-          </p>
-        ) : (
-          <p>
-            Don't have an account?{' '}
-            <span onClick={() => setState('Sign Up')}>Sign up</span>
-          </p>
-        )}
+        <p className="text-center text-sm">
+          {state === 'Sign Up' ? (
+            <>
+              Already have an account?{' '}
+              <span
+                className="text-blue-600 cursor-pointer"
+                onClick={() => setState('Login')}
+              >
+                Login here
+              </span>
+            </>
+          ) : (
+            <>
+              Don’t have an account?{' '}
+              <span
+                className="text-blue-600 cursor-pointer"
+                onClick={() => setState('Sign Up')}
+              >
+                Sign up
+              </span>
+            </>
+          )}
+        </p>
       </div>
     </div>
   );

@@ -2,44 +2,35 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 
 const userAuth = async (req, res, next) => {
-  const token = req.cookies.accessToken;
+  const token = req.cookies?.accessToken;
 
+  // Instead of returning 401 for missing token, just set req.user = null and call next()
+  // This allows the frontend to check auth status without triggering an error on home page
   if (!token) {
-    return res.status(401).json({
-      success: false,
-      message: "Unauthorized access, please login first",
-    });
+    req.user = null;
+    return next();
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // The token should have _id, not id, based on your authController.js
-    // In your createToken: jwt.sign({ _id: userId }, ...)
-    // So, check for _id, not id
     if (!decoded?._id) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid token, please login again",
-      });
+      req.user = null;
+      return next();
     }
 
     const user = await userModel.findById(decoded._id).select('-password');
     if (!user) {
-      return res.status(401).json({
-        success: false,
-        message: "User not found",
-      });
+      req.user = null;
+      return next();
     }
 
-    req.user = user; // attach full user
+    req.user = user;
     next();
   } catch (err) {
     console.error("JWT error:", err);
-    return res.status(403).json({
-      success: false,
-      message: "Session expired or invalid. Please login again.",
-    });
+    req.user = null;
+    return next();
   }
 };
 

@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 const Login = () => {
   const [state, setState] = useState('Sign Up');
   const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,6 +22,7 @@ const Login = () => {
       if (state === 'Sign Up') {
         const { data } = await axios.post(backendUrl + '/api/auth/register', {
           name,
+          username,
           email,
           password,
         });
@@ -71,7 +73,17 @@ const Login = () => {
               />
             </div>
           )}
-
+          {state === 'Sign Up' && (
+            <div>
+              <input
+                onChange={(e) => setUsername(e.target.value)}
+                value={username}
+                type="text"
+                placeholder="Username"
+                required
+              />
+            </div>
+          )}
           <div>
             <input
               onChange={(e) => setEmail(e.target.value)}

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Dashboard from './pages/Dashboard'
 
 
+
 const App = () => {
   return (
     <div>
@@ -19,7 +20,6 @@ const App = () => {
         <Route path='/email-verify' element={<EmailVerify/>}/>
         <Route path='/reset-passsword' element={<ResetPassword/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
-
         
       </Routes>
     </div>

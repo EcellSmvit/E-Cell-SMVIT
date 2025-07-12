@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Background from '@/components/Background';
 
 const Login = () => {
   const [state, setState] = useState('Sign Up');
@@ -57,82 +58,133 @@ const Login = () => {
   };
 
   return (
-    <div className='bg-white'>
-
-      <div>
-        <h2>{state === 'Sign Up' ? 'Create Account' : 'Login'}</h2>
-        <p>{state === 'Sign Up' ? 'Create your account' : 'Login to your account!'}</p>
-
-        <form onSubmit={onSubmitHandler}>
-          {state === 'Sign Up' && (
-            <div>
-              <input
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                type="text"
-                placeholder="Full Name"
-                required
-              />
-            </div>
-          )}
-          {state === 'Sign Up' && (
-            <div>
-              <input
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                type="text"
-                placeholder="Username"
-                required
-              />
-            </div>
-          )}
-          {state === 'Sign Up' && (
-            <div>
-              <input
-                onChange={(e) => setMobileNumber(e.target.value)}
-                value={mobileNumber}
-                type="text"
-                placeholder="Mobile Number"
-                required
-              />
-            </div>
-          )}
-          <div>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              placeholder="Email id"
-              required
-            />
-          </div>
-
-          <div>
-            <input
-              onChange={(e) => setPassword(e.target.value)}
-              value={password}
-              type="password"
-              placeholder="Password"
-              required
-            />
-          </div>
-
-          <p onClick={() => navigate('/reset-password')}>Forgot password?</p>
-
-          <button type="submit">{state}</button>
-        </form>
-
-        {state === 'Sign Up' ? (
-          <p>
-            Already have an account?{' '}
-            <span onClick={() => setState('Login')}>Login here</span>
+    <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
+      <div className="w-[50vw] h-[100vh] relative bg-gradient-to-br from-blue-900 to-indigo-800">
+        <img
+          className="absolute top-4 left-4 z-10 w-24"
+          src="https://www.ecellsmvit.in/images/ecellwhite.png"
+          alt="E-Cell SMVIT Logo"
+        />
+        <Background />
+        <div className="absolute top-1/2 left-1/2 z-10 px-4 w-full text-center transform -translate-x-1/2 -translate-y-1/2">
+          <h2 className="mb-4 text-4xl font-bold text-white drop-shadow-lg">
+            {state === 'Sign Up' ? 'Create Account' : 'Welcome Back!'}
+          </h2>
+          <p className="mb-6 text-lg text-blue-100">
+            {state === 'Sign Up'
+              ? 'Join the E-Cell SMVIT community and unlock new opportunities!'
+              : 'Login to your account and continue your entrepreneurial journey.'}
           </p>
-        ) : (
-          <p>
-            Don't have an account?{' '}
-            <span onClick={() => setState('Sign Up')}>Sign up</span>
-          </p>
-        )}
+          
+        </div>
+      </div>
+      <div className="w-[50vw] h-[100vh] flex flex-col justify-center items-center bg-gray-100">
+        <div className="p-8 w-full max-w-md">
+          <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
+            {state === 'Sign Up' ? 'Sign Up' : 'Login'}
+          </h2>
+          
+
+          <form onSubmit={onSubmitHandler} className="space-y-4">
+            {state === 'Sign Up' && (
+              <div>
+                <input
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  type="text"
+                  placeholder="Full Name"
+                  required
+                  className="w-full rounded-2xl px-4 py-2 border border-[#4E47E5] focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                />
+              </div>
+            )}
+            {state === 'Sign Up' && (
+              <div>
+                <input
+                  onChange={(e) => setUsername(e.target.value)}
+                  value={username}
+                  type="text"
+                  placeholder="Username"
+                  required
+                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                />
+              </div>
+            )}
+            {state === 'Sign Up' && (
+              <div>
+                <input
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                  value={mobileNumber}
+                  type="text"
+                  placeholder="Mobile Number"
+                  required
+                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                />
+              </div>
+            )}
+            <div>
+              <input
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                type="email"
+                placeholder="Email id"
+                required
+                className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+              />
+            </div>
+
+            <div>
+              <input
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+                placeholder="Password"
+                required
+                className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+              />
+            </div>
+
+            <div className="flex justify-end">
+              <p
+                onClick={() => navigate('/reset-passsword')}
+                className="text-sm text-[#4E47E5] hover:underline cursor-pointer"
+              >
+                Forgot password?
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full py-2 mt-2 bg-[#4E47E5] text-white font-semibold rounded-2xl hover:bg-[#3a36b6] transition-colors"
+            >
+              {state}
+            </button>
+          </form>
+
+          <div className="mt-6 text-center">
+            {state === 'Sign Up' ? (
+              <p className="text-[#4E47E5]">
+                Already have an account?{' '}
+                <span
+                  onClick={() => setState('Login')}
+                  className="font-semibold cursor-pointer hover:underline"
+                >
+                  Login here
+                </span>
+              </p>
+            ) : (
+              <p className="text-[#4E47E5]">
+                Don't have an account?{' '}
+                <span
+                  onClick={() => setState('Sign Up')}
+                  className="font-semibold cursor-pointer hover:underline"
+                >
+                  Sign up
+                </span>
+              </p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

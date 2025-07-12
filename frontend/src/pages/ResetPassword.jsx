@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Background from '@/components/Background';
 
 const ResetPassword = () => {
   const { backendUrl } = useContext(AppContext);
@@ -90,77 +91,136 @@ const ResetPassword = () => {
   };
 
   return (
-    <div>
-      <img
-        onClick={() => navigate('/')}
-        src={assets.logo}
-        alt="Logo"
-      />
-
-      {!isEmailSent && (
-        <form onSubmit={onSubmitEmail}>
-          <h1>Reset Password</h1>
-          <p>Enter your registered email address.</p>
-
-          <div>
-            <img src={assets.mail_icon} alt="Email Icon" />
-            <input
-              type="email"
-              placeholder="Email ID"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
-      )}
-
-      {!isOtpSent && isEmailSent && (
-        <form onSubmit={onSubmitOtp}>
-          <h1>Reset Password OTP</h1>
-          <p>Enter the 6-digit code sent to your email.</p>
-
-          <div onPaste={handlePaste}>
-            {Array(6)
-              .fill(0)
-              .map((_, index) => (
+    <div className="flex justify-center items-center w-[100vw] h-[100vh]">
+      <div className="w-[50vw] h-[100vh] relative ">
+        <Background/>
+        <img
+          className="absolute top-4 left-4 z-10 w-24"
+          src="https://www.ecellsmvit.in/images/ecellwhite.png"
+          alt="E-Cell SMVIT Logo"
+        />
+        <div className="absolute top-1/2 left-1/2 z-10 px-4 w-full text-center transform -translate-x-1/2 -translate-y-1/2">
+          <h2 className="mb-4 text-4xl font-bold text-white drop-shadow-lg">
+            Reset Password
+          </h2>
+          <p className="mb-6 text-lg text-blue-100">
+            { !isEmailSent
+              ? "Enter your registered email address to receive a reset code."
+              : !isOtpSent
+                ? "Enter the 6-digit code sent to your email."
+                : "Set your new password below." }
+          </p>
+        </div>
+      </div>
+      <div className="w-[50vw] h-[100vh] flex flex-col justify-center items-center bg-gray-100">
+        <div className="p-8 w-full max-w-md">
+          {!isEmailSent && (
+            <form onSubmit={onSubmitEmail} className="space-y-4">
+              <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
+                Reset Password
+              </h2>
+              <div>
                 <input
-                  ref={(el) => (inputRefs.current[index] = el)}
-                  key={index}
-                  type="text"
-                  maxLength="1"
-                  onInput={(e) => handleInput(e, index)}
-                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  type="email"
+                  placeholder="Email ID"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
+                  className="w-full rounded-2xl px-4 py-2 border border-[#4E47E5] focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
                 />
-              ))}
-          </div>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 mt-2 bg-[#4E47E5] text-white font-semibold rounded-2xl hover:bg-[#3a36b6] transition-colors"
+              >
+                Send OTP
+              </button>
+              <div className="flex justify-end">
+                <p
+                  onClick={() => navigate('/login')}
+                  className="text-sm text-[#4E47E5] hover:underline cursor-pointer"
+                >
+                  Back to Login
+                </p>
+              </div>
+            </form>
+          )}
 
-          <button type="submit">Submit</button>
-        </form>
-      )}
+          {!isOtpSent && isEmailSent && (
+            <form onSubmit={onSubmitOtp} className="space-y-4">
+              <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
+                Enter OTP
+              </h2>
+              <div className="flex gap-2 justify-center" onPaste={handlePaste}>
+                {Array(6)
+                  .fill(0)
+                  .map((_, index) => (
+                    <input
+                      ref={(el) => (inputRefs.current[index] = el)}
+                      key={index}
+                      type="text"
+                      maxLength="1"
+                      onInput={(e) => handleInput(e, index)}
+                      onKeyDown={(e) => handleKeyDown(e, index)}
+                      required
+                      className="w-10 h-12 text-center text-2xl border border-[#4E47E5] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5]"
+                    />
+                  ))}
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 mt-2 bg-[#4E47E5] text-white font-semibold rounded-2xl hover:bg-[#3a36b6] transition-colors"
+              >
+                Verify OTP
+              </button>
+              <div className="flex justify-end">
+                <p
+                  onClick={() => {
+                    setIsEmailSent(false);
+                    setOtp('');
+                    inputRefs.current.forEach((input) => input && (input.value = ''));
+                  }}
+                  className="text-sm text-[#4E47E5] hover:underline cursor-pointer"
+                >
+                  Change Email
+                </p>
+              </div>
+            </form>
+          )}
 
-      {isOtpSent && isEmailSent && (
-        <form onSubmit={onSubmitNewPassword}>
-          <h1>New Password</h1>
-          <p>Enter the new password below.</p>
-
-          <div>
-            <img src={assets.lock_icon} alt="Password Icon" />
-            <input
-              type="password"
-              placeholder="New Password"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-              required
-            />
-          </div>
-
-          <button type="submit">Submit</button>
-        </form>
-      )}
+          {isOtpSent && isEmailSent && (
+            <form onSubmit={onSubmitNewPassword} className="space-y-4">
+              <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
+                New Password
+              </h2>
+              <div>
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                  className="w-full rounded-2xl px-4 py-2 border border-[#4E47E5] focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 mt-2 bg-[#4E47E5] text-white font-semibold rounded-2xl hover:bg-[#3a36b6] transition-colors"
+              >
+                Reset Password
+              </button>
+              <div className="flex justify-end">
+                <p
+                  onClick={() => navigate('/login')}
+                  className="text-sm text-[#4E47E5] hover:underline cursor-pointer"
+                >
+                  Back to Login
+                </p>
+              </div>
+            </form>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

@@ -55,7 +55,7 @@ export const register = async (req, res)=>{
 
 
     } catch(err) {
-        res.json({success:false, messsage: err.message})
+        res.json({success:false, message: err.message})
     }
 }
 
@@ -94,7 +94,7 @@ export const login = async(req, res)=>{
         return res.json({success:true, })
 
     } catch(err) {
-        res.json({success:false, messsage: err.message}) 
+        res.json({success:false, message: err.message}) 
     }
 }
 
@@ -107,7 +107,7 @@ export const logout = (req, res)=>{
         });
         return res.json({success:true, message:"Logged Out"})
     }catch (err) {
-        res.json({success:false, messsage: err.message})
+        res.json({success:false, message: err.message})
     }
 }
 
@@ -143,7 +143,7 @@ export const sendVerifyOtp = async(req, res)=>{
         return res.json({success:true, message:"Verification OTP sent to your email"})
 
     }catch(err) {
-        res.json({success:false, messsage: err.message})
+        res.json({success:false, message: err.message})
         
     }
 }

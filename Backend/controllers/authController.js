@@ -32,7 +32,7 @@ export const register = async (req, res)=>{
         //we are send this token using cookie.
          const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
 
-        res.cookie('token', token, {
+        res.cookie('accessToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
@@ -99,7 +99,7 @@ export const login = async(req, res)=>{
 
 export const logout = (req, res)=>{
     try {
-        res.clearCookie('token',{
+        res.clearCookie('accessToken',{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',

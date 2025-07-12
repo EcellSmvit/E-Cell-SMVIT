@@ -35,7 +35,7 @@ export const register = async (req, res)=>{
          res.cookie('accessToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            sameSite: 'none',
             maxAge: 1 * 24 * 60 * 60 * 1000
           });
           
@@ -87,7 +87,7 @@ export const login = async(req, res)=>{
          res.cookie('accessToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            sameSite: 'none',
             maxAge: 1 * 24 * 60 * 60 * 1000
           });
           
@@ -103,7 +103,7 @@ export const logout = (req, res)=>{
         res.clearCookie('accessToken',{
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
+            sameSite: process.env.NODE_ENV === 'none',
         });
         return res.json({success:true, message:"Logged Out"})
     }catch (err) {

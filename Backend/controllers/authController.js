@@ -32,12 +32,13 @@ export const register = async (req, res)=>{
         //we are send this token using cookie.
          const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
 
-        res.cookie('accessToken', token, {
+         res.cookie('accessToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 1*24*60*60*1000
-        });
+            maxAge: 1 * 24 * 60 * 60 * 1000
+          });
+          
 
         //we are send wellcome email to user...
         const mailOptions = {
@@ -83,13 +84,13 @@ export const login = async(req, res)=>{
 
          const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
 
-        res.cookie('accessToken', token, {
+         res.cookie('accessToken', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
-            maxAge: 1*24*60*60*1000
-        });
-
+            maxAge: 1 * 24 * 60 * 60 * 1000
+          });
+          
         return res.json({success:true, })
 
     } catch(err) {

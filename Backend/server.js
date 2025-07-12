@@ -10,7 +10,8 @@ const app = express()
 const PORT = process.env.PORT || 4000
 const allowedOrigins = [
     'https://e-cell-smvit.onrender.com',
-    'http://localhost:5173'
+    'http://localhost:5173',
+    'https://e-cell-smvit-backend.onrender.com'
 ]
 
 // Connect to the database

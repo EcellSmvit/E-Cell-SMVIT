@@ -12,10 +12,7 @@ AuthRouter.post('/login', login)
 AuthRouter.post('/logout', logout)
 AuthRouter.post('/send-verify-otp', userAuth, sendVerifyOtp)
 AuthRouter.post('/verify-account', userAuth, verifyEmail)
-AuthRouter.get('/is-auth', (req, res) => {
-    console.log('🔥 Cookies received:', req.cookies);
-    res.json({ success: !!req.cookies.accessToken });
-  });
+AuthRouter.get('/is-auth',userAuth,isAuthenticated );
   
 AuthRouter.post('/send-reset-otp', sendRestOtp)
 AuthRouter.post('/reset-password', resetPassword)

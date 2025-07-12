@@ -16,22 +16,19 @@ export const AppContextProvider = (props) => {
 
     //+++++++++Create a fun that give the user data +++++++++
     const getUserData = async () => {
+      console.log("👀 Browser cookies:", document.cookie);
+    
       try {
         const { data } = await axios.get(`${backendUrl}/api/user/data`, {
           withCredentials: true,
         });
-    
-        if (data.success) {
-          console.log("✅ User Data Fetched:", data.user);
-          setUserData(data.user); // ✅ Correct key
-        } else {
-          toast.error(data.message || "Could not fetch user data");
-        }
+        console.log("✅ User Data Fetched:", data);
+        setUserData(data.user);
       } catch (error) {
         console.error("❌ getUserData Error:", error.response?.data || error.message);
-        toast.error(error.response?.data?.message || error.message);
       }
     };
+    
     
 
     const getAuthStatus = async () => {

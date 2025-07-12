@@ -10,6 +10,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
 
   const navigate = useNavigate();
   const { backendUrl, setIsLogin, getUserData } = useContext(AppContext);
@@ -25,6 +26,7 @@ const Login = () => {
           username,
           email,
           password,
+          mobileNumber,
         });
         console.log('📝 Sign Up response:', data);
         if (data.success) {
@@ -80,6 +82,17 @@ const Login = () => {
                 value={username}
                 type="text"
                 placeholder="Username"
+                required
+              />
+            </div>
+          )}
+          {state === 'Sign Up' && (
+            <div>
+              <input
+                onChange={(e) => setMobileNumber(e.target.value)}
+                value={mobileNumber}
+                type="text"
+                placeholder="Mobile Number"
                 required
               />
             </div>

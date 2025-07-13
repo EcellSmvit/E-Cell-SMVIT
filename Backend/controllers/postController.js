@@ -1,38 +1,33 @@
 import cloudinary from "../config/cloudinary.js";
 import Post from "../models/postModel.js";
 
-// ===============================
-// Get Feed Posts
-// ===============================
 export const getFeedPosts = async (req, res) => {
-  try {
-    // Check if user is authenticated
-    if (!req.userId) {
-      return res.status(401).json({ message: "Unauthorized: Please log in." });
-    }
-
-    const user = req.userId;
-    const connections = Array.isArray(user.connections) ? user.connections : [];
-
-    // Fetch posts from user and their connections
-    const posts = await Post.find({ author: { $in: [...connections, user._id] } })
-      .populate("author", "name username profilePicture headline")
-      .populate("comments.user", "name profilePicture username headline")
-      .sort({ createdAt: -1 });
-
-    res.status(200).json(posts);
-  } catch (error) {
-    console.error("❌ Error in getFeedPosts:", error);
-    res.status(500).json({ message: "Server error while fetching feed posts." });
-  }
-};
-
-// ===============================
-// Create Post
-// ===============================
+	try {
+	  if (!req.userId) {
+		return res.status(401).json({ message: "Unauthorized: Please log in." });
+	  }
+  
+	  const user = await User.findById(req.userId);
+	  if (!user) {
+		return res.status(404).json({ message: "User not found." });
+	  }
+  
+	  const connections = Array.isArray(user.connections) ? user.connections : [];
+  
+	  const posts = await Post.find({ author: { $in: [...connections, user._id] } })
+		.populate("author", "name username profilePicture headline")
+		.populate("comments.user", "name profilePicture username headline")
+		.sort({ createdAt: -1 });
+  
+	  res.status(200).json(posts);
+	} catch (error) {
+	  console.error("❌ Error in getFeedPosts:", error.message);
+	  res.status(500).json({ message: "Server error while fetching feed posts." });
+	}
+  };
+  
 export const createPost = async (req, res) => {
   try {
-    // Check if user is authenticated
     if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
@@ -47,7 +42,6 @@ export const createPost = async (req, res) => {
 
     if (image) {
       try {
-        // Validate image is a base64 string
         if (!/^data:image\/[a-zA-Z]+;base64,/.test(image)) {
           return res.status(400).json({ message: "Invalid image format." });
         }
@@ -74,7 +68,6 @@ export const createPost = async (req, res) => {
 
     await newPost.save();
 
-    // Populate author for frontend consistency
     await newPost.populate("author", "name username profilePicture headline");
 
     res.status(201).json(newPost);
@@ -84,12 +77,8 @@ export const createPost = async (req, res) => {
   }
 };
 
-// ===============================
-// Delete Post
-// ===============================
 export const deletePost = async (req, res) => {
   try {
-    // Check if user is authenticated
     if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
@@ -108,9 +97,7 @@ export const deletePost = async (req, res) => {
     }
 
     if (post.image) {
-      // Safely extract public_id for deletion
       try {
-        // Extract Cloudinary public_id from URL
         const urlParts = post.image.split("/");
         const fileName = urlParts[urlParts.length - 1];
         const publicId = fileName.split(".")[0];
@@ -129,9 +116,6 @@ export const deletePost = async (req, res) => {
   }
 };
 
-// ===============================
-// Get Post by ID
-// ===============================
 export const getPostById = async (req, res) => {
   try {
     const postId = req.params.id;
@@ -150,12 +134,8 @@ export const getPostById = async (req, res) => {
   }
 };
 
-// ===============================
-// Create Comment
-// ===============================
 export const createComment = async (req, res) => {
   try {
-    // Check if user is authenticated
     if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
@@ -194,12 +174,8 @@ export const createComment = async (req, res) => {
   }
 };
 
-// ===============================
-// Like / Unlike Post
-// ===============================
 export const likePost = async (req, res) => {
   try {
-    // Check if user is authenticated
     if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
@@ -227,7 +203,6 @@ export const likePost = async (req, res) => {
 
     await post.save();
 
-    // Repopulate for updated likes
     await post.populate("author", "name username profilePicture headline");
     await post.populate("comments.user", "name profilePicture username headline");
 

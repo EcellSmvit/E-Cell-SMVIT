@@ -1,5 +1,6 @@
 import cloudinary from "../config/cloudinary.js";
 import Post from "../models/postModel.js";
+import User from "../models/userModel.js";
 
 export const getFeedPosts = async (req, res) => {
 	try {
@@ -7,6 +8,7 @@ export const getFeedPosts = async (req, res) => {
 		return res.status(401).json({ message: "Unauthorized: Please log in." });
 	  }
   
+	  // 🛠 FIX: fetch full user document
 	  const user = await User.findById(req.userId);
 	  if (!user) {
 		return res.status(404).json({ message: "User not found." });
@@ -15,13 +17,13 @@ export const getFeedPosts = async (req, res) => {
 	  const connections = Array.isArray(user.connections) ? user.connections : [];
   
 	  const posts = await Post.find({ author: { $in: [...connections, user._id] } })
-		.populate("author", "name username headline")
-		.populate("comments.user", "name username headline")
+		.populate("author", "name username profilePicture headline")
+		.populate("comments.user", "name profilePicture username headline")
 		.sort({ createdAt: -1 });
   
 	  res.status(200).json(posts);
 	} catch (error) {
-	  console.error("❌ Error in getFeedPosts:", error.message);
+	  console.error("❌ Error in getFeedPosts:", error);
 	  res.status(500).json({ message: "Server error while fetching feed posts." });
 	}
   };

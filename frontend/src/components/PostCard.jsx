@@ -1,12 +1,15 @@
 import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
+import { AppContext } from "../context/AppContext"; 
 
 const PostCard = ({ post, onUpdate }) => {
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
+  const { userData } = useContext(AppContext);
+const currentUserId = userData?._id;
 
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
@@ -125,13 +128,15 @@ const PostCard = ({ post, onUpdate }) => {
               }
             }}
           />
-          <button
-            onClick={commentPost}
-            className={`text-blue-500 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
-            disabled={isCommenting}
-          >
-            Post
-          </button>
+          {post.author?._id === currentUserId && (
+  <button
+    onClick={deletePost}
+    disabled={isDeleting}
+    className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+  >
+    🗑️ Delete
+  </button>
+)}
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ const Dashboard = () => {
       >
         <div className="flex items-center gap-3">
           <img
-            src={ECELL_LOGO_URL}
+            src="https://www.ecellsmvit.in/images/ecellwhite.png"
             alt="E-Cell Logo"
             className="h-10 w-10 object-contain"
             style={{ background: "rgba(255,255,255,0.05)", borderRadius: "8px" }}

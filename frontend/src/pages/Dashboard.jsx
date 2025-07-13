@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Feed from "./Feed";
+import { Post } from "ogl";
 
 const Dashboard = () => {
   const { userData, setIsLogin } = useContext(AppContext);
@@ -14,23 +15,24 @@ const Dashboard = () => {
 
   if (!userData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black">
-        <div className="text-white text-xl font-semibold">Loading...</div>
+      <div className="flex justify-center items-center min-h-screen bg-black">
+        <div className="text-xl font-semibold text-white">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white">
-      <h1 className="text-3xl font-bold mb-4">We are coming soon 🚀</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen text-white bg-black">
+      <h1 className="mb-4 text-3xl font-bold">We are coming soon 🚀</h1>
       <button
         onClick={handleLogout}
-        className="mt-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded"
+        className="px-4 py-2 mt-4 font-semibold text-white bg-blue-600 rounded hover:bg-blue-700"
       >
         Logout
       </button>
       <div className="p-4">
         <Feed />
+        <Post/>
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Feed from "./Feed";
-import { Post } from "ogl";
+import PostCard from "@/components/PostCard";
+
 
 const Dashboard = () => {
   const { userData, setIsLogin } = useContext(AppContext);
@@ -35,8 +36,8 @@ const Dashboard = () => {
         
       </div>
       <div className="p-4">
-      <Post/>
-        
+      
+        <PostCard/>
       </div>
     </div>
   );

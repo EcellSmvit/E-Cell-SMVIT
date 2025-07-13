@@ -1,14 +1,16 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
-// import { AppContext } from "../context/AppContext"; 
+import { AppContext } from "../context/AppContext";
 
 const PostCard = ({ post, onUpdate }) => {
+  const { userData } = useContext(AppContext);
+  const currentUserId = userData?._id;
+
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
-
 
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
@@ -90,13 +92,16 @@ const PostCard = ({ post, onUpdate }) => {
         >
           ❤️ {post.likes.length}
         </button>
-        <button
-          onClick={deletePost}
-          disabled={isDeleting}
-          className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
-        >
-          🗑️ Delete
-        </button>
+
+        {post.author?._id === currentUserId && (
+          <button
+            onClick={deletePost}
+            disabled={isDeleting}
+            className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+          >
+            🗑️ Delete
+          </button>
+        )}
       </div>
 
       <div className="mt-2">
@@ -104,10 +109,7 @@ const PostCard = ({ post, onUpdate }) => {
           <div className="mb-2">
             {post.comments.map((c, i) => (
               <div key={i} className="mb-1 text-sm text-gray-700">
-                <b>
-                  {c.user?.name || c.user?.username || "Unknown"}:
-                </b>{" "}
-                {c.content}
+                <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
               </div>
             ))}
           </div>
@@ -127,15 +129,13 @@ const PostCard = ({ post, onUpdate }) => {
               }
             }}
           />
-          {post.author?._id === currentUserId && (
-  <button
-    onClick={deletePost}
-    disabled={isDeleting}
-    className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
-  >
-    🗑️ Delete
-  </button>
-)}
+          <button
+            onClick={commentPost}
+            className={`text-blue-500 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
+            disabled={isCommenting}
+          >
+            Post
+          </button>
         </div>
       </div>
     </div>

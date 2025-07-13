@@ -32,7 +32,11 @@ const Dashboard = () => {
       </button>
       <div className="p-4">
         <Feed />
-        <Post/>
+        
+      </div>
+      <div className="p-4">
+      <Post/>
+        
       </div>
     </div>
   );

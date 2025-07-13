@@ -4,19 +4,13 @@ import User from "../models/userModel.js";
 
 export const getFeedPosts = async (req, res) => {
 	try {
+	  // Optional: you can still verify auth if needed
 	  if (!req.userId) {
 		return res.status(401).json({ message: "Unauthorized: Please log in." });
 	  }
   
-	  // 🛠 FIX: fetch full user document
-	  const user = await User.findById(req.userId);
-	  if (!user) {
-		return res.status(404).json({ message: "User not found." });
-	  }
-  
-	  const connections = Array.isArray(user.connections) ? user.connections : [];
-  
-	  const posts = await Post.find({ author: { $in: [...connections, user._id] } })
+	  // ✅ Fetch all posts, no filter on author
+	  const posts = await Post.find({})
 		.populate("author", "name username profilePicture headline")
 		.populate("comments.user", "name profilePicture username headline")
 		.sort({ createdAt: -1 });
@@ -27,6 +21,7 @@ export const getFeedPosts = async (req, res) => {
 	  res.status(500).json({ message: "Server error while fetching feed posts." });
 	}
   };
+  
   
 export const createPost = async (req, res) => {
   try {

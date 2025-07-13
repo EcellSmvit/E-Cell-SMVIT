@@ -1,5 +1,5 @@
 import { useState } from "react";
-import api from "../utils/api"; // already has baseURL set
+import api from "../utils/api";
 import { toast } from "react-toastify";
 
 const CreatePost = ({ onPostCreated }) => {
@@ -9,34 +9,38 @@ const CreatePost = ({ onPostCreated }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!content.trim()) {
+      toast.error("Content is required.");
+      return;
+    }
     setIsUploading(true);
 
     try {
-      let base64 = "";
+      let base64 = undefined;
 
       if (image) {
-        const reader = new FileReader();
-        const fileReadPromise = new Promise((resolve, reject) => {
+        base64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result);
           reader.onerror = reject;
+          reader.readAsDataURL(image);
         });
-        reader.readAsDataURL(image);
-        base64 = await fileReadPromise;
       }
 
-      // ✅ DO NOT add BACKEND_URL manually here
       await api.post("/create", {
         content,
-        image: base64 || undefined,
+        image: base64,
       });
 
       toast.success("Post created!");
       setContent("");
       setImage(null);
-      onPostCreated();
+      if (typeof onPostCreated === "function") onPostCreated();
     } catch (err) {
       console.error("❌ Create post error:", err);
-      toast.error("Failed to create post.");
+      toast.error(
+        err?.response?.data?.message || "Failed to create post."
+      );
     } finally {
       setIsUploading(false);
     }
@@ -50,12 +54,14 @@ const CreatePost = ({ onPostCreated }) => {
         placeholder="What's on your mind?"
         className="p-2 mb-2 w-full rounded border"
         required
+        disabled={isUploading}
       />
       <input
         type="file"
         accept="image/*"
-        onChange={(e) => setImage(e.target.files[0])}
+        onChange={(e) => setImage(e.target.files[0] || null)}
         className="mb-2"
+        disabled={isUploading}
       />
       <button
         type="submit"

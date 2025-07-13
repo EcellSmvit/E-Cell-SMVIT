@@ -1,50 +1,138 @@
 import { useState } from "react";
 import api from "../utils/api";
+import { toast } from "react-toastify";
 
 const PostCard = ({ post, onUpdate }) => {
   const [comment, setComment] = useState("");
+  const [isLiking, setIsLiking] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isCommenting, setIsCommenting] = useState(false);
 
   const likePost = async () => {
-    await api.post(`/${post._id}/like`);
-    onUpdate();
+    setIsLiking(true);
+    try {
+      await api.post(`/${post._id}/like`);
+      if (typeof onUpdate === "function") onUpdate();
+    } catch (err) {
+      toast.error(
+        err?.response?.data?.message || "Failed to like post."
+      );
+    } finally {
+      setIsLiking(false);
+    }
   };
 
   const commentPost = async () => {
     if (!comment.trim()) return;
-    await api.post(`/${post._id}/comment`, { content: comment });
-    setComment("");
-    onUpdate();
+    setIsCommenting(true);
+    try {
+      await api.post(`/${post._id}/comment`, { content: comment });
+      setComment("");
+      if (typeof onUpdate === "function") onUpdate();
+    } catch (err) {
+      toast.error(
+        err?.response?.data?.message || "Failed to add comment."
+      );
+    } finally {
+      setIsCommenting(false);
+    }
   };
 
   const deletePost = async () => {
-    await api.delete(`/delete/${post._id}`);
-    onUpdate();
+    if (!window.confirm("Are you sure you want to delete this post?")) return;
+    setIsDeleting(true);
+    try {
+      await api.delete(`/delete/${post._id}`);
+      if (typeof onUpdate === "function") onUpdate();
+      toast.success("Post deleted.");
+    } catch (err) {
+      toast.error(
+        err?.response?.data?.message || "Failed to delete post."
+      );
+    } finally {
+      setIsDeleting(false);
+    }
   };
 
   return (
-    <div className="border rounded p-4 mb-4">
-      <h3 className="font-bold">@{post.author?.username}</h3>
-      <p>{post.content}</p>
-      {post.image && <img src={post.image} alt="post" className="w-full mt-2 rounded" />}
+    <div className="p-4 mb-4 bg-white rounded border">
+      <div className="flex gap-2 items-center mb-2">
+        {post.author?.profilePicture && (
+          <img
+            src={post.author.profilePicture}
+            alt={post.author.username}
+            className="object-cover w-8 h-8 rounded-full"
+          />
+        )}
+        <div>
+          <h3 className="font-bold">@{post.author?.username}</h3>
+          {post.author?.headline && (
+            <div className="text-xs text-gray-500">{post.author.headline}</div>
+          )}
+        </div>
+      </div>
+      <p className="mb-2">{post.content}</p>
+      {post.image && (
+        <img
+          src={post.image}
+          alt="post"
+          className="object-contain mt-2 w-full max-h-96 rounded"
+        />
+      )}
       <div className="flex gap-4 mt-2 text-sm">
-        <button onClick={likePost}>❤️ {post.likes.length}</button>
-        <button onClick={deletePost}>🗑️ Delete</button>
+        <button
+          onClick={likePost}
+          disabled={isLiking}
+          className={`flex items-center gap-1 ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
+        >
+          ❤️ {post.likes.length}
+        </button>
+        <button
+          onClick={deletePost}
+          disabled={isDeleting}
+          className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+        >
+          🗑️ Delete
+        </button>
       </div>
       <div className="mt-2">
-        {post.comments.map((c, i) => (
-          <div key={i} className="text-sm text-gray-700">
-            <b>{c.user?.name}:</b> {c.content}
+        {post.comments && post.comments.length > 0 && (
+          <div className="mb-2">
+            {post.comments.map((c, i) => (
+              <div key={i} className="mb-1 text-sm text-gray-700">
+                <b>
+                  {c.user?.name
+                    ? c.user.name
+                    : c.user?.username
+                    ? c.user.username
+                    : "Unknown"}
+                  :
+                </b>{" "}
+                {c.content}
+              </div>
+            ))}
           </div>
-        ))}
+        )}
         <div className="flex gap-2 mt-2">
           <input
             type="text"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Add comment"
-            className="border rounded px-2 py-1 flex-1"
+            className="flex-1 px-2 py-1 rounded border"
+            disabled={isCommenting}
+            onKeyDown={e => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commentPost();
+              }
+            }}
           />
-          <button onClick={commentPost} className="text-blue-500">
+          <button
+            onClick={commentPost}
+            className={`text-blue-500 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
+            disabled={isCommenting}
+          >
             Post
           </button>
         </div>

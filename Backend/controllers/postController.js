@@ -15,8 +15,8 @@ export const getFeedPosts = async (req, res) => {
 	  const connections = Array.isArray(user.connections) ? user.connections : [];
   
 	  const posts = await Post.find({ author: { $in: [...connections, user._id] } })
-		.populate("author", "name username profilePicture headline")
-		.populate("comments.user", "name profilePicture username headline")
+		.populate("author", "name username headline")
+		.populate("comments.user", "name username headline")
 		.sort({ createdAt: -1 });
   
 	  res.status(200).json(posts);
@@ -68,7 +68,7 @@ export const createPost = async (req, res) => {
 
     await newPost.save();
 
-    await newPost.populate("author", "name username profilePicture headline");
+    await newPost.populate("author", "name username headline");
 
     res.status(201).json(newPost);
   } catch (error) {
@@ -120,8 +120,8 @@ export const getPostById = async (req, res) => {
   try {
     const postId = req.params.id;
     const post = await Post.findById(postId)
-      .populate("author", "name username profilePicture headline")
-      .populate("comments.user", "name profilePicture username headline");
+      .populate("author", "name username headline")
+      .populate("comments.user", "name username headline");
 
     if (!post) {
       return res.status(404).json({ message: "Post not found." });
@@ -160,8 +160,8 @@ export const createComment = async (req, res) => {
       },
       { new: true }
     )
-      .populate("author", "name email username headline profilePicture")
-      .populate("comments.user", "name profilePicture username headline");
+      .populate("author", "name email username headline ")
+      .populate("comments.user", "name  username headline");
 
     if (!post) {
       return res.status(404).json({ message: "Post not found." });
@@ -184,8 +184,8 @@ export const likePost = async (req, res) => {
     const userId = req.userId;
 
     const post = await Post.findById(postId)
-      .populate("author", "name username profilePicture headline")
-      .populate("comments.user", "name profilePicture username headline");
+      .populate("author", "name username  headline")
+      .populate("comments.user", "name  username headline");
 
     if (!post) {
       return res.status(404).json({ message: "Post not found." });
@@ -203,8 +203,8 @@ export const likePost = async (req, res) => {
 
     await post.save();
 
-    await post.populate("author", "name username profilePicture headline");
-    await post.populate("comments.user", "name profilePicture username headline");
+    await post.populate("author", "name username headline");
+    await post.populate("comments.user", "name username headline");
 
     res.status(200).json(post);
   } catch (error) {

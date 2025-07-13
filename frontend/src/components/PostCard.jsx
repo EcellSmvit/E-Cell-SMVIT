@@ -2,13 +2,6 @@ import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 
-/**
- * PostCard component displays a single post, its comments, and allows
- * liking, commenting, and deleting the post.
- * 
- * This component now provides more helpful error messages for 401 (Unauthorized)
- * and 404 (Not Found) errors, to help users understand why actions may fail.
- */
 const PostCard = ({ post, onUpdate }) => {
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
@@ -22,9 +15,7 @@ const PostCard = ({ post, onUpdate }) => {
     } else if (status === 404) {
       toast.error("Resource not found. The post may have been deleted.");
     } else {
-      toast.error(
-        err?.response?.data?.message || fallbackMsg
-      );
+      toast.error(err?.response?.data?.message || fallbackMsg);
     }
   };
 
@@ -71,13 +62,6 @@ const PostCard = ({ post, onUpdate }) => {
   return (
     <div className="p-4 mb-4 bg-white rounded border">
       <div className="flex gap-2 items-center mb-2">
-        {post.author?.profilePicture && (
-          <img
-            src={post.author.profilePicture}
-            alt={post.author.username}
-            className="object-cover w-8 h-8 rounded-full"
-          />
-        )}
         <div>
           <h3 className="font-bold">@{post.author?.username}</h3>
           {post.author?.headline && (
@@ -85,7 +69,9 @@ const PostCard = ({ post, onUpdate }) => {
           )}
         </div>
       </div>
+
       <p className="mb-2">{post.content}</p>
+
       {post.image && (
         <img
           src={post.image}
@@ -93,6 +79,7 @@ const PostCard = ({ post, onUpdate }) => {
           className="object-contain mt-2 w-full max-h-96 rounded"
         />
       )}
+
       <div className="flex gap-4 mt-2 text-sm">
         <button
           onClick={likePost}
@@ -109,18 +96,14 @@ const PostCard = ({ post, onUpdate }) => {
           🗑️ Delete
         </button>
       </div>
+
       <div className="mt-2">
         {post.comments && post.comments.length > 0 && (
           <div className="mb-2">
             {post.comments.map((c, i) => (
               <div key={i} className="mb-1 text-sm text-gray-700">
                 <b>
-                  {c.user?.name
-                    ? c.user.name
-                    : c.user?.username
-                    ? c.user.username
-                    : "Unknown"}
-                  :
+                  {c.user?.name || c.user?.username || "Unknown"}:
                 </b>{" "}
                 {c.content}
               </div>
@@ -135,7 +118,7 @@ const PostCard = ({ post, onUpdate }) => {
             placeholder="Add comment"
             className="flex-1 px-2 py-1 rounded border"
             disabled={isCommenting}
-            onKeyDown={e => {
+            onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.preventDefault();
                 commentPost();

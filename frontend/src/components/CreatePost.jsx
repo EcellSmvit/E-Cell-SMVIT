@@ -2,10 +2,30 @@ import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 
+/**
+ * CreatePost component allows users to create a new post with optional image.
+ * 
+ * This version provides more helpful error messages for 401 (Unauthorized)
+ * and 404 (Not Found) errors, to help users understand why actions may fail.
+ */
 const CreatePost = ({ onPostCreated }) => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+
+  // Helper to show user-friendly error messages
+  const handleApiError = (err, fallbackMsg) => {
+    const status = err?.response?.status;
+    if (status === 401) {
+      toast.error("You must be logged in to create a post. Please log in.");
+    } else if (status === 404) {
+      toast.error("Resource not found. The endpoint may be incorrect.");
+    } else {
+      toast.error(
+        err?.response?.data?.message || fallbackMsg
+      );
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,9 +58,7 @@ const CreatePost = ({ onPostCreated }) => {
       if (typeof onPostCreated === "function") onPostCreated();
     } catch (err) {
       console.error("❌ Create post error:", err);
-      toast.error(
-        err?.response?.data?.message || "Failed to create post."
-      );
+      handleApiError(err, "Failed to create post.");
     } finally {
       setIsUploading(false);
     }

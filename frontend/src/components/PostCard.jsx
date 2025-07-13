@@ -2,11 +2,31 @@ import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 
+/**
+ * PostCard component displays a single post, its comments, and allows
+ * liking, commenting, and deleting the post.
+ * 
+ * This component now provides more helpful error messages for 401 (Unauthorized)
+ * and 404 (Not Found) errors, to help users understand why actions may fail.
+ */
 const PostCard = ({ post, onUpdate }) => {
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
+
+  const handleApiError = (err, fallbackMsg) => {
+    const status = err?.response?.status;
+    if (status === 401) {
+      toast.error("You must be logged in to perform this action. Please log in.");
+    } else if (status === 404) {
+      toast.error("Resource not found. The post may have been deleted.");
+    } else {
+      toast.error(
+        err?.response?.data?.message || fallbackMsg
+      );
+    }
+  };
 
   const likePost = async () => {
     setIsLiking(true);
@@ -14,9 +34,7 @@ const PostCard = ({ post, onUpdate }) => {
       await api.post(`/${post._id}/like`);
       if (typeof onUpdate === "function") onUpdate();
     } catch (err) {
-      toast.error(
-        err?.response?.data?.message || "Failed to like post."
-      );
+      handleApiError(err, "Failed to like post.");
     } finally {
       setIsLiking(false);
     }
@@ -30,9 +48,7 @@ const PostCard = ({ post, onUpdate }) => {
       setComment("");
       if (typeof onUpdate === "function") onUpdate();
     } catch (err) {
-      toast.error(
-        err?.response?.data?.message || "Failed to add comment."
-      );
+      handleApiError(err, "Failed to add comment.");
     } finally {
       setIsCommenting(false);
     }
@@ -46,9 +62,7 @@ const PostCard = ({ post, onUpdate }) => {
       if (typeof onUpdate === "function") onUpdate();
       toast.success("Post deleted.");
     } catch (err) {
-      toast.error(
-        err?.response?.data?.message || "Failed to delete post."
-      );
+      handleApiError(err, "Failed to delete post.");
     } finally {
       setIsDeleting(false);
     }

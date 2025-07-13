@@ -64,23 +64,37 @@ const PostCard = ({ post, onUpdate }) => {
   };
 
   return (
-    <div className="p-4 mb-4 bg-white rounded border">
+    <div
+      className="p-4 mb-4 rounded border shadow-lg relative overflow-hidden"
+      style={{
+        background: "rgba(255, 255, 255, 0.15)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
+        border: "1px solid rgba(255,255,255,0.25)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+      }}
+    >
       <div className="flex gap-2 items-center mb-2">
         <div>
-          <h3 className="font-bold">@{post.author?.username}</h3>
+          <h3 className="font-bold text-white drop-shadow">@{post.author?.username}</h3>
           {post.author?.headline && (
-            <div className="text-xs text-gray-500">{post.author.headline}</div>
+            <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
           )}
         </div>
       </div>
 
-      <p className="mb-2">{post.content}</p>
+      <p className="mb-2 text-white drop-shadow">{post.content}</p>
 
       {post.image && (
         <img
           src={post.image}
           alt="post"
           className="object-contain mt-2 w-full max-h-96 rounded"
+          style={{
+            background: "rgba(255,255,255,0.10)",
+            backdropFilter: "blur(2px)",
+            WebkitBackdropFilter: "blur(2px)",
+          }}
         />
       )}
 
@@ -88,7 +102,7 @@ const PostCard = ({ post, onUpdate }) => {
         <button
           onClick={likePost}
           disabled={isLiking}
-          className={`flex items-center gap-1 ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-1 text-white ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
         >
           ❤️ {post.likes.length}
         </button>
@@ -97,7 +111,7 @@ const PostCard = ({ post, onUpdate }) => {
           <button
             onClick={deletePost}
             disabled={isDeleting}
-            className={`flex items-center gap-1 text-red-500 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+            className={`flex items-center gap-1 text-red-300 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
           >
             🗑️ Delete
           </button>
@@ -108,7 +122,7 @@ const PostCard = ({ post, onUpdate }) => {
         {post.comments && post.comments.length > 0 && (
           <div className="mb-2">
             {post.comments.map((c, i) => (
-              <div key={i} className="mb-1 text-sm text-gray-700">
+              <div key={i} className="mb-1 text-sm text-gray-100 drop-shadow">
                 <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
               </div>
             ))}
@@ -120,7 +134,14 @@ const PostCard = ({ post, onUpdate }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Add comment"
-            className="flex-1 px-2 py-1 rounded border"
+            className="flex-1 px-2 py-1 rounded border bg-white/30 text-white placeholder:text-gray-200"
+            style={{
+              background: "rgba(255,255,255,0.25)",
+              color: "#fff",
+              border: "1px solid rgba(255,255,255,0.25)",
+              backdropFilter: "blur(4px)",
+              WebkitBackdropFilter: "blur(4px)",
+            }}
             disabled={isCommenting}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
@@ -131,7 +152,7 @@ const PostCard = ({ post, onUpdate }) => {
           />
           <button
             onClick={commentPost}
-            className={`text-blue-500 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
+            className={`text-blue-200 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
             disabled={isCommenting}
           >
             Post

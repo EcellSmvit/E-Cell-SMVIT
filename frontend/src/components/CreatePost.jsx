@@ -58,24 +58,51 @@ const CreatePost = ({ onPostCreated }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 mb-6 text-black bg-white rounded border">
+    <form
+      onSubmit={handleSubmit}
+      className="p-4 mb-6 rounded border"
+      style={{
+        background: "rgba(255,255,255,0.15)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        border: "1px solid rgba(255,255,255,0.25)",
+        color: "#fff",
+      }}
+    >
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="What's on your mind?"
         className="p-2 mb-2 w-full rounded border"
+        style={{
+          background: "rgba(255,255,255,0.25)",
+          color: "#fff",
+          border: "1px solid rgba(255,255,255,0.25)",
+          backdropFilter: "blur(4px)",
+          WebkitBackdropFilter: "blur(4px)",
+        }}
         rows={3}
         disabled={isUploading}
         required
       />
-      
-      <label className="block mb-2 text-sm font-medium">Optional Image:</label>
+
+      <label className="block mb-2 text-sm font-medium" style={{ color: "#e0e0e0" }}>
+        Optional Image:
+      </label>
       <input
         type="file"
         accept="image/*"
         onChange={(e) => setImage(e.target.files[0] || null)}
         className="mb-2"
         disabled={isUploading}
+        style={{
+          background: "rgba(255,255,255,0.15)",
+          color: "#fff",
+          border: "1px solid rgba(255,255,255,0.15)",
+          padding: "0.25rem",
+          borderRadius: "0.375rem",
+        }}
       />
 
       <button
@@ -83,6 +110,13 @@ const CreatePost = ({ onPostCreated }) => {
         disabled={isUploading}
         className={`bg-indigo-500 text-white px-4 py-1 rounded mt-2 ${
           isUploading ? "opacity-60 cursor-not-allowed" : ""}`}
+        style={{
+          background: "rgba(99,102,241,0.85)",
+          boxShadow: "0 2px 8px 0 rgba(99,102,241,0.15)",
+          backdropFilter: "blur(2px)",
+          WebkitBackdropFilter: "blur(2px)",
+          border: "1px solid rgba(255,255,255,0.15)",
+        }}
       >
         {isUploading ? "Posting..." : "Post"}
       </button>

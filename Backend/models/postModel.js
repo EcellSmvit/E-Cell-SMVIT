@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const postSchema = new mongoose.Schema(
 	{
-		author: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+		author: { type: mongoose.Schema.Types.ObjectId, ref: "user", required: true },
 		content: { type: String },
 		image: { type: String },
-		likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+		likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 		comments: [
 			{
 				content: { type: String },
-				user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+				user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
 				createdAt: { type: Date, default: Date.now },
 			},
 		],

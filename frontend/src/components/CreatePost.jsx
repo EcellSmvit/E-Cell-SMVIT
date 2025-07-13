@@ -2,44 +2,37 @@ import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 
-/**
- * CreatePost component allows users to create a new post with optional image.
- * 
- * This version provides more helpful error messages for 401 (Unauthorized)
- * and 404 (Not Found) errors, to help users understand why actions may fail.
- */
 const CreatePost = ({ onPostCreated }) => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
 
-  // Helper to show user-friendly error messages
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
     if (status === 401) {
-      toast.error("You must be logged in to create a post. Please log in.");
+      toast.error("You must be logged in to create a post.");
     } else if (status === 404) {
-      toast.error("Resource not found. The endpoint may be incorrect.");
+      toast.error("Endpoint not found.");
     } else {
-      toast.error(
-        err?.response?.data?.message || fallbackMsg
-      );
+      toast.error(err?.response?.data?.message || fallbackMsg);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!content.trim()) {
-      toast.error("Content is required.");
+      toast.error("Post content cannot be empty.");
       return;
     }
+
     setIsUploading(true);
 
     try {
-      let base64 = undefined;
+      let base64Image = null;
 
       if (image) {
-        base64 = await new Promise((resolve, reject) => {
+        base64Image = await new Promise((resolve, reject) => {
           const reader = new FileReader();
           reader.onloadend = () => resolve(reader.result);
           reader.onerror = reject;
@@ -49,15 +42,15 @@ const CreatePost = ({ onPostCreated }) => {
 
       await api.post("/create", {
         content,
-        image: base64,
+        image: base64Image,
       });
 
-      toast.success("Post created!");
+      toast.success("Post created successfully!");
       setContent("");
       setImage(null);
       if (typeof onPostCreated === "function") onPostCreated();
     } catch (err) {
-      console.error("❌ Create post error:", err);
+      console.error("❌ Error creating post:", err);
       handleApiError(err, "Failed to create post.");
     } finally {
       setIsUploading(false);
@@ -71,9 +64,12 @@ const CreatePost = ({ onPostCreated }) => {
         onChange={(e) => setContent(e.target.value)}
         placeholder="What's on your mind?"
         className="p-2 mb-2 w-full rounded border"
-        required
+        rows={3}
         disabled={isUploading}
+        required
       />
+      
+      <label className="block mb-2 text-sm font-medium">Optional Image:</label>
       <input
         type="file"
         accept="image/*"
@@ -81,6 +77,7 @@ const CreatePost = ({ onPostCreated }) => {
         className="mb-2"
         disabled={isUploading}
       />
+
       <button
         type="submit"
         disabled={isUploading}

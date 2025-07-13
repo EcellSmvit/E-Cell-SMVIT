@@ -7,11 +7,11 @@ import Post from "../models/postModel.js";
 export const getFeedPosts = async (req, res) => {
   try {
     // Check if user is authenticated
-    if (!req.user) {
+    if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
-    const user = req.user;
+    const user = req.userId;
     const connections = Array.isArray(user.connections) ? user.connections : [];
 
     // Fetch posts from user and their connections
@@ -33,7 +33,7 @@ export const getFeedPosts = async (req, res) => {
 export const createPost = async (req, res) => {
   try {
     // Check if user is authenticated
-    if (!req.user) {
+    if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
@@ -90,12 +90,12 @@ export const createPost = async (req, res) => {
 export const deletePost = async (req, res) => {
   try {
     // Check if user is authenticated
-    if (!req.user) {
+    if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
     const postId = req.params.id;
-    const userId = req.user._id;
+    const userId = req.userId._id;
 
     const post = await Post.findById(postId);
 
@@ -156,7 +156,7 @@ export const getPostById = async (req, res) => {
 export const createComment = async (req, res) => {
   try {
     // Check if user is authenticated
-    if (!req.user) {
+    if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
@@ -172,7 +172,7 @@ export const createComment = async (req, res) => {
       {
         $push: {
           comments: {
-            user: req.user._id,
+            user: req.userId._id,
             content,
             createdAt: new Date(),
           },
@@ -200,12 +200,12 @@ export const createComment = async (req, res) => {
 export const likePost = async (req, res) => {
   try {
     // Check if user is authenticated
-    if (!req.user) {
+    if (!req.userId) {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
     const postId = req.params.id;
-    const userId = req.user._id;
+    const userId = req.userId._id;
 
     const post = await Post.findById(postId)
       .populate("author", "name username profilePicture headline")

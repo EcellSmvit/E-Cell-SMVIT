@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Feed from "./Feed";
-import PostCard from "@/components/PostCard";
 
 
 const Dashboard = () => {
@@ -34,10 +33,6 @@ const Dashboard = () => {
       <div className="p-4">
         <Feed />
         
-      </div>
-      <div className="p-4">
-      
-        <PostCard/>
       </div>
     </div>
   );

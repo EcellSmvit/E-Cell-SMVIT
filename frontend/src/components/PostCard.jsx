@@ -1,15 +1,14 @@
 import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
-import { AppContext } from "../context/AppContext"; 
+// import { AppContext } from "../context/AppContext"; 
 
 const PostCard = ({ post, onUpdate }) => {
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
-  const { userData } = useContext(AppContext);
-const currentUserId = userData?._id;
+
 
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;

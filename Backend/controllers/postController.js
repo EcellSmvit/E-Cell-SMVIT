@@ -57,7 +57,7 @@ export const createPost = async (req, res) => {
         });
 
         newPost = new Post({
-          author: req.user._id,
+          author: req.userId,
           content,
           image: result.secure_url,
         });
@@ -67,7 +67,7 @@ export const createPost = async (req, res) => {
       }
     } else {
       newPost = new Post({
-        author: req.user._id,
+        author: req.userId,
         content,
       });
     }
@@ -95,7 +95,7 @@ export const deletePost = async (req, res) => {
     }
 
     const postId = req.params.id;
-    const userId = req.userId._id;
+    const userId = req.userId;
 
     const post = await Post.findById(postId);
 
@@ -172,7 +172,7 @@ export const createComment = async (req, res) => {
       {
         $push: {
           comments: {
-            user: req.userId._id,
+            user: req.userId,
             content,
             createdAt: new Date(),
           },
@@ -205,7 +205,7 @@ export const likePost = async (req, res) => {
     }
 
     const postId = req.params.id;
-    const userId = req.userId._id;
+    const userId = req.userId;
 
     const post = await Post.findById(postId)
       .populate("author", "name username profilePicture headline")

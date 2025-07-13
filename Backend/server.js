@@ -26,6 +26,10 @@ app.use(cors({
     credentials: true,
 }));
 
+app.options('*', cors({
+    origin: allowedOrigins,
+    credentials: true,
+}));
 
 app.get('/', (req, res) => {
     res.send(`<h1>API is Working...</h1>`)

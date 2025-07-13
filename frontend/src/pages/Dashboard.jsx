@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import Feed from "./Feed";
 
 const Dashboard = () => {
   const { userData, setIsLogin } = useContext(AppContext);
@@ -28,6 +29,9 @@ const Dashboard = () => {
       >
         Logout
       </button>
+      <div className="p-4">
+        <Feed />
+      </div>
     </div>
   );
 };

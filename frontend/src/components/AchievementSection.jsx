@@ -44,7 +44,7 @@ const AchievementSection = () => {
         end: "bottom top",
         scrub: 2,
         pin: true,
-        // markers: true,
+        
       }
     });
     
@@ -58,15 +58,10 @@ const AchievementSection = () => {
       .to("#bg2", { opacity: 0, ease: "power2.out" }, 1.2);
 
     return () => {
-      imgTimeline.kill(); // Clean up the timeline
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // Kill all scroll triggers
+      imgTimeline.kill(); 
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
     };
   }, []);
-
-
-
-  // Use font-[anton] utility class (if Tailwind config is set up) or fallback to style attribute
-  // Here, we use style={{ fontFamily: 'Anton, sans-serif' }} for reliability
 
   return (
     <div className="overflow-hidden">
@@ -74,7 +69,7 @@ const AchievementSection = () => {
         id="page2"
         className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center"
       >
-        <div id="scroll-container" className="absolute inset-0 z-50 w-full h-full pointer-events-none">
+        <div id="scroll-container" className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />
           </div>

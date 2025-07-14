@@ -50,6 +50,7 @@ export default function ImageSection() {
       gsap.set(rightRef.current, { width: '0%' })
       gsap.set(middleRef.current, { width: '100%' })
       gsap.set(cardRef.current, { opacity: 1 })
+      gsap.set(buttonRef.current, { opacity: 1 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -64,8 +65,10 @@ export default function ImageSection() {
             const percent = width / parentWidth
             if (percent <= 0.5) {
               gsap.set(cardRef.current, { opacity: 0 })
+              gsap.set(buttonRef.current, { opacity: 0 })
             } else {
               gsap.set(cardRef.current, { opacity: 1 })
+              gsap.set(buttonRef.current, { opacity: 1 })
             }
           }
         }
@@ -118,7 +121,7 @@ export default function ImageSection() {
 
           <div
             ref={cardRef}
-            className="absolute bottom-4 left-4 z-20 w-1/2 rounded-lg drop-shadow-lg backdrop-blur-md bg-white/20 text-white"
+            className="absolute bottom-4 left-4 z-20 w-1/2 text-white rounded-lg drop-shadow-lg backdrop-blur-md bg-white/20"
           >
             <h1 className="px-4 py-2 text-3xl font-bold">{images[middleIdx].title}</h1>
             <p className="px-4 py-2 text-lg">{images[middleIdx].desc}</p>

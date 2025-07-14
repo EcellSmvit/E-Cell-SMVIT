@@ -14,22 +14,26 @@ const PORT = process.env.PORT || 4000
 // Connect to MongoDB
 connectDB()
 
-
 const allowedOrigins = ['https://e-cell-smvit.onrender.com']
+
 const corsOptions = {
     origin: function (origin, callback) {
-        
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true)
+        // Allow requests with no origin (like mobile apps, curl, etc.)
+        if (!origin) return callback(null, true)
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true)
         } else {
-            callback(new Error('Not allowed by CORS'))
+            return callback(new Error('Not allowed by CORS'))
         }
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    optionsSuccessStatus: 200 // Some legacy browsers choke on 204
 }
 
+// CORS preflight handling for all routes
+app.options('*', cors(corsOptions))
 
 app.use(cors(corsOptions))
 app.use(express.json())

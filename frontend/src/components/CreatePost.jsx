@@ -85,7 +85,7 @@ const CreatePost = ({ onPostCreated }) => {
         className="p-3 mb-2 w-full rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
         style={{
           background: "rgba(255,255,255,0.22)",
-          color: "#f5f5f5",
+          color: "#fff",
           border: "1.5px solid rgba(255,255,255,0.28)",
           boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.10)",
           backdropFilter: "blur(6px)",

@@ -73,7 +73,7 @@ const CreatePost = ({ onPostCreated }) => {
       <label
         htmlFor="post-content"
         className="block mb-1 text-sm font-medium"
-        style={{ color: "#e0e0e0", letterSpacing: "0.01em" }}
+        style={{ color: "#fff", letterSpacing: "0.01em" }}
       >
         What's on your mind?
       </label>

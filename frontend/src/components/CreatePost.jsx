@@ -70,17 +70,30 @@ const CreatePost = ({ onPostCreated }) => {
         color: "#fff",
       }}
     >
+      <label
+        htmlFor="post-content"
+        className="block mb-1 text-sm font-medium"
+        style={{ color: "#e0e0e0", letterSpacing: "0.01em" }}
+      >
+        What's on your mind?
+      </label>
       <textarea
+        id="post-content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        placeholder="What's on your mind?"
-        className="p-2 mb-2 w-full rounded border"
+        placeholder="Share your thoughts..."
+        className="p-3 mb-2 w-full rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
         style={{
-          background: "rgba(255,255,255,0.25)",
-          color: "#fff",
-          border: "1px solid rgba(255,255,255,0.25)",
-          backdropFilter: "blur(4px)",
-          WebkitBackdropFilter: "blur(4px)",
+          background: "rgba(255,255,255,0.22)",
+          color: "#f5f5f5",
+          border: "1.5px solid rgba(255,255,255,0.28)",
+          boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.10)",
+          backdropFilter: "blur(6px)",
+          WebkitBackdropFilter: "blur(6px)",
+          fontSize: "1.05rem",
+          fontWeight: 400,
+          letterSpacing: "0.01em",
+          resize: "vertical",
         }}
         rows={3}
         disabled={isUploading}

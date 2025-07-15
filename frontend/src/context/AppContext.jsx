@@ -11,10 +11,6 @@ export const AppContextProvider = (props) => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL
     const [isLogin, setIsLogin] = useState(false)
     const [userData, setUserData] = useState(null);
-
-
-
-    //+++++++++Create a fun that give the user data +++++++++
     const getUserData = async () => {
       console.log("👀 Browser cookies:", document.cookie);
     

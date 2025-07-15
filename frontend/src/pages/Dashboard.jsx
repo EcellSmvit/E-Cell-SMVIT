@@ -3,6 +3,7 @@ import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
 import Feed from "./Feed";
 import { LogOut } from 'lucide-react';
+import Sidebar from "@/components/SideBar/Sidebar";
 
 const ECELL_LOGO_URL =
   "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png"; // Replace with your actual logo URL if different
@@ -77,6 +78,7 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex flex-col justify-center items-center flex-1 pt-24">
+        <Sidebar/>
         <div className="p-4 w-full max-w-3xl">
           <Feed />
         </div>

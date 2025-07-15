@@ -41,7 +41,6 @@ const Dashboard = () => {
         background: "radial-gradient(circle at 50% 30%, #4F46E5 0%, #000 100%)",
       }}
     >
-      
       <nav
         className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3 bg-indigo-900/80 backdrop-blur-md border-b border-indigo-700"
         style={{
@@ -55,7 +54,6 @@ const Dashboard = () => {
             className="h-10 w-10 object-contain"
             style={{ background: "rgba(255,255,255,0.05)", borderRadius: "8px" }}
           />
-          
         </div>
         <div>
           {userData ? (
@@ -77,10 +75,16 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex flex-col justify-center items-center flex-1 pt-24">
-        <Sidebar/>
-        <div className="p-4 w-full max-w-3xl">
-          <Feed />
+      <div className="flex flex-1 pt-24 w-full">
+        {/* Sidebar */}
+        <div className="hidden md:block md:w-64 lg:w-72 xl:w-80 h-full">
+          <Sidebar />
+        </div>
+        {/* Feed/Main Content */}
+        <div className="flex-1 flex justify-center items-start w-full">
+          <div className="p-4 w-full max-w-3xl">
+            <Feed />
+          </div>
         </div>
       </div>
     </div>

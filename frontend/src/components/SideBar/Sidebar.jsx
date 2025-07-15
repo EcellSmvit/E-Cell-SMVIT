@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Home, UserPlus, Bell } from "lucide-react";
 
 export default function Sidebar({ user }) {
-  if (!user) return null; 
+  if (!user) return null;
 
   return (
     <div
@@ -37,9 +37,7 @@ export default function Sidebar({ user }) {
               border: "3px solid white",
             }}
           />
-          <h2 style={{ marginTop: "0.5rem", fontSize: "1.1rem" }}>
-            {user.name}
-          </h2>
+          <h2 style={{ marginTop: "0.5rem", fontSize: "1.1rem" }}>{user.name}</h2>
         </Link>
         <p style={{ fontSize: "0.9rem", color: "#555" }}>{user.headline}</p>
         <p style={{ fontSize: "0.85rem", color: "#777" }}>
@@ -51,19 +49,46 @@ export default function Sidebar({ user }) {
       <nav style={{ marginTop: "1.5rem" }}>
         <ul style={{ listStyle: "none", padding: "0" }}>
           <li style={{ padding: "0.5rem 1rem" }}>
-            
+            <Link
+              to="/"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+                color: "#333",
+              }}
+            >
               <Home size={20} /> Home
-          
+            </Link>
           </li>
           <li style={{ padding: "0.5rem 1rem" }}>
-            
+            <Link
+              to="/network"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+                color: "#333",
+              }}
+            >
               <UserPlus size={20} /> My Network
-            
+            </Link>
           </li>
           <li style={{ padding: "0.5rem 1rem" }}>
-           
+            <Link
+              to="/notifications"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                textDecoration: "none",
+                color: "#333",
+              }}
+            >
               <Bell size={20} /> Notifications
-           
+            </Link>
           </li>
         </ul>
       </nav>

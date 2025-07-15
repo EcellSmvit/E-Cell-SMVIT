@@ -4,12 +4,9 @@ import User from "../models/userModel.js";
 
 export const getFeedPosts = async (req, res) => {
 	try {
-	  // Optional: you can still verify auth if needed
 	  if (!req.userId) {
 		return res.status(401).json({ message: "Unauthorized: Please log in." });
 	  }
-  
-	  // ✅ Fetch all posts, no filter on author
 	  const posts = await Post.find({})
 		.populate("author", "name username profilePicture headline")
 		.populate("comments.user", "name profilePicture username headline")

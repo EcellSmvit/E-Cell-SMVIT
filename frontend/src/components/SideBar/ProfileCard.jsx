@@ -13,13 +13,13 @@ const ProfileCard = ({ user }) => {
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">
       <div className="relative h-40 bg-gray-200">
         <img
-          src={user.bannerImg || "https://www.ecellsmvit.in/images/ecellwhite.png"}
+          src={user.bannerImg || "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8"}
           alt="Banner"
           className="w-full h-full object-cover"
         />
         <div className="absolute -bottom-10 left-4">
           <img
-            src={user.profilePicture || "https://www.ecellsmvit.in/images/ecellwhite.png"}
+            src={user.profilePicture || "https://i.sstatic.net/l60Hf.png"}
             alt="Profile"
             className="w-20 h-20 rounded-full border-4 border-white object-cover"
           />

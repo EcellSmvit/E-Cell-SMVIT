@@ -7,19 +7,19 @@ const ProfileCard = ({ user }) => {
     navigate(`/profile/${user.username}`);
   };
 
+  if (!user) return null; // prevent crash if user is undefined
+
   return (
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">
       <div className="relative h-40 bg-gray-200">
-        {user.bannerImg && (
-          <img
-            src={user.bannerImg ? user.bannerImg : "https://www.ecellsmvit.in/images/ecellwhite.png"}
-            alt="Banner"
-            className="w-full h-full object-cover"
-          />
-        )}
+        <img
+          src={user.bannerImg || "https://www.ecellsmvit.in/images/ecellwhite.png"}
+          alt="Banner"
+          className="w-full h-full object-cover"
+        />
         <div className="absolute -bottom-10 left-4">
           <img
-            src={user.profilePicture ? user.profilePicture : "https://www.ecellsmvit.in/images/ecellwhite.png"}
+            src={user.profilePicture || "https://www.ecellsmvit.in/images/ecellwhite.png"}
             alt="Profile"
             className="w-20 h-20 rounded-full border-4 border-white object-cover"
           />

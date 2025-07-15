@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Home, UserPlus, Bell } from "lucide-react";
 
 export default function Sidebar({ user }) {
-  if (!user) return null; // Optional: prevents error when user is undefined
+  if (!user) return null; 
 
   return (
     <div
@@ -18,7 +18,7 @@ export default function Sidebar({ user }) {
       <div
         style={{
           height: "64px",
-          backgroundImage: `url("${user.bannerImg || "/banner.png"}")`,
+          backgroundImage: `url("${user.bannerImg || "https://www.ecellsmvit.in/images/ecellwhite.png"}")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -28,7 +28,7 @@ export default function Sidebar({ user }) {
       <div style={{ textAlign: "center", marginTop: "-40px" }}>
         <Link to={`/profile/${user.username}`}>
           <img
-            src={user.profilePicture || "/avatar.png"}
+            src={user.profilePicture || "https://www.ecellsmvit.in/images/ecellwhite.png"}
             alt={user.name}
             style={{
               width: "80px",
@@ -51,19 +51,19 @@ export default function Sidebar({ user }) {
       <nav style={{ marginTop: "1.5rem" }}>
         <ul style={{ listStyle: "none", padding: "0" }}>
           <li style={{ padding: "0.5rem 1rem" }}>
-            <Link to="/" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "#333" }}>
+            
               <Home size={20} /> Home
-            </Link>
+          
           </li>
           <li style={{ padding: "0.5rem 1rem" }}>
-            <Link to="/network" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "#333" }}>
+            
               <UserPlus size={20} /> My Network
-            </Link>
+            
           </li>
           <li style={{ padding: "0.5rem 1rem" }}>
-            <Link to="/notifications" style={{ display: "flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "#333" }}>
+           
               <Bell size={20} /> Notifications
-            </Link>
+           
           </li>
         </ul>
       </nav>

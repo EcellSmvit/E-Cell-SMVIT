@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
+import { Trash,Heart } from 'lucide-react';
 
 const PostCard = ({ post, onUpdate }) => {
   const { userData } = useContext(AppContext);
@@ -102,9 +103,10 @@ const PostCard = ({ post, onUpdate }) => {
         <button
           onClick={likePost}
           disabled={isLiking}
-          className={`flex items-center gap-1 text-white ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-1 ${post.likes.includes(currentUserId) ? "text-red-500" : "text-white"} ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
         >
-          ❤️ {post.likes.length}
+          <Heart color={post.likes.includes(currentUserId) ? "red" : "white"} />
+          {post.likes.length}
         </button>
 
         {post.author?._id === currentUserId && (
@@ -113,7 +115,7 @@ const PostCard = ({ post, onUpdate }) => {
             disabled={isDeleting}
             className={`flex items-center gap-1 text-red-300 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
           >
-            🗑️ Delete
+            <Trash />
           </button>
         )}
       </div>

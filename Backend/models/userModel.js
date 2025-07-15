@@ -19,6 +19,43 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profilePicture:{
+        type: String,
+        default:"",
+    },
+    bannerImg: {
+        type: String,
+        default: "",
+    },
+    headline:{
+        type: String,
+		default: "SMVIT Member",
+    },
+    location: {
+        type: String,
+        default: "India",
+    },
+    about: {
+        type: String,
+        default: "",
+    },
+    experience: [
+        {
+            title: String,
+            company: String,
+            startDate: Date,
+            endDate: Date,
+            description: String,
+        },
+    ],
+    education: [
+        {
+            school: String,
+            fieldOfStudy: String,
+            startYear: Number,
+            endYear: Number,
+        },
+    ],
     mobileNumber: {
         type: String,
         required: true,

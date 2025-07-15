@@ -7,6 +7,7 @@ import { connectDB } from './config/db.js'
 import AuthRouter from './routes/authRoutes.js'
 import UserRouter from './routes/userRoutes.js'
 import postRouter from './routes/postRoutes.js'
+import profileRouter from './routes/profileRoutes.js'
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -42,6 +43,8 @@ app.get('/', (req, res) => {
 app.use('/api/auth', AuthRouter)
 app.use('/api/user', UserRouter)
 app.use('/api/v1/posts', postRouter)
+app.use('/api/profile',profileRouter)
+
 
 app.use((req, res, next) => {
     res.status(404).json({ error: 'Resource not found' })

@@ -81,16 +81,14 @@ export const login = async(req, res)=>{
             return res.json({success:false, message:"Invalid Password"})
         }
 
-        //if password is Matched then generate token.
-         //we are send this token using cookie.
 
 
          const token = jwt.sign({id: user._id}, process.env.JWT_SECRET_KEY, {expiresIn: '1d'})
 
          res.cookie('accessToken', token, {
             httpOnly: true,
-            secure: true,               // ✅ Force secure, always true on Render
-            sameSite: 'None',           // ✅ Case-sensitive! Must be capital 'N'
+            secure: true,               
+            sameSite: 'None',           
             maxAge: 1 * 24 * 60 * 60 * 1000,
           });
           

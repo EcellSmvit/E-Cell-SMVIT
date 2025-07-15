@@ -7,7 +7,7 @@ const ProfileCard = ({ user }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  if (!user) return null; // prevent crash if user is undefined
+  if (!user) return null; 
 
   return (
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">

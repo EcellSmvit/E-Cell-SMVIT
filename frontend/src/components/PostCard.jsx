@@ -76,12 +76,21 @@ const PostCard = ({ post, onUpdate }) => {
       }}
     >
       <div className="flex gap-2 items-center mb-2">
-        <div>
-          <h1 className="font-bold text-white drop-shadow">{post.author?.name}</h1>
-          <h3 className="font-bold text-white drop-shadow">@{post.author?.username}</h3>
-          {post.author?.headline && (
-            <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
-          )}
+        <div className="flex items-center gap-3">
+          <img
+            src={
+              post.author?.profilePicture 
+            }
+            alt="Profile"
+            className="w-10 h-10 rounded-full object-cover border-2 border-white shadow"
+          />
+          <div>
+            <h1 className="font-bold text-white drop-shadow">{post.author?.name}</h1>
+            <h3 className="font-bold text-white drop-shadow">@{post.author?.username}</h3>
+            {post.author?.headline && (
+              <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
+            )}
+          </div>
         </div>
       </div>
 

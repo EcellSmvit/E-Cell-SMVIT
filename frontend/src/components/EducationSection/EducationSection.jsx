@@ -33,7 +33,7 @@ const EducationSection = ({ userData, isOwnProfile, onSave }) => {
 	};
 
 	return (
-		<div className="bg-white rounded-lg shadow p-6">
+		<div className="bg-white/70 rounded-2xl shadow-md p-6 mb-8 border border-white/30">
 			<h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
 				<School size={28} className="text-blue-600" />
 				Education

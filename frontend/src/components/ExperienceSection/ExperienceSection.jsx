@@ -46,7 +46,7 @@ const ExperienceSection = ({ userData, isOwnProfile, onSave }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow p-6 mb-8">
+    <div className="bg-white/70 rounded-2xl shadow-md p-6 mb-8 border border-white/30">
       <div className="flex items-center mb-4">
         <Briefcase className="text-blue-600 mr-2" />
         <h2 className="text-2xl font-bold text-gray-800">Experience</h2>

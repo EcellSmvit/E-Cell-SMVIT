@@ -28,30 +28,30 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  const profileImage = user.profilePicture || "https://via.placeholder.com/150";
+  const profileImage = user.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558";
   const bannerImage = user.bannerImg || "https://via.placeholder.com/900x200";
 
   return (
-    <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">
+    <div className="overflow-hidden mx-auto mt-6 max-w-xl bg-white rounded-2xl border shadow-lg">
       <div className="relative h-40 bg-gray-200">
-        <img src={bannerImage} alt="Banner" className="w-full h-full object-cover" />
-        <div className="absolute -bottom-10 left-4">
+        <img src={bannerImage} alt="Banner" className="object-cover w-full h-full" />
+        <div className="absolute left-4 -bottom-10">
           <img
             src={profileImage}
             alt="Profile"
-            className="w-20 h-20 rounded-full border-4 border-white object-cover bg-white"
+            className="object-cover w-20 h-20 bg-white rounded-full border-4 border-white"
           />
         </div>
       </div>
 
-      <div className="pt-14 pb-6 px-6">
+      <div className="px-6 pt-14 pb-6">
         <h2 className="text-xl font-semibold text-black">{user.name}</h2>
         <p className="text-gray-500">@{user.username}</p>
-        <p className="text-sm text-gray-700 mt-2">{user.headline || "No headline added."}</p>
+        <p className="mt-2 text-sm text-gray-700">{user.headline || "No headline added."}</p>
 
         <button
           onClick={handleViewProfile}
-          className="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-xl transition"
+          className="px-4 py-2 mt-4 text-white bg-blue-600 rounded-xl transition hover:bg-blue-700"
         >
           View Profile
         </button>

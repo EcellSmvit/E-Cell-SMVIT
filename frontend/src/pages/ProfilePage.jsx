@@ -166,7 +166,7 @@ const ProfilePage = () => {
 
             <div className="relative -mt-14">
               <img
-                src={userData.profilePicture || "https://via.placeholder.com/150"}
+                src={userData.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
                 alt="Profile"
                 className="object-cover w-28 h-28 rounded-full border-4 border-white shadow-xl bg-white/60"
                 style={{

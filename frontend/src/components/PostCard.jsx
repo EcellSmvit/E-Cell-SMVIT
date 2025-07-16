@@ -79,7 +79,7 @@ const PostCard = ({ post, onUpdate }) => {
         <div className="flex gap-3 items-center">
           <img
             src={
-              post.author?.profilePicture || "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
+              post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
             }
             alt="Profile"
             className="object-cover w-10 h-10 rounded-full border-2 border-white shadow"
@@ -137,7 +137,7 @@ const PostCard = ({ post, onUpdate }) => {
                 <img
                   src={
                     c.user?.profilePicture ||
-                    "https://via.placeholder.com/32?text=U"
+                    "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
                   }
                   alt="Profile"
                   className="object-cover w-7 h-7 rounded-full border shadow border-white/40"

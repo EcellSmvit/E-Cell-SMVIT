@@ -23,7 +23,7 @@ const ProfilePage = () => {
     const { data: userProfile, isLoading: isUserProfileLoading } = useQuery({
         queryKey: ["userProfile", username],
         queryFn: async () => {
-            const res = await axios.get(`${backendUrl}/api/user/data/${username}`);
+            const res = await axios.get(`${backendUrl}/api/profile/${username}`);
             return res.data;
         },
     });

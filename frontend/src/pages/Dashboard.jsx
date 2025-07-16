@@ -43,16 +43,16 @@ const Dashboard = () => {
       }}
     >
       <nav
-        className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-3 bg-indigo-900/80 backdrop-blur-md border-b border-indigo-700"
+        className="flex fixed top-0 left-0 z-50 justify-between items-center px-6 py-3 w-full border-b border-indigo-700 backdrop-blur-md bg-indigo-900/80"
         style={{
           boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.18)",
         }}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex gap-3 items-center">
           <img
             src="https://www.ecellsmvit.in/images/ecellwhite.png"
             alt="E-Cell Logo"
-            className="h-10 w-10 object-contain"
+            className="object-contain w-10 h-10"
             style={{ background: "rgba(255,255,255,0.05)", borderRadius: "8px" }}
           />
         </div>
@@ -60,14 +60,14 @@ const Dashboard = () => {
           {userData ? (
             <button
               onClick={handleLogout}
-              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 transition"
+              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded transition hover:bg-blue-700"
             >
               <LogOut />
             </button>
           ) : (
             <button
               onClick={handleLogin}
-              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded hover:bg-blue-700 transition"
+              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded transition hover:bg-blue-700"
             >
               Login
             </button>
@@ -77,13 +77,13 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex flex-1 pt-24 w-full">
-        <div className="hidden md:flex flex-col items-center w-72 p-4 relative">
+        <div className="hidden relative flex-col items-center pl-4 w-72 md:flex">
           <div className="flex justify-center w-full">
             <ProfileCard username={userData.username} />
           </div>
         </div>
         {/* Feed/Main Content */}
-        <div className="flex-1 flex justify-center items-start w-full">
+        <div className="flex flex-1 justify-center items-start w-full">
           <div className="p-4 w-full max-w-3xl">
             <Feed />
           </div>

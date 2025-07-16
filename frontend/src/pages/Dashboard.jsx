@@ -77,9 +77,11 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex flex-1 pt-24 w-full">
-        {/* Sidebar */}
-        <div className="hidden md:block md:w-64 lg:w-72 xl:w-80 h-full">
-        <ProfileCard username={userData.username} />
+        {/* Left Sidebar: ProfileCard centered vertically */}
+        <div className="hidden md:flex flex-col items-center w-72 xl:w-80 relative">
+          <div className="sticky top-32 flex justify-center w-full">
+            <ProfileCard username={userData.username} />
+          </div>
         </div>
         {/* Feed/Main Content */}
         <div className="flex-1 flex justify-center items-start w-full">
@@ -87,6 +89,8 @@ const Dashboard = () => {
             <Feed />
           </div>
         </div>
+        {/* Right Sidebar: Empty space for future content */}
+        <div className="hidden lg:block lg:w-64 xl:w-80"></div>
       </div>
     </div>
   );

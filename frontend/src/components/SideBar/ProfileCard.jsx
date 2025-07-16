@@ -1,7 +1,26 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const ProfileCard = ({ user }) => {
+const ProfileCard = ({ username }) => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const backendUrl = import.meta.env.VITE_BACKEND_URL;
+        const { data } = await axios.get(`${backendUrl}/api/profile/${username}`, {
+          withCredentials: true,
+        });
+        setUser(data.data);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    if (username) fetchUser();
+  }, [username]);
 
   if (!user) return null;
 
@@ -9,27 +28,18 @@ const ProfileCard = ({ user }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  // Safe image rendering with fallback
-  const profileImage =
-    user.profilePicture?.startsWith("http")
-      ? user.profilePicture
-      : "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600&auto=format&fit=crop&q=60";
+  const profileImage = user.profilePicture?.startsWith("http")
+    ? user.profilePicture
+    : "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600";
 
-  const bannerImage =
-    user.bannerImg?.startsWith("http")
-      ? user.bannerImg
-      : "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDE0fHx8ZW58MHx8fHx8";
+  const bannerImage = user.bannerImg?.startsWith("http")
+    ? user.bannerImg
+    : "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60";
 
   return (
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">
-      {/* Banner */}
       <div className="relative h-40 bg-gray-200">
-        <img
-          src={bannerImage}
-          alt="Banner"
-          className="w-full h-full object-cover"
-        />
-        {/* Profile Picture */}
+        <img src={bannerImage} alt="Banner" className="w-full h-full object-cover" />
         <div className="absolute -bottom-10 left-4">
           <img
             src={profileImage}
@@ -39,7 +49,6 @@ const ProfileCard = ({ user }) => {
         </div>
       </div>
 
-      {/* Info */}
       <div className="pt-14 pb-6 px-6">
         <h2 className="text-xl font-semibold text-black">{user.name}</h2>
         <p className="text-gray-500">@{user.username}</p>

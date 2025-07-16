@@ -28,13 +28,16 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  // Fallbacks if the value is null, undefined or empty
-  const profileImage = user.profilePicture || "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600";
-  const bannerImage = user.bannerImg || "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60";
+  const profileImage = user.profilePicture?.startsWith("http")
+    ? user.profilePicture
+    : "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600";
+
+  const bannerImage = user.bannerImg?.startsWith("http")
+    ? user.bannerImg
+    : "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60";
 
   return (
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">
-      {/* Banner */}
       <div className="relative h-40 bg-gray-200">
         <img src={bannerImage} alt="Banner" className="w-full h-full object-cover" />
         <div className="absolute -bottom-10 left-4">
@@ -46,7 +49,6 @@ const ProfileCard = ({ username }) => {
         </div>
       </div>
 
-      {/* Info */}
       <div className="pt-14 pb-6 px-6">
         <h2 className="text-xl font-semibold text-black">{user.name}</h2>
         <p className="text-gray-500">@{user.username}</p>

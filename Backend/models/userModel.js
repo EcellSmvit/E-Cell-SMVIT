@@ -21,11 +21,11 @@ const UserSchema = new mongoose.Schema({
     },
     profilePicture:{
         type: String,
-        default:"https://www.ecellsmvit.in/images/ecellwhite.png",
+        default:"",
     },
     bannerImg: {
         type: String,
-        default: "https://www.ecellsmvit.in/images/ecellwhite.png",
+        default: "",
     },
     headline:{
         type: String,

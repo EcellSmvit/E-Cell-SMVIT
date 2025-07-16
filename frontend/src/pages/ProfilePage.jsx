@@ -59,15 +59,53 @@ const ProfilePage = () => {
 
   const handleImageUpload = async (e, type) => {
     const file = e.target.files[0];
-    if (!file) return;
-
+  
+    if (!file) {
+      toast.error("No file selected.");
+      return;
+    }
+  
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    const maxSizeInMB = 3;
+  
+    if (!allowedTypes.includes(file.type)) {
+      toast.error("Only JPG, PNG, or WEBP images are allowed.");
+      return;
+    }
+  
+    if (file.size > maxSizeInMB * 1024 * 1024) {
+      toast.error(`Image must be under ${maxSizeInMB}MB.`);
+      return;
+    }
+  
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result;
-      handleSave({ [type]: base64 });
+      toast.loading("Uploading image...");
+  
+      updateProfile(
+        { [type]: base64 },
+        {
+          onSuccess: () => {
+            toast.dismiss();
+            toast.success(`${type === "profilePicture" ? "Profile" : "Banner"} updated!`);
+            queryClient.invalidateQueries(["userProfile", username]);
+          },
+          onError: () => {
+            toast.dismiss();
+            toast.error("Failed to upload image.");
+          },
+        }
+      );
     };
+  
+    reader.onerror = () => {
+      toast.error("Failed to read the file.");
+    };
+  
     reader.readAsDataURL(file);
   };
+  
 
   return (
     <div className="bg-white min-h-screen py-10 px-4 md:px-12 lg:px-24">

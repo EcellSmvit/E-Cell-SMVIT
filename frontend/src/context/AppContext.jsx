@@ -19,6 +19,9 @@ export const AppContextProvider = (props) => {
           withCredentials: true,
         });
         console.log("✅ User Data Fetched:", data);
+
+        const profileRes = await axios.get(`${backendUrl}/api/profile/${username}`);
+        console.log("✅ Full Profile Fetched:", profileRes.data);
         setUserData(data.user);
       } catch (error) {
         console.error("❌ getUserData Error:", error.response?.data || error.message);

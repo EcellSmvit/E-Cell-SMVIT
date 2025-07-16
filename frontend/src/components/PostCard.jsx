@@ -86,7 +86,6 @@ const PostCard = ({ post, onUpdate }) => {
           />
           <div>
             <h1 className="font-bold text-white drop-shadow">{post.author?.name}</h1>
-            <h3 className="font-bold text-white drop-shadow">@{post.author?.username}</h3>
             {post.author?.headline && (
               <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
             )}

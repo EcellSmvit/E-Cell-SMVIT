@@ -29,9 +29,7 @@ const ProfileCard = ({ user }) => {
       <div className="pt-14 pb-6 px-6">
         <h2 className="text-xl font-semibold text-black">{user.name}</h2>
         <p className="text-gray-500">@{user.username}</p>
-        {user.headline && (
-          <p className="text-sm text-gray-900 mt-2 font-medium">{user.headline}</p>
-        )}
+        <p className="text-sm text-gray-700 mt-2">{user.headline}</p>
 
         <button
           onClick={handleViewProfile}

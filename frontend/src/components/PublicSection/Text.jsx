@@ -43,19 +43,30 @@ function Text() {
   return (
     <div
       ref={containerRef}
-      className='flex flex-col gap-4 justify-center items-center p-4'
+      className="flex flex-col gap-4 justify-center items-center px-4 py-8 sm:py-12 md:py-16"
     >
       <h1
         ref={h1Ref}
-        className='text-6xl text-center text-[#4F45E0]'
+        className="
+          text-3xl
+          sm:text-4xl
+          md:text-5xl
+          lg:text-6xl
+          xl:text-7xl
+          text-center
+          text-[#4F45E0]
+          font-black
+          leading-tight
+        "
       >
         Our purpose is to empower dreams 
-        & <br />build a culture of innovation.
+        & <br className="hidden xs:inline" />
+        build a culture of innovation.
       </h1> 
 
       <p
         ref={pRef}
-        className='w-1/2 text-xl text-center text-white'
+        className="w-full text-base font-medium leading-relaxed text-center text-white sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 sm:text-lg md:text-xl"
       >
         E-Cell SMVIT is committed to fostering entrepreneurial spirit,  nurturing innovative minds,  and creating a dynamic ecosystem  where students transform ideas into impactful ventures.  For years, we've been empowering changemakers and redefining  what's possible. 
         Explore our Purpose & Vision, Journey, and more.

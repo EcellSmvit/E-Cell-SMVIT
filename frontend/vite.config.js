@@ -6,6 +6,7 @@ import path from 'path'
 export default defineConfig({
   server: {
     historyApiFallback: true,
+    // host: true,
   },
   plugins: [react()],
   resolve: {

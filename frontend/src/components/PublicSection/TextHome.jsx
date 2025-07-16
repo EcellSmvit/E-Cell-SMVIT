@@ -15,7 +15,7 @@ return (
       animateBy="words"
       direction="top"
       onAnimationComplete={handleAnimationComplete}
-      className="mb-8 text-lg sm:text-xl md:text-2xl lg:text-3xl text-white"
+      className="flex justify-center items-center mb-8 text-sm text-center text-white sm:text-xl md:text-2xl lg:text-3xl"
     />
   </div>
 );

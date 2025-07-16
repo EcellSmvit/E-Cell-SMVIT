@@ -4,7 +4,7 @@ import {getPublicProfile,updateProfile} from '../controllers/profileController.j
 
 const profileRouter = express.Router();
 
-profileRouter.get("/:username",userAuth,getPublicProfile);
+profileRouter.get("/:username",getPublicProfile);
 profileRouter.put("/userprofile",userAuth,updateProfile);
 
 export default profileRouter;

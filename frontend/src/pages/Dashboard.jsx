@@ -77,9 +77,8 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className="flex flex-1 pt-24 w-full">
-        {/* Left Sidebar: ProfileCard centered vertically */}
-        <div className="hidden md:flex flex-col items-center w-72 xl:w-80 relative">
-          <div className="sticky top-32 flex justify-center w-full">
+        <div className="hidden md:flex flex-col items-center w-72 p-4 relative">
+          <div className="flex justify-center w-full">
             <ProfileCard username={userData.username} />
           </div>
         </div>

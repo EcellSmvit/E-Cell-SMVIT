@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import {RGBELoader} from 'three/addons/loaders/RGBELoader.js'
+import ScrollButton from './ScrollButton';
 
 const ThreeScene = () => {
   const canvasRef = useRef(null);
@@ -93,6 +94,7 @@ const ThreeScene = () => {
   }, []);
 
   return (
+    <>
     <canvas
       ref={canvasRef}
       id="world"
@@ -108,7 +110,10 @@ const ThreeScene = () => {
         pointerEvents: 'auto' 
       }}
     />
-    
+    <div>
+      <ScrollButton/>
+    </div>
+    </>
   );
 };
 

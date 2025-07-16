@@ -66,7 +66,7 @@ const PostCard = ({ post, onUpdate }) => {
 
   return (
     <div
-      className="p-4 mb-4 rounded border shadow-lg relative overflow-hidden"
+      className="overflow-hidden relative p-4 mb-4 rounded border shadow-lg"
       style={{
         background: "rgba(255, 255, 255, 0.15)",
         backdropFilter: "blur(12px)",
@@ -76,13 +76,13 @@ const PostCard = ({ post, onUpdate }) => {
       }}
     >
       <div className="flex gap-2 items-center mb-2">
-        <div className="flex items-center gap-3">
+        <div className="flex gap-3 items-center">
           <img
             src={
               post.author?.profilePicture || "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"
             }
             alt="Profile"
-            className="w-10 h-10 rounded-full object-cover border-2 border-white shadow"
+            className="object-cover w-10 h-10 rounded-full border-2 border-white shadow"
           />
           <div>
             <h1 className="font-bold text-white drop-shadow">{post.author?.name}</h1>
@@ -133,8 +133,19 @@ const PostCard = ({ post, onUpdate }) => {
         {post.comments && post.comments.length > 0 && (
           <div className="mb-2">
             {post.comments.map((c, i) => (
-              <div key={i} className="mb-1 text-sm text-gray-100 drop-shadow">
-                <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
+              <div key={i} className="flex gap-2 items-center mb-1 text-sm text-gray-100 drop-shadow">
+                <img
+                  src={
+                    c.user?.profilePicture ||
+                    "https://via.placeholder.com/32?text=U"
+                  }
+                  alt="Profile"
+                  className="object-cover w-7 h-7 rounded-full border shadow border-white/40"
+                  style={{ background: "rgba(255,255,255,0.15)" }}
+                />
+                <span>
+                  <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
+                </span>
               </div>
             ))}
           </div>
@@ -145,7 +156,7 @@ const PostCard = ({ post, onUpdate }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             placeholder="Add comment"
-            className="flex-1 px-2 py-1 rounded border bg-white/30 text-white placeholder:text-gray-200"
+            className="flex-1 px-2 py-1 text-white rounded border bg-white/30 placeholder:text-gray-200"
             style={{
               background: "rgba(255,255,255,0.25)",
               color: "#fff",

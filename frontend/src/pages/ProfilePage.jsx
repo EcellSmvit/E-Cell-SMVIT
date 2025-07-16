@@ -14,12 +14,11 @@ const ProfilePage = () => {
     const { username } = useParams();
     const queryClient = useQueryClient();
 
-    // Fetch authenticated user
+
     const { data: authUser, isLoading } = useQuery({
         queryKey: ["authUser"],
     });
 
-    // Fetch profile data for the username in the URL
     const { data: userProfile, isLoading: isUserProfileLoading } = useQuery({
         queryKey: ["userProfile", username],
         queryFn: async () => {
@@ -28,7 +27,7 @@ const ProfilePage = () => {
         },
     });
 
-    // Mutation for updating profile
+
     const { mutate: updateProfile } = useMutation({
         mutationFn: async (updatedData) => {
             await axios.put(`${backendUrl}/api/profile/userprofile`, updatedData);
@@ -39,16 +38,18 @@ const ProfilePage = () => {
         },
     });
 
-    if (isLoading || isUserProfileLoading) return null;
+    if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
 
-    // Check if the profile belongs to the authenticated user
+    const profileData = userProfile?.data;
     const isOwnProfile = authUser?.username === userProfile?.data?.username;
     const userData = isOwnProfile ? authUser : userProfile.data;
 
     const handleSave = (updatedData) => {
         updateProfile(updatedData);
     };
-
+    if (!userData) {
+        return <div className="text-red-600">Error: user data not found</div>;
+      }
     return (
         <div>
             <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />

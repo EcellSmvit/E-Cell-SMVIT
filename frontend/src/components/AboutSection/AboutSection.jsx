@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const AboutSection =({userData,isOwnProfile,onSave}) => {
+    if (!userData) return null;
     const[isEditing,setIsEditing] = useState(false);
     const[about,setAbout] = useState(userData.about || "");
 

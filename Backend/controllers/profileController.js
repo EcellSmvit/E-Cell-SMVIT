@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js"
 
 export const getPublicProfile = async(req,res) =>{
     try {
+        console.log("🌐 Getting profile for username:", req.params.username);
         const user = await userModel.findOne({username: req.params.username}).select("-password");
         if(!user){
             return res.status(404).json({success:false,message:"User not found"});

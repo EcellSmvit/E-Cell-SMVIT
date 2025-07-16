@@ -13,8 +13,7 @@ const ProfilePage = () => {
     const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const { username } = useParams();
     const queryClient = useQueryClient();
-
-
+    
     const { data: authUser, isLoading } = useQuery({
         queryKey: ["authUser"],
     });
@@ -41,6 +40,8 @@ const ProfilePage = () => {
     if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
 
     const profileData = userProfile;
+    console.log("👤 userProfile =", userProfile); // 👈 add this
+    console.log("🔐 authUser =", authUser); 
     const isOwnProfile = authUser?.username === profileData?.username;
     const userData = isOwnProfile ? authUser : profileData;
 
@@ -48,6 +49,7 @@ const ProfilePage = () => {
         updateProfile(updatedData);
     };
     if (!userData) {
+        console.log("🚨 userData is undefined — show fallback");
         return <div className="text-red-600">Error: user data not found</div>;
       }
     return (

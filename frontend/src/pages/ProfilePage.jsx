@@ -9,59 +9,84 @@ import EducationSection from "@/components/EducationSection/EducationSection";
 import SkillSection from "@/components/skillsection/SkillSection";
 
 const ProfilePage = () => {
-    axios.defaults.withCredentials = true;
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
-    const { username } = useParams();
-    const queryClient = useQueryClient();
-    
-    const { data: authUser, isLoading } = useQuery({
-        queryKey: ["authUser"],
-    });
+  axios.defaults.withCredentials = true;
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const { username } = useParams();
+  const queryClient = useQueryClient();
 
-    const { data: userProfile, isLoading: isUserProfileLoading } = useQuery({
-        queryKey: ["userProfile", username],
-        queryFn: async () => {
-            const res = await axios.get(`${backendUrl}/api/profile/${username}`);
-            return res.data;
-        },
-    });
+  // Query to get authenticated user (if logged in)
+  const { data: authUser, isLoading: isAuthLoading } = useQuery({
+    queryKey: ["authUser"],
+    queryFn: async () => {
+      const res = await axios.get(`${backendUrl}/api/user/data`);
+      return res.data.user; // Ensure your backend sends { user: {...} }
+    },
+    retry: false
+  });
 
+  // Query to get public profile data
+  const { data: userProfile, isLoading: isProfileLoading } = useQuery({
+    queryKey: ["userProfile", username],
+    queryFn: async () => {
+      const res = await axios.get(`${backendUrl}/api/profile/${username}`);
+      return res.data.data; // your controller returns { data: user }
+    },
+    retry: false
+  });
 
-    const { mutate: updateProfile } = useMutation({
-        mutationFn: async (updatedData) => {
-            await axios.put(`${backendUrl}/api/profile/userprofile`, updatedData);
-        },
-        onSuccess: () => {
-            toast.success("Profile updated successfully");
-            queryClient.invalidateQueries(["userProfile", username]);
-        },
-    });
+  const { mutate: updateProfile } = useMutation({
+    mutationFn: async (updatedData) => {
+      await axios.put(`${backendUrl}/api/profile/userprofile`, updatedData);
+    },
+    onSuccess: () => {
+      toast.success("Profile updated successfully");
+      queryClient.invalidateQueries(["userProfile", username]);
+    },
+  });
 
-    if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
+  if (isAuthLoading || isProfileLoading) return <div className="text-center py-10">Loading...</div>;
 
-    const profileData = userProfile?.data;
+  const isOwnProfile = authUser?.username === userProfile?.username;
+  const userData = userProfile || {};
 
-console.log("✅ profileData =", profileData);
-console.log("🔐 authUser =", authUser);
+  if (!userData.username) {
+    return <div className="text-red-600 text-center py-6">Error: User data not found</div>;
+  }
 
-const isOwnProfile = authUser?.username === profileData?.username;
-const userData = isOwnProfile ? authUser : profileData;
-
-if (!userData) {
-  console.log("🚨 userData is undefined — show fallback");
-  return <div className="text-red-600">Error: user data not found</div>;
-}
-const handleSave = (updatedData) => {
+  const handleSave = (updatedData) => {
     updateProfile(updatedData);
   };
-    return (
-        <div className="bg-white">
-            <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-            <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-            <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-            <SkillSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+
+  return (
+    <div className="bg-white min-h-screen py-10 px-4 md:px-12 lg:px-24">
+      <div className="max-w-4xl mx-auto">
+        {/* Profile Header Section */}
+        <div className="flex flex-col items-center gap-4 mb-10">
+          <img
+            src={userData.bannerImg || "https://via.placeholder.com/900x200"}
+            alt="Banner"
+            className="w-full h-48 object-cover rounded-lg"
+          />
+          <img
+            src={userData.profilePicture || "https://via.placeholder.com/150"}
+            alt="Profile"
+            className="w-24 h-24 rounded-full object-cover border-4 border-white -mt-14"
+          />
+          <div className="text-center">
+            <h1 className="text-2xl font-semibold">{userData.name}</h1>
+            <p className="text-gray-600">@{userData.username}</p>
+            <p className="text-gray-800 mt-1">{userData.headline || "No headline provided."}</p>
+          </div>
         </div>
-    );
+
+        {/* Editable Sections */}
+        <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+        <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+        <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+        <SkillSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+      </div>
+    </div>
+  );
 };
 
 export default ProfilePage;

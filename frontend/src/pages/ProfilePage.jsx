@@ -51,6 +51,9 @@ if (!userData) {
   console.log("🚨 userData is undefined — show fallback");
   return <div className="text-red-600">Error: user data not found</div>;
 }
+const handleSave = (updatedData) => {
+    updateProfile(updatedData);
+  };
     return (
         <div className="bg-white">
             <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />

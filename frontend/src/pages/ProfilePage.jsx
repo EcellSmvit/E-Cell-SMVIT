@@ -19,7 +19,7 @@ const ProfilePage = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       const res = await axios.get(`${backendUrl}/api/user/data`);
-      return res.data.user; // Ensure your backend sends { user: {...} }
+      return res.data.user;
     },
     retry: false
   });
@@ -29,7 +29,7 @@ const ProfilePage = () => {
     queryKey: ["userProfile", username],
     queryFn: async () => {
       const res = await axios.get(`${backendUrl}/api/profile/${username}`);
-      return res.data.data; // your controller returns { data: user }
+      return res.data.data;
     },
     retry: false
   });
@@ -44,13 +44,26 @@ const ProfilePage = () => {
     },
   });
 
-  if (isAuthLoading || isProfileLoading) return <div className="text-center py-10">Loading...</div>;
+  if (isAuthLoading || isProfileLoading)
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200">
+        <div className="backdrop-blur-md bg-white/40 rounded-xl px-8 py-6 shadow-xl border border-white/30">
+          <span className="text-lg font-semibold text-indigo-700">Loading...</span>
+        </div>
+      </div>
+    );
 
   const isOwnProfile = authUser?.username === userProfile?.username;
   const userData = userProfile || {};
 
   if (!userData.username) {
-    return <div className="text-red-600 text-center py-6">Error: User data not found</div>;
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200">
+        <div className="backdrop-blur-md bg-white/40 rounded-xl px-8 py-6 shadow-xl border border-white/30">
+          <span className="text-red-600 text-center">Error: User data not found</span>
+        </div>
+      </div>
+    );
   }
 
   const handleSave = (updatedData) => {
@@ -59,30 +72,30 @@ const ProfilePage = () => {
 
   const handleImageUpload = async (e, type) => {
     const file = e.target.files[0];
-  
+
     if (!file) {
       toast.error("No file selected.");
       return;
     }
-  
+
     const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
     const maxSizeInMB = 3;
-  
+
     if (!allowedTypes.includes(file.type)) {
       toast.error("Only JPG, PNG, or WEBP images are allowed.");
       return;
     }
-  
+
     if (file.size > maxSizeInMB * 1024 * 1024) {
       toast.error(`Image must be under ${maxSizeInMB}MB.`);
       return;
     }
-  
+
     const reader = new FileReader();
     reader.onloadend = () => {
       const base64 = reader.result;
       toast.loading("Uploading image...");
-  
+
       updateProfile(
         { [type]: base64 },
         {
@@ -98,70 +111,81 @@ const ProfilePage = () => {
         }
       );
     };
-  
+
     reader.onerror = () => {
       toast.error("Failed to read the file.");
     };
-  
+
     reader.readAsDataURL(file);
   };
-  
 
   return (
-    <div className="bg-white min-h-screen py-10 px-4 md:px-12 lg:px-24">
-      <div className="max-w-4xl mx-auto">
-        {/* Profile Header Section */}
-        <div className="flex flex-col items-center gap-4 mb-10">
-          <div className="relative w-full">
-            <img
-              src={userData.bannerImg || "https://via.placeholder.com/900x200"}
-              alt="Banner"
-              className="w-full h-48 object-cover rounded-lg"
-            />
-            {isOwnProfile && (
-              <label className="absolute top-2 right-2 bg-white p-1 rounded shadow cursor-pointer text-sm">
-                Edit Cover
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => handleImageUpload(e, "bannerImg")}
-                />
-              </label>
-            )}
+    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200 py-10 px-2 md:px-8 flex items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto">
+        <div className="backdrop-blur-lg bg-white/40 border border-white/30 shadow-2xl rounded-3xl p-6 md:p-10">
+          {/* Profile Header Section */}
+          <div className="flex flex-col items-center gap-4 mb-10">
+            <div className="relative w-full">
+              <img
+                src={userData.bannerImg || "https://via.placeholder.com/900x200"}
+                alt="Banner"
+                className="w-full h-48 object-cover rounded-2xl border border-white/40 shadow-lg"
+                style={{
+                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+                  background: "rgba(255,255,255,0.1)",
+                }}
+              />
+              {isOwnProfile && (
+                <label className="absolute top-3 right-4 bg-white/60 hover:bg-white/80 transition p-2 rounded-lg shadow-lg cursor-pointer text-sm font-medium border border-white/40 backdrop-blur-md">
+                  <span className="text-indigo-700">Edit Cover</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleImageUpload(e, "bannerImg")}
+                  />
+                </label>
+              )}
+            </div>
+
+            <div className="relative -mt-14">
+              <img
+                src={userData.profilePicture || "https://via.placeholder.com/150"}
+                alt="Profile"
+                className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-xl bg-white/60"
+                style={{
+                  boxShadow: "0 4px 24px 0 rgba(31, 38, 135, 0.18)",
+                  background: "rgba(255,255,255,0.2)",
+                }}
+              />
+              {isOwnProfile && (
+                <label className="absolute bottom-2 right-2 bg-white/80 hover:bg-white transition p-2 rounded-full shadow-lg cursor-pointer text-xs font-medium border border-white/40 backdrop-blur-md">
+                  <span className="text-indigo-700">Edit</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => handleImageUpload(e, "profilePicture")}
+                  />
+                </label>
+              )}
+            </div>
+
+            <div className="text-center mt-2">
+              <h1 className="text-3xl font-bold text-indigo-900 drop-shadow-sm">{userData.name}</h1>
+              <p className="text-indigo-600 font-medium">@{userData.username}</p>
+              <p className="text-gray-800 mt-1 italic">{userData.headline || "No headline provided."}</p>
+            </div>
           </div>
 
-          <div className="relative">
-            <img
-              src={userData.profilePicture || "https://via.placeholder.com/150"}
-              alt="Profile"
-              className="w-24 h-24 rounded-full object-cover border-4 border-white -mt-14"
-            />
-            {isOwnProfile && (
-              <label className="absolute bottom-0 right-0 bg-white p-1 rounded-full shadow cursor-pointer text-xs">
-                Edit
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={(e) => handleImageUpload(e, "profilePicture")}
-                />
-              </label>
-            )}
-          </div>
-
-          <div className="text-center">
-            <h1 className="text-2xl font-semibold">{userData.name}</h1>
-            <p className="text-gray-600">@{userData.username}</p>
-            <p className="text-gray-800 mt-1">{userData.headline || "No headline provided."}</p>
+          {/* Editable Sections */}
+          <div className="space-y-8">
+            <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+            <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+            <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
+            <SkillSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
           </div>
         </div>
-
-        {/* Editable Sections */}
-        <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-        <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-        <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
-        <SkillSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
       </div>
     </div>
   );

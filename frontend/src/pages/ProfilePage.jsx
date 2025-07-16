@@ -57,21 +57,61 @@ const ProfilePage = () => {
     updateProfile(updatedData);
   };
 
+  const handleImageUpload = async (e, type) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const base64 = reader.result;
+      handleSave({ [type]: base64 });
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <div className="bg-white min-h-screen py-10 px-4 md:px-12 lg:px-24">
       <div className="max-w-4xl mx-auto">
         {/* Profile Header Section */}
         <div className="flex flex-col items-center gap-4 mb-10">
-          <img
-            src={userData.bannerImg || "https://via.placeholder.com/900x200"}
-            alt="Banner"
-            className="w-full h-48 object-cover rounded-lg"
-          />
-          <img
-            src={userData.profilePicture || "https://via.placeholder.com/150"}
-            alt="Profile"
-            className="w-24 h-24 rounded-full object-cover border-4 border-white -mt-14"
-          />
+          <div className="relative w-full">
+            <img
+              src={userData.bannerImg || "https://via.placeholder.com/900x200"}
+              alt="Banner"
+              className="w-full h-48 object-cover rounded-lg"
+            />
+            {isOwnProfile && (
+              <label className="absolute top-2 right-2 bg-white p-1 rounded shadow cursor-pointer text-sm">
+                Edit Cover
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => handleImageUpload(e, "bannerImg")}
+                />
+              </label>
+            )}
+          </div>
+
+          <div className="relative">
+            <img
+              src={userData.profilePicture || "https://via.placeholder.com/150"}
+              alt="Profile"
+              className="w-24 h-24 rounded-full object-cover border-4 border-white -mt-14"
+            />
+            {isOwnProfile && (
+              <label className="absolute bottom-0 right-0 bg-white p-1 rounded-full shadow cursor-pointer text-xs">
+                Edit
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => handleImageUpload(e, "profilePicture")}
+                />
+              </label>
+            )}
+          </div>
+
           <div className="text-center">
             <h1 className="text-2xl font-semibold">{userData.name}</h1>
             <p className="text-gray-600">@{userData.username}</p>

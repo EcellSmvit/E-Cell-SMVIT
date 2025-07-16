@@ -196,7 +196,7 @@ const ProfilePage = () => {
 
           {/* Editable Sections */}
           <div className="space-y-8">
-          <Headline headline={userData.headline} isOwnProfile={isOwnProfile} onSave={data}/>
+          <Headline headline={userData.headline} isOwnProfile={isOwnProfile} onSave={handleSave}/>
             <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />

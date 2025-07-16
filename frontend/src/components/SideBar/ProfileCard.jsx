@@ -28,13 +28,10 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  const profileImage = user.profilePicture?.startsWith("http")
-    ? user.profilePicture
-    : "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600";
+  const profileImage = user.profilePicture || "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600";
 
-  const bannerImage = user.bannerImg?.startsWith("http")
-    ? user.bannerImg
-    : "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60";
+  const bannerImage = user.bannerImg || "https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?fm=jpg&q=60";
+
 
   return (
     <div className="max-w-xl mx-auto mt-6 shadow-lg rounded-2xl overflow-hidden border bg-white">

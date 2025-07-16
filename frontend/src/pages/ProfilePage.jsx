@@ -39,7 +39,7 @@ const ProfilePage = () => {
 
     if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
 
-    const profileData = userProfile;
+    const profileData = userProfile?.data;
     console.log("👤 userProfile =", userProfile); // 👈 add this
     console.log("🔐 authUser =", authUser); 
     const isOwnProfile = authUser?.username === profileData?.username;

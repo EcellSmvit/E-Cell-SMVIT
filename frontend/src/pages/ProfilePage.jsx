@@ -41,8 +41,8 @@ const ProfilePage = () => {
     if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
 
     const profileData = userProfile;
-    const isOwnProfile = authUser?.username === profileData?.data?.username;
-    const userData = isOwnProfile ? authUser : profileData.data;
+    const isOwnProfile = authUser?.username === profileData?.username;
+    const userData = isOwnProfile ? authUser : profileData;
 
     const handleSave = (updatedData) => {
         updateProfile(updatedData);

@@ -8,7 +8,7 @@ export const getPublicProfile = async(req,res) =>{
         if(!user){
             return res.status(404).json({success:false,message:"User not found"});
         }
-        res.json(user);
+        res.json({ data: user });
     } catch (error) {
         console.error("Error in get getpublicProfile controller:",error)
         res.status(500).json({success:false,message:"Server error"})

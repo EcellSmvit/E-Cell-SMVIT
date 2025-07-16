@@ -19,7 +19,7 @@ const ProfileCard = ({ user }) => {
         />
         <div className="absolute -bottom-10 left-4">
           <img
-            src={user.profilePicture || "https://i.sstatic.net/l60Hf.png"}
+            src={user.profilePicture || "https://images.unsplash.com/photo-1728577740843-5f29c7586afe?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D"}
             alt="Profile"
             className="w-20 h-20 rounded-full border-4 border-white object-cover"
           />

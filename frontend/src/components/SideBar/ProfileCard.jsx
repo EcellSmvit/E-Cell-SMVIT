@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProfileCard = ({ user }) => {
   const navigate = useNavigate();
-
+  console.log("ProfileCard user:", user);
   const handleViewProfile = () => {
     navigate(`/profile/${user.username}`);
   };

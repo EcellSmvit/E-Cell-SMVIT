@@ -179,7 +179,7 @@ const AchievementSection = () => {
           </div>
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[3]"
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[3]"
           id="bg1"
         >
           <h1
@@ -196,7 +196,7 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[2]"
+          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[2]"
           id="bg2"
         >
           <h1
@@ -213,7 +213,7 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[1]"
+          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[1]"
           id="bg3"
         >
           <h1
@@ -230,7 +230,7 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[0]"
+          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[0]"
           id="bg4"
         >
           <h1
@@ -262,7 +262,7 @@ const AchievementSection = () => {
               md:mb-8
               absolute 
               md:static 
-              -top-48 
+              -top-40 
               left-1/2 
               -translate-x-1/2 
               md:translate-x-0

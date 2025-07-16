@@ -40,20 +40,19 @@ const ProfilePage = () => {
     if (isLoading || isUserProfileLoading) return <div>Loading...</div>;
 
     const profileData = userProfile?.data;
-    console.log("👤 userProfile =", userProfile); // 👈 add this
-    console.log("🔐 authUser =", authUser); 
-    const isOwnProfile = authUser?.username === profileData?.username;
-    const userData = isOwnProfile ? authUser : profileData;
 
-    const handleSave = (updatedData) => {
-        updateProfile(updatedData);
-    };
-    if (!userData) {
-        console.log("🚨 userData is undefined — show fallback");
-        return <div className="text-red-600">Error: user data not found</div>;
-      }
+console.log("✅ profileData =", profileData);
+console.log("🔐 authUser =", authUser);
+
+const isOwnProfile = authUser?.username === profileData?.username;
+const userData = isOwnProfile ? authUser : profileData;
+
+if (!userData) {
+  console.log("🚨 userData is undefined — show fallback");
+  return <div className="text-red-600">Error: user data not found</div>;
+}
     return (
-        <div>
+        <div className="bg-white">
             <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />

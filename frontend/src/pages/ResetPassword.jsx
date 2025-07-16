@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import Background from '@/components/Background';
+import Background from '../components/PublicSection/Background';
 
 const ResetPassword = () => {
   const { backendUrl } = useContext(AppContext);
@@ -95,11 +95,11 @@ const ResetPassword = () => {
       <div className="w-[50vw] h-[100vh] relative ">
         <Background/>
         <img
-          className="absolute top-4 left-4 z-10 w-24"
+          className="absolute z-10 w-24 top-4 left-4"
           src="https://www.ecellsmvit.in/images/ecellwhite.png"
           alt="E-Cell SMVIT Logo"
         />
-        <div className="absolute top-1/2 left-1/2 z-10 px-4 w-full text-center transform -translate-x-1/2 -translate-y-1/2">
+        <div className="absolute z-10 w-full px-4 text-center transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
           <h2 className="mb-4 text-4xl font-bold text-white drop-shadow-lg">
             Reset Password
           </h2>
@@ -113,7 +113,7 @@ const ResetPassword = () => {
         </div>
       </div>
       <div className="w-[50vw] h-[100vh] flex flex-col justify-center items-center bg-gray-100">
-        <div className="p-8 w-full max-w-md">
+        <div className="w-full max-w-md p-8">
           {!isEmailSent && (
             <form onSubmit={onSubmitEmail} className="space-y-4">
               <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
@@ -151,7 +151,7 @@ const ResetPassword = () => {
               <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
                 Enter OTP
               </h2>
-              <div className="flex gap-2 justify-center" onPaste={handlePaste}>
+              <div className="flex justify-center gap-2" onPaste={handlePaste}>
                 {Array(6)
                   .fill(0)
                   .map((_, index) => (

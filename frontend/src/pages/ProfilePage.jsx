@@ -46,7 +46,12 @@ const ProfilePage = () => {
 
   if (isAuthLoading || isProfileLoading)
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200">
+      <div
+        className="flex items-center justify-center min-h-screen"
+        style={{
+          background: "radial-gradient(circle at 50% 30%, #4E46E4 0%, #000 100%)",
+        }}
+      >
         <div className="backdrop-blur-md bg-white/40 rounded-xl px-8 py-6 shadow-xl border border-white/30">
           <span className="text-lg font-semibold text-indigo-700">Loading...</span>
         </div>
@@ -58,7 +63,12 @@ const ProfilePage = () => {
 
   if (!userData.username) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200">
+      <div
+        className="flex items-center justify-center min-h-screen"
+        style={{
+          background: "radial-gradient(circle at 50% 30%, #4E46E4 0%, #000 100%)",
+        }}
+      >
         <div className="backdrop-blur-md bg-white/40 rounded-xl px-8 py-6 shadow-xl border border-white/30">
           <span className="text-red-600 text-center">Error: User data not found</span>
         </div>
@@ -120,7 +130,12 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-200 via-blue-100 to-purple-200 py-10 px-2 md:px-8 flex items-center justify-center">
+    <div
+      className="min-h-screen py-10 px-2 md:px-8 flex items-center justify-center"
+      style={{
+        background: "radial-gradient(circle at 50% 30%, #4E46E4 0%, #000 100%)",
+      }}
+    >
       <div className="w-full max-w-4xl mx-auto">
         <div className="backdrop-blur-lg bg-white/40 border border-white/30 shadow-2xl rounded-3xl p-6 md:p-10">
           {/* Profile Header Section */}

@@ -44,7 +44,7 @@ const ProfileCard = ({ username }) => {
     >
       {/* Banner */}
       <div className="relative h-40 bg-gray-300">
-        <img src={bannerImage} alt="Banner" className="object-cover w-full h-full" />
+        <img src={bannerImage} alt="Banner" className="object-conatin w-full h-full" />
         <div className="absolute left-6 -bottom-10">
           <img
             src={profileImage}

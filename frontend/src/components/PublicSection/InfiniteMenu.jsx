@@ -73,7 +73,7 @@ void main() {
     float containerAspect = 1.0;
     
     float scale = max(imageAspect / containerAspect, 
-                     containerAspect / imageAspect);
+                      containerAspect / imageAspect);
     
     vec2 st = vec2(vUvs.x, 1.0 - vUvs.y);
     st = (st - 0.5) * scale + 0.5;
@@ -437,10 +437,6 @@ class ArcballControl {
     this.orientation = quat.multiply(quat.create(), combinedQuat, this.orientation);
     quat.normalize(this.orientation, this.orientation);
 
-    const RA_INTENSITY = 0.8 * timeScale;
-    quat.slerp(this._combinedQuat, this._combinedQuat, combinedQuat, RA_INTENSITY);
-    quat.normalize(this._combinedQuat, this._combinedQuat);
-
     const rad = Math.acos(this._combinedQuat[3]) * 2.0;
     const s = Math.sin(rad / 2.0);
     let rv = 0;
@@ -554,7 +550,8 @@ class InfiniteGridMenu {
   }
 
   #init(onInit) {
-    this.gl = this.canvas.getContext('webgl2', { antialias: true, alpha: false });
+    // Changed alpha to true to allow CSS background to show through
+    this.gl = this.canvas.getContext('webgl2', { antialias: true, alpha: true });
     const gl = this.gl;
     if (!gl) {
       throw new Error('No WebGL 2 context!');
@@ -715,6 +712,7 @@ class InfiniteGridMenu {
     gl.enable(gl.CULL_FACE);
     gl.enable(gl.DEPTH_TEST);
 
+    // Clear with transparent color to allow CSS background to show through
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -828,8 +826,8 @@ const defaultItems = [
   {
     image: 'https://picsum.photos/900/900?grayscale',
     link: 'https://google.com/',
-    title: '',
-    description: ''
+    title: 'Default Event', // Added default title
+    description: 'Discover exciting opportunities!' // Added default description
   },
 ];
 
@@ -881,7 +879,9 @@ export default function InfiniteMenu({ items = [] }) {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div
+      className="relative w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#6C4DFF] via-black to-black text-white" // Radial gradient background
+    >
       <canvas
         id="infinite-grid-menu-canvas"
         ref={canvasRef}
@@ -892,41 +892,42 @@ export default function InfiniteMenu({ items = [] }) {
         <>
           <h2
             className={`
-          select-none
-          absolute
-          font-black
-          [font-size:4rem]
-          left-[1.6em]
-          top-1/2
-          transform
-          translate-x-[20%]
-          -translate-y-1/2
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-                ? 'opacity-0 pointer-events-none duration-[100ms]'
-                : 'opacity-100 pointer-events-auto duration-[500ms]'
-              }
-        `}
+              select-none
+              absolute
+              font-black
+              text-4xl md:text-5xl lg:text-6xl xl:text-7xl /* Responsive font size */
+              left-4 md:left-8 lg:left-16 /* Responsive left positioning */
+              top-1/2
+              transform
+              -translate-y-1/2
+              transition-all
+              ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+              ${isMoving
+                  ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[20%]' /* Adjust translate-x for smoother hide */
+                  : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-0' /* Reset translate-x on show */
+                }
+            `}
           >
             {activeItem.title}
           </h2>
 
           <p
             className={`
-          select-none
-          absolute
-          max-w-[10ch]
-          text-[1.5rem]
-          top-1/2
-          right-[1%]
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-                ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[-60%] -translate-y-1/2'
-                : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-[-90%] -translate-y-1/2'
-              }
-        `}
+              select-none
+              absolute
+              max-w-[15ch] md:max-w-[25ch] lg:max-w-[35ch] /* Responsive max-width */
+              text-base md:text-lg lg:text-xl /* Responsive font size */
+              top-1/2
+              right-4 md:right-8 lg:right-16 /* Responsive right positioning */
+              transform
+              -translate-y-1/2
+              transition-all
+              ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+              ${isMoving
+                  ? 'opacity-0 pointer-events-none duration-[100ms] translate-x-[60%]' /* Adjust translate-x for smoother hide */
+                  : 'opacity-100 pointer-events-auto duration-[500ms] translate-x-0' /* Reset translate-x on show */
+                }
+            `}
           >
             {activeItem.description}
           </p>
@@ -934,27 +935,26 @@ export default function InfiniteMenu({ items = [] }) {
           <div
             onClick={handleButtonClick}
             className={`
-          absolute
-          left-1/2
-          z-10
-          w-[60px]
-          h-[60px]
-          grid
-          place-items-center
-          bg-[#00ffff]
-          border-[5px]
-          border-black
-          rounded-full
-          cursor-pointer
-          transition-all
-          ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
-          ${isMoving
-                ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
-                : 'bottom-[3.8em] opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2'
-              }
-        `}
+              absolute
+              left-1/2
+              z-10
+              w-16 h-16 md:w-20 md:h-20 /* Responsive width/height */
+              grid
+              place-items-center
+              bg-[#00ffff]
+              border-[5px]
+              border-black
+              rounded-full
+              cursor-pointer
+              transition-all
+              ease-[cubic-bezier(0.25,0.1,0.25,1.0)]
+              ${isMoving
+                  ? 'bottom-[-80px] opacity-0 pointer-events-none duration-[100ms] scale-0 -translate-x-1/2'
+                  : 'bottom-8 md:bottom-12 lg:bottom-16 opacity-100 pointer-events-auto duration-[500ms] scale-100 -translate-x-1/2' /* Responsive bottom positioning */
+                }
+            `}
           >
-            <p className="select-none relative text-[#ffffff] top-[2px] text-[26px]">
+            <p className="select-none relative text-[#ffffff] text-3xl md:text-4xl /* Responsive arrow size */">
               &#x2197;
             </p>
           </div>

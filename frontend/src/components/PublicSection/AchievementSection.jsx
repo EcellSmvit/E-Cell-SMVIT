@@ -3,6 +3,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GltfScene from './GltfScene';
 
+import ScrollButton2 from './ScrollButton2';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,6 +71,7 @@ const AchievementSection = () => {
         id="page2"
         className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center"
       >
+        <ScrollButton2/>
         <div id="scroll-container" className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />

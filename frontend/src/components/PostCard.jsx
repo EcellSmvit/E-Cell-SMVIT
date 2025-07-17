@@ -18,9 +18,9 @@ const PostCard = ({ post, onUpdate }) => {
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
     if (status === 401) {
-      toast.error("You must be logged in to perform this action. Please log in.");
+      toast.error("You must be logged in to perform this action.");
     } else if (status === 404) {
-      toast.error("Resource not found. The post may have been deleted.");
+      toast.error("Post not found. It may have been deleted.");
     } else {
       toast.error(err?.response?.data?.message || fallbackMsg);
     }
@@ -30,7 +30,7 @@ const PostCard = ({ post, onUpdate }) => {
     setIsLiking(true);
     try {
       await api.post(`/${post._id}/like`);
-      if (typeof onUpdate === "function") onUpdate();
+      onUpdate?.();
     } catch (err) {
       handleApiError(err, "Failed to like post.");
     } finally {
@@ -44,9 +44,9 @@ const PostCard = ({ post, onUpdate }) => {
     try {
       await api.post(`/${post._id}/comment`, { content: comment });
       setComment("");
-      if (typeof onUpdate === "function") onUpdate();
+      onUpdate?.();
     } catch (err) {
-      handleApiError(err, "Failed to add comment.");
+      handleApiError(err, "Failed to comment.");
     } finally {
       setIsCommenting(false);
     }
@@ -57,8 +57,8 @@ const PostCard = ({ post, onUpdate }) => {
     setIsDeleting(true);
     try {
       await api.delete(`/delete/${post._id}`);
-      if (typeof onUpdate === "function") onUpdate();
       toast.success("Post deleted.");
+      onUpdate?.();
     } catch (err) {
       handleApiError(err, "Failed to delete post.");
     } finally {
@@ -66,7 +66,6 @@ const PostCard = ({ post, onUpdate }) => {
     }
   };
 
-  // Handler to go to user profile
   const goToUserProfile = (e) => {
     e.stopPropagation();
     if (post.author?._id) {
@@ -76,62 +75,58 @@ const PostCard = ({ post, onUpdate }) => {
 
   return (
     <div
-      className="overflow-hidden relative p-4 mb-4 rounded border shadow-lg"
+      className="rounded-2xl p-6 mb-6 transition-transform hover:scale-[1.01] duration-300"
       style={{
-        background: "rgba(255, 255, 255, 0.15)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid rgba(255,255,255,0.25)",
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+        background: "rgba(255, 255, 255, 0.08)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        border: "1px solid rgba(255,255,255,0.2)",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
       }}
     >
-      <div className="flex gap-2 items-center mb-2">
-        <div className="flex gap-3 items-center">
-          <img
-            src={
-              post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
-            }
-            alt="Profile"
-            className="object-cover w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer"
+      {/* Header: Profile */}
+      <div className="flex items-center gap-4 mb-4">
+        <img
+          src={post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
+          alt="User"
+          onClick={goToUserProfile}
+          className="w-12 h-12 rounded-full object-cover border-2 border-white cursor-pointer hover:shadow-xl transition-shadow"
+        />
+        <div>
+          <h2
             onClick={goToUserProfile}
-            style={{ transition: "box-shadow 0.2s" }}
-          />
-          <div>
-            <h1
-              className="font-bold text-white drop-shadow cursor-pointer"
-              onClick={goToUserProfile}
-            >
-              {post.author?.name}
-            </h1>
-            {post.author?.headline && (
-              <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
-            )}
-          </div>
+            className="text-white font-semibold text-lg cursor-pointer hover:underline"
+          >
+            {post.author?.name}
+          </h2>
+          {post.author?.headline && (
+            <p className="text-sm text-gray-300">{post.author.headline}</p>
+          )}
         </div>
       </div>
 
-      <p className="mb-2 text-white drop-shadow">{post.content}</p>
+      {/* Content */}
+      <p className="text-white text-base mb-3 whitespace-pre-line">{post.content}</p>
 
+      {/* Post Image */}
       {post.image && (
-        <img
-          src={post.image}
-          alt="post"
-          className="object-contain mt-2 w-full max-h-96 rounded"
-          style={{
-            background: "rgba(255,255,255,0.10)",
-            backdropFilter: "blur(2px)",
-            WebkitBackdropFilter: "blur(2px)",
-          }}
-        />
+        <div className="rounded-lg overflow-hidden mb-4 border border-white/20">
+          <img
+            src={post.image}
+            alt="Post"
+            className="object-cover w-full max-h-[400px] transition-transform duration-200 hover:scale-[1.01]"
+          />
+        </div>
       )}
 
-      <div className="flex gap-4 mt-2 text-sm">
+      {/* Buttons */}
+      <div className="flex items-center gap-5 text-sm text-white mb-4">
         <button
           onClick={likePost}
           disabled={isLiking}
-          className={`flex items-center gap-1 ${post.likes.includes(currentUserId) ? "text-red-500" : "text-white"} ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-1 hover:text-red-400 transition-all ${post.likes.includes(currentUserId) ? "text-red-400" : ""} ${isLiking ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          <Heart color={post.likes.includes(currentUserId) ? "red" : "white"} />
+          <Heart size={18} color={post.likes.includes(currentUserId) ? "red" : "white"} />
           {post.likes.length}
         </button>
 
@@ -139,64 +134,50 @@ const PostCard = ({ post, onUpdate }) => {
           <button
             onClick={deletePost}
             disabled={isDeleting}
-            className={`flex items-center gap-1 text-red-300 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+            className={`flex items-center gap-1 text-red-300 hover:text-red-500 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`}
           >
-            <Trash />
+            <Trash size={18} />
+            Delete
           </button>
         )}
       </div>
 
-      <div className="mt-2">
-        {post.comments && post.comments.length > 0 && (
-          <div className="mb-2">
-            {post.comments.map((c, i) => (
-              <div key={i} className="flex gap-2 items-center mb-1 text-sm text-gray-100 drop-shadow">
-                <img
-                  src={
-                    c.user?.profilePicture ||
-                    "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
-                  }
-                  alt="Profile"
-                  className="object-cover w-7 h-7 rounded-full border shadow border-white/40"
-                  style={{ background: "rgba(255,255,255,0.15)" }}
-                />
-                <span>
-                  <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-        <div className="flex gap-2 mt-2">
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Add comment"
-            className="flex-1 px-2 py-1 text-white rounded border bg-white/30 placeholder:text-gray-200"
-            style={{
-              background: "rgba(255,255,255,0.25)",
-              color: "#fff",
-              border: "1px solid rgba(255,255,255,0.25)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-            }}
-            disabled={isCommenting}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                commentPost();
-              }
-            }}
-          />
-          <button
-            onClick={commentPost}
-            className={`text-blue-200 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
-            disabled={isCommenting}
-          >
-            Post
-          </button>
+      {/* Comments */}
+      {post.comments?.length > 0 && (
+        <div className="space-y-2 mb-3">
+          {post.comments.map((c, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm text-gray-100">
+              <img
+                src={c.user?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
+                alt="User"
+                className="w-7 h-7 rounded-full object-cover border border-white/30"
+              />
+              <span>
+                <strong>{c.user?.name || "Unknown"}:</strong> {c.content}
+              </span>
+            </div>
+          ))}
         </div>
+      )}
+
+      {/* Add Comment */}
+      <div className="flex items-center gap-3 mt-3">
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Write a comment..."
+          onKeyDown={(e) => e.key === "Enter" && commentPost()}
+          disabled={isCommenting}
+          className="flex-1 px-3 py-2 rounded-lg bg-white/10 placeholder:text-gray-300 text-white border border-white/20 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+        />
+        <button
+          onClick={commentPost}
+          disabled={isCommenting}
+          className={`px-4 py-1 text-sm rounded-md font-medium bg-blue-500 text-white hover:bg-blue-600 transition-all ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          Post
+        </button>
       </div>
     </div>
   );

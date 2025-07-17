@@ -20,7 +20,7 @@ const Login = () => {
     try {
       e.preventDefault();
       axios.defaults.withCredentials = true;
-  
+
       if (state === 'Sign Up') {
         const { data } = await axios.post(backendUrl + '/api/auth/register', {
           name,
@@ -30,22 +30,10 @@ const Login = () => {
           mobileNumber,
         });
         console.log('📝 Sign Up response:', data);
-  
         if (data.success) {
           setIsLogin(true);
           await getUserData();
-  
-          // ✅ Fetch latest user profile
-          const res = await axios.get(backendUrl + '/api/user/me');
-          const currentUser = res.data.user;
-  
-          // ✅ Redirect based on verification status
-          if (!currentUser.isAccountVerified) {
-            toast.info("Please verify your email before accessing the dashboard.");
-            navigate('/email-verify');
-          } else {
-            navigate('/dashboard');
-          }
+          navigate('/dashboard');
         } else {
           toast.error(data.message);
         }
@@ -55,20 +43,11 @@ const Login = () => {
           password,
         });
         console.log('🔐 Login response:', data);
-  
+
         if (data.success) {
           setIsLogin(true);
-          await getUserData();
-  
-          const res = await axios.get(backendUrl + '/api/user/me');
-          const currentUser = res.data.user;
-  
-          if (!currentUser.isAccountVerified) {
-            toast.info("Please verify your email before accessing the dashboard.");
-            navigate('/email-verify');
-          } else {
-            navigate('/dashboard');
-          }
+          getUserData();
+          navigate('/dashboard');
         } else {
           toast.error(data.message);
         }
@@ -77,7 +56,6 @@ const Login = () => {
       toast.error(error.message);
     }
   };
-  
 
   return (
     <div className='flex justify-center items-center w-[100vw] h-[100vh]'>

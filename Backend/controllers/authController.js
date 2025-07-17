@@ -151,37 +151,37 @@ export const sendVerifyOtp = async(req, res)=>{
 
 //Verify OTP and update user account to verified
 export const verifyEmail = async (req, res) => {
-    const { otp } = req.body;
-    const userId = req.user._id;
-  
-    if (!userId || !otp) {
-      return res.json({ success: false, message: "Missing Details" });
+  const { otp } = req.body;
+  const userId = req.user._id;
+
+  if (!userId || !otp) {
+    return res.json({ success: false, message: "Missing Details" });
+  }
+
+  try {
+    const user = await userModel.findById(userId);
+
+    if (!user) return res.json({ success: false, message: "User not found" });
+
+    if (user.verifyOtp !== otp) {
+      return res.json({ success: false, message: "Invalid OTP" });
     }
-  
-    try {
-      const user = await userModel.findById(userId);
-  
-      if (!user) return res.json({ success: false, message: "User not found" });
-  
-      if (user.verifyOtp !== otp) {
-        return res.json({ success: false, message: "Invalid OTP" });
-      }
-  
-      if (user.verifyOtpExpireAt < Date.now()) {
-        return res.json({ success: false, message: "OTP expired. Please request a new OTP" });
-      }
-  
-      user.isAccountVerified = true;
-      user.verifyOtp = "";
-      user.verifyOtpExpireAt = 0;
-      await user.save();
-  
-      return res.json({ success: true, message: "Account verified successfully" });
-    } catch (err) {
-      return res.json({ success: false, message: err.message });
+
+    if (user.verifyOtpExpireAt < Date.now()) {
+      return res.json({ success: false, message: "OTP expired. Please request a new OTP" });
     }
-  };
-  
+
+    user.isAccountVerified = true;
+    user.verifyOtp = "";
+    user.verifyOtpExpireAt = 0;
+    await user.save();
+
+    return res.json({ success: true, message: "Account verified successfully" });
+  } catch (err) {
+    return res.json({ success: false, message: err.message });
+  }
+};
+
 
 //check user is Authenticated or not.
 export const isAuthenticated = async(req, res)=>{

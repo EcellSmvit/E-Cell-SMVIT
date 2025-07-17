@@ -116,7 +116,7 @@ const PostCard = ({ post, onUpdate }) => {
           <img
             src={post.image}
             alt="Post"
-            className="object-cover w-full max-h-[400px] transition-transform duration-200 hover:scale-[1.01]"
+            className="object-contain w-full max-h-[400px] transition-transform duration-200  bg-black"
           />
         </div>
       )}

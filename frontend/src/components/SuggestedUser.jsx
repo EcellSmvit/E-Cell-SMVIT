@@ -15,27 +15,27 @@ const SuggestedUser = () => {
     },
   });
 
-  if (isLoading) return <p className="text-white text-sm">Loading suggestions...</p>;
-  if (error) return <p className="text-red-400 text-sm">Error loading suggestions</p>;
-  if (!data || data.length === 0) return <p className="text-white text-sm">No suggestions available</p>;
+  if (isLoading) return <p className="text-sm text-white">Loading suggestions...</p>;
+  if (error) return <p className="text-sm text-red-400">Error loading suggestions</p>;
+  if (!data || data.length === 0) return <p className="text-sm text-white">No suggestions available</p>;
 
   return (
-    <div className="p-4 bg-white/10 border border-white/20 rounded-xl shadow">
-      <h2 className="text-white text-lg font-semibold mb-3">Suggested Users</h2>
+    <div className="rounded-xl border shadow  bg-white/10 border-white/20">
+      <h2 className="mb-3 text-lg font-semibold text-white">Suggested Users</h2>
       <ul className="space-y-3">
         {data.map((user) => (
           <li
             key={user._id}
-            className="flex gap-3 items-center cursor-pointer hover:bg-white/10 p-2 rounded"
+            className="flex gap-3 items-center p-2 rounded cursor-pointer hover:bg-white/10"
             onClick={() => navigate(`/profile/${user.username}`)}
           >
             <img
               src={user.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
               alt="Profile"
-              className="w-10 h-10 rounded-full border shadow object-cover"
+              className="object-cover w-10 h-10 rounded-full border shadow"
             />
             <div>
-              <p className="text-white font-medium">{user.name}</p>
+              <p className="font-medium text-white">{user.name}</p>
               <p className="text-sm text-gray-300">@{user.username}</p>
             </div>
           </li>

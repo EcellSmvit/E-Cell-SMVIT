@@ -20,7 +20,7 @@ const SuggestedUser = () => {
   if (!data || data.length === 0) return <p className="text-sm text-white">No suggestions available</p>;
 
   return (
-    <div className="rounded-xl border shadow  bg-white/10 border-white/20">
+    <div className="p-4 rounded-xl border shadow bg-white/10 border-white/20">
       <h2 className="mb-3 text-lg font-semibold text-white">Suggested Users</h2>
       <ul className="space-y-3">
         {data.map((user) => (

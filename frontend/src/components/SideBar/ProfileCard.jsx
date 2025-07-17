@@ -34,7 +34,7 @@ const ProfileCard = ({ username }) => {
 
   return (
     <div
-      className="overflow-hidden mx-auto w-[400px] h-[500px] rounded-2xl border shadow-xl transition-transform border-white/20"
+      className="overflow-hidden mx-auto w-[400px] h-[400px] rounded-2xl border shadow-xl transition-transform border-white/20"
       style={{
         background: "rgba(255, 255, 255, 0.06)",
         backdropFilter: "blur(18px)",

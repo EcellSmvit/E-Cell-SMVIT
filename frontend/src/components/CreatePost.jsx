@@ -60,7 +60,7 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="mb-6 rounded border"
+      className="p-4 mb-6 rounded border"
       style={{
         background: "rgba(255,255,255,0.15)",
         boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",

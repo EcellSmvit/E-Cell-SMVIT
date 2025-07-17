@@ -48,8 +48,7 @@ export const register = async (req, res)=>{
             from: process.env.SENDER_EMAIL,
             to: email,
             subject: 'Welcome to our site',
-            text: `Hello ${name}, Welcome to our site. 
-            We are happy to see you here.Your account has been created successfully with email id: ${email}.`
+            html: WELCOME_TEMPLATE.replace("{{name}}", user.name)
 
         }
         await transporter.sendMail(mailOptions)

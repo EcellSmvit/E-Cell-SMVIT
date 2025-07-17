@@ -18,9 +18,9 @@ const PostCard = ({ post, onUpdate }) => {
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
     if (status === 401) {
-      toast.error("You must be logged in to perform this action. Please log in.");
+      toast.error("You must be logged in to perform this action.");
     } else if (status === 404) {
-      toast.error("Resource not found. The post may have been deleted.");
+      toast.error("Post not found. It may have been deleted.");
     } else {
       toast.error(err?.response?.data?.message || fallbackMsg);
     }
@@ -46,7 +46,7 @@ const PostCard = ({ post, onUpdate }) => {
       setComment("");
       if (typeof onUpdate === "function") onUpdate();
     } catch (err) {
-      handleApiError(err, "Failed to add comment.");
+      handleApiError(err, "Failed to comment.");
     } finally {
       setIsCommenting(false);
     }
@@ -66,7 +66,6 @@ const PostCard = ({ post, onUpdate }) => {
     }
   };
 
-  // Handler to go to user profile
   const goToUserProfile = (e) => {
     e.stopPropagation();
     if (post.author?._id) {
@@ -76,62 +75,58 @@ const PostCard = ({ post, onUpdate }) => {
 
   return (
     <div
-      className="overflow-hidden relative p-4 mb-4 rounded border shadow-lg"
+      className="rounded-2xl p-6 mb-6 shadow-xl transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl"
       style={{
-        background: "rgba(255, 255, 255, 0.15)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        border: "1px solid rgba(255,255,255,0.25)",
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+        background: "rgba(255, 255, 255, 0.08)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        border: "1px solid rgba(255, 255, 255, 0.25)",
+        boxShadow: "0 12px 32px rgba(0, 0, 0, 0.15)",
       }}
     >
-      <div className="flex gap-2 items-center mb-2">
-        <div className="flex gap-3 items-center">
-          <img
-            src={
-              post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
-            }
-            alt="Profile"
-            className="object-cover w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer"
+      <div className="flex items-center gap-4 mb-4">
+        <img
+          src={post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
+          alt="User"
+          onClick={goToUserProfile}
+          className="w-12 h-12 rounded-full border-2 border-white cursor-pointer object-cover shadow"
+        />
+        <div>
+          <h2
+            className="text-lg font-semibold text-white cursor-pointer hover:underline"
             onClick={goToUserProfile}
-            style={{ transition: "box-shadow 0.2s" }}
-          />
-          <div>
-            <h1
-              className="font-bold text-white drop-shadow cursor-pointer"
-              onClick={goToUserProfile}
-            >
-              {post.author?.name}
-            </h1>
-            {post.author?.headline && (
-              <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
-            )}
-          </div>
+          >
+            {post.author?.name}
+          </h2>
+          {post.author?.headline && (
+            <p className="text-sm text-gray-200">{post.author.headline}</p>
+          )}
         </div>
       </div>
 
-      <p className="mb-2 text-white drop-shadow">{post.content}</p>
+      <p className="text-white text-base mb-3">{post.content}</p>
 
       {post.image && (
-        <img
-          src={post.image}
-          alt="post"
-          className="object-contain mt-2 w-full max-h-96 rounded"
-          style={{
-            background: "rgba(255,255,255,0.10)",
-            backdropFilter: "blur(2px)",
-            WebkitBackdropFilter: "blur(2px)",
-          }}
-        />
+        <div className="rounded-lg overflow-hidden mb-4 border border-white/20">
+          <img
+            src={post.image}
+            alt="Post"
+            className="object-cover w-full max-h-96 rounded"
+            style={{
+              background: "rgba(255,255,255,0.10)",
+              backdropFilter: "blur(3px)",
+            }}
+          />
+        </div>
       )}
 
-      <div className="flex gap-4 mt-2 text-sm">
+      <div className="flex gap-6 items-center text-white text-sm mb-4">
         <button
           onClick={likePost}
           disabled={isLiking}
-          className={`flex items-center gap-1 ${post.likes.includes(currentUserId) ? "text-red-500" : "text-white"} ${isLiking ? "opacity-60 cursor-not-allowed" : ""}`}
+          className={`flex items-center gap-2 ${post.likes.includes(currentUserId) ? "text-red-400" : "text-white"} ${isLiking ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          <Heart color={post.likes.includes(currentUserId) ? "red" : "white"} />
+          <Heart size={18} color={post.likes.includes(currentUserId) ? "red" : "white"} />
           {post.likes.length}
         </button>
 
@@ -139,64 +134,47 @@ const PostCard = ({ post, onUpdate }) => {
           <button
             onClick={deletePost}
             disabled={isDeleting}
-            className={`flex items-center gap-1 text-red-300 ${isDeleting ? "opacity-60 cursor-not-allowed" : ""}`}
+            className={`flex items-center gap-2 text-red-300 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`}
           >
-            <Trash />
+            <Trash size={18} />
           </button>
         )}
       </div>
 
-      <div className="mt-2">
-        {post.comments && post.comments.length > 0 && (
-          <div className="mb-2">
-            {post.comments.map((c, i) => (
-              <div key={i} className="flex gap-2 items-center mb-1 text-sm text-gray-100 drop-shadow">
-                <img
-                  src={
-                    c.user?.profilePicture ||
-                    "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
-                  }
-                  alt="Profile"
-                  className="object-cover w-7 h-7 rounded-full border shadow border-white/40"
-                  style={{ background: "rgba(255,255,255,0.15)" }}
-                />
-                <span>
-                  <b>{c.user?.name || c.user?.username || "Unknown"}:</b> {c.content}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
-        <div className="flex gap-2 mt-2">
-          <input
-            type="text"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            placeholder="Add comment"
-            className="flex-1 px-2 py-1 text-white rounded border bg-white/30 placeholder:text-gray-200"
-            style={{
-              background: "rgba(255,255,255,0.25)",
-              color: "#fff",
-              border: "1px solid rgba(255,255,255,0.25)",
-              backdropFilter: "blur(4px)",
-              WebkitBackdropFilter: "blur(4px)",
-            }}
-            disabled={isCommenting}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                commentPost();
-              }
-            }}
-          />
-          <button
-            onClick={commentPost}
-            className={`text-blue-200 ${isCommenting ? "opacity-60 cursor-not-allowed" : ""}`}
-            disabled={isCommenting}
-          >
-            Post
-          </button>
+      {post.comments?.length > 0 && (
+        <div className="mb-3 space-y-2">
+          {post.comments.map((c, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm text-gray-100">
+              <img
+                src={c.user?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
+                alt="User"
+                className="w-7 h-7 rounded-full object-cover border border-white/30"
+              />
+              <span>
+                <strong>{c.user?.name || "Unknown"}:</strong> {c.content}
+              </span>
+            </div>
+          ))}
         </div>
+      )}
+
+      <div className="flex gap-3 items-center mt-3">
+        <input
+          type="text"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          placeholder="Add a comment..."
+          onKeyDown={(e) => e.key === "Enter" && commentPost()}
+          disabled={isCommenting}
+          className="flex-1 px-3 py-1.5 rounded-lg bg-white/10 placeholder:text-gray-200 text-white border border-white/20 backdrop-blur"
+        />
+        <button
+          onClick={commentPost}
+          disabled={isCommenting}
+          className={`text-blue-200 font-medium ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          Post
+        </button>
       </div>
     </div>
   );

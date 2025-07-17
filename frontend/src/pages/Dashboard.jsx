@@ -77,7 +77,7 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div>
+      <div className="flex justify-center items-start">
         {/* Profile Card */}
         <div>
           <ProfileCard username={userData.username} />

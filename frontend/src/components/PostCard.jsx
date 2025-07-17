@@ -70,7 +70,7 @@ const PostCard = ({ post, onUpdate }) => {
   const goToUserProfile = (e) => {
     e.stopPropagation();
     if (post.author?._id) {
-      navigate(`/profile/${post.author._id}`);
+      navigate(`/profile/${post.author.username}`);
     }
   };
 

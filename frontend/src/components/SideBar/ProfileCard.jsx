@@ -34,7 +34,7 @@ const ProfileCard = ({ username }) => {
 
   return (
     <div
-      className="overflow-hidden mx-auto mt-6 max-w-xl rounded-2xl border border-white/20 shadow-xl transition-transform hover:scale-[1.01]"
+      className="overflow-hidden mx-auto w-[400px] h-[300px] rounded-2xl border shadow-xl transition-transform border-white/20"
       style={{
         background: "rgba(255, 255, 255, 0.06)",
         backdropFilter: "blur(18px)",
@@ -44,12 +44,12 @@ const ProfileCard = ({ username }) => {
     >
       {/* Banner */}
       <div className="relative h-40 bg-gray-300">
-        <img src={bannerImage} alt="Banner" className="object-conatin w-full h-full" />
+        <img src={bannerImage} alt="Banner" className="w-full h-full object-conatin" />
         <div className="absolute left-6 -bottom-10">
           <img
             src={profileImage}
             alt="Profile"
-            className="object-cover w-20 h-20 rounded-full border-4 border-white shadow-lg bg-white"
+            className="object-cover w-20 h-20 bg-white rounded-full border-4 border-white shadow-lg"
           />
         </div>
       </div>
@@ -62,7 +62,7 @@ const ProfileCard = ({ username }) => {
 
         <button
           onClick={handleViewProfile}
-          className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition duration-200"
+          className="px-4 py-2 mt-4 font-medium text-white bg-blue-600 rounded-lg transition duration-200 hover:bg-blue-700"
         >
           View Profile
         </button>

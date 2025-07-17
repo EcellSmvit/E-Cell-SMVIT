@@ -14,6 +14,7 @@ const PostCard = ({ post, onUpdate }) => {
   const [isLiking, setIsLiking] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const [isCommenting, setIsCommenting] = useState(false);
+  const [showComments, setShowComments] = useState(false);
 
   const handleApiError = (err, fallbackMsg) => {
     const status = err?.response?.status;
@@ -45,6 +46,7 @@ const PostCard = ({ post, onUpdate }) => {
       await api.post(`/${post._id}/comment`, { content: comment });
       setComment("");
       onUpdate?.();
+      setShowComments(true); // Show comments after adding one
     } catch (err) {
       handleApiError(err, "Failed to comment.");
     } finally {
@@ -84,7 +86,7 @@ const PostCard = ({ post, onUpdate }) => {
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
       }}
     >
-      {/* Header: Profile */}
+      {/* Header */}
       <div className="flex items-center gap-4 mb-4">
         <img
           src={post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
@@ -108,7 +110,7 @@ const PostCard = ({ post, onUpdate }) => {
       {/* Content */}
       <p className="text-white text-base mb-3 whitespace-pre-line">{post.content}</p>
 
-      {/* Post Image */}
+      {/* Image */}
       {post.image && (
         <div className="rounded-lg overflow-hidden mb-4 border border-white/20">
           <img
@@ -142,22 +144,36 @@ const PostCard = ({ post, onUpdate }) => {
         )}
       </div>
 
-      {/* Comments */}
+      {/* Toggle Comments */}
       {post.comments?.length > 0 && (
-        <div className="space-y-2 mb-3">
-          {post.comments.map((c, i) => (
-            <div key={i} className="flex items-center gap-2 text-sm text-gray-100">
-              <img
-                src={c.user?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
-                alt="User"
-                className="w-7 h-7 rounded-full object-cover border border-white/30"
-              />
-              <span>
-                <strong>{c.user?.name || "Unknown"}:</strong> {c.content}
-              </span>
+        <>
+          <button
+            onClick={() => setShowComments((prev) => !prev)}
+            className="text-sm text-blue-300 hover:underline mb-2"
+          >
+            {showComments ? "Hide Comments" : `View Comments (${post.comments.length})`}
+          </button>
+
+          {showComments && (
+            <div className="space-y-2 mb-3 transition-all duration-300">
+              {post.comments.map((c, i) => (
+                <div key={i} className="flex items-center gap-2 text-sm text-gray-100">
+                  <img
+                    src={
+                      c.user?.profilePicture ||
+                      "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
+                    }
+                    alt="User"
+                    className="w-7 h-7 rounded-full object-cover border border-white/30"
+                  />
+                  <span>
+                    <strong>{c.user?.name || "Unknown"}:</strong> {c.content}
+                  </span>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
 
       {/* Add Comment */}

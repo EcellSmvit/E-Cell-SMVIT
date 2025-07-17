@@ -77,19 +77,14 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex flex-row justify-center items-start mt-32">
-        {/* Profile Card */}
-        <div>
+      <div className="flex flex-row justify-center items-start mt-32 w-full">
+        <div className="flex flex-1 justify-end">
           <ProfileCard username={userData.username} />
         </div>
-        {/* Feed/Main Content */}
-        <div>
-          <div >
-            <Feed />
-          </div>
+        <div className="flex flex-col items-center mx-8" style={{ minWidth: 400, maxWidth: 600, width: "100%" }}>
+          <Feed />
         </div>
-        {/* Suggested Users */}
-        <div>
+        <div className="flex flex-1 justify-start">
           <SuggestedUser />
         </div>
       </div>

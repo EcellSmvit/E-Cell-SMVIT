@@ -27,3 +27,21 @@ export const getUserData = async (req, res) => {
   }
 }
   
+export const getSuggestedUsers = async (req, res) => {
+    try {
+      const users = await userModel.aggregate([
+        { $sample: { size: 3 } },
+        {
+          $project: {
+            password: 0,
+            email: 0,
+            phone: 0,
+            __v: 0
+          }
+        }
+      ]);
+      res.json({ success: true, data: users });
+    } catch (err) {
+      res.status(500).json({ success: false, message: "Error fetching suggested users" });
+    }
+  };

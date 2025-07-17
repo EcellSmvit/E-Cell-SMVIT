@@ -5,6 +5,7 @@ import Feed from "./Feed";
 import { LogOut } from 'lucide-react';
 // import Sidebar from "@/components/SideBar/ProfileCard";
 import ProfileCard from "@/components/SideBar/ProfileCard";
+import SuggestedUser from "@/components/SuggestedUser";
 
 const ECELL_LOGO_URL =
   "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png"; // Replace with your actual logo URL if different
@@ -89,7 +90,9 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Right Sidebar: Empty space for future content */}
-        <div className="hidden lg:block lg:w-64 xl:w-80"></div>
+        <div className="hidden lg:block lg:w-64 xl:w-80">
+          <SuggestedUser/>
+        </div>
       </div>
     </div>
   );

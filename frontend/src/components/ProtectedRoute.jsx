@@ -1,0 +1,14 @@
+import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+
+const ProtectedRoute = ({ children }) => {
+  const { isLogin, userData } = useContext(AppContext);
+
+  if (!isLogin) return <Navigate to="/login" />;
+  if (userData && !userData.isAccountVerified) return <Navigate to="/email-verify" />;
+
+  return children;
+};
+
+export default ProtectedRoute;

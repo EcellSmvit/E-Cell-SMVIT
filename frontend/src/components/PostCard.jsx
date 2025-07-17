@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
-import { Trash,Heart } from 'lucide-react';
+import { Trash, Heart } from 'lucide-react';
+import { useNavigate } from "react-router-dom";
 
 const PostCard = ({ post, onUpdate }) => {
   const { userData } = useContext(AppContext);
   const currentUserId = userData?._id;
+  const navigate = useNavigate();
 
   const [comment, setComment] = useState("");
   const [isLiking, setIsLiking] = useState(false);
@@ -64,6 +66,14 @@ const PostCard = ({ post, onUpdate }) => {
     }
   };
 
+  // Handler to go to user profile
+  const goToUserProfile = (e) => {
+    e.stopPropagation();
+    if (post.author?._id) {
+      navigate(`/profile/${post.author._id}`);
+    }
+  };
+
   return (
     <div
       className="overflow-hidden relative p-4 mb-4 rounded border shadow-lg"
@@ -82,10 +92,17 @@ const PostCard = ({ post, onUpdate }) => {
               post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
             }
             alt="Profile"
-            className="object-cover w-10 h-10 rounded-full border-2 border-white shadow"
+            className="object-cover w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer"
+            onClick={goToUserProfile}
+            style={{ transition: "box-shadow 0.2s" }}
           />
           <div>
-            <h1 className="font-bold text-white drop-shadow">{post.author?.name}</h1>
+            <h1
+              className="font-bold text-white drop-shadow cursor-pointer"
+              onClick={goToUserProfile}
+            >
+              {post.author?.name}
+            </h1>
             {post.author?.headline && (
               <div className="text-xs text-gray-200 drop-shadow">{post.author.headline}</div>
             )}

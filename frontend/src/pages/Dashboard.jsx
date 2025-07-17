@@ -90,7 +90,7 @@ const Dashboard = () => {
           </div>
         </div>
         {/* Right Sidebar: Empty space for future content */}
-        <div className="hidden lg:block lg:w-64 xl:w-80">
+        <div className="block w-full md:w-64 xl:w-80">
           <SuggestedUser/>
         </div>
       </div>

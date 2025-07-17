@@ -2,12 +2,17 @@ import express from 'express'
 import cors from 'cors'
 import 'dotenv/config'
 import cookieParser from 'cookie-parser'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 import { connectDB } from './config/db.js'
 import AuthRouter from './routes/authRoutes.js'
 import UserRouter from './routes/userRoutes.js'
 import postRouter from './routes/postRoutes.js'
 import profileRouter from './routes/profileRoutes.js'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -36,17 +41,20 @@ app.use(cors(corsOptions))
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/', (req, res) => {
-    res.send(`<h1>API is Working...</h1>`)
-})
-
+// API routes
 app.use('/api/auth', AuthRouter)
 app.use('/api/user', UserRouter)
 app.use('/api/v1/posts', postRouter)
-app.use('/api/profile',profileRouter)
+app.use('/api/profile', profileRouter)
 
+// Serve frontend
+app.use(express.static(path.join(__dirname, 'dist')))
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'))
+})
 
-app.use((req, res, next) => {
+// 404 handler
+app.use((req, res) => {
     res.status(404).json({ error: 'Resource not found' })
 })
 

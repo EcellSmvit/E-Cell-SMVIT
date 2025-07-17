@@ -77,19 +77,19 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex flex-1 items-start pt-24 w-full">
+      <div>
         {/* Profile Card */}
-        <div className="hidden flex-col items-center pl-4 w-72 md:flex">
+        <div>
           <ProfileCard username={userData.username} />
         </div>
         {/* Feed/Main Content */}
-        <div className="flex flex-1 justify-center w-full">
-          <div className="p-4 w-full max-w-3xl">
+        <div>
+          <div >
             <Feed />
           </div>
         </div>
         {/* Suggested Users */}
-        <div className="block w-full md:w-64 xl:w-80">
+        <div>
           <SuggestedUser />
         </div>
       </div>

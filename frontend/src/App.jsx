@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Dashboard from './pages/Dashboard'
 import Feed from './pages/Feed';
 import ProfilePage from './pages/ProfilePage'
-import ProtectedRoute from './components/ProtectedRoute'
+
 
 
 

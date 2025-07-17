@@ -77,21 +77,20 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content */}
-      <div className="flex flex-1 pt-24 w-full">
-        <div className="hidden relative flex-col items-center pl-4 w-72 md:flex">
-          <div className="flex justify-center w-full">
-            <ProfileCard username={userData.username} />
-          </div>
+      <div className="flex flex-1 items-start pt-24 w-full">
+        {/* Profile Card */}
+        <div className="hidden flex-col items-center pl-4 w-72 md:flex">
+          <ProfileCard username={userData.username} />
         </div>
         {/* Feed/Main Content */}
-        <div className="flex flex-1 justify-center items-start w-full">
+        <div className="flex flex-1 justify-center w-full">
           <div className="p-4 w-full max-w-3xl">
             <Feed />
           </div>
         </div>
-        {/* Right Sidebar: Empty space for future content */}
+        {/* Suggested Users */}
         <div className="block w-full md:w-64 xl:w-80">
-          <SuggestedUser/>
+          <SuggestedUser />
         </div>
       </div>
     </div>

@@ -17,10 +17,10 @@ const Login = () => {
   const { backendUrl, setIsLogin, getUserData } = useContext(AppContext);
 
   const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    axios.defaults.withCredentials = true;
+  
     try {
-      e.preventDefault();
-      axios.defaults.withCredentials = true;
-
       if (state === 'Sign Up') {
         const { data } = await axios.post(backendUrl + '/api/auth/register', {
           name,
@@ -29,34 +29,56 @@ const Login = () => {
           password,
           mobileNumber,
         });
-        
+  
         if (data.success) {
           setIsLogin(true);
-          await getUserData();
-          toast.success("Signup successful! Please verify your email.");
-          navigate('/verify-email');
+          await getUserData(); // ensure latest data in context
+  
+          // small delay to allow AppContext to update userData
+          setTimeout(() => {
+            const storedUser = JSON.parse(localStorage.getItem('userData')); // optional fallback
+  
+            if (storedUser?.isAccountVerified || userData?.isAccountVerified) {
+              toast.success("Signup successful! Redirecting to dashboard...");
+              navigate('/dashboard');
+            } else {
+              toast.success("Signup successful! Please verify your email.");
+              navigate('/verify-email');
+            }
+          }, 300); // delay for context to reflect changes
         } else {
           toast.error(data.message);
         }
+  
       } else {
+        // LOGIN FLOW
         const { data } = await axios.post(backendUrl + '/api/auth/login', {
           email,
           password,
         });
-        console.log('🔐 Login response:', data);
-
+  
         if (data.success) {
           setIsLogin(true);
-          getUserData();
-          navigate('/dashboard');
+          await getUserData();
+  
+          setTimeout(() => {
+            const storedUser = JSON.parse(localStorage.getItem('userData'));
+            if (storedUser?.isAccountVerified || userData?.isAccountVerified) {
+              navigate('/dashboard');
+            } else {
+              navigate('/verify-email');
+            }
+          }, 300);
         } else {
           toast.error(data.message);
         }
       }
+  
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response?.data?.message || error.message);
     }
   };
+  
 
   return (
     <div className='flex justify-center items-center w-[100vw] h-[100vh]'>

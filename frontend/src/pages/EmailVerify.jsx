@@ -63,9 +63,13 @@ const EmailVerify = () => {
 
   // Handle resend OTP
   const handleResendOtp = async () => {
+    if (!userData || !userData._id) {
+      return toast.error("User data not loaded yet.")
+    }
+  
     try {
       const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`, {
-        userId: userData?._id,
+        userId: userData._id,
       })
       if (data.success) {
         toast.success("OTP resent successfully.")
@@ -76,6 +80,7 @@ const EmailVerify = () => {
       toast.error(error.response?.data?.message || "Failed to resend OTP.")
     }
   }
+  
 
   useEffect(() => {
     if (isLogin && userData?.isAccountVerified) {

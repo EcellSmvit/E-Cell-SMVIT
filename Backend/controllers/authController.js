@@ -45,8 +45,8 @@ export const register = async (req, res)=>{
 
         //we are send wellcome email to user...
         const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: email,
+            from: `"E-CELL SMVIT" <${process.env.SENDER_EMAIL}>`,
+            to: user.email,
             subject: 'Welcome to our site',
             html: WELCOME_TEMPLATE.replace("{{name}}", user.name)
 
@@ -131,7 +131,7 @@ export const sendVerifyOtp = async(req, res)=>{
 
         //now send otp to user email.
         const mailOptions = {
-            from: process.env.SENDER_EMAIL,
+            from: `"E-CELL SMVIT" <${process.env.SENDER_EMAIL}>`,
             to: user.email,
             subject: 'Account Verification OTP',
             // text: `Hello ${user.name}, Your OTP for account verification is ${otp}. It will expire in 1 day`,

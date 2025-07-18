@@ -114,6 +114,7 @@ export const logout = (req, res)=>{
 
 //Send verification OPT to user email
 export const sendVerifyOtp = async (req, res) => {
+    console.log("📥 Received body:", req.body)
     try {
       const { userId } = req.body;
       if (!userId) return res.status(400).json({ success: false, message: "userId missing" });
@@ -189,13 +190,23 @@ export const verifyEmail = async (req, res) => {
 
 
 //check user is Authenticated or not.
-export const isAuthenticated = async(req, res)=>{
-    try {
-        return res.json({success:true})
-    }catch(error) {
-        return res.json({success:false, message: error.message})
-    }
+import jwt from 'jsonwebtoken'
+
+export const isAuthenticated = (req, res, next) => {
+  const token = req.cookies?.accessToken
+  if (!token) {
+    return res.status(401).json({ success: false, message: "Unauthorized: No token" })
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
+    req.userId = decoded.id
+    next()
+  } catch (err) {
+    return res.status(401).json({ success: false, message: "Unauthorized: Invalid token" })
+  }
 }
+
 
 //send RESET PASSWORD OTP to user email
 export const sendRestOtp = async(req, res)=>{

@@ -17,14 +17,12 @@ const EmailVerify = () => {
     }
   }
 
-  // Handle backspace focus shift
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
       inputRefs.current[index - 1].focus()
     }
   }
 
-  // Paste OTP
   const handlePaste = (e) => {
     const paste = e.clipboardData.getData('text').slice(0, 6)
     paste.split('').forEach((char, index) => {
@@ -34,7 +32,6 @@ const EmailVerify = () => {
     })
   }
 
-  // Submit OTP
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     const otpArray = inputRefs.current.map(input => input.value.trim())
@@ -45,13 +42,10 @@ const EmailVerify = () => {
     }
 
     try {
-      const { data } = await axios.post(`${backendUrl}/api/auth/verify-account`, {
-        otp,
-        userId: userData?._id // optional if backend expects it
-      })
+      const { data } = await axios.post(`${backendUrl}/api/auth/verify-account`, { otp })
       if (data.success) {
         toast.success(data.message)
-        getUserData()
+        await getUserData()
         navigate('/dashboard')
       } else {
         toast.error(data.message)
@@ -61,16 +55,9 @@ const EmailVerify = () => {
     }
   }
 
-  // Handle resend OTP
   const handleResendOtp = async () => {
-    if (!userData || !userData._id) {
-      return toast.error("User data not loaded yet.")
-    }
-  
     try {
-      const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`, {
-        userId: userData._id,
-      })
+      const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`)
       if (data.success) {
         toast.success("OTP resent successfully.")
       } else {
@@ -80,11 +67,18 @@ const EmailVerify = () => {
       toast.error(error.response?.data?.message || "Failed to resend OTP.")
     }
   }
-  
+
+  useEffect(() => {
+    if (!userData?._id) {
+      getUserData()
+    }
+  }, [])
 
   useEffect(() => {
     if (isLogin && userData?.isAccountVerified) {
       navigate('/dashboard')
+    } else if (isLogin && userData?._id && !userData.isAccountVerified) {
+      handleResendOtp()
     }
   }, [isLogin, userData])
 

@@ -63,21 +63,28 @@ const EmailVerify = () => {
     e.preventDefault()
     const otpArray = inputRefs.current.map(input => input.value.trim())
     const otp = otpArray.join('')
-
+  
     if (otp.length !== 6) {
       return toast.error("Please enter the full 6-digit OTP.")
     }
-
+  
     try {
       const { data } = await axios.post(
         `${backendUrl}/api/auth/verify-account`,
         { otp },
         { withCredentials: true }
       )
+  
       if (data.success) {
         toast.success(data.message)
+  
+        // ✅ Ensure userData is refreshed and verified before navigating
         await getUserData()
-        navigate('/dashboard')
+  
+        // ✅ Add small delay to ensure state is settled (optional but safe)
+        setTimeout(() => {
+          navigate('/dashboard')
+        }, 200)
       } else {
         toast.error(data.message)
       }
@@ -85,6 +92,7 @@ const EmailVerify = () => {
       toast.error(error.response?.data?.message || error.message)
     }
   }
+  
 
   // Manual resend OTP
   const handleResendOtp = async () => {

@@ -32,26 +32,25 @@ const Login = () => {
   
         if (data.success) {
           setIsLogin(true);
-          await getUserData(); // ensure latest data in context
+          await getUserData();
   
-          // small delay to allow AppContext to update userData
+          // 👇 Use only localStorage for safety
           setTimeout(() => {
-            const storedUser = JSON.parse(localStorage.getItem('userData')); // optional fallback
+            const storedUser = JSON.parse(localStorage.getItem('userData'));
   
-            if (storedUser?.isAccountVerified || userData?.isAccountVerified) {
+            if (storedUser?.isAccountVerified) {
               toast.success("Signup successful! Redirecting to dashboard...");
               navigate('/dashboard');
             } else {
               toast.success("Signup successful! Please verify your email.");
               navigate('/verify-email');
             }
-          }, 300); // delay for context to reflect changes
+          }, 300);
         } else {
           toast.error(data.message);
         }
   
       } else {
-        // LOGIN FLOW
         const { data } = await axios.post(backendUrl + '/api/auth/login', {
           email,
           password,
@@ -63,7 +62,8 @@ const Login = () => {
   
           setTimeout(() => {
             const storedUser = JSON.parse(localStorage.getItem('userData'));
-            if (storedUser?.isAccountVerified || userData?.isAccountVerified) {
+  
+            if (storedUser?.isAccountVerified) {
               navigate('/dashboard');
             } else {
               navigate('/verify-email');
@@ -78,6 +78,7 @@ const Login = () => {
       toast.error(error.response?.data?.message || error.message);
     }
   };
+  
   
 
   return (

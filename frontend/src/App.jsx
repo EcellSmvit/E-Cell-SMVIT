@@ -10,11 +10,13 @@ import Dashboard from './pages/Dashboard'
 import Feed from './pages/Feed';
 import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './components/ProtectedRoute';
-
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
 
 
 
 const App = () => {
+  const { userData } = useContext(AppContext);
   return (
     <div>
       <ToastContainer/>

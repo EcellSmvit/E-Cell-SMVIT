@@ -23,7 +23,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path="/verify-email" element={!userData?.isAccountVerified ? <EmailVerify /> : <Navigate to="/dashboard" />}/>
+        <Route path="/verify-email" element={<EmailVerify/>}/>
         <Route path='/reset-passsword' element={<ResetPassword/>}/>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='/feed' element={<Feed />} />

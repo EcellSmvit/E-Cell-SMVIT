@@ -22,7 +22,7 @@ export const getUserData = async (req, res) => {
         email: user.email,
         username: user.username,
         mobileNumber: user.mobileNumber,
-        isAccountVerified: user.isVerified,  // mapped to expected frontend key
+        isAccountVerified: user.isVerified,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       },

@@ -160,7 +160,7 @@ export const sendVerifyOtp = async (req, res) => {
 //Verify OTP and update user account to verified
 export const verifyEmail = async (req, res) => {
   const { otp } = req.body;
-  const userId = req.user._id;
+  const userId = req.userId;
 
   if (!userId || !otp) {
     return res.json({ success: false, message: "Missing Details" });

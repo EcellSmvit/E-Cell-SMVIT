@@ -10,35 +10,45 @@ const EmailVerify = () => {
   const navigate = useNavigate()
   const { backendUrl, isLogin, userData, getUserData } = useContext(AppContext)
 
-  const handelInput = (e, index) => {
+  // Handle single digit input
+  const handleInput = (e, index) => {
     if (e.target.value.length > 0 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus()
     }
   }
 
-  const handelKeyDown = (e, index) => {
+  // Handle backspace focus shift
+  const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
       inputRefs.current[index - 1].focus()
     }
   }
 
+  // Paste OTP
   const handlePaste = (e) => {
-    const paste = e.clipboardData.getData('text')
-    const pasteArray = paste.split('')
-    pasteArray.forEach((char, index) => {
+    const paste = e.clipboardData.getData('text').slice(0, 6)
+    paste.split('').forEach((char, index) => {
       if (inputRefs.current[index]) {
         inputRefs.current[index].value = char
       }
     })
   }
 
+  // Submit OTP
   const onSubmitHandler = async (e) => {
-    try {
-      e.preventDefault()
-      const otpArray = inputRefs.current.map(e => e.value)
-      const otp = otpArray.join('')
+    e.preventDefault()
+    const otpArray = inputRefs.current.map(input => input.value.trim())
+    const otp = otpArray.join('')
 
-      const { data } = await axios.post(backendUrl + '/api/auth/verify-account', { otp })
+    if (otp.length !== 6) {
+      return toast.error("Please enter the full 6-digit OTP.")
+    }
+
+    try {
+      const { data } = await axios.post(`${backendUrl}/api/auth/verify-account`, {
+        otp,
+        userId: userData?._id // optional if backend expects it
+      })
       if (data.success) {
         toast.success(data.message)
         getUserData()
@@ -47,16 +57,31 @@ const EmailVerify = () => {
         toast.error(data.message)
       }
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.response?.data?.message || error.message)
+    }
+  }
+
+  // Handle resend OTP
+  const handleResendOtp = async () => {
+    try {
+      const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`, {
+        userId: userData?._id,
+      })
+      if (data.success) {
+        toast.success("OTP resent successfully.")
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to resend OTP.")
     }
   }
 
   useEffect(() => {
     if (isLogin && userData?.isAccountVerified) {
-      navigate('/dashboard');
+      navigate('/dashboard')
     }
-  }, [isLogin, userData]);
-  
+  }, [isLogin, userData])
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 to-indigo-800">
@@ -71,18 +96,15 @@ const EmailVerify = () => {
           <p className="text-gray-600 mb-6 text-center">
             Enter the 6-digit code sent to your email address to verify your account.
           </p>
-          <div
-            onPaste={handlePaste}
-            className="flex justify-center gap-3 mb-6"
-          >
+          <div onPaste={handlePaste} className="flex justify-center gap-3 mb-6">
             {Array(6).fill(0).map((_, index) => (
               <input
-                ref={e => inputRefs.current[index] = e}
                 key={index}
+                ref={el => inputRefs.current[index] = el}
                 type="text"
                 maxLength="1"
-                onInput={(e) => handelInput(e, index)}
-                onKeyDown={(e) => handelKeyDown(e, index)}
+                onInput={(e) => handleInput(e, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
                 required
                 className="w-12 h-12 text-2xl text-center border-2 border-[#4E47E5] rounded-xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] transition-all"
                 style={{ background: "#f5f7ff" }}
@@ -101,7 +123,13 @@ const EmailVerify = () => {
         </form>
         <div className="mt-6 text-center">
           <p className="text-gray-500 text-sm">
-            Didn't receive the code? <span className="text-[#4E47E5] font-semibold cursor-pointer hover:underline">Resend</span>
+            Didn't receive the code?{' '}
+            <button
+              onClick={handleResendOtp}
+              className="text-[#4E47E5] font-semibold hover:underline"
+            >
+              Resend
+            </button>
           </p>
         </div>
       </div>

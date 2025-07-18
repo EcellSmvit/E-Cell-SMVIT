@@ -18,66 +18,42 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    axios.defaults.withCredentials = true;
+    const otpArray = inputRefs.current.map(input => input.value.trim());
+    const otp = otpArray.join('');
+  
+    if (otp.length !== 6) {
+      return toast.error("Please enter the full 6-digit OTP.");
+    }
   
     try {
-      if (state === 'Sign Up') {
-        const { data } = await axios.post(backendUrl + '/api/auth/register', {
-          name,
-          username,
-          email,
-          password,
-          mobileNumber,
-        });
+      const { data } = await axios.post(
+        `${backendUrl}/api/auth/verify-account`,
+        { otp },
+        { withCredentials: true }
+      );
   
-        if (data.success) {
-          setIsLogin(true);
-          await getUserData();
+      if (data.success) {
+        toast.success(data.message);
   
-          // 👇 Use only localStorage for safety
-          setTimeout(() => {
-            const storedUser = JSON.parse(localStorage.getItem('userData'));
+        // 🔁 FORCE updated user data after verification
+        await getUserData();
   
-            if (storedUser?.isAccountVerified) {
-              toast.success("Signup successful! Redirecting to dashboard...");
-              navigate('/dashboard');
-            } else {
-              toast.success("Signup successful! Please verify your email.");
-              navigate('/verify-email');
-            }
-          }, 300);
+        const updatedUser = JSON.parse(localStorage.getItem('userData'));
+        if (updatedUser?.isAccountVerified) {
+          navigate('/dashboard');
         } else {
-          toast.error(data.message);
+          toast.error("Something went wrong. Please login again.");
         }
   
       } else {
-        const { data } = await axios.post(backendUrl + '/api/auth/login', {
-          email,
-          password,
-        });
-  
-        if (data.success) {
-          setIsLogin(true);
-          await getUserData();
-  
-          setTimeout(() => {
-            const storedUser = JSON.parse(localStorage.getItem('userData'));
-  
-            if (storedUser?.isAccountVerified) {
-              navigate('/dashboard');
-            } else {
-              navigate('/verify-email');
-            }
-          }, 300);
-        } else {
-          toast.error(data.message);
-        }
+        toast.error(data.message);
       }
   
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
   };
+  
   
   
 

@@ -1,31 +1,42 @@
 import userModel from "../models/userModel.js";
 
 export const getUserData = async (req, res) => {
-    try {
-        const userId = req.userId;
-        const user = await userModel.findById(userId);
-  
-        if (!user) {
-            return res.status(404).json({ success: false, message: "User not found" });
-      }
+  try {
+    const userId = req.userId;
 
-      res.json({
-        success: true,
-        user: {
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            username: user.username,
-            isAccountVerified: user.isVerified,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt,
-        }
+    if (!userId) {
+      return res.status(400).json({ success: false, message: "User ID missing in request" });
+    }
+
+    const user = await userModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        username: user.username,
+        mobileNumber: user.mobileNumber,
+        isAccountVerified: user.isVerified,  // mapped to expected frontend key
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
     });
-  
-} catch (error) {
-    return res.status(500).json({ success: false, message: "Internal Server Error" }); // ✅ Proper error response
+    
+  } catch (error) {
+    console.error("Error in getUserData:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
   }
-}
+};
+
   
 export const getSuggestedUsers = async (req, res) => {
     try {

@@ -77,14 +77,14 @@ const EmailVerify = () => {
   
       if (data.success) {
         toast.success(data.message)
-  
-        // ✅ Ensure userData is refreshed and verified before navigating
-        await getUserData()
-  
-        // ✅ Add small delay to ensure state is settled (optional but safe)
-        setTimeout(() => {
-          navigate('/dashboard')
-        }, 200)
+
+        const updatedUser = await getUserData();
+
+      if (updatedUser?.isAccountVerified) {
+        navigate('/dashboard');
+      } else {
+        toast.error("Account still not verified. Try again.");
+      }
       } else {
         toast.error(data.message)
       }

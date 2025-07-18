@@ -5,6 +5,8 @@ const userAuth = async (req, res, next) => {
   console.log('🍪 Cookies:', req.cookies);
 
   const token = req.cookies.accessToken;
+  const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  req.userId = decoded.id;
 
   if (!token) {
     console.log('❌ No accessToken found in cookies');

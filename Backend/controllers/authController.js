@@ -114,9 +114,9 @@ export const logout = (req, res)=>{
 
 //Send verification OPT to user email
 export const sendVerifyOtp = async (req, res) => {
-    console.log("📥 Received body:", req.body)
+    console.log("📥 Received body:", req.userId)
     try {
-      const { userId } = req.body;
+      const { userId } = req.userId;;
       if (!userId) return res.status(400).json({ success: false, message: "userId missing" });
   
       const user = await userModel.findById(userId);

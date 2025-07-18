@@ -189,8 +189,7 @@ export const verifyEmail = async (req, res) => {
 };
 
 
-//check user is Authenticated or not.
-import jwt from 'jsonwebtoken'
+
 
 export const isAuthenticated = (req, res, next) => {
   const token = req.cookies?.accessToken

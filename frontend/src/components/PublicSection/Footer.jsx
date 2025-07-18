@@ -1,181 +1,207 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
-function Footer() {
-  const menuRefs = useRef([]);
-  const h1Ref = useRef(null);
-  const contactRefs = useRef([]);
-  const socialRefs = useRef([]);
-  const footerRef = useRef(null);
-  const logoRef = useRef(null); // Ref for the background logo
-
-  // Helper to set refs for array items
-  const setMenuRef = (el, idx) => (menuRefs.current[idx] = el);
-  const setContactRef = (el, idx) => (contactRefs.current[idx] = el);
-  const setSocialRef = (el, idx) => (socialRefs.current[idx] = el);
-
-  useEffect(() => {
-    let observer;
-    // Animation function
-    const animateFooter = () => {
-      const tl = gsap.timeline({
-        defaults: { ease: "power3.out" }
-      });
-
-      // Animate logo first, slightly fading in
-      tl.fromTo(
-        logoRef.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 0.15, duration: 1.2, ease: "power2.out" },
-        "start"
-      )
-      // Animate menu items
-      .fromTo(
-        menuRefs.current,
-        { y: 50, opacity: 0, autoAlpha: 0 }, // Use autoAlpha for visibility
-        { y: 0, opacity: 1, autoAlpha: 1, duration: 0.8, stagger: 0.1, delay: 0.2 },
-        "start+=0.3" // Starts slightly after logo
-      )
-      // Animate h1 with a slight scale up
-      .fromTo(
-        h1Ref.current,
-        { y: 80, opacity: 0, scale: 0.95 },
-        { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power3.out" },
-        "<0.2" // Starts 0.2 seconds before menu ends
-      )
-      // Animate contact info
-      .fromTo(
-        contactRefs.current,
-        { y: 40, opacity: 0, autoAlpha: 0 },
-        { y: 0, opacity: 1, autoAlpha: 1, duration: 0.6, stagger: 0.1 },
-        "<0.3" // Starts 0.3 seconds before h1 ends
-      )
-      // Animate social links
-      .fromTo(
-        socialRefs.current,
-        { y: 40, opacity: 0, autoAlpha: 0 },
-        { y: 0, opacity: 1, autoAlpha: 1, duration: 0.6, stagger: 0.1 },
-        "<0.3" // Starts 0.3 seconds before contact ends
-      );
-    };
-
-    // Intersection Observer to trigger animation
-    if (footerRef.current) {
-      observer = new IntersectionObserver(
-        (entries, obs) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              animateFooter();
-              obs.disconnect(); // Animate only once
-            }
-          });
-        },
-        {
-          threshold: 0.25 // Trigger when 25% of the footer is visible
-        }
-      );
-      observer.observe(footerRef.current);
-    }
-
-    // Cleanup
-    return () => {
-      if (observer) observer.disconnect();
-    };
-  }, []);
-
-  return (
-    <div
-      id='footer'
-      ref={footerRef}
-      className="relative w-screen min-h-screen flex flex-col justify-between overflow-hidden text-white font-['Anton',_sans-serif] select-none"
-    >
-      {/* Background Gradient */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          background: 'linear-gradient(180deg, #000 0%, #6A4CFE 100%)'
-        }}
-      />
-
-      {/* E-Cell Logo (Subtle Background Element) */}
-      <img
-        ref={logoRef}
-        className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] md:w-[40rem] lg:w-[50rem] opacity-0 z-10 pointer-events-none'
-        src="https://www.ecellsmvit.in/images/Ecell%20Logo%20Vector.svg"
-        alt="E-Cell Logo"
-      />
-
-      {/* Main Content Wrapper - Centered */}
-      <div className="relative z-20 flex flex-col items-center justify-center flex-grow p-6 md:p-12 text-center">
-        {/* Menu Items */}
-        <nav className='flex flex-col md:flex-row gap-3 md:gap-8 lg:gap-12 font-black mb-10 text-xl md:text-2xl lg:text-3xl uppercase'>
-          {["Home", "Events", "Our Team", "Gallery"].map((text, idx) => (
-            <a key={text} ref={el => setMenuRef(el, idx)}
-               href={`#${text.toLowerCase().replace(' ', '-')}`} // Example: scroll to section
-               className="hover:text-purple-300 transition-colors duration-300 transform hover:-translate-y-1 inline-block"
-            >
-              {text}
-            </a>
-          ))}
-        </nav>
-
-        {/* Main Title */}
-        <h1
-          ref={h1Ref}
-          className='text-white text-[18vw] md:text-[14vw] lg:text-[12vw] leading-none mb-10 tracking-wide md:tracking-wider'
-        >
-          E-CELL SMVIT
-        </h1>
-
-        {/* Contact and Email */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-16 font-sans text-base md:text-lg lg:text-xl font-medium">
-          <p
-            className="text-white hover:text-purple-200 transition-colors duration-300 cursor-pointer"
-            ref={el => setContactRef(el, 0)}
-          >
-            Contact: +91 98765 43210
-          </p>
-          <p
-            className="text-white hover:text-purple-200 transition-colors duration-300 cursor-pointer"
-            ref={el => setContactRef(el, 1)}
-          >
-            Email: ecellsmvit@gmail.com
-          </p>
-        </div>
-      </div>
-
-      {/* Social Links and Footer Bottom */}
-      <div className='relative z-20 w-full flex flex-row flex-wrap gap-x-16 md:gap-x-24 lg:gap-x-40 justify-center items-center text-white text-2xl md:text-3xl lg:text-4xl py-6 border-t-[1px] border-gray-700/50'>
-        <a
-          href="https://www.instagram.com/ecellsmvit"
-          target="_blank"
-          rel="noopener noreferrer"
-          ref={el => setSocialRef(el, 0)}
-          className="hover:text-purple-300 transition-colors duration-300 transform hover:scale-105 inline-block my-2"
-        >
-          Instagram
-        </a>
-        <a
-          href="https://www.linkedin.com/company/ecellsmvit"
-          target="_blank"
-          rel="noopener noreferrer"
-          ref={el => setSocialRef(el, 1)}
-          className="hover:text-purple-300 transition-colors duration-300 transform hover:scale-105 inline-block my-2"
-        >
-          LinkedIn
-        </a>
-        <a
-          href="https://twitter.com/ecellsmvit"
-          target="_blank"
-          rel="noopener noreferrer"
-          ref={el => setSocialRef(el, 2)}
-          className="hover:text-purple-300 transition-colors duration-300 transform hover:scale-105 inline-block my-2"
-        >
-          Twitter
-        </a>
-      </div>
+// Helper component to create some scrollable space
+const ScrollPlaceholder = () => (
+    <div className="h-screen bg-gray-900 flex flex-col items-center justify-center text-white p-8 text-center">
+        <h1 className="text-5xl font-bold mb-4">Scroll Down</h1>
+        <p className="text-xl">The footer will animate in when it enters the viewport.</p>
+        <svg className="w-10 h-10 mt-8 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
     </div>
-  );
+);
+
+
+function Footer() {
+    // Refs for various elements to be animated
+    const footerRef = useRef(null);
+    const logoRef = useRef(null);
+    const h1Ref = useRef(null);
+    const copyrightRef = useRef(null);
+    const menuRefs = useRef([]);
+    const socialRefs = useRef([]);
+    const contactRefs = useRef([]);
+
+    // Helper functions to add elements to their respective ref arrays
+    const addToMenuRefs = (el) => {
+        if (el && !menuRefs.current.includes(el)) {
+            menuRefs.current.push(el);
+        }
+    };
+    const addToSocialRefs = (el) => {
+        if (el && !socialRefs.current.includes(el)) {
+            socialRefs.current.push(el);
+        }
+    };
+    const addToContactRefs = (el) => {
+        if (el && !contactRefs.current.includes(el)) {
+            contactRefs.current.push(el);
+        }
+    };
+
+    useEffect(() => {
+        // Ensure all refs are populated before animating
+        const allElements = [
+            ...menuRefs.current,
+            ...socialRefs.current,
+            ...contactRefs.current,
+            h1Ref.current,
+            copyrightRef.current,
+            logoRef.current
+        ];
+        
+        if (allElements.some(el => !el)) {
+            // If any ref is not yet set, wait for the next render
+            return;
+        }
+
+        let observer;
+
+        // The main animation function using GSAP
+        const animateFooter = () => {
+            const tl = gsap.timeline({
+                defaults: { ease: "power3.out", duration: 0.8 }
+            });
+
+            // Start with the subtle background logo animation
+            tl.fromTo(logoRef.current,
+                { scale: 0.8, opacity: 0 },
+                { scale: 1, opacity: 0.1, duration: 1.5, ease: "power2.out" },
+                "start"
+            )
+            // Animate the top section columns with a stagger effect
+            .fromTo([...menuRefs.current, ...socialRefs.current, ...contactRefs.current],
+                { y: 40, opacity: 0 },
+                { y: 0, opacity: 1, stagger: 0.1 },
+                "start+=0.3"
+            )
+            // Animate the large central heading
+            .fromTo(h1Ref.current,
+                { y: 100, opacity: 0, scale: 0.9 },
+                { y: 0, opacity: 1, scale: 1, duration: 1.2 },
+                "start+=0.6"
+            )
+            // Animate the copyright text at the bottom
+            .fromTo(copyrightRef.current,
+                { y: 20, opacity: 0 },
+                { y: 0, opacity: 1 },
+                "start+=1.0"
+            );
+        };
+
+        // Use Intersection Observer to trigger the animation only when the footer is visible
+        if (footerRef.current) {
+            observer = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            animateFooter();
+                            obs.disconnect(); // Disconnect after animating once
+                        }
+                    });
+                },
+                { threshold: 0.2 } // Trigger when 20% of the footer is visible
+            );
+            observer.observe(footerRef.current);
+        }
+
+        // Cleanup function to disconnect the observer when the component unmounts
+        return () => {
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, []); // Empty dependency array ensures this runs only once on mount
+
+    return (
+        <footer
+            ref={footerRef}
+            className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden text-white font-sans select-none bg-black"
+        >
+            {/* Background Gradient Layer */}
+            <div
+                className="absolute inset-0 z-0"
+                style={{
+                    background: 'linear-gradient(180deg, #000000 0%, #3d26a7 100%)'
+                }}
+            />
+
+            {/* Subtle Background Logo */}
+            <img
+                ref={logoRef}
+                className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[35rem] opacity-0 z-10 pointer-events-none'
+                src="https://www.ecellsmvit.in/images/Ecell%20Logo%20Vector.svg"
+                alt="E-Cell Background Logo"
+            />
+
+            {/* Main Content Container */}
+            <div className="relative z-20 flex flex-col flex-grow w-full max-w-7xl mx-auto px-6 py-12 md:px-8 md:py-16">
+                {/* Top Section: Grid Layout for Links */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 w-full mb-16 md:mb-24">
+                    {/* Column 1: Menu */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <h4 ref={addToMenuRefs} className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Menu</h4>
+                        <nav className="flex flex-col gap-2">
+                            {["Home", "Events", "Our Team", "Gallery"].map((text) => (
+                                <a key={text} ref={addToMenuRefs} href={`#${text.toLowerCase().replace(' ', '-')}`} className="text-lg text-gray-200 hover:text-white transition-colors duration-300">
+                                    {text}
+                                </a>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Column 2: Socials */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                        <h4 ref={addToSocialRefs} className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Socials</h4>
+                        <nav className="flex flex-col gap-2">
+                            {[
+                                { name: "Instagram", url: "https://www.instagram.com/ecellsmvit" },
+                                { name: "LinkedIn", url: "https://www.linkedin.com/company/ecellsmvit" },
+                                { name: "Twitter", url: "https://twitter.com/ecellsmvit" }
+                            ].map((social) => (
+                                <a key={social.name} ref={addToSocialRefs} href={social.url} target="_blank" rel="noopener noreferrer" className="text-lg text-gray-200 hover:text-white transition-colors duration-300">
+                                    {social.name}
+                                </a>
+                            ))}
+                        </nav>
+                    </div>
+
+                    {/* Column 3: Contact */}
+                    <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                         <h4 ref={addToContactRefs} className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Contact Us</h4>
+                        <div className="flex flex-col gap-2">
+                            <p ref={addToContactRefs} className="text-lg text-gray-200 hover:text-white transition-colors duration-300 cursor-pointer">
+                                Contact: +91 98765 43210
+                            </p>
+                            <p ref={addToContactRefs} className="text-lg text-gray-200 hover:text-white transition-colors duration-300 cursor-pointer">
+                                Email: ecellsmvit@gmail.com
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div className="flex-grow flex items-center justify-center text-center my-10">
+                    <h1 ref={h1Ref} className="text-white font-['Anton',_sans-serif] text-[18vw] md:text-[14vw] lg:text-[15rem] leading-none tracking-normal">
+                        E-CELL SMVIT
+                    </h1>
+                </div>
+
+                {/* Bottom Section: Copyright */}
+                <div className="w-full mt-16 md:mt-24">
+                    <p ref={copyrightRef} className="text-center text-gray-400 text-sm">
+                        © {new Date().getFullYear()} E-Cell SMVIT. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    );
 }
 
-export default Footer;
+
+export default function App() {
+  return (
+    <main>
+      <Footer />
+    </main>
+  );
+}

@@ -113,40 +113,45 @@ export const logout = (req, res)=>{
 
 
 //Send verification OPT to user email
-export const sendVerifyOtp = async(req, res)=>{
+export const sendVerifyOtp = async (req, res) => {
     try {
-        //fist we get the user id to verify the user.
-        const {userId} = req.body;
-
-        const user = await userModel.findById(userId)
-        if(user.isAccountVerified){
-            return res.json({success:false, message:"Account already verified"})
-        }
-
-        //generate OTP send user email.
-        const otp = String(Math.floor(100000 + Math.random() * 900000)) //6 digits random number
-        user.verifyOtp = otp
-        user.verifyOtpExpireAt = Date.now() + 24*60*60*1000 //1day
-        await user.save()
-
-        //now send otp to user email.
-        const mailOptions = {
-            from: `"E-CELL SMVIT" <${process.env.SENDER_EMAIL}>`,
-            to: user.email,
-            subject: 'Account Verification OTP',
-            // text: `Hello ${user.name}, Your OTP for account verification is ${otp}. It will expire in 1 day`,
-            html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email)
-        }
-        //send email
-        await transporter.sendMail(mailOptions)
-
-        return res.json({success:true, message:"Verification OTP sent to your email"})
-
-    }catch(err) {
-        res.json({success:false, message: err.message})
-        
+      const { userId } = req.body;
+      if (!userId) return res.status(400).json({ success: false, message: "userId missing" });
+  
+      const user = await userModel.findById(userId);
+      if (!user) return res.status(404).json({ success: false, message: "User not found" });
+  
+      if (user.isAccountVerified) {
+        return res.json({ success: false, message: "Account already verified" });
+      }
+  
+      const otp = String(Math.floor(100000 + Math.random() * 900000));
+      user.verifyOtp = otp;
+      user.verifyOtpExpireAt = Date.now() + 24 * 60 * 60 * 1000;
+      await user.save();
+  
+      const mailOptions = {
+        from: `"E-CELL SMVIT" <${process.env.SENDER_EMAIL}>`,
+        to: user.email,
+        subject: 'Account Verification OTP',
+        html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace("{{email}}", user.email),
+      };
+  
+      try {
+        await transporter.sendMail(mailOptions);
+        console.log("✅ OTP email sent to:", user.email);
+        return res.json({ success: true, message: "Verification OTP sent to your email" });
+      } catch (mailErr) {
+        console.error("❌ Email send error:", mailErr);
+        return res.status(500).json({ success: false, message: "Email send failed", error: mailErr.message });
+      }
+  
+    } catch (err) {
+      console.error("❌ Error in sendVerifyOtp:", err);
+      return res.status(500).json({ success: false, message: err.message });
     }
-}
+  };
+  
 
 
 //Verify OTP and update user account to verified

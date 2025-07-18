@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { AppContext } from '../context/AppContext'
@@ -6,23 +6,49 @@ import axios from 'axios'
 
 const EmailVerify = () => {
   axios.defaults.withCredentials = true
-  const inputRefs = React.useRef([])
+  const inputRefs = useRef([])
   const navigate = useNavigate()
   const { backendUrl, isLogin, userData, getUserData } = useContext(AppContext)
+  const hasOtpSentRef = useRef(false) // prevent multiple resend
 
-  // Handle single digit input
+  // Auto-send OTP when page loads if not verified
+  useEffect(() => {
+    if (!userData?._id) {
+      getUserData()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (isLogin && userData?.isAccountVerified) {
+      navigate('/dashboard')
+    }
+
+    if (
+      isLogin &&
+      userData?._id &&
+      !userData.isAccountVerified &&
+      !hasOtpSentRef.current
+    ) {
+      handleResendOtp()
+      hasOtpSentRef.current = true
+    }
+  }, [isLogin, userData])
+
+  // Auto shift input focus
   const handleInput = (e, index) => {
     if (e.target.value.length > 0 && index < inputRefs.current.length - 1) {
       inputRefs.current[index + 1].focus()
     }
   }
 
+  // Backspace move left
   const handleKeyDown = (e, index) => {
     if (e.key === 'Backspace' && e.target.value === '' && index > 0) {
       inputRefs.current[index - 1].focus()
     }
   }
 
+  // Paste OTP
   const handlePaste = (e) => {
     const paste = e.clipboardData.getData('text').slice(0, 6)
     paste.split('').forEach((char, index) => {
@@ -32,6 +58,7 @@ const EmailVerify = () => {
     })
   }
 
+  // Submit OTP
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     const otpArray = inputRefs.current.map(input => input.value.trim())
@@ -42,7 +69,11 @@ const EmailVerify = () => {
     }
 
     try {
-      const { data } = await axios.post(`${backendUrl}/api/auth/verify-account`, { otp })
+      const { data } = await axios.post(
+        `${backendUrl}/api/auth/verify-account`,
+        { otp },
+        { withCredentials: true }
+      )
       if (data.success) {
         toast.success(data.message)
         await getUserData()
@@ -55,11 +86,16 @@ const EmailVerify = () => {
     }
   }
 
+  // Manual resend OTP
   const handleResendOtp = async () => {
     try {
-      const { data } = await axios.post(`${backendUrl}/api/auth/send-verify-otp`)
+      const { data } = await axios.post(
+        `${backendUrl}/api/auth/send-verify-otp`,
+        {},
+        { withCredentials: true }
+      )
       if (data.success) {
-        toast.success("OTP resent successfully.")
+        toast.success("OTP sent to your email.")
       } else {
         toast.error(data.message)
       }
@@ -67,20 +103,6 @@ const EmailVerify = () => {
       toast.error(error.response?.data?.message || "Failed to resend OTP.")
     }
   }
-
-  useEffect(() => {
-    if (!userData?._id) {
-      getUserData()
-    }
-  }, [])
-
-  useEffect(() => {
-    if (isLogin && userData?.isAccountVerified) {
-      navigate('/dashboard')
-    } else if (isLogin && userData?._id && !userData.isAccountVerified) {
-      handleResendOtp()
-    }
-  }, [isLogin, userData])
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-900 to-indigo-800">

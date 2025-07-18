@@ -29,11 +29,12 @@ const Login = () => {
           password,
           mobileNumber,
         });
-        console.log('📝 Sign Up response:', data);
+        
         if (data.success) {
           setIsLogin(true);
           await getUserData();
-          navigate('/dashboard');
+          toast.success("Signup successful! Please verify your email.");
+          navigate('/verify-email');
         } else {
           toast.error(data.message);
         }

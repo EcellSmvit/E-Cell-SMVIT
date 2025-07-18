@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Dashboard from './pages/Dashboard'
 import Feed from './pages/Feed';
 import ProfilePage from './pages/ProfilePage'
+import ProtectedRoute from './components/ProtectedRoute';
 
 
 
@@ -20,9 +21,9 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/email-verify' element={<EmailVerify/>}/>
+        <Route path="/verify-email" element={!userData?.isAccountVerified ? <EmailVerify /> : <Navigate to="/dashboard" />}/>
         <Route path='/reset-passsword' element={<ResetPassword/>}/>
-        <Route path='/dashboard' element={<Dashboard/>}/>
+        <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='/feed' element={<Feed />} />
         <Route path='/profile/:username' element={<ProfilePage/>}/>
         

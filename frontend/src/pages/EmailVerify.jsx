@@ -52,10 +52,11 @@ const EmailVerify = () => {
   }
 
   useEffect(() => {
-    if (isLogin && userData && userData.isAccountVerified) {
-      navigate('/')
+    if (isLogin && userData?.isAccountVerified) {
+      navigate('/dashboard');
     }
-  }, [isLogin, userData])
+  }, [isLogin, userData]);
+  
 
   return (
     <div>

@@ -66,7 +66,6 @@ const Login = () => {
             toast.error("Failed to fetch user data.");
             return;
           }
-          
           if (user.isAccountVerified === true) {
             toast.success("Redirecting to dashboard...");
             navigate('/dashboard');

@@ -1,9 +1,6 @@
 import jwt from 'jsonwebtoken';
 
 const userAuth = async (req, res, next) => {
-  console.log('🔐 Auth Middleware Triggered:', req.method, req.originalUrl);
-  console.log('🍪 Cookies:', req.cookies);
-
   const token = req.cookies.accessToken;
 
 
@@ -16,9 +13,8 @@ const userAuth = async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    console.log('✅ Token verified:', decoded);
-
     req.userId = decoded.id;
+    console.log('✅ Token verified:', decoded);
     return next();
   } catch (error) {
     console.log('❌ JWT verification failed:', error.message); // ✅ You MUST see this now

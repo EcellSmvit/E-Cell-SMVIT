@@ -116,7 +116,8 @@ export const logout = (req, res)=>{
 export const sendVerifyOtp = async (req, res) => {
     console.log("📥 Received body:", req.userId)
     try {
-      const { userId } = req.userId;;
+      const { userId } = req.userId;
+      console.log("🔍 userId from middleware:", userId);
       if (!userId) return res.status(400).json({ success: false, message: "userId missing" });
   
       const user = await userModel.findById(userId);

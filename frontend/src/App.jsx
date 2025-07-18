@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage'
 import ProtectedRoute from './components/ProtectedRoute';
 import { useContext } from "react";
 import { AppContext } from "./context/AppContext";
+import VerifyRoute from './components/VerifyRoute';
 
 
 
@@ -23,7 +24,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
-        <Route path="/verify-email" element={<EmailVerify/>}/>
+        <Route path="/verify-email" element={<VerifyRoute />} />
         <Route path='/reset-passsword' element={<ResetPassword/>}/>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='/feed' element={<Feed />} />

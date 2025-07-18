@@ -18,44 +18,59 @@ const Login = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    const otpArray = inputRefs.current.map(input => input.value.trim());
-    const otp = otpArray.join('');
-  
-    if (otp.length !== 6) {
-      return toast.error("Please enter the full 6-digit OTP.");
-    }
-  
+    axios.defaults.withCredentials = true;
+
     try {
-      const { data } = await axios.post(
-        `${backendUrl}/api/auth/verify-account`,
-        { otp },
-        { withCredentials: true }
-      );
-  
-      if (data.success) {
-        toast.success(data.message);
-  
-        // 🔁 FORCE updated user data after verification
-        await getUserData();
-  
-        const updatedUser = JSON.parse(localStorage.getItem('userData'));
-        if (updatedUser?.isAccountVerified) {
-          navigate('/dashboard');
+      if (state === 'Sign Up') {
+        const { data } = await axios.post(`${backendUrl}/api/auth/register`, {
+          name,
+          username,
+          email,
+          password,
+          mobileNumber,
+        });
+
+        if (data.success) {
+          toast.success("Signup successful!");
+          setIsLogin(true);
+          const user = await getUserData();
+
+          if (user?.isAccountVerified) {
+            navigate('/dashboard');
+          } else {
+            toast.info("Please verify your email.");
+            navigate('/verify-email');
+          }
         } else {
-          toast.error("Something went wrong. Please login again.");
+          toast.error(data.message);
         }
-  
+
       } else {
-        toast.error(data.message);
+        const { data } = await axios.post(`${backendUrl}/api/auth/login`, {
+          email,
+          password,
+        });
+
+        if (data.success) {
+          toast.success("Login successful!");
+          setIsLogin(true);
+          const user = await getUserData();
+
+          if (user?.isAccountVerified) {
+            navigate('/dashboard');
+          } else {
+            toast.info("Please verify your email.");
+            navigate('/verify-email');
+          }
+        } else {
+          toast.error(data.message);
+        }
       }
-  
+
     } catch (error) {
       toast.error(error.response?.data?.message || error.message);
     }
   };
-  
-  
-  
 
   return (
     <div className='flex justify-center items-center w-[100vw] h-[100vh]'>
@@ -75,74 +90,62 @@ const Login = () => {
               ? 'Join the E-Cell SMVIT community and unlock new opportunities!'
               : 'Login to your account and continue your entrepreneurial journey.'}
           </p>
-          
         </div>
       </div>
+
       <div className="w-[50vw] h-[100vh] flex flex-col justify-center items-center bg-gray-100">
         <div className="p-8 w-full max-w-md">
           <h2 className="text-3xl font-bold mb-2 text-[#4E47E5] text-center">
             {state === 'Sign Up' ? 'Sign Up' : 'Login'}
           </h2>
-          
 
           <form onSubmit={onSubmitHandler} className="space-y-4">
             {state === 'Sign Up' && (
-              <div>
+              <>
                 <input
-                  onChange={(e) => setName(e.target.value)}
-                  value={name}
                   type="text"
                   placeholder="Full Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full rounded-2xl px-4 py-2 border border-[#4E47E5] focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl bg-white text-[#4E47E5]"
                 />
-              </div>
-            )}
-            {state === 'Sign Up' && (
-              <div>
                 <input
-                  onChange={(e) => setUsername(e.target.value)}
-                  value={username}
                   type="text"
                   placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl bg-white text-[#4E47E5]"
                 />
-              </div>
-            )}
-            {state === 'Sign Up' && (
-              <div>
                 <input
-                  onChange={(e) => setMobileNumber(e.target.value)}
-                  value={mobileNumber}
                   type="text"
                   placeholder="Mobile Number"
+                  value={mobileNumber}
+                  onChange={(e) => setMobileNumber(e.target.value)}
                   required
-                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
+                  className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl bg-white text-[#4E47E5]"
                 />
-              </div>
+              </>
             )}
-            <div>
-              <input
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                type="email"
-                placeholder="Email id"
-                required
-                className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
-              />
-            </div>
 
-            <div>
-              <input
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-                type="password"
-                placeholder="Password"
-                required
-                className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#4E47E5] bg-white text-[#4E47E5] placeholder-[#4E47E5]/60"
-              />
-            </div>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl bg-white text-[#4E47E5]"
+            />
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-2 border border-[#4E47E5] rounded-2xl bg-white text-[#4E47E5]"
+            />
 
             <div className="flex justify-end">
               <p
@@ -165,20 +168,14 @@ const Login = () => {
             {state === 'Sign Up' ? (
               <p className="text-[#4E47E5]">
                 Already have an account?{' '}
-                <span
-                  onClick={() => setState('Login')}
-                  className="font-semibold cursor-pointer hover:underline"
-                >
+                <span onClick={() => setState('Login')} className="font-semibold cursor-pointer hover:underline">
                   Login here
                 </span>
               </p>
             ) : (
               <p className="text-[#4E47E5]">
                 Don't have an account?{' '}
-                <span
-                  onClick={() => setState('Sign Up')}
-                  className="font-semibold cursor-pointer hover:underline"
-                >
+                <span onClick={() => setState('Sign Up')} className="font-semibold cursor-pointer hover:underline">
                   Sign up
                 </span>
               </p>

@@ -19,6 +19,7 @@ export const AppContextProvider = (props) => {
           withCredentials: true,
         });
         console.log("✅ User Data Fetched:", data);
+        console.log("🧪 Verified?", data.user?.isAccountVerified);
         setUserData(data.user);
         return data.user;
       } catch (error) {

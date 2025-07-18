@@ -60,6 +60,7 @@ const Login = () => {
           toast.success("Login successful!");
           setIsLogin(true);
           const user = await getUserData();
+          console.log("✅ User returned after login:", user);
 
           if (!user) {
             toast.error("Failed to fetch user data.");
@@ -67,8 +68,10 @@ const Login = () => {
           }
           
           if (user.isAccountVerified === true) {
+            toast.success("Redirecting to dashboard...");
             navigate('/dashboard');
           } else {
+            toast.info("Redirecting to verify email...");
             navigate('/verify-email');
           }
         } else {

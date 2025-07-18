@@ -20,6 +20,7 @@ export const AppContextProvider = (props) => {
         });
         console.log("✅ User Data Fetched:", data);
         setUserData(data.user);
+        return data.user;
       } catch (error) {
         console.error("❌ getUserData Error:", error.response?.data || error.message);
       }

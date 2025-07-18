@@ -34,8 +34,12 @@ const Login = () => {
           toast.success("Signup successful!");
           setIsLogin(true);
           const user = await getUserData();
+          if (!user) {
+            toast.error("Failed to fetch user data");
+            return;
+          }
 
-          if (user?.isAccountVerified) {
+          if (user.isAccountVerified) {
             navigate('/dashboard');
           } else {
             toast.info("Please verify your email.");

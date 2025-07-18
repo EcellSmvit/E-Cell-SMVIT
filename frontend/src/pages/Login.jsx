@@ -34,17 +34,18 @@ const Login = () => {
           toast.success("Signup successful!");
           setIsLogin(true);
           const user = await getUserData();
+
           if (!user) {
-            toast.error("Failed to fetch user data");
+            toast.error("Failed to fetch user data.");
             return;
           }
 
-          if (user.isAccountVerified) {
+          if (user.isAccountVerified === true) {
             navigate('/dashboard');
           } else {
-            toast.info("Please verify your email.");
             navigate('/verify-email');
           }
+
         } else {
           toast.error(data.message);
         }
@@ -60,10 +61,14 @@ const Login = () => {
           setIsLogin(true);
           const user = await getUserData();
 
-          if (user?.isAccountVerified) {
+          if (!user) {
+            toast.error("Failed to fetch user data.");
+            return;
+          }
+          
+          if (user.isAccountVerified === true) {
             navigate('/dashboard');
           } else {
-            toast.info("Please verify your email.");
             navigate('/verify-email');
           }
         } else {

@@ -19,20 +19,20 @@ const EmailVerify = () => {
   }, [])
 
   useEffect(() => {
-    if (isLogin && userData?.isAccountVerified) {
-      navigate('/dashboard')
+    const checkUser = async () => {
+      const updatedUser = await getUserData();
+      if (updatedUser?.isAccountVerified) {
+        navigate('/dashboard');
+      } else if (!hasOtpSentRef.current) {
+        handleResendOtp();
+        hasOtpSentRef.current = true;
+      }
+    };
+  
+    if (isLogin) {
+      checkUser();
     }
-
-    if (
-      isLogin &&
-      userData?._id &&
-      !userData.isAccountVerified &&
-      !hasOtpSentRef.current
-    ) {
-      handleResendOtp()
-      hasOtpSentRef.current = true
-    }
-  }, [isLogin, userData])
+  }, [isLogin]);
 
   // Auto shift input focus
   const handleInput = (e, index) => {

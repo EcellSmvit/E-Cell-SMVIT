@@ -92,12 +92,12 @@ const PostCard = ({ post, onUpdate }) => {
           src={post.author?.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
           alt="User"
           onClick={goToUserProfile}
-          className="w-12 h-12 rounded-full object-cover border-2 border-white cursor-pointer hover:shadow-xl transition-shadow"
+          className="object-cover w-12 h-12 transition-shadow border-2 border-white rounded-full cursor-pointer hover:shadow-xl"
         />
         <div>
           <h2
             onClick={goToUserProfile}
-            className="text-white font-semibold text-lg cursor-pointer hover:underline"
+            className="text-lg font-semibold text-white cursor-pointer hover:underline"
           >
             {post.author?.name}
           </h2>
@@ -108,11 +108,11 @@ const PostCard = ({ post, onUpdate }) => {
       </div>
 
       {/* Content */}
-      <p className="text-white text-base mb-3 whitespace-pre-line">{post.content}</p>
+      <p className="mb-3 text-base text-white whitespace-pre-line">{post.content}</p>
 
       {/* Image */}
       {post.image && (
-        <div className="rounded-lg overflow-hidden mb-4 border border-white/20">
+        <div className="mb-4 overflow-hidden border rounded-lg border-white/20">
           <img
             src={post.image}
             alt="Post"
@@ -122,7 +122,7 @@ const PostCard = ({ post, onUpdate }) => {
       )}
 
       {/* Buttons */}
-      <div className="flex items-center gap-5 text-sm text-white mb-4">
+      <div className="flex items-center gap-5 mb-4 text-sm text-white">
         <button
           onClick={likePost}
           disabled={isLiking}
@@ -149,13 +149,13 @@ const PostCard = ({ post, onUpdate }) => {
         <>
           <button
             onClick={() => setShowComments((prev) => !prev)}
-            className="text-sm text-blue-300 hover:underline mb-2"
+            className="mb-2 text-sm text-blue-300 hover:underline"
           >
             {showComments ? "Hide Comments" : `View Comments (${post.comments.length})`}
           </button>
 
           {showComments && (
-            <div className="space-y-2 mb-3 transition-all duration-300">
+            <div className="mb-3 space-y-2 transition-all duration-300">
               {post.comments.map((c, i) => (
                 <div key={i} className="flex items-center gap-2 text-sm text-gray-100">
                   <img
@@ -164,7 +164,7 @@ const PostCard = ({ post, onUpdate }) => {
                       "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"
                     }
                     alt="User"
-                    className="w-7 h-7 rounded-full object-cover border border-white/30"
+                    className="object-cover border rounded-full w-7 h-7 border-white/30"
                   />
                   <span>
                     <strong>{c.user?.name || "Unknown"}:</strong> {c.content}
@@ -185,12 +185,12 @@ const PostCard = ({ post, onUpdate }) => {
           placeholder="Write a comment..."
           onKeyDown={(e) => e.key === "Enter" && commentPost()}
           disabled={isCommenting}
-          className="flex-1 px-3 py-2 rounded-lg bg-white/10 placeholder:text-gray-300 text-white border border-white/20 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all"
+          className="flex-1 px-3 py-2 text-white transition-all border rounded-2xl bg-white/10 placeholder:text-gray-300 border-white/20 backdrop-blur-md focus:outline-none focus:ring-2 focus:ring-blue-300"
         />
         <button
           onClick={commentPost}
           disabled={isCommenting}
-          className={`px-4 py-1 text-sm rounded-md font-medium bg-blue-500 text-white hover:bg-blue-600 transition-all ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-4 py-1 text-sm rounded-2xl font-medium bg-blue-500 text-white hover:bg-blue-600 transition-all ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           Post
         </button>

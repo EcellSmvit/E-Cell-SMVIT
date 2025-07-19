@@ -190,7 +190,7 @@ const PostCard = ({ post, onUpdate }) => {
         <button
           onClick={commentPost}
           disabled={isCommenting}
-          className={`px-4 py-1 text-sm rounded-2xl font-medium bg-[#4F47E4] text-white transition-all ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`px-4 py-2 text-sm rounded-2xl font-medium bg-[#4F47E4] text-white transition-all ${isCommenting ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           Post
         </button>

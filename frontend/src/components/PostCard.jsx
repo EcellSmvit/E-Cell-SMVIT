@@ -128,7 +128,7 @@ const PostCard = ({ post, onUpdate }) => {
           disabled={isLiking}
           className={`flex items-center gap-1 hover:text-red-400 transition-all ${post.likes.includes(currentUserId) ? "text-red-400" : ""} ${isLiking ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          <Heart size={18} color={post.likes.includes(currentUserId) ? "red" : "white"} />
+          <Heart size={18} color={post.likes.includes(currentUserId) ? "red" : "white"} fill={post.likes.includes(currentUserId) ? "red" : "none"} />
           {post.likes.length}
         </button>
 

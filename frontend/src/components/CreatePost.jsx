@@ -60,7 +60,7 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 mb-6 rounded border"
+      className="p-4 mb-6 border rounded-2xl"
       style={{
         background: "rgba(255,255,255,0.15)",
         boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
@@ -82,7 +82,7 @@ const CreatePost = ({ onPostCreated }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Share your thoughts..."
-        className="p-3 mb-2 w-full rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="w-full p-3 mb-2 transition border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
         style={{
           background: "rgba(255,255,255,0.22)",
           color: "#fff",

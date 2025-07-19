@@ -28,9 +28,8 @@ const ProfileCard = ({ username }) => {
     navigate(`/profile/${user.username}`);
   };
 
-  const profileImage =
-    user.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558";
-  const bannerImage = user.bannerImg || "https://via.placeholder.com/900x200";
+  const profileImage = user.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558";
+  const bannerImage = user.bannerImg || "https://ik.imagekit.io/jwt52yyie/_banner-default.jpg?updatedAt=1752960448122";
 
   return (
     <div
@@ -49,20 +48,20 @@ const ProfileCard = ({ username }) => {
           <img
             src={profileImage}
             alt="Profile"
-            className="object-cover w-20 h-20 bg-white rounded-full border-4 border-white shadow-lg"
+            className="object-cover w-20 h-20 bg-white border-4 border-white rounded-full shadow-lg"
           />
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-6 pt-14 pb-6 text-white">
+      <div className="px-6 pb-6 text-white pt-14">
         <h2 className="text-xl font-semibold">{user.name}</h2>
         <p className="text-sm text-gray-200">@{user.username}</p>
         <p className="mt-2 text-sm text-gray-100">{user.headline || "No headline added."}</p>
 
         <button
           onClick={handleViewProfile}
-          className="px-4 py-2 mt-4 font-medium text-white bg-blue-600 rounded-lg transition duration-200 hover:bg-blue-700"
+          className="px-4 py-2 mt-4 font-medium text-white transition duration-200 bg-[#4F47E4] rounded-2xl "
         >
           View Profile
         </button>

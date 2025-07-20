@@ -8,6 +8,7 @@ function AchievementMobile() {
         background: "radial-gradient(circle at 50% 40%, #7c3aed 0%, #000 100%)",
       }}
     >
+      <h1 className="w-full text-center text-2xl font-bold text-white mb-4 tracking-wide">ACHIEVEMENTS</h1>
       {/* Card 1 */}
       <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 p-4 flex flex-col items-center w-full sm:w-[300px] max-w-xs">
         <img

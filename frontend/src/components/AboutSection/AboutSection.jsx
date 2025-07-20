@@ -11,22 +11,25 @@ const AboutSection = ({ userData, isOwnProfile, onSave }) => {
   };
 
   return (
-    <div className="bg-white/70 rounded-2xl shadow-md p-6 mb-8 border border-white/30">
-      <h2 className="text-2xl font-bold text-indigo-800 mb-4">About</h2>
+    <div className="bg-white/30 backdrop-blur-xl rounded-2xl border border-white/20 shadow-[0_8px_30px_rgba(0,0,0,0.1)] p-6 transition-all duration-300">
+      <h2 className="text-xl md:text-2xl font-bold text-indigo-900 mb-4 tracking-tight">
+        About
+      </h2>
+
       {isOwnProfile ? (
         <>
           {isEditing ? (
             <div>
               <textarea
-                className="w-full min-h-[100px] p-3 border border-indigo-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/90 text-gray-800 resize-none mb-3"
+                className="w-full min-h-[120px] p-4 text-sm md:text-base bg-white/80 text-gray-800 rounded-xl border border-indigo-300 shadow-inner resize-none transition focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:bg-white"
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
                 placeholder="Write something about yourself..."
               />
-              <div className="flex gap-2">
+              <div className="flex gap-3 mt-4">
                 <button
                   onClick={handleSave}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-lg transition"
+                  className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-5 py-2 rounded-lg shadow transition-all"
                 >
                   Save
                 </button>
@@ -35,28 +38,28 @@ const AboutSection = ({ userData, isOwnProfile, onSave }) => {
                     setIsEditing(false);
                     setAbout(userData.about || "");
                   }}
-                  className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-lg transition"
+                  className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium px-5 py-2 rounded-lg transition-all"
                 >
                   Cancel
                 </button>
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
-              <p className={`text-gray-700 ${!userData.about ? "italic text-gray-400" : ""}`}>
+            <div className="flex flex-col gap-3">
+              <p className={`text-gray-800 text-sm md:text-base ${!userData.about ? "italic text-gray-400" : ""}`}>
                 {userData.about || "No about information added yet."}
               </p>
               <button
                 onClick={() => setIsEditing(true)}
-                className="self-start mt-2 bg-indigo-100 hover:bg-indigo-200 text-indigo-700 font-medium px-3 py-1.5 rounded-lg transition text-sm"
+                className="self-start mt-1.5 text-sm bg-white/60 hover:bg-white/80 text-indigo-700 font-medium px-4 py-1.5 rounded-lg shadow-sm border border-white/30 backdrop-blur-md transition"
               >
-                Edit
+                Edit About
               </button>
             </div>
           )}
         </>
       ) : (
-        <p className={`text-gray-700 ${!userData.about ? "italic text-gray-400" : ""}`}>
+        <p className={`text-gray-800 text-sm md:text-base ${!userData.about ? "italic text-gray-400" : ""}`}>
           {userData.about || "No about information added yet."}
         </p>
       )}

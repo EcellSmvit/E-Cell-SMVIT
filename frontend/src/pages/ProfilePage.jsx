@@ -15,7 +15,6 @@ const ProfilePage = () => {
   const { username } = useParams();
   const queryClient = useQueryClient();
 
-  // Query to get authenticated user (if logged in)
   const { data: authUser, isLoading: isAuthLoading } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -25,7 +24,6 @@ const ProfilePage = () => {
     retry: false
   });
 
-  // Query to get public profile data
   const { data: userProfile, isLoading: isProfileLoading } = useQuery({
     queryKey: ["userProfile", username],
     queryFn: async () => {
@@ -132,28 +130,24 @@ const ProfilePage = () => {
 
   return (
     <div
-      className="flex justify-center items-center px-2 py-10 min-h-screen md:px-8"
+      className="flex justify-center items-center px-3 md:px-8 py-10 min-h-screen"
       style={{
         background: "radial-gradient(circle at 50% 30%, #4E46E4 0%, #000 100%)",
       }}
     >
-      <div className="mx-auto w-full max-w-4xl">
-        <div className="p-6 rounded-3xl border shadow-2xl backdrop-blur-lg bg-white/40 border-white/30 md:p-10">
-          {/* Profile Header Section */}
+      <div className="w-full max-w-5xl mx-auto">
+        <div className="p-6 md:p-10 rounded-3xl bg-white/30 backdrop-blur-xl border border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.1)] transition-all duration-300">
+          {/* Banner */}
           <div className="flex flex-col gap-4 items-center mb-10">
             <div className="relative w-full">
               <img
                 src={userData.bannerImg || "https://via.placeholder.com/900x200"}
                 alt="Banner"
-                className="object-cover w-full h-48 rounded-2xl border shadow-lg border-white/40"
-                style={{
-                  boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
-                  background: "rgba(255,255,255,0.1)",
-                }}
+                className="object-cover w-full h-48 rounded-2xl border border-white/30 shadow-lg transition-transform duration-300 hover:scale-[1.01]"
               />
               {isOwnProfile && (
-                <label className="absolute top-3 right-4 p-2 text-sm font-medium rounded-lg border shadow-lg backdrop-blur-md transition cursor-pointer bg-white/60 hover:bg-white/80 border-white/40">
-                  <span className="text-indigo-700">Edit Cover</span>
+                <label className="absolute top-3 right-4 px-3 py-1.5 text-xs font-semibold text-indigo-700 rounded-md border border-white/30 shadow-md bg-white/60 backdrop-blur-sm cursor-pointer hover:bg-white/80 transition-all">
+                  Edit Cover
                   <input
                     type="file"
                     accept="image/*"
@@ -164,19 +158,16 @@ const ProfilePage = () => {
               )}
             </div>
 
-            <div className="relative -mt-14">
+            {/* Profile Picture */}
+            <div className="relative -mt-14 group">
               <img
                 src={userData.profilePicture || "https://ik.imagekit.io/jwt52yyie/20171206_01.jpg?updatedAt=1752695077558"}
                 alt="Profile"
-                className="object-cover w-28 h-28 rounded-full border-4 border-white shadow-xl bg-white/60"
-                style={{
-                  boxShadow: "0 4px 24px 0 rgba(31, 38, 135, 0.18)",
-                  background: "rgba(255,255,255,0.2)",
-                }}
+                className="object-cover w-28 h-28 rounded-full border-4 border-white bg-white/70 shadow-lg transition-transform duration-300 group-hover:scale-105"
               />
               {isOwnProfile && (
-                <label className="absolute right-2 bottom-2 p-2 text-xs font-medium rounded-full border shadow-lg backdrop-blur-md transition cursor-pointer bg-white/80 hover:bg-white border-white/40">
-                  <span className="text-indigo-700">Edit</span>
+                <label className="absolute right-1.5 bottom-1.5 p-1 text-xs font-semibold text-indigo-700 bg-white/80 border border-white/40 rounded-full shadow-md backdrop-blur-md cursor-pointer hover:bg-white transition-all">
+                  Edit
                   <input
                     type="file"
                     accept="image/*"
@@ -187,16 +178,17 @@ const ProfilePage = () => {
               )}
             </div>
 
-            <div className="mt-2 text-center">
-              <h1 className="text-3xl font-bold text-indigo-900 drop-shadow-sm">{userData.name}</h1>
-              <p className="font-medium text-indigo-600">@{userData.username}</p>
-              <p className="mt-1 italic text-gray-800">{userData.headline || "No headline provided."}</p>
+            {/* User Info */}
+            <div className="mt-2 text-center space-y-1">
+              <h1 className="text-2xl md:text-3xl font-bold text-indigo-900">{userData.name}</h1>
+              <p className="text-base text-indigo-600">@{userData.username}</p>
+              <p className="text-sm italic text-gray-800">{userData.headline || "No headline provided."}</p>
             </div>
           </div>
 
-          {/* Editable Sections */}
-          <div className="space-y-8">
-          <Headline headline={userData.headline} isOwnProfile={isOwnProfile} onSave={handleSave}/>
+          {/* Profile Editable Sections */}
+          <div className="space-y-8 transition-all duration-300 ease-in-out">
+            <Headline headline={userData.headline} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <AboutSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <ExperienceSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />
             <EducationSection userData={userData} isOwnProfile={isOwnProfile} onSave={handleSave} />

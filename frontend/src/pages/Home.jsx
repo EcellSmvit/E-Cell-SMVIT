@@ -18,6 +18,7 @@ import Text from '@/components/PublicSection/Text';
 import InfinityComponent from '@/components/PublicSection/Infinity';
 import Footer from '@/components/PublicSection/Footer';
 import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobile';
+import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
 // import Section6 from './components/Section6';
 
 
@@ -32,7 +33,12 @@ function Home() {
       <InfinityComponent/>
       <Text/>
       <Section2/>
-      <ImageSection/>
+      <div className="hidden sm:block">
+        <ImageSection/>
+      </div>
+      <div className="block sm:hidden">
+        <AboutMobile/>
+      </div>
       <div className="hidden sm:block">
         <AchievementSection/>
       </div>

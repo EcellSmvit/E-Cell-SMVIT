@@ -2,13 +2,13 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import axios from "axios";
-import {
-  AboutSection,
-  ExperienceSection,
-  EducationSection,
-  SkillSection,
-  Headline,
-} from "@/components"; // optional: central export
+import AboutSection from "@/components/AboutSection/AboutSection";
+import ExperienceSection from "@/components/ExperienceSection/ExperienceSection";
+import EducationSection from "@/components/EducationSection/EducationSection";
+import SkillSection from "@/components/skillsection/SkillSection";
+import Headline from "@/components/Headline/Headline";
+
+
 import { Pencil } from "lucide-react";
 
 const ProfilePage = () => {

@@ -3,10 +3,8 @@ import React from 'react'
 function AboutMobile() {
     return (
         <div
-          className="w-screen min-h-auto flex flex-col items-center justify-start gap-6 p-4"
-          style={{
-            background: "radial-gradient(circle at 50% 40%, #7c3aed 0%, #000 100%)",
-          }}
+          className="w-screen min-h-auto flex bg-gradient-to-b from-[#6C4DFF] via-[#1f1c4d] to-black flex-col items-center justify-start gap-6 p-4"
+          
         >
           {/* About Section */}
           <div className="bg-white/20 backdrop-blur-lg rounded-2xl shadow-xl border border-white/30 p-6 w-full max-w-md flex flex-col items-center">

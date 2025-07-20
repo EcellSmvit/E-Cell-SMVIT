@@ -3,10 +3,8 @@ import React from 'react';
 function AchievementMobile() {
   return (
     <div
-      className="w-screen min-h-screen flex flex-wrap justify-center items-start gap-6 p-4 overflow-y-auto"
-      style={{
-        background: "radial-gradient(circle at 50% 40%, #7c3aed 0%, #000 100%)",
-      }}
+      className="w-screen bg-gradient-to-b from-black via-[#1f1c4d] to-[#6C4DFF] min-h-screen flex flex-wrap justify-center items-start gap-6 p-4 overflow-y-auto"
+      
     >
       <h1 className="w-full text-center text-2xl font-bold text-white mb-4 tracking-wide">ACHIEVEMENTS</h1>
       {/* Card 1 */}

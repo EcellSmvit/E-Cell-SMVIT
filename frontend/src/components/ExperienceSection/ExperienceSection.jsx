@@ -46,39 +46,40 @@ const ExperienceSection = ({ userData, isOwnProfile, onSave }) => {
   };
 
   return (
-    <div className="bg-white/70 rounded-2xl shadow-md p-6 mb-8 border border-white/30">
-      <div className="flex items-center mb-4">
-        <Briefcase className="text-blue-600 mr-2" />
-        <h2 className="text-2xl font-bold text-gray-800">Experience</h2>
+    <div className="bg-white/30 backdrop-blur-xl rounded-2xl shadow-xl p-6 border border-white/20 mb-8 transition-all duration-300">
+      <div className="flex items-center gap-2 mb-4">
+        <Briefcase className="text-indigo-700" />
+        <h2 className="text-xl md:text-2xl font-bold text-indigo-900">Experience</h2>
       </div>
+
       {experience.length === 0 && (
-        <p className="text-gray-500 mb-4">No experience added yet.</p>
+        <p className="text-gray-600 italic mb-4">No experience added yet.</p>
       )}
+
       <div className="space-y-4">
         {experience.map((exp, i) => (
           <div
             key={i}
-            className="relative bg-gray-50 border border-gray-200 rounded-lg p-4 flex items-start"
+            className="relative p-4 border border-white/20 rounded-xl bg-white/50 shadow-sm"
           >
             <div className="flex-1">
-              <h3 className="text-lg font-semibold text-gray-900">{exp.title}</h3>
-              <p className="text-gray-700 font-medium">{exp.company}</p>
-              <p className="text-gray-500 text-sm">
+              <h3 className="text-lg font-semibold text-indigo-900">{exp.title}</h3>
+              <p className="text-indigo-700 font-medium">{exp.company}</p>
+              <p className="text-sm text-gray-600">
                 {formatDate(exp.startDate)} -{" "}
                 {exp.endDate ? formatDate(exp.endDate) : "Present"}
               </p>
               {exp.description && (
-                <p className="text-gray-600 mt-2">{exp.description}</p>
+                <p className="text-gray-700 mt-2">{exp.description}</p>
               )}
             </div>
             {isEditing && (
               <button
                 onClick={() => handleDeleteExperience(exp._id)}
-                className="absolute top-2 right-2 text-gray-400 hover:text-red-500 transition"
+                className="absolute top-2 right-2 text-gray-500 hover:text-red-500 transition"
                 aria-label="Delete experience"
-                type="button"
               >
-                <X size={20} />
+                <X size={18} />
               </button>
             )}
           </div>
@@ -86,72 +87,66 @@ const ExperienceSection = ({ userData, isOwnProfile, onSave }) => {
       </div>
 
       {isEditing && (
-        <div className="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-4">
-          <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+        <div className="mt-6 bg-white/40 backdrop-blur-md border border-white/30 rounded-xl p-5 space-y-4 shadow-md transition-all duration-300">
+          <div className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               placeholder="Title"
               value={newExperience.title}
-              onChange={(e) =>
-                setNewExperience({ ...newExperience, title: e.target.value })
-              }
-              className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setNewExperience({ ...newExperience, title: e.target.value })}
+              className="flex-1 px-4 py-2 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white/80 text-gray-800"
             />
             <input
               type="text"
               placeholder="Company"
               value={newExperience.company}
-              onChange={(e) =>
-                setNewExperience({ ...newExperience, company: e.target.value })
-              }
-              className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+              className="flex-1 px-4 py-2 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white/80 text-gray-800"
             />
           </div>
-          <div className="flex flex-col md:flex-row md:space-x-4 space-y-4 md:space-y-0">
+
+          <div className="flex flex-col md:flex-row gap-4">
             <input
               type="date"
-              placeholder="Start Date"
               value={newExperience.startDate}
-              onChange={(e) =>
-                setNewExperience({ ...newExperience, startDate: e.target.value })
-              }
-              className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              onChange={(e) => setNewExperience({ ...newExperience, startDate: e.target.value })}
+              className="flex-1 px-4 py-2 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white/80 text-gray-800"
             />
             {!newExperience.currentlyWorking && (
               <input
                 type="date"
-                placeholder="End Date"
                 value={newExperience.endDate}
-                onChange={(e) =>
-                  setNewExperience({ ...newExperience, endDate: e.target.value })
-                }
-                className="flex-1 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                onChange={(e) => setNewExperience({ ...newExperience, endDate: e.target.value })}
+                className="flex-1 px-4 py-2 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white/80 text-gray-800"
               />
             )}
           </div>
-          <div className="flex items-center space-x-2">
+
+          <div className="flex items-center gap-2">
             <input
               type="checkbox"
               id="currentlyWorking"
               checked={newExperience.currentlyWorking}
               onChange={handleCurrentlyWorkingChange}
-              className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+              className="h-4 w-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
             />
-            <label htmlFor="currentlyWorking" className="text-gray-700">
+            <label htmlFor="currentlyWorking" className="text-sm text-gray-700">
               I currently work here
             </label>
           </div>
+
           <textarea
             placeholder="Description"
             value={newExperience.description}
             onChange={(e) =>
               setNewExperience({ ...newExperience, description: e.target.value })
             }
-            className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y min-h-[80px]"
+            className="w-full min-h-[80px] px-4 py-2 border border-indigo-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm bg-white/80 text-gray-800 resize-y"
           />
+
           <button
             onClick={handleAddExperience}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition font-semibold"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg shadow transition font-medium"
             type="button"
           >
             Add Experience
@@ -160,11 +155,11 @@ const ExperienceSection = ({ userData, isOwnProfile, onSave }) => {
       )}
 
       {isOwnProfile && (
-        <div className="mt-6 flex space-x-4">
+        <div className="mt-6 flex gap-4">
           {isEditing ? (
             <button
               onClick={handleSave}
-              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition font-semibold"
+              className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg shadow transition font-medium"
               type="button"
             >
               Save Changes
@@ -172,7 +167,7 @@ const ExperienceSection = ({ userData, isOwnProfile, onSave }) => {
           ) : (
             <button
               onClick={() => setIsEditing(true)}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition font-semibold"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg shadow transition font-medium"
               type="button"
             >
               Edit Experience

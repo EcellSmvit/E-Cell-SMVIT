@@ -113,7 +113,7 @@ function Footer() {
 
             <img
                 ref={logoRef}
-                className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] md:w-[35rem] opacity-0 z-10 pointer-events-none'
+                className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[30rem] opacity-0 z-10 pointer-events-none'
                 src="https://www.ecellsmvit.in/images/Ecell%20Logo%20Vector.svg"
                 alt="E-Cell Background Logo"
             />

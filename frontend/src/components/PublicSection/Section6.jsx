@@ -126,34 +126,57 @@ function Section6() {
     setLoading(true);
     setError('');
     setSent(false);
-
+  
     // Basic validation
     if (!form.name || !form.email || !form.subject || !form.message) {
       setError('Please fill in all fields.');
       setLoading(false);
       return;
     }
-
+  
+    // Log what will be sent
+    console.log("📤 Sending email with following data:");
+    console.log({
+      SERVICE_ID,
+      TEMPLATE_ID,
+      PUBLIC_KEY,
+      data: {
+        name: form.name,
+        from_name: form.name,
+        from_email: form.email,
+        subject: form.subject,
+        message: form.message,
+      },
+    });
+  
     try {
-      await emailjs.send(
+      const response = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          from_name: form.name,
+          name: form.name,              // for {{name}} in template
+          from_name: form.name,        // for {{from_name}} in template
           from_email: form.email,
           subject: form.subject,
           message: form.message,
         },
         PUBLIC_KEY
       );
+  
+      console.log("✅ Email sent successfully:", response);
       setSent(true);
       setForm({ name: '', email: '', subject: '', message: '' });
     } catch (err) {
+      console.error("❌ Email sending failed:", err);
+      if (err?.text) {
+        console.error("📩 EmailJS error response:", err.text);
+      }
       setError('Failed to send message. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div

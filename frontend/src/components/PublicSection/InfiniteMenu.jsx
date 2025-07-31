@@ -880,7 +880,7 @@ export default function InfiniteMenu({ items = [] }) {
 
   return (
     <div
-      className="relative w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#6C4DFF] via-black to-black text-white" // Radial gradient background
+      id='events' className="relative w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#6C4DFF] via-black to-black text-white" // Radial gradient background
     >
       <canvas
         id="infinite-grid-menu-canvas"

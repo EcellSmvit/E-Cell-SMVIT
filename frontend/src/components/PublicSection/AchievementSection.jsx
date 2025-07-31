@@ -3,8 +3,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import GltfScene from './GltfScene';
 
-import ScrollButton2 from './ScrollButton2';
-
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,7 +69,6 @@ const AchievementSection = () => {
         id="page2"
         className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center"
       >
-        <ScrollButton2/>
         <div id="scroll-container" className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />
@@ -83,20 +80,7 @@ const AchievementSection = () => {
           style={{ fontFamily: 'Anton, sans-serif' }}
         >
           <h1
-            className="
-              text-2xl
-              sm:text-3xl
-              md:text-4xl
-              lg:text-5xl
-              xl:text-6xl
-              font-bold
-              text-white
-              text-center
-              tracking-wide
-              select-none
-              px-2
-              leading-tight
-            "
+            className="px-2 text-2xl font-bold tracking-wide leading-tight text-center text-white select-none sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             style={{ fontFamily: 'Anton, sans-serif' }}
           >
             OUR ACHIEVEMENT
@@ -277,7 +261,7 @@ const AchievementSection = () => {
           >
             STARTUP BACKED BY E-CELL
           </h1>
-          <div className="flex flex-row gap-16 md:gap-40 justify-center items-end w-full pointer-events-auto">
+          <div className="flex flex-row gap-16 justify-center items-end w-full pointer-events-auto md:gap-40">
             {/* Left Images */}
             <div className="flex flex-col gap-10 md:gap-10">
               <div className="w-[20vw] md:w-[8vw] rounded-[3vw] md:rounded-[1vw] overflow-hidden">

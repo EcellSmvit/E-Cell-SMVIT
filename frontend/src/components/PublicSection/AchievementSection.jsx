@@ -166,9 +166,13 @@ const AchievementSection = () => {
           </div>
         </div>
         <div
-          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[3]"
-          id="bg1"
-        >
+  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+             backdrop-blur-lg border border-white/20 rounded-2xl 
+             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+  id="bg1"
+>
+
           <h1
             className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
             style={{ fontFamily: 'Anton, sans-serif' }}
@@ -183,9 +187,13 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[2]"
-          id="bg2"
-        >
+  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+             backdrop-blur-lg border border-white/20 rounded-2xl 
+             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+  id="bg1"
+>
+
           <h1
             className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
             style={{ fontFamily: 'Anton, sans-serif' }}
@@ -200,9 +208,13 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[1]"
-          id="bg3"
-        >
+  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+             backdrop-blur-lg border border-white/20 rounded-2xl 
+             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+  id="bg1"
+>
+
           <h1
             className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
             style={{ fontFamily: 'Anton, sans-serif' }}
@@ -217,9 +229,13 @@ const AchievementSection = () => {
           />
         </div>
         <div
-          className="flex absolute bottom-0 left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-white/20 backdrop-blur-lg border border-white/20 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] z-[0]"
-          id="bg4"
-        >
+  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+             backdrop-blur-lg border border-white/20 rounded-2xl 
+             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+  id="bg1"
+>
+
           <h1
             className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
             style={{ fontFamily: 'Anton, sans-serif' }}

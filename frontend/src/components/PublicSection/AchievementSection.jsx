@@ -191,7 +191,7 @@ const AchievementSection = () => {
              bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
              backdrop-blur-lg border border-white/20 rounded-2xl 
              shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg1"
+  id="bg2"
 >
 
           <h1
@@ -212,7 +212,7 @@ const AchievementSection = () => {
              bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
              backdrop-blur-lg border border-white/20 rounded-2xl 
              shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg1"
+  id="bg3"
 >
 
           <h1
@@ -233,7 +233,7 @@ const AchievementSection = () => {
              bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
              backdrop-blur-lg border border-white/20 rounded-2xl 
              shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg1"
+  id="bg4"
 >
 
           <h1

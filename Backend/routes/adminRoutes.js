@@ -33,5 +33,33 @@ router.delete("/users/:id", async (req, res) => {
   await userModel.findByIdAndDelete(req.params.id);
   res.json({ message: "User deleted" });
 });
+// PUT /api/admin/users/:id/role
+router.put("/users/:id/role", async (req, res) => {
+  const { role } = req.body;
+
+  try {
+    const user = await userModel.findById(req.params.id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    if (role === "admin") {
+      user.isAdmin = true;
+    } else if (role === "alumni") {
+      user.isAlumni = true;
+    } else if (role === "remove") {
+      user.isAdmin = false;
+      user.isAlumni = false;
+    } else {
+      return res.status(400).json({ message: "Invalid role" });
+    }
+
+    await user.save();
+    return res.status(200).json({ message: "User role updated", user });
+  } catch (err) {
+    console.error("❌ Error updating role:", err);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+
 
 export default router;

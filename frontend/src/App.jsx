@@ -14,7 +14,7 @@ import { useContext } from "react";
 import { AppContext } from "./context/AppContext";
 import VerifyRoute from './components/VerifyRoute';
 import AdminDashboard from "./pages/AdminDashboard";
-
+import { Navigate } from "react-router-dom";
 
 const App = () => {
   const { userData } = useContext(AppContext);

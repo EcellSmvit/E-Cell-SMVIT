@@ -19,7 +19,7 @@ const AdminDashboard = () => {
       setPosts(postRes.data);
       setUsers(userRes.data);
     } catch (err) {
-      console.error("\u274C Admin data fetch error:", err);
+      console.error("❌ Admin data fetch error:", err);
       toast.error("Failed to load admin data.");
     }
   };
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
       setPosts((prev) => prev.filter((p) => p._id !== id));
       toast.success("Post deleted");
     } catch (err) {
-      console.error("\u274C Post delete error:", err);
+      console.error("❌ Post delete error:", err);
       toast.error("Failed to delete post.");
     }
   };
@@ -45,7 +45,7 @@ const AdminDashboard = () => {
       setUsers((prev) => prev.filter((u) => u._id !== id));
       toast.success("User deleted");
     } catch (err) {
-      console.error("\u274C User delete error:", err);
+      console.error("❌ User delete error:", err);
       toast.error("Failed to delete user.");
     }
   };
@@ -58,7 +58,7 @@ const AdminDashboard = () => {
       toast.success("User role updated");
       fetchData();
     } catch (err) {
-      console.error("\u274C Update role error:", err);
+      console.error("❌ Update role error:", err);
       toast.error("Failed to update role.");
     }
   };
@@ -99,8 +99,8 @@ const AdminDashboard = () => {
           <li key={user._id} className="p-4 rounded bg-white/10">
             <div className="mb-1 font-medium">{user.name} ({user.email})</div>
             <div className="text-sm text-gray-300">
-              Username: {user.username} | Verified: {user.isAccountVerified ? "✅" : "❌"}<br/>
-              Admin: {user.isAdmin ? "Yes" : "No"} | Alumni: {user.isAlumni ? "Yes" : "No"}<br/>
+              Username: {user.username} | Verified: {user.isAccountVerified ? "✅" : "❌"}<br />
+              Admin: {user.isAdmin ? "Yes" : "No"} | Alumni: {user.isAlumni ? "Yes" : "No"}<br />
               Joined: {new Date(user.createdAt).toLocaleString()}
             </div>
             <div className="flex flex-wrap gap-2 mt-2">
@@ -112,9 +112,13 @@ const AdminDashboard = () => {
                 className="px-2 py-1 text-sm bg-green-500 rounded hover:bg-green-600">
                 Make Alumni
               </button>
-              <button onClick={() => updateUserRole(user._id, "remove")}
+              <button onClick={() => updateUserRole(user._id, "removeAdmin")}
+                className="px-2 py-1 text-sm bg-yellow-600 rounded hover:bg-yellow-700">
+                Remove Admin
+              </button>
+              <button onClick={() => updateUserRole(user._id, "removeAlumni")}
                 className="px-2 py-1 text-sm bg-yellow-500 rounded hover:bg-yellow-600">
-                Remove Roles
+                Remove Alumni
               </button>
               <button onClick={() => deleteUser(user._id)}
                 className="px-2 py-1 text-sm bg-red-500 rounded hover:bg-red-600">

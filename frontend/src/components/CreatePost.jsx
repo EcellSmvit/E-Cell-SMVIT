@@ -7,7 +7,7 @@ import { AppContext } from "../context/AppContext";
 const CreatePost = ({ onPostCreated }) => {
   const { userData } = useContext(AppContext);
   const isAuthorized = userData?.isAdmin || userData?.isAlumni;
-  
+
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -22,14 +22,16 @@ const CreatePost = ({ onPostCreated }) => {
       toast.error(err?.response?.data?.message || fallbackMsg);
     }
   };
-    if (!isAuthorized) {
-      return (
-        <div className="my-6 italic text-center text-gray-400">
-          Only <span className="font-semibold text-indigo-300">Admins</span> or{" "}
-          <span className="font-semibold text-indigo-300">Alumni</span> can create posts.
-        </div>
-      );
-    }
+
+  if (!isAuthorized) {
+    return (
+      <div className="my-6 italic text-center text-gray-400">
+        Only <span className="font-semibold text-indigo-300">Admins</span> or{" "}
+        <span className="font-semibold text-indigo-300">Alumni</span> can post jobs or internships.
+      </div>
+    );
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -72,50 +74,29 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 mb-6 rounded-2xl border"
-      style={{
-        background: "rgba(255,255,255,0.15)",
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
-        backdropFilter: "blur(8px)",
-        WebkitBackdropFilter: "blur(8px)",
-        border: "1px solid rgba(255,255,255,0.25)",
-        color: "#fff",
-      }}
+      className="p-6 mb-6 text-white bg-gradient-to-br from-indigo-700 via-purple-800 to-indigo-900 rounded-xl border border-indigo-400 shadow-xl"
     >
-      <label
-        htmlFor="post-content"
-        className="block mb-1 text-sm font-medium"
-        style={{ color: "#fff", letterSpacing: "0.01em" }}
-      >
-        What's on your mind?
+      <h2 className="mb-2 text-xl font-bold">Post Job / Internship Opportunity</h2>
+      <p className="mb-4 text-sm text-indigo-200">Alumni can share job or internship opportunities from their companies with the student community.</p>
+
+      <label htmlFor="post-content" className="block mb-1 text-sm font-medium">
+        Details:
       </label>
       <textarea
         id="post-content"
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        placeholder="Share your thoughts..."
-        className="p-3 mb-2 w-full rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        style={{
-          background: "rgba(255,255,255,0.22)",
-          color: "#fff",
-          border: "1.5px solid rgba(255,255,255,0.28)",
-          boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.10)",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
-          fontSize: "1.05rem",
-          fontWeight: 400,
-          letterSpacing: "0.01em",
-          resize: "vertical",
-        }}
-        rows={3}
+        placeholder="Describe the opportunity (e.g., position, requirements, apply link)..."
+        className="p-3 mb-3 w-full placeholder-indigo-200 text-white rounded-lg border border-white/20 bg-white/10 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        rows={4}
         disabled={isUploading}
         required
       />
 
-      <label className="block mb-2 text-sm font-medium" style={{ color: "#e0e0e0" }}>
-        Optional Image:
+      <label className="block mb-2 text-sm font-medium text-indigo-200">
+        Upload Poster / Logo (optional):
       </label>
-      <div className="relative mb-2">
+      <div className="relative mb-4">
         <input
           id="image-upload"
           type="file"
@@ -123,20 +104,11 @@ const CreatePost = ({ onPostCreated }) => {
           onChange={(e) => setImage(e.target.files[0] || null)}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           disabled={isUploading}
-          style={{
-            zIndex: 2,
-          }}
         />
         <label
           htmlFor="image-upload"
-          className={`flex items-center justify-center gap-2 px-3 py-2 rounded border border-dashed border-indigo-300 bg-white/10 text-indigo-100 cursor-pointer transition hover:bg-indigo-500/20 ${
+          className={`flex items-center justify-center gap-2 px-4 py-2 rounded border border-dashed border-indigo-400 bg-white/5 text-indigo-100 cursor-pointer transition hover:bg-indigo-500/10 ${
             isUploading ? "opacity-60 cursor-not-allowed" : ""}`}
-          style={{
-            fontWeight: 500,
-            fontSize: "0.95rem",
-            letterSpacing: "0.01em",
-            zIndex: 1,
-          }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +116,6 @@ const CreatePost = ({ onPostCreated }) => {
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            style={{ minWidth: "20px" }}
           >
             <path
               strokeLinecap="round"
@@ -160,17 +131,10 @@ const CreatePost = ({ onPostCreated }) => {
       <button
         type="submit"
         disabled={isUploading}
-        className={`bg-indigo-500 text-white px-4 py-1 rounded mt-2 ${
+        className={`w-full text-center bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-4 py-2 rounded transition-all duration-200 ${
           isUploading ? "opacity-60 cursor-not-allowed" : ""}`}
-        style={{
-          background: "rgba(99,102,241,0.85)",
-          boxShadow: "0 2px 8px 0 rgba(99,102,241,0.15)",
-          backdropFilter: "blur(2px)",
-          WebkitBackdropFilter: "blur(2px)",
-          border: "1px solid rgba(255,255,255,0.15)",
-        }}
       >
-        {isUploading ? "Posting..." : "Post"}
+        {isUploading ? "Posting..." : "Post Opportunity"}
       </button>
     </form>
   );

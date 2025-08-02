@@ -5,35 +5,41 @@ import postModel from "../models/postModel.js";
 
 const router = express.Router();
 
-router.use(userAuth); // Ensure login
+// ✅ Login required
+router.use(userAuth);
 
-// Only allow if user is admin
+// ✅ Admin-only access
 router.use(async (req, res, next) => {
   const user = await userModel.findById(req.userId);
   if (!user?.isAdmin) return res.status(403).json({ message: "Admin only" });
   next();
 });
 
+// ✅ Get all posts
 router.get("/posts", async (req, res) => {
   const posts = await postModel.find().populate("author", "name email");
   res.json(posts);
 });
 
+// ✅ Delete post
 router.delete("/posts/:id", async (req, res) => {
   await postModel.findByIdAndDelete(req.params.id);
   res.json({ message: "Post deleted" });
 });
 
+// ✅ Get all users
 router.get("/users", async (req, res) => {
   const users = await userModel.find({}, "-password");
   res.json(users);
 });
 
+// ✅ Delete user
 router.delete("/users/:id", async (req, res) => {
   await userModel.findByIdAndDelete(req.params.id);
   res.json({ message: "User deleted" });
 });
-// PUT /api/admin/users/:id/role
+
+// ✅ Update role
 router.put("/users/:id/role", async (req, res) => {
   const { role } = req.body;
 
@@ -53,13 +59,11 @@ router.put("/users/:id/role", async (req, res) => {
     }
 
     await user.save();
-    return res.status(200).json({ message: "User role updated", user });
+    res.status(200).json({ message: "User role updated", user });
   } catch (err) {
     console.error("❌ Error updating role:", err);
-    return res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: "Internal server error" });
   }
 });
-
-
 
 export default router;

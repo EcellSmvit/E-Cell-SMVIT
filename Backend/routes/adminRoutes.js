@@ -1,5 +1,5 @@
 import express from "express";
-import userAuth from "../middlewares/userAuth.js";
+import userAuth from "../middleware/userAuth.js";
 import userModel from "../models/userModel.js";
 import postModel from "../models/postModel.js";
 

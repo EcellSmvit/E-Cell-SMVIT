@@ -54,9 +54,14 @@ router.put("/users/:id/role", async (req, res) => {
     } else if (role === "remove") {
       user.isAdmin = false;
       user.isAlumni = false;
+    } else if (role === "removeAdmin") {
+      user.isAdmin = false;
+    } else if (role === "removeAlumni") {
+      user.isAlumni = false;
     } else {
       return res.status(400).json({ message: "Invalid role" });
     }
+    
 
     await user.save();
     res.status(200).json({ message: "User role updated", user });

@@ -13,7 +13,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { useContext } from "react";
 import { AppContext } from "./context/AppContext";
 import VerifyRoute from './components/VerifyRoute';
-
+import AdminDashboard from "./pages/AdminDashboard";
 
 
 const App = () => {
@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='/feed' element={<Feed />} />
         <Route path='/profile/:username' element={<ProfilePage/>}/>
-        
+        <Route path="/admin" element={userData?.isAdmin ? (<AdminDashboard />) : (<Navigate to="/" />)}/>
       </Routes>
     </div>
   )

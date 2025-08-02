@@ -10,6 +10,7 @@ import AuthRouter from './routes/authRoutes.js'
 import UserRouter from './routes/userRoutes.js'
 import postRouter from './routes/postRoutes.js'
 import profileRouter from './routes/profileRoutes.js'
+import adminRoutes from './routes/adminRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,12 +47,9 @@ app.use('/api/auth', AuthRouter)
 app.use('/api/user', UserRouter)
 app.use('/api/v1/posts', postRouter)
 app.use('/api/profile', profileRouter)
+app.use('/api/admin', adminRoutes);
 
 
-// app.use(express.static(path.join(__dirname, 'dist')))
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
-// })
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.get(/^(?!.*api).*/, (req, res) => { 

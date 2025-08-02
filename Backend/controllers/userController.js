@@ -23,6 +23,8 @@ export const getUserData = async (req, res) => {
         username: user.username,
         mobileNumber: user.mobileNumber,
         isAccountVerified: user.isAccountVerified,
+        isAdmin: user.isAdmin,
+        isAlumni: user.isAlumni,
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       },

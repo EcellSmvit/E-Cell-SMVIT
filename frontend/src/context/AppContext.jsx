@@ -50,7 +50,6 @@ export const AppContextProvider = (props) => {
     useEffect(()=>{
         getAuthStatus()
     }, [])
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++
     const value ={
         backendUrl, 
         isLogin, 

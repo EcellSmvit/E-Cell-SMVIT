@@ -26,6 +26,15 @@ export const createPost = async (req, res) => {
       return res.status(401).json({ message: "Unauthorized: Please log in." });
     }
 
+    const user = await userModel.findById(req.userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
+
+    if (!user.isAdmin && !user.isAlumni) {
+      return res.status(403).json({ message: "Permission denied. Only Admins or Alumni can create posts." });
+    }
+    
     const { content, image } = req.body;
 
     if (!content || typeof content !== "string" || !content.trim()) {

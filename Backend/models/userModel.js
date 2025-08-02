@@ -73,6 +73,15 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    isAdmin: {
+        type: Boolean,
+        default: false
+      },
+    
+      isAlumni: {
+        type: Boolean,
+        default: false
+      },
     resetOtp:{
         type: String,
         default: ''

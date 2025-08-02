@@ -74,10 +74,18 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-6 mb-6 text-white bg-gradient-to-br from-indigo-700 via-purple-800 to-indigo-900 rounded-xl border border-indigo-400 shadow-xl"
+      className="p-6 mb-6 rounded-2xl border"
+      style={{
+        background: "rgba(255,255,255,0.15)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
+        backdropFilter: "blur(8px)",
+        WebkitBackdropFilter: "blur(8px)",
+        border: "1px solid rgba(255,255,255,0.25)",
+        color: "#fff",
+      }}
     >
       <h2 className="mb-2 text-xl font-bold">Post Job / Internship Opportunity</h2>
-      <p className="mb-4 text-sm text-indigo-200">Alumni can share job or internship opportunities from their companies with the student community.</p>
+      <p className="mb-4 text-sm text-gray-300">Alumni can share job or internship opportunities from their companies with the student community.</p>
 
       <label htmlFor="post-content" className="block mb-1 text-sm font-medium">
         Details:

@@ -1,8 +1,12 @@
 import { useState } from "react";
 import api from "../utils/api";
 import { toast } from "react-toastify";
+import { AppContext } from "../context/AppContext";
 
 const CreatePost = ({ onPostCreated }) => {
+  const { userData } = useContext(AppContext);
+  const isAuthorized = userData?.isAdmin || userData?.isAlumni;
+  
   const [content, setContent] = useState("");
   const [image, setImage] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -17,7 +21,14 @@ const CreatePost = ({ onPostCreated }) => {
       toast.error(err?.response?.data?.message || fallbackMsg);
     }
   };
-
+    if (!isAuthorized) {
+      return (
+        <div className="my-6 italic text-center text-gray-400">
+          Only <span className="font-semibold text-indigo-300">Admins</span> or{" "}
+          <span className="font-semibold text-indigo-300">Alumni</span> can create posts.
+        </div>
+      );
+    }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -60,7 +71,7 @@ const CreatePost = ({ onPostCreated }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="p-4 mb-6 border rounded-2xl"
+      className="p-4 mb-6 rounded-2xl border"
       style={{
         background: "rgba(255,255,255,0.15)",
         boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.18)",
@@ -82,7 +93,7 @@ const CreatePost = ({ onPostCreated }) => {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Share your thoughts..."
-        className="w-full p-3 mb-2 transition border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        className="p-3 mb-2 w-full rounded-lg border transition focus:outline-none focus:ring-2 focus:ring-indigo-400"
         style={{
           background: "rgba(255,255,255,0.22)",
           color: "#fff",

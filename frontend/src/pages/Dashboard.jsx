@@ -6,6 +6,7 @@ import { LogOut } from 'lucide-react';
 // import Sidebar from "@/components/SideBar/ProfileCard";
 import ProfileCard from "@/components/SideBar/ProfileCard";
 import SuggestedUser from "@/components/SuggestedUser";
+import AdminButton from "@/components/AdminButton";
 
 const ECELL_LOGO_URL =
   "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png"; // Replace with your actual logo URL if different
@@ -74,6 +75,7 @@ const Dashboard = () => {
             </button>
           )}
         </div>
+        <AdminButton/>
       </nav>
 
       {/* Main Content */}

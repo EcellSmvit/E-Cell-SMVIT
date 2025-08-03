@@ -9,7 +9,7 @@ import SuggestedUser from "@/components/SuggestedUser";
 import AdminButton from "@/components/AdminButton";
 
 const ECELL_LOGO_URL =
-  "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png"; // Replace with your actual logo URL if different
+  "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png";
 
 const Dashboard = () => {
   const { userData, setIsLogin } = useContext(AppContext);
@@ -58,7 +58,8 @@ const Dashboard = () => {
             style={{ background: "rgba(255,255,255,0.05)", borderRadius: "8px" }}
           />
         </div>
-        <div>
+        <div className="flex items-center gap-4">
+          <AdminButton />
           {userData ? (
             <button
               onClick={handleLogout}
@@ -75,7 +76,6 @@ const Dashboard = () => {
             </button>
           )}
         </div>
-        <AdminButton/>
       </nav>
 
       {/* Main Content */}

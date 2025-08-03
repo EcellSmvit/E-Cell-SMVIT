@@ -66,7 +66,6 @@ router.put("/users/:id/role", async (req, res) => {
     await user.save();
     res.status(200).json({ message: "User role updated", user });
   } catch (err) {
-    console.error("❌ Error updating role:", err);
     res.status(500).json({ message: "Internal server error" });
   }
 });

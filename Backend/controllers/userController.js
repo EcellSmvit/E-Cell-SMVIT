@@ -31,7 +31,6 @@ export const getUserData = async (req, res) => {
     });
     
   } catch (error) {
-    console.error("Error in getUserData:", error);
     return res.status(500).json({
       success: false,
       message: "Internal Server Error",

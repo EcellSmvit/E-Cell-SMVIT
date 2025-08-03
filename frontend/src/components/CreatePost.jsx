@@ -64,7 +64,6 @@ const CreatePost = ({ onPostCreated }) => {
       setImage(null);
       if (typeof onPostCreated === "function") onPostCreated();
     } catch (err) {
-      console.error("❌ Error creating post:", err);
       handleApiError(err, "Failed to create post.");
     } finally {
       setIsUploading(false);

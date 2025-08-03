@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Section2 = () => {
   const lenis = new Lenis({ autoRaf: true });
-  lenis.on("scroll", (e) => console.log(e));
+
 
   useEffect(() => {
     const videoTimeline = gsap.timeline({

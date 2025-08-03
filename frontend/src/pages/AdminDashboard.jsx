@@ -1,4 +1,3 @@
-// pages/AdminDashboard.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,7 +18,6 @@ const AdminDashboard = () => {
       setPosts(postRes.data);
       setUsers(userRes.data);
     } catch (err) {
-      console.error("❌ Admin data fetch error:", err);
       toast.error("Failed to load admin data.");
     }
   };
@@ -32,7 +30,6 @@ const AdminDashboard = () => {
       setPosts((prev) => prev.filter((p) => p._id !== id));
       toast.success("Post deleted");
     } catch (err) {
-      console.error("❌ Post delete error:", err);
       toast.error("Failed to delete post.");
     }
   };
@@ -45,7 +42,6 @@ const AdminDashboard = () => {
       setUsers((prev) => prev.filter((u) => u._id !== id));
       toast.success("User deleted");
     } catch (err) {
-      console.error("❌ User delete error:", err);
       toast.error("Failed to delete user.");
     }
   };
@@ -58,7 +54,6 @@ const AdminDashboard = () => {
       toast.success("User role updated");
       fetchData();
     } catch (err) {
-      console.error("❌ Update role error:", err);
       toast.error("Failed to update role.");
     }
   };

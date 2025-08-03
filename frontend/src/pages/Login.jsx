@@ -60,7 +60,6 @@ const Login = () => {
           toast.success("Login successful!");
           setIsLogin(true);
           const user = await getUserData();
-          console.log("✅ User returned after login:", user);
 
           if (!user) {
             toast.error("Failed to fetch user data.");

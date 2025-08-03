@@ -114,11 +114,8 @@ export const logout = (req, res)=>{
 
 //Send verification OPT to user email
 export const sendVerifyOtp = async (req, res) => {
-    console.log("💡 Incoming userId:", req.userId);
-    console.log("📥 Received body:", req.userId)
     try {
       const  userId  = req.userId;
-      console.log("🔍 userId from middleware:", userId);
       if (!userId) return res.status(400).json({ success: false, message: "userId missing" });
   
       const user = await userModel.findById(userId);
@@ -142,15 +139,12 @@ export const sendVerifyOtp = async (req, res) => {
   
       try {
         await transporter.sendMail(mailOptions);
-        console.log("✅ OTP email sent to:", user.email);
         return res.json({ success: true, message: "Verification OTP sent to your email" });
       } catch (mailErr) {
-        console.error("❌ Email send error:", mailErr);
         return res.status(500).json({ success: false, message: "Email send failed", error: mailErr.message });
       }
   
     } catch (err) {
-      console.error("❌ Error in sendVerifyOtp:", err);
       return res.status(500).json({ success: false, message: err.message });
     }
   };

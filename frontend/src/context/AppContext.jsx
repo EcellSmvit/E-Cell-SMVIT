@@ -14,14 +14,10 @@ export const AppContextProvider = (props) => {
     const [userData, setUserData] = useState(null);
     
     const getUserData = async () => {
-      console.log("👀 Browser cookies:", document.cookie);
-    
       try {
         const { data } = await axios.get(`${backendUrl}/api/user/data`, {
           withCredentials: true,
         });
-        console.log("✅ User Data Fetched:", data);
-        console.log("🧪 Verified?", data.user?.isAccountVerified);
         setUserData(data.user);
         return data.user;
       } catch (error) {
@@ -29,18 +25,13 @@ export const AppContextProvider = (props) => {
       }
     };
     
-    
-
     const getAuthStatus = async () => {
         try {
           const { data } = await axios.get(backendUrl + '/api/auth/is-auth');
-          console.log('✅ Auth status response:', data);
       
           if (data.success) {
             setIsLogin(true);
             getUserData();
-          } else {
-            console.log('⚠️ Not logged in (auth check failed):', data.message);
           }
         } catch (error) {
           console.error('❌ Auth status request failed:', error.response?.data || error.message);

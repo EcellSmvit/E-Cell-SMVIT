@@ -28,7 +28,6 @@ const corsOptions = {
         if (allowedOrigins.includes(origin)) {
             return callback(null, true)
         } else {
-            console.error('❌ CORS Error: ', origin)
             return callback(new Error('Not allowed by CORS'))
         }
     },
@@ -61,6 +60,4 @@ app.use((req, res) => {
     res.status(404).json({ error: 'Resource not found' })
 })
 
-app.listen(PORT, () => {
-    console.log(`✅ Server running on PORT: ${PORT}`)
-})
+app.listen(PORT)

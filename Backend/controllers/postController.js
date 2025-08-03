@@ -14,7 +14,6 @@ export const getFeedPosts = async (req, res) => {
   
 	  res.status(200).json(posts);
 	} catch (error) {
-	  console.error("❌ Error in getFeedPosts:", error);
 	  res.status(500).json({ message: "Server error while fetching feed posts." });
 	}
   };
@@ -59,7 +58,6 @@ export const createPost = async (req, res) => {
           image: result.secure_url,
         });
       } catch (cloudErr) {
-        console.error("❌ Cloudinary upload failed:", cloudErr);
         return res.status(500).json({ message: "Image upload failed." });
       }
     } else {
@@ -75,7 +73,6 @@ export const createPost = async (req, res) => {
 
     res.status(201).json(newPost);
   } catch (error) {
-    console.error("❌ Error in createPost:", error);
     res.status(500).json({ message: "Server error while creating post." });
   }
 };
@@ -106,7 +103,7 @@ export const deletePost = async (req, res) => {
         const publicId = fileName.split(".")[0];
         await cloudinary.uploader.destroy(`posts/${publicId}`);
       } catch (err) {
-        console.warn("⚠️ Failed to delete Cloudinary image:", err);
+        // Image deletion failed, but continue deleting post
       }
     }
 
@@ -114,7 +111,6 @@ export const deletePost = async (req, res) => {
 
     res.status(200).json({ message: "Post deleted successfully." });
   } catch (error) {
-    console.error("❌ Error in deletePost:", error);
     res.status(500).json({ message: "Server error while deleting post." });
   }
 };
@@ -132,7 +128,6 @@ export const getPostById = async (req, res) => {
 
     res.status(200).json(post);
   } catch (error) {
-    console.error("❌ Error in getPostById:", error);
     res.status(500).json({ message: "Server error while fetching post." });
   }
 };
@@ -172,7 +167,6 @@ export const createComment = async (req, res) => {
 
     res.status(200).json(post);
   } catch (error) {
-    console.error("❌ Error in createComment:", error);
     res.status(500).json({ message: "Server error while creating comment." });
   }
 };
@@ -211,7 +205,6 @@ export const likePost = async (req, res) => {
 
     res.status(200).json(post);
   } catch (error) {
-    console.error("❌ Error in likePost:", error);
     res.status(500).json({ message: "Server error while liking post." });
   }
 };

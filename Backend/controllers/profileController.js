@@ -1,22 +1,16 @@
 import cloudinary from "../config/cloudinary.js"
 import userModel from "../models/userModel.js"
 
-
 export const getPublicProfile = async (req, res) => {
     try {
-      console.log("🌐 Getting profile for:", req.params.username);
-  
       const user = await userModel.findOne({ username: req.params.username }).select("-password");
   
       if (!user) {
-        console.log("❌ No user found");
         return res.status(404).json({ success: false, message: "User not found" });
       }
   
-      console.log("✅ User found:", user.username);
       return res.json({ data: user }); // ✅ Required for frontend
     } catch (error) {
-      console.error("❌ getPublicProfile error:", error.message);
       return res.status(500).json({ success: false, message: "Server error" });
     }
   };
@@ -66,8 +60,6 @@ export const getPublicProfile = async (req, res) => {
   
       res.json(user);
     } catch (error) {
-      console.error("Error in updateProfile Controller:", error);
       res.status(500).json({ success: false, message: "Server error" });
     }
   };
-  

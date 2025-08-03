@@ -68,66 +68,71 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="p-6 text-white flex flex-row gap-4">
+    <div className="p-6 text-white">
       <h1 className="mb-4 text-3xl font-bold">Admin Dashboard</h1>
-
-      
-      <div className="flex  flex-wrap gap-4">
-      <h2 className="mt-6 mb-2 text-xl">All Posts</h2>
-        {posts.map((post) => (
-          <div key={post._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
-            <p className="text-sm text-gray-300">Author: {post.author?.name}</p>
-            <p>{post.content}</p>
-            {post.image && <img src={post.image} alt="post-img" className="mt-2 w-32 rounded" />}
-            <div className="flex justify-between items-center mt-2">
-              <span className="text-xs text-gray-400">
-                Likes: {post.likes?.length} | Comments: {post.comments?.length}
-              </span>
-              <button
-                className="px-3 py-1 text-sm bg-red-500 rounded hover:bg-red-600"
-                onClick={() => deletePost(post._id)}
-              >
-                Delete
-              </button>
-            </div>
+      <div className="flex flex-row gap-8">
+        {/* Users on the left */}
+        <div className="flex-1 min-w-0">
+          <h2 className="mb-2 text-xl">All Users</h2>
+          <div className="flex flex-wrap gap-4">
+            {users.map((user) => (
+              <div key={user._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
+                <div className="mb-1 font-medium">{user.name} ({user.email})</div>
+                <div className="text-sm text-gray-300">
+                  Username: {user.username} | Verified: {user.isAccountVerified ? "✅" : "❌"}<br />
+                  Admin: {user.isAdmin ? "Yes" : "No"} | Alumni: {user.isAlumni ? "Yes" : "No"}<br />
+                  Joined: {new Date(user.createdAt).toLocaleString()}
+                </div>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  <button onClick={() => updateUserRole(user._id, "admin")}
+                    className="px-2 py-1 text-sm bg-blue-500 rounded hover:bg-blue-600">
+                    Make Admin
+                  </button>
+                  <button onClick={() => updateUserRole(user._id, "alumni")}
+                    className="px-2 py-1 text-sm bg-green-500 rounded hover:bg-green-600">
+                    Make Alumni
+                  </button>
+                  <button onClick={() => updateUserRole(user._id, "removeAdmin")}
+                    className="px-2 py-1 text-sm bg-yellow-600 rounded hover:bg-yellow-700">
+                    Remove Admin
+                  </button>
+                  <button onClick={() => updateUserRole(user._id, "removeAlumni")}
+                    className="px-2 py-1 text-sm bg-yellow-500 rounded hover:bg-yellow-600">
+                    Remove Alumni
+                  </button>
+                  <button onClick={() => deleteUser(user._id)}
+                    className="px-2 py-1 text-sm bg-red-500 rounded hover:bg-red-600">
+                    Delete User
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-
-      <h2 className="mt-6 mb-2 text-xl">All Users</h2>
-      <div className="flex flex-wrap gap-4">
-        {users.map((user) => (
-          <div key={user._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
-            <div className="mb-1 font-medium">{user.name} ({user.email})</div>
-            <div className="text-sm text-gray-300">
-              Username: {user.username} | Verified: {user.isAccountVerified ? "✅" : "❌"}<br />
-              Admin: {user.isAdmin ? "Yes" : "No"} | Alumni: {user.isAlumni ? "Yes" : "No"}<br />
-              Joined: {new Date(user.createdAt).toLocaleString()}
-            </div>
-            <div className="flex flex-wrap gap-2 mt-2">
-              <button onClick={() => updateUserRole(user._id, "admin")}
-                className="px-2 py-1 text-sm bg-blue-500 rounded hover:bg-blue-600">
-                Make Admin
-              </button>
-              <button onClick={() => updateUserRole(user._id, "alumni")}
-                className="px-2 py-1 text-sm bg-green-500 rounded hover:bg-green-600">
-                Make Alumni
-              </button>
-              <button onClick={() => updateUserRole(user._id, "removeAdmin")}
-                className="px-2 py-1 text-sm bg-yellow-600 rounded hover:bg-yellow-700">
-                Remove Admin
-              </button>
-              <button onClick={() => updateUserRole(user._id, "removeAlumni")}
-                className="px-2 py-1 text-sm bg-yellow-500 rounded hover:bg-yellow-600">
-                Remove Alumni
-              </button>
-              <button onClick={() => deleteUser(user._id)}
-                className="px-2 py-1 text-sm bg-red-500 rounded hover:bg-red-600">
-                Delete User
-              </button>
-            </div>
+        </div>
+        {/* Posts on the right */}
+        <div className="flex-1 min-w-0">
+          <h2 className="mb-2 text-xl">All Posts</h2>
+          <div className="flex flex-wrap gap-4">
+            {posts.map((post) => (
+              <div key={post._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
+                <p className="text-sm text-gray-300">Author: {post.author?.name}</p>
+                <p>{post.content}</p>
+                {post.image && <img src={post.image} alt="post-img" className="mt-2 w-32 rounded" />}
+                <div className="flex justify-between items-center mt-2">
+                  <span className="text-xs text-gray-400">
+                    Likes: {post.likes?.length} | Comments: {post.comments?.length}
+                  </span>
+                  <button
+                    className="px-3 py-1 text-sm bg-red-500 rounded hover:bg-red-600"
+                    onClick={() => deletePost(post._id)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
     </div>
   );

@@ -68,11 +68,12 @@ const AdminDashboard = () => {
   }, []);
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-6 text-white flex flex-row gap-4">
       <h1 className="mb-4 text-3xl font-bold">Admin Dashboard</h1>
 
+      
+      <div className="flex  flex-wrap gap-4">
       <h2 className="mt-6 mb-2 text-xl">All Posts</h2>
-      <div className="flex flex-wrap gap-4">
         {posts.map((post) => (
           <div key={post._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
             <p className="text-sm text-gray-300">Author: {post.author?.name}</p>

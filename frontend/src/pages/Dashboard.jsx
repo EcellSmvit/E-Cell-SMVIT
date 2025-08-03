@@ -75,9 +75,7 @@ const Dashboard = () => {
             </button>
           )}
         </div>
-        <div>
-        <AdminButton/>
-        </div>
+        
         
       </nav>
 
@@ -90,6 +88,9 @@ const Dashboard = () => {
         </div>
         <div className="flex flex-1 justify-start">
           <SuggestedUser />
+          <div>
+        <AdminButton/>
+        </div>
         </div>
       </div>
     </div>

@@ -58,8 +58,7 @@ const Dashboard = () => {
             style={{ background: "rgba(255,255,255,0.05)", borderRadius: "8px" }}
           />
         </div>
-        <div className="flex items-center gap-4">
-          <AdminButton />
+        <div>
           {userData ? (
             <button
               onClick={handleLogout}
@@ -76,9 +75,12 @@ const Dashboard = () => {
             </button>
           )}
         </div>
+        <div>
+        <AdminButton/>
+        </div>
+        
       </nav>
 
-      {/* Main Content */}
       <div className="flex flex-row justify-center items-start mt-32 w-full">
         <div className="flex flex-1 justify-end">
           <ProfileCard username={userData.username} />

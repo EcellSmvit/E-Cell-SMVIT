@@ -72,9 +72,9 @@ const AdminDashboard = () => {
       <h1 className="mb-4 text-3xl font-bold">Admin Dashboard</h1>
 
       <h2 className="mt-6 mb-2 text-xl">All Posts</h2>
-      <ul className="space-y-4">
+      <div className="flex flex-wrap gap-4">
         {posts.map((post) => (
-          <li key={post._id} className="p-4 rounded bg-white/10">
+          <div key={post._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
             <p className="text-sm text-gray-300">Author: {post.author?.name}</p>
             <p>{post.content}</p>
             {post.image && <img src={post.image} alt="post-img" className="mt-2 w-32 rounded" />}
@@ -89,14 +89,14 @@ const AdminDashboard = () => {
                 Delete
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
 
       <h2 className="mt-6 mb-2 text-xl">All Users</h2>
-      <ul className="space-y-4">
+      <div className="flex flex-wrap gap-4">
         {users.map((user) => (
-          <li key={user._id} className="p-4 rounded bg-white/10">
+          <div key={user._id} className="p-4 rounded bg-white/10 w-80 flex-shrink-0">
             <div className="mb-1 font-medium">{user.name} ({user.email})</div>
             <div className="text-sm text-gray-300">
               Username: {user.username} | Verified: {user.isAccountVerified ? "✅" : "❌"}<br />
@@ -125,9 +125,9 @@ const AdminDashboard = () => {
                 Delete User
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

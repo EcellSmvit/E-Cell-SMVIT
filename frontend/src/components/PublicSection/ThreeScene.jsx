@@ -37,7 +37,7 @@ const ThreeScene = () => {
     controls.enablePan = true;   
     controls.update()
 
-    let light = new THREE.AmbientLight("white",2);
+    let light = new THREE.AmbientLight("white",0.1);
     scene.add(light)
 
     const light1 = new THREE.PointLight(0x4F46E5,1,100)
@@ -45,7 +45,7 @@ const ThreeScene = () => {
     scene.add(light1)
 
    new RGBELoader()
-  .load('https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/rogland_clear_night_1k.hdr', (texture) => {
+  .load('https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/studio_small_08_2k.hdr', (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.environment = texture;
   });

@@ -16,7 +16,7 @@ function EnvironmentLoader() {
     import('three/examples/jsm/loaders/RGBELoader').then(({ RGBELoader }) => {
       const loader = new RGBELoader();
       loader.load(
-        'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/rogland_clear_night_1k.hdr',
+        'https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/2k/studio_small_08_2k.hdr',
         (texture) => {
           if (disposed) {
             texture.dispose();
@@ -67,7 +67,7 @@ const Model = () => {
         scrollTrigger: {
           trigger: '#page2',
           start: 'top top',
-          end: '+=350%', // extend scroll distance so animation ends further down
+          end: '+=350%',
           scrub: 2,
         },
       });

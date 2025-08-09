@@ -19,6 +19,7 @@ import InfinityComponent from '@/components/PublicSection/Infinity';
 import Footer from '@/components/PublicSection/Footer';
 import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobile';
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
+import Loding from '@/components/PublicSection/Loding';
 // import Section6 from './components/Section6';
 
 
@@ -26,6 +27,9 @@ import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
 function Home() {
   return (
     <div>
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 1000 }}>
+        <Loding/>
+      </div>
       <Navbar/>
       <TextHome/>
       <Background/>

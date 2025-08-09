@@ -27,9 +27,9 @@ import Loding from '@/components/PublicSection/Loding';
 function Home() {
   return (
     <div>
-      <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 1000 }}>
+      {/* <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 1000 }}>
         <Loding/>
-      </div>
+      </div> */}
       <Navbar/>
       <TextHome/>
       <Background/>

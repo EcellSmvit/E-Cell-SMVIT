@@ -97,7 +97,7 @@ const AchievementSection = () => {
             "
             style={{ fontFamily: 'sans-serif' }}
           >
-            {/* Left side */}
+            
             <div className="flex flex-col gap-6 md:gap-[2vw] text-base md:text-[1.5vw] text-white tracking-wide md:tracking-[0.1vw] whitespace-normal md:whitespace-nowrap w-full md:w-1/2 text-center md:text-left">
               <div id="animated-line">
                 <span className="font-bold" style={{ fontFamily: 'Anton, sans-serif' }}>
@@ -130,7 +130,7 @@ const AchievementSection = () => {
                 </div>
               </div>
             </div>
-            {/* Right side */}
+            
             <div className="flex flex-col gap-6 md:gap-[2vw] text-base md:text-[1.5vw] text-white tracking-wide md:tracking-[0.1vw] whitespace-normal md:whitespace-nowrap w-full md:w-1/2 text-center md:text-left">
               <div id="animated-line">
                 <span className="font-bold" style={{ fontFamily: 'Anton, sans-serif' }}>
@@ -166,88 +166,120 @@ const AchievementSection = () => {
           </div>
         </div>
         <div
-  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-             backdrop-blur-lg border border-white/20 rounded-2xl 
-             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg1"
->
-
-          <h1
-            className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
-            style={{ fontFamily: 'Anton, sans-serif' }}
-          >
-            WINNER OF IPL AUCTION,IITB
-          </h1>
-          <img
-            className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw]"
-            id="img1"
-            src="https://ik.imagekit.io/jwt52yyie/476971099_17995442297755800_2833424896387556065_n.png?updatedAt=1751375625880"
-            alt=""
-          />
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+                     backdrop-blur-lg border border-white/20 
+                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+          id="bg1"
+        >
+          <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
+            <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
+              <img
+                className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw] shadow-lg"
+                id="img1"
+                src="https://ik.imagekit.io/jwt52yyie/476971099_17995442297755800_2833424896387556065_n.png?updatedAt=1751375625880"
+                alt="Winner of IPL Auction, IITB"
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center w-full md:items-start md:w-1/2">
+              <h1
+                className="text-[10vw] md:text-[5vw] text-white uppercase text-center md:text-left font-bold mb-4"
+                style={{ fontFamily: 'Anton, sans-serif' }}
+              >
+                WINNER OF IPL AUCTION, IITB
+              </h1>
+              <p className="max-w-xl text-base font-normal text-center text-white/80 md:text-lg md:text-left">
+                Shashwat, Satvik, and Anant from E-Cell SMVIT emerged as the winners of the IPL Auction event at IIT Bombay! Their strategic thinking and teamwork led them to victory among top competitors from across the country. Congratulations to the team for this outstanding achievement!
+              </p>
+            </div>
+          </div>
         </div>
         <div
-  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-             backdrop-blur-lg border border-white/20 rounded-2xl 
-             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg2"
->
-
-          <h1
-            className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
-            style={{ fontFamily: 'Anton, sans-serif' }}
-          >
-            CASE COMPETITION FINALIST, IITR
-          </h1>
-          <img
-            className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw]"
-            id="img1"
-            src="https://ik.imagekit.io/jwt52yyie/484165290_17999063099755800_2469744340898086729_n.png?updatedAt=1751375906011"
-            alt=""
-          />
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+                     backdrop-blur-lg border border-white/20 
+                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+          id="bg2"
+        >
+          <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
+            <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
+              <img
+                className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw] shadow-lg"
+                id="img1"
+                src="https://ik.imagekit.io/jwt52yyie/484165290_17999063099755800_2469744340898086729_n.png?updatedAt=1751375906011"
+                alt="Case Competition Finalist, IITR"
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center w-full md:items-start md:w-1/2">
+              <h1
+                className="text-[10vw] md:text-[5vw] text-white uppercase text-center md:text-left font-bold mb-4"
+                style={{ fontFamily: 'Anton, sans-serif' }}
+              >
+                CASE COMPETITION FINALIST, IITR
+              </h1>
+              <p className="max-w-xl text-base font-normal text-center text-white/80 md:text-lg md:text-left">
+                Anuj represented us at the finals of the Case Study Competition at IIT Roorkee’s National Social Summit! Tackling the crucial topic of “Ensuring Safe & Inclusive Workplaces,” he analyzed workplace harassment issues and proposed impactful solutions. A huge shoutout to him for making it to the finals and showcasing his skills on such a big stage!
+              </p>
+            </div>
+          </div>
         </div>
         <div
-  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-             backdrop-blur-lg border border-white/20 rounded-2xl 
-             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg3"
->
-
-          <h1
-            className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
-            style={{ fontFamily: 'Anton, sans-serif' }}
-          >
-            BLUE PRINT FINALIST,IITD
-          </h1>
-          <img
-            className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw]"
-            id="img1"
-            src="https://ik.imagekit.io/jwt52yyie/WhatsApp%20Image%202025-07-01%20at%2018.53.39_a50fd182.png?updatedAt=1751376280226"
-            alt=""
-          />
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+                     backdrop-blur-lg border border-white/20
+                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+          id="bg3"
+        >
+          <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
+            <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
+              <img
+                className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw] shadow-lg"
+                id="img1"
+                src="https://ik.imagekit.io/jwt52yyie/WhatsApp%20Image%202025-07-01%20at%2018.53.39_a50fd182.png?updatedAt=1751376280226"
+                alt="Blueprint Finalist, IITD"
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center w-full md:items-start md:w-1/2">
+              <h1
+                className="text-[10vw] md:text-[5vw] text-white uppercase text-center md:text-left font-bold mb-4"
+                style={{ fontFamily: 'Anton, sans-serif' }}
+              >
+                BLUEPRINT FINALIST, IITD
+              </h1>
+              <p className="max-w-xl text-base font-normal text-center text-white/80 md:text-lg md:text-left">
+                Our team reached the finals of the Blueprint competition at IIT Delhi! Competing against some of the brightest minds, they showcased innovative thinking and problem-solving skills. Congratulations to the team for making it to the finals and representing E-Cell SMVIT on a national platform!
+              </p>
+            </div>
+          </div>
         </div>
         <div
-  className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-             bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-             backdrop-blur-lg border border-white/20 rounded-2xl 
-             shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-  id="bg4"
->
-
-          <h1
-            className="text-[10vw] md:text-[5vw] text-white uppercase text-center absolute bottom-0 md:left-[30%] md:-translate-x-1/2 md:-translate-y-1/2 z-0"
-            style={{ fontFamily: 'Anton, sans-serif' }}
-          >
-            STARTUP MELA, SJU
-          </h1>
-          <img
-            className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw]"
-            id="img1"
-            src="https://ik.imagekit.io/jwt52yyie/464984466_560928352994412_508468383643153030_n.png?updatedAt=1751376431935"
-            alt=""
-          />
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
+                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+                     backdrop-blur-lg border border-white/20 
+                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+          id="bg4"
+        >
+          <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
+            <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
+              <img
+                className="w-[90vw] h-[54vw] md:w-[50vw] md:h-[30vw] object-cover rounded-[4vw] md:rounded-[2vw] shadow-lg"
+                id="img1"
+                src="https://ik.imagekit.io/jwt52yyie/464984466_560928352994412_508468383643153030_n.png?updatedAt=1751376431935"
+                alt="Startup Mela, SJU"
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center w-full md:items-start md:w-1/2">
+              <h1
+                className="text-[10vw] md:text-[5vw] text-white uppercase text-center md:text-left font-bold mb-4"
+                style={{ fontFamily: 'Anton, sans-serif' }}
+              >
+                STARTUP MELA, SJU
+              </h1>
+              <p className="max-w-xl text-base font-normal text-center text-white/80 md:text-lg md:text-left">
+                Our team participated in the Startup Mela at St. Joseph's University, showcasing entrepreneurial spirit and innovative ideas. The event provided a platform to connect with like-minded individuals, gain valuable feedback, and further our mission of fostering a culture of innovation. Kudos to everyone involved for making a mark at SJU!
+              </p>
+            </div>
+          </div>
         </div>
         <div
           id="page2-text"
@@ -278,7 +310,7 @@ const AchievementSection = () => {
             STARTUP BACKED BY E-CELL
           </h1>
           <div className="flex flex-row gap-16 justify-center items-end w-full pointer-events-auto md:gap-40">
-            {/* Left Images */}
+            
             <div className="flex flex-col gap-10 md:gap-10">
               <div className="w-[20vw] md:w-[8vw] rounded-[3vw] md:rounded-[1vw] overflow-hidden">
                 <img
@@ -295,9 +327,9 @@ const AchievementSection = () => {
                 />
               </div>
             </div>
-            {/* Center Spacer */}
+            
             <div className="w-[4vw] md:w-[10vw]"></div>
-            {/* Right Images */}
+            
             <div className="flex flex-col gap-6 md:gap-8">
               <div className="w-[20vw] md:w-[8vw] rounded-[3vw] md:rounded-[1vw] overflow-hidden">
                 <img

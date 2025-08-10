@@ -59,14 +59,14 @@ function Text() {
           leading-tight
         "
       >
-        Our purpose is to empower dreams 
+        OUR PURPOSE IS TO EMPOWER DREAMS 
         & <br className="hidden xs:inline" />
-        build a culture of innovation.
+        BUILD A CULTURE OF INNOVATION.
       </h1> 
 
       <p
         ref={pRef}
-        className="w-full text-base font-medium leading-relaxed text-center text-white sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 sm:text-lg md:text-xl"
+        className="w-full text-base font-medium leading-relaxed text-justify text-white sm:w-4/5 md:w-3/4 lg:w-2/3 xl:w-1/2 sm:text-lg md:text-xl"
       >
         E-Cell SMVIT is committed to fostering entrepreneurial spirit,  nurturing innovative minds,  and creating a dynamic ecosystem  where students transform ideas into impactful ventures.  For years, we've been empowering changemakers and redefining  what's possible. 
         Explore our Purpose & Vision, Journey, and more.

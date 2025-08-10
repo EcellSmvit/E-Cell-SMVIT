@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const images = [
   {
-    src: "https://ik.imagekit.io/96gea10vb/Gallery%20Images/NEC%20IIT%20Bombay-1.avif?updatedAt=1747310809335",
+    src: "https://ik.imagekit.io/es6xialea/IMG_2510.JPG?updatedAt=1754758464033",
     title: "OUR MISSION",
     desc: "Our mission is to create a self-sustaining campus hub that fosters entrepreneurship by connecting students with industry experts, understanding market demands, and providing hands-on training to launch start-ups seamlessly.",
   },

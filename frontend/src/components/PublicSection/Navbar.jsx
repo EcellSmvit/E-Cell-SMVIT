@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { gsap } from 'gsap';
 
 function Navbar() {
   const navigate = useNavigate();
+  const navbarRef = useRef(null);
 
-  // Scroll to section by id
+  useEffect(() => {
+    if (navbarRef.current) {
+      gsap.set(navbarRef.current, { y: -100, opacity: 0 });
+      setTimeout(() => {
+        gsap.to(navbarRef.current, { y: 0, opacity: 1, duration: 1, ease: "power3.out" });
+      }, 3000);
+    }
+  }, []);
+
   const handleScroll = (id) => {
     const section = document.getElementById(id);
     if (section) {
@@ -13,20 +23,21 @@ function Navbar() {
   };
 
   return (
-    <div className="absolute z-20 top-6 left-1/2 transform -translate-x-1/2 h-16 w-[90vw]
+    <div
+      ref={navbarRef}
+      className="absolute z-20 top-6 left-1/2 transform -translate-x-1/2 h-16 w-[90vw]
                 bg-gradient-to-r from-white/10 to-white/5
                 backdrop-blur-xl rounded-2xl
                 flex items-center justify-between px-4 md:px-8
                 text-white
-                shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
-
+                shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]"
+    >
       <div className="font-sans text-2xl font-bold tracking-wide drop-shadow-sm">
         <img className='w-8' src="https://www.ecellsmvit.in/images/ecellwhite.png" alt="Ecell Logo" />
       </div>
 
-      {/* Navigation Links - hidden on small screens */}
       <div className="hidden md:flex">
-        <ul className='flex items-center justify-center gap-6 text-sm md:gap-8 md:text-base'>
+        <ul className='flex gap-6 justify-center items-center text-sm md:gap-8 md:text-base'>
           <li
             className="cursor-pointer relative after:content-[''] after:block after:h-[2px] after:bg-[#4F46E5] after:w-0 after:transition-all after:duration-300 hover:after:w-full"
             onClick={() => handleScroll('home')}
@@ -54,7 +65,6 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* Single Auth Button */}
       <div className="flex items-center">
         <button
           onClick={() => navigate('/login')}

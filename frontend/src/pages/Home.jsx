@@ -7,9 +7,6 @@ import Navbar from '../components/PublicSection/Navbar'
 import TextHome from '../components/PublicSection/TextHome';
 import ThreeScene from '../components/PublicSection/ThreeScene';
 import Section2 from '../components/PublicSection/Section2';
-import Section3 from '../components/PublicSection/Section3';
-// import Loding from './components/Loding';
-// import Section4 from './components/Section4';
 import AchievementSection from '../components/PublicSection/AchievementSection';
 import Section5 from '../components/PublicSection/Section5';
 import Section6 from '../components/PublicSection/Section6';
@@ -19,18 +16,12 @@ import InfinityComponent from '@/components/PublicSection/Infinity';
 import Footer from '@/components/PublicSection/Footer';
 import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobile';
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
-import Loding from '@/components/PublicSection/Loding';
-// import Section6 from './components/Section6';
 
 
 
 function Home() {
   return (
-    <div>
-      {/* <div style={{ position: "fixed", top: 0, left: 0, width: "100vw", zIndex: 1000 }}>
-        <Loding/>
-      </div> */}
-      
+    <div>     
       <Navbar/>
       <TextHome/>
       <Background/>

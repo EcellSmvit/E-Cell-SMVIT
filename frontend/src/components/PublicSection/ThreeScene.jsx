@@ -125,7 +125,7 @@ const ThreeScene = () => {
           pointerEvents: 'auto'
         }}
       />
-      <div>
+      <div className="block sm:hidden">
         <ScrollButton />
       </div>
     </>

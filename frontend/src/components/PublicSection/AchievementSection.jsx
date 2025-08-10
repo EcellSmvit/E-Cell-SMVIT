@@ -66,37 +66,17 @@ const AchievementSection = () => {
   return (
     <div className="overflow-hidden">
       <div
-        id="page2"
-        className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center"
-      >
+        id="page2" className="bg-[radial-gradient(circle,_#6C4DFF_10%,_#000000_70%)] w-full h-[200vh] relative flex items-center justify-center">
         <div id="scroll-container" className="absolute inset-0 z-0 w-full h-full pointer-events-none">
           <div id="gltf-pin-wrapper" className="sticky top-0 w-full h-[200vh]">
             <GltfScene />
           </div>
         </div>
-        <div
-          id="page1-text"
-          className="absolute top-[3vh] left-1/2 -translate-x-1/2 text-[4vw] text-white tracking-[0.2vw] z-0 pointer-events-none select-none whitespace-nowrap"
-          style={{ fontFamily: 'Anton, sans-serif' }}
-        >
-          <h1
-            className="px-2 text-2xl font-bold tracking-wide leading-tight text-center text-white select-none sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
-            style={{ fontFamily: 'Anton, sans-serif' }}
-          >
+        <div id="page1-text" className="absolute top-[3vh] left-1/2 -translate-x-1/2 text-[4vw] text-white tracking-[0.2vw] z-0 pointer-events-none select-none whitespace-nowrap" style={{ fontFamily: 'Anton, sans-serif' }}>
+          <h1 className="px-2 text-2xl font-bold tracking-wide leading-tight text-center text-white select-none sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl" style={{ fontFamily: 'Anton,sans-serif' }}>
             OUR ACHIEVEMENT
           </h1>
-          <div
-            className="
-              absolute 
-              left-1/2 -translate-x-1/2
-              top-[10vh] md:top-[30vh]
-              md:flex  md:flex-row 
-              gap-8 md:gap-[6vw] 
-              z-0 pointer-events-none select-none 
-              w-[95vw] max-w-6xl hidden
-            "
-            style={{ fontFamily: 'sans-serif' }}
-          >
+          <div className="absolute left-1/2 -translate-x-1/2 top-[10vh] md:top-[30vh] md:flex  md:flex-row gap-8 md:gap-[6vw] z-0 pointer-events-none select-none w-[95vw] max-w-6xl hidden" style={{ fontFamily: 'sans-serif' }}>
             
             <div className="flex flex-col gap-6 md:gap-[2vw] text-base md:text-[1.5vw] text-white tracking-wide md:tracking-[0.1vw] whitespace-normal md:whitespace-nowrap w-full md:w-1/2 text-center md:text-left">
               <div id="animated-line">
@@ -166,12 +146,7 @@ const AchievementSection = () => {
           </div>
         </div>
         <div
-          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-                     backdrop-blur-lg border border-white/20 
-                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-          id="bg1"
-        >
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh]md:h-screen bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90 backdrop-blur-lg border border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]" id="bg1">
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
             <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
               <img
@@ -194,13 +169,7 @@ const AchievementSection = () => {
             </div>
           </div>
         </div>
-        <div
-          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-                     backdrop-blur-lg border border-white/20 
-                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
-          id="bg2"
-        >
+        <div className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90 backdrop-blur-lg border border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]" id="bg2">
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
             <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
               <img
@@ -225,9 +194,9 @@ const AchievementSection = () => {
         </div>
         <div
           className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
-                     backdrop-blur-lg border border-white/20
-                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+                     bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90
+                     backdrop-blur-lg border border-white/20 
+                     shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]"
           id="bg3"
         >
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
@@ -254,9 +223,9 @@ const AchievementSection = () => {
         </div>
         <div
           className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#6D4DFE]/40 via-white/10 to-[#6D4DFE]/10 
+                     bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90
                      backdrop-blur-lg border border-white/20 
-                     shadow-[0_4px_30px_rgba(0,0,0,0.3)] z-[3]"
+                     shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]"
           id="bg4"
         >
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
@@ -286,25 +255,7 @@ const AchievementSection = () => {
           className="flex absolute bottom-60 left-1/2 z-10 flex-col items-center w-full -translate-x-1/2 pointer-events-none select-none"
           style={{ fontFamily: 'Anton, sans-serif' }}
         >
-          <h1
-            className="
-              text-[6vw] 
-              md:text-[4vw] 
-              text-white 
-              tracking-[0.2vw] 
-              whitespace-nowrap 
-              mb-4 
-              md:mb-8
-              absolute 
-              md:static 
-              -top-40 
-              left-1/2 
-              -translate-x-1/2 
-              md:translate-x-0
-              w-full 
-              text-center
-              z-20
-            "
+          <h1 className="text-[6vw] md:text-[4vw] text-white tracking-[0.2vw] whitespace-nowrap mb-4 md:mb-8 absolute md:static -top-40 left-1/2 -translate-x-1/2 md:translate-x-0 w-full text-center z-20"
             style={{ fontFamily: 'Anton, sans-serif' }}
           >
             STARTUP BACKED BY E-CELL
@@ -321,7 +272,7 @@ const AchievementSection = () => {
               </div>
               <div className="w-[20vw] md:w-[8vw] rounded-[3vw] md:rounded-[1vw] overflow-hidden">
                 <img
-                  src="https://www.ecellsmvit.in/brand%20images/Group%207.svg"
+                  src="https://ik.imagekit.io/es6xialea/Tvara%20Logo%201.png?updatedAt=1754836706096"
                   alt="Left 2"
                   className="w-full h-full object-cover rounded-[3vw] md:rounded-[1vw] shadow-[0_4px_30px_rgba(255,0,0,0.7)]"
                 />

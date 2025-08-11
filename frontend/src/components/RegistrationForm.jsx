@@ -89,6 +89,7 @@ export default function RegistrationForm({ eventId }) {
               errors.name ? "border-red-400" : "border-gray-300"
             }`}
             placeholder="Enter your full name"
+            style={{ color: "#111827" }}
           />
           {errors.name && (
             <small className="text-red-500 mt-1 block">Name is required</small>
@@ -106,6 +107,7 @@ export default function RegistrationForm({ eventId }) {
             }`}
             placeholder="Enter your email"
             type="email"
+            style={{ color: "#111827" }}
           />
           {errors.email && (
             <small className="text-red-500 mt-1 block">Email is required</small>
@@ -121,6 +123,7 @@ export default function RegistrationForm({ eventId }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
             placeholder="Enter your phone number"
             type="tel"
+            style={{ color: "#111827" }}
           />
         </div>
 
@@ -132,6 +135,7 @@ export default function RegistrationForm({ eventId }) {
             {...register("college")}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
             placeholder="Enter your college name"
+            style={{ color: "#111827" }}
           />
         </div>
 
@@ -144,6 +148,7 @@ export default function RegistrationForm({ eventId }) {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition resize-none"
             placeholder="Any additional notes or answers"
             rows={3}
+            style={{ color: "#111827" }}
           />
         </div>
 
@@ -156,6 +161,7 @@ export default function RegistrationForm({ eventId }) {
             type="file"
             accept="image/*"
             className="block w-full text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition"
+            style={{ color: "#111827" }}
           />
           <small className="text-xs text-gray-500 block mt-1">
             JPEG/PNG allowed

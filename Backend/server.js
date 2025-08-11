@@ -4,6 +4,7 @@ import 'dotenv/config'
 import cookieParser from 'cookie-parser'
 import path from 'path';
 import { fileURLToPath } from 'url';
+import registrationRoutes from "./routes/registrationRoutes.js";
 
 import { connectDB } from './config/db.js'
 import AuthRouter from './routes/authRoutes.js'
@@ -47,6 +48,7 @@ app.use('/api/user', UserRouter)
 app.use('/api/v1/posts', postRouter)
 app.use('/api/profile', profileRouter)
 app.use('/api/admin', adminRoutes);
+app.use("/api/registrations", registrationRoutes);
 
 
 

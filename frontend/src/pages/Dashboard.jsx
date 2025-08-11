@@ -7,6 +7,7 @@ import { LogOut } from 'lucide-react';
 import ProfileCard from "@/components/SideBar/ProfileCard";
 import SuggestedUser from "@/components/SuggestedUser";
 import AdminButton from "@/components/AdminButton";
+import RegistrationForm from "@/components/RegistrationForm";
 
 const ECELL_LOGO_URL =
   "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png";
@@ -44,6 +45,9 @@ const Dashboard = () => {
         background: "radial-gradient(circle at 50% 30%, #4F46E5 0%, #000 100%)",
       }}
     >
+      <div className="w-[100%]">
+        <RegistrationForm/>
+      </div>
       <nav
         className="flex fixed top-0 left-0 z-50 justify-between items-center px-6 py-3 w-full border-b border-indigo-700 backdrop-blur-md bg-indigo-900/80"
         style={{

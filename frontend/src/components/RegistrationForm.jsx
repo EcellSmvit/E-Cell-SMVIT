@@ -57,7 +57,7 @@ export default function RegistrationForm({ eventId }) {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-8 bg-white rounded-2xl shadow-lg border border-indigo-100 mt-10">
+    <div className="max-w-xl mx-auto p-8 bg-black rounded-2xl shadow-lg border border-indigo-100 mt-10">
       <h3 className="text-2xl font-bold mb-6 text-indigo-700 text-center tracking-tight">
         Event Registration
       </h3>

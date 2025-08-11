@@ -33,7 +33,7 @@ export default function RegistrationForm({ eventId }) {
         phone: data.phone,
         college: data.college,
         answers: { note: data.note || "" },
-        file: base64, // base64 image string for Cloudinary
+        file: base64,
       };
 
       const res = await axios.post(
@@ -49,8 +49,15 @@ export default function RegistrationForm({ eventId }) {
         setMessage({ type: "error", text: res.data?.message || "Registration failed" });
       }
     } catch (err) {
-      console.error(err);
-      setMessage({ type: "error", text: err?.response?.data?.message || err.message || "Error" });
+      // Show a more explicit error message for debugging
+      console.error("Registration error:", err);
+      let errorText = "Something went wrong. Please try again.";
+      if (err?.response?.data?.message) {
+        errorText = err.response.data.message;
+      } else if (err?.message) {
+        errorText = err.message;
+      }
+      setMessage({ type: "error", text: errorText });
     } finally {
       setLoading(false);
     }

@@ -18,7 +18,7 @@ import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobil
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
 import Gallery from '@/components/PublicSection/Gallery';
 import Events from '@/components/PublicSection/Events';
-import Heads from '@/components/PublicSection/Heads';
+// import Heads from '@/components/PublicSection/Heads';
 
 
 
@@ -31,7 +31,7 @@ function Home() {
       {/* <TextHome/> */}
       {/* <Background/> */}
       <ThreeScene />
-      <Heads/>
+      {/* <Heads/> */}
       <InfinityComponent/>
       <Text/>
       <Section2/>

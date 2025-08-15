@@ -17,19 +17,25 @@ import Footer from '@/components/PublicSection/Footer';
 import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobile';
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
 import Gallery from '@/components/PublicSection/Gallery';
+import Events from '@/components/PublicSection/Events';
+import Heads from '@/components/PublicSection/Heads';
 
 
 
 function Home() {
   return (
     <div>     
-      <Navbar/>
-      <TextHome/>
-      <Background/>
+      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50 }}>
+        <Navbar />
+      </div>
+      {/* <TextHome/> */}
+      {/* <Background/> */}
       <ThreeScene />
+      <Heads/>
       <InfinityComponent/>
       <Text/>
       <Section2/>
+      
       {/* <Gallery/> */}
       <div className="hidden sm:block">
         <ImageSection/>
@@ -46,6 +52,8 @@ function Home() {
       </div>
       <Section5/>
       <About/>
+      
+      {/* <Events/> */}
       <Section6/>
       <Footer/>
     </div>

@@ -146,7 +146,7 @@ const AchievementSection = () => {
           </div>
         </div>
         <div
-          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90 backdrop-blur-lg border border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]" id="bg1">
+          className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-black z-[3]" id="bg1">
             
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
             <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
@@ -170,7 +170,7 @@ const AchievementSection = () => {
             </div>
           </div>
         </div>
-        <div className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90 backdrop-blur-lg border border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]" id="bg2">
+        <div className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen bg-black z-[3]" id="bg2">
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
             <div className="flex flex-shrink-0 justify-center items-center w-full md:w-1/2">
               <img
@@ -195,9 +195,7 @@ const AchievementSection = () => {
         </div>
         <div
           className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90
-                     backdrop-blur-lg border border-white/20 
-                     shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]"
+                     bg-black z-[3]"
           id="bg3"
         >
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">
@@ -216,7 +214,7 @@ const AchievementSection = () => {
               >
                 BLUEPRINT FINALIST, IITD
               </h1>
-              <p className="max-w-xl text-base font-normal text-center text-white/80 md:text-lg md:text-left">
+              <p className="max-w-xl text-base font-normal text-center text-white md:text-lg md:text-left">
                 Our team reached the finals of the Blueprint competition at IIT Delhi! Competing against some of the brightest minds, they showcased innovative thinking and problem-solving skills. Congratulations to the team for making it to the finals and representing E-Cell SMVIT on a national platform!
               </p>
             </div>
@@ -224,9 +222,7 @@ const AchievementSection = () => {
         </div>
         <div
           className="flex absolute bottom-0 md:left-0 justify-center items-center w-screen h-[80vh] md:h-screen 
-                     bg-gradient-to-br from-[#1a1336] via-[#2d1e5a]/80 to-[#1a1336]/90
-                     backdrop-blur-lg border border-white/20 
-                     shadow-[0_4px_30px_rgba(0,0,0,0.5)] z-[3]"
+                     bg-black z-[3]"
           id="bg4"
         >
           <div className="flex flex-col gap-6 justify-center items-center px-4 w-full h-full md:flex-row md:px-16 md:gap-12">

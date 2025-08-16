@@ -18,7 +18,8 @@ import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobil
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
 import Gallery from '@/components/PublicSection/Gallery';
 import Events from '@/components/PublicSection/Events';
-// import Heads from '@/components/PublicSection/Heads';
+import Heads from '@/components/PublicSection/Heads';
+import Aboutsectiontesting from '@/components/Aboutsectiontesting';
 
 
 
@@ -31,7 +32,7 @@ function Home() {
       {/* <TextHome/> */}
       {/* <Background/> */}
       <ThreeScene />
-      {/* <Heads/> */}
+      
       <InfinityComponent/>
       <Text/>
       <Section2/>
@@ -50,8 +51,10 @@ function Home() {
       <div className="block sm:hidden">
         <AchievementMobile/>
       </div>
-      <Section5/>
-      <About/>
+      {/* <Section5/> */}
+      <Heads/>
+      {/* <Aboutsectiontesting/> */}
+      {/* <About/> */}
       
       {/* <Events/> */}
       <Section6/>

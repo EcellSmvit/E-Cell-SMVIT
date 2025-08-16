@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -95,12 +96,11 @@ function Navbar() {
 </div>
         </div>
         <div className={`flex flex-1 justify-end items-center transition-all duration-500 ${expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-          <button
+          
+          <InteractiveHoverButton
+          
             onClick={() => navigate('/login')}
-            className="px-4 py-2 text-sm md:text-base font-semibold text-white transition-all duration-200 bg-[#4F46E5] rounded-full hover:bg-gray-200 hover:text-[#4F46E5] flex items-center justify-center"
-          >
-            Login/Signup
-          </button>
+          >Login/Signup</InteractiveHoverButton>
         </div>
       </div>
     </div>

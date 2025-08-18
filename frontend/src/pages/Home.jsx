@@ -20,6 +20,8 @@ import Gallery from '@/components/PublicSection/Gallery';
 import Events from '@/components/PublicSection/Events';
 import Heads from '@/components/PublicSection/Heads';
 import Aboutsectiontesting from '@/components/Aboutsectiontesting';
+import StartupBacked from '@/components/PublicSection/StartupBacked';
+import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 
 
 
@@ -38,26 +40,29 @@ function Home() {
       <Section2/>
       
       {/* <Gallery/> */}
-      <div className="hidden sm:block">
+      {/* <div className="hidden sm:block">
         <ImageSection/>
-      </div>
+      </div> */}
+      <OurMissionandVision/>
       <div className="block sm:hidden">
         <AboutMobile/>
       </div>
       
-      <div className="hidden sm:block">
+      {/* <div className="hidden sm:block">
         <AchievementSection/>
-      </div>
+      </div> */}
       <div className="block sm:hidden">
         <AchievementMobile/>
       </div>
       {/* <Section5/> */}
+      <StartupBacked/>
       <Heads/>
       {/* <Aboutsectiontesting/> */}
       {/* <About/> */}
       
       {/* <Events/> */}
       <Section6/>
+      
       <Footer/>
     </div>
     

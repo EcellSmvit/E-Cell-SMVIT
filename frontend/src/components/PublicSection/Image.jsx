@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { cn } from "@/lib/utils";
+import { InteractiveGridPattern } from "@/components/magicui/interactive-grid-pattern";
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -86,7 +88,15 @@ export default function ImageSection() {
   const [leftIdx, middleIdx, rightIdx] = getIndices(current)
 
   return (
-    <div className="relative bg-gradient-to-t to-[#6C4DFF] via-[#1f1c4d] from-black">
+    <div>
+      {/* <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  bg-background">
+      <InteractiveGridPattern
+        className={cn(
+          "[mask-image:radial-gradient(400px_circle_at_center,white,transparent)]",
+          "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12",
+        )}
+      />
+    </div> */}
       <div ref={containerRef} className="flex overflow-hidden items-center p-6 w-full h-screen">
         <div
           ref={leftRef}
@@ -96,7 +106,7 @@ export default function ImageSection() {
           <img
             src={images[leftIdx].src}
             alt=""
-            className="object-cover p-4 w-full h-full"
+            className="object-cover p-4 w-full h-full rounded"
           />
         </div>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import emailjs from '@emailjs/browser';
+import { InteractiveGridPattern } from "../magicui/interactive-grid-pattern";
 
 const ShinyText = ({ children, className = "" }) => (
   <span
@@ -162,14 +163,30 @@ function Section6() {
     <div
       id='contact-section'
       ref={sectionRef}
-      className='w-full min-h-screen bg-gradient-to-br from-[#6C4DFF] via-black to-black flex flex-col items-center justify-center p-6 md:p-12 lg:p-20'
+      className='flex overflow-hidden relative flex-col justify-center items-center p-6 w-full min-h-screen md:p-12 lg:p-20'
     >
+      {/* InteractiveGridPattern as full background */}
+      <div className="absolute inset-0 z-10 pointer-events-none">
+  <InteractiveGridPattern
+    className="[mask-image:radial-gradient(400px_circle_at_top,white,transparent)]"
+    width={40}
+    height={40}
+    squares={[80, 80]}
+    squaresClassName="hover:fill-blue-500"
+  />
+</div> 
+      <div className='flex relative z-20 flex-row gap-4 justify-center items-center mb-8'>
       <h1
         ref={headingRef}
-        className='p-2 mb-8 text-4xl font-extrabold tracking-wide text-center text-white drop-shadow-lg md:text-5xl lg:text-6xl'
+        className='p-2 w-auto text-4xl font-black text-center text-black bg-white md:text-5xl lg:text-6xl'
       >
-        CONTACT <span className="text-[#6C4DFF]">US</span>
+        CONTACT 
       </h1>
+      <h1 className='text-4xl font-black text-center md:text-5xl lg:text-6xl p-2  bg-[#6D4DFE] text-white'>
+        US
+      </h1>
+      </div>
+      
 
       <div className='flex flex-col gap-12 justify-center items-center w-full max-w-7xl lg:flex-row lg:gap-24 lg:items-start'>
         <div className="flex flex-col flex-1 items-center text-center lg:items-start lg:text-left">

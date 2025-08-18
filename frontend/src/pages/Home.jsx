@@ -21,7 +21,7 @@ import Events from '@/components/PublicSection/Events';
 import Heads from '@/components/PublicSection/Heads';
 import Aboutsectiontesting from '@/components/Aboutsectiontesting';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
-import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
+// import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 
 
 
@@ -43,7 +43,7 @@ function Home() {
       {/* <div className="hidden sm:block">
         <ImageSection/>
       </div> */}
-      <OurMissionandVision/>
+      {/* <OurMissionandVision/> */}
       <div className="block sm:hidden">
         <AboutMobile/>
       </div>

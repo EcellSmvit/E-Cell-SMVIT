@@ -23,7 +23,7 @@ html, body {
   }
 }
 
-@theme inline {
+/* @theme inline {
   @keyframes grid {
   0% {
     transform: translateY(-50%);
@@ -31,5 +31,19 @@ html, body {
   100% {
     transform: translateY(0);
     }
+  } */
+  @layer utilities {
+    @keyframes grid {
+      0% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+  
+    .animate-grid {
+      animation: grid 15s linear infinite;
+    }
   }
-}
+  

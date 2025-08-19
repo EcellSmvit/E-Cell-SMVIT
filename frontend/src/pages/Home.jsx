@@ -7,7 +7,7 @@ import Navbar from '../components/PublicSection/Navbar'
 import TextHome from '../components/PublicSection/TextHome';
 import ThreeScene from '../components/PublicSection/ThreeScene';
 import Section2 from '../components/PublicSection/Section2';
-import AchievementSection from '../components/PublicSection/AchievementSection';
+// import AchievementSection from '../components/PublicSection/AchievementSection';
 import Section5 from '../components/PublicSection/Section5';
 import Section6 from '../components/PublicSection/Section6';
 import ImageSection from '@/components/PublicSection/Image';
@@ -21,7 +21,9 @@ import Events from '@/components/PublicSection/Events';
 import Heads from '@/components/PublicSection/Heads';
 import Aboutsectiontesting from '@/components/Aboutsectiontesting';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
-// import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
+import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
+import WhyEcell from '@/components/PublicSection/WhyEcell';
+// import Recurtiment from '@/components/EventsFormHandling/Recurtiment';
 
 
 
@@ -43,27 +45,31 @@ function Home() {
       {/* <div className="hidden sm:block">
         <ImageSection/>
       </div> */}
-      {/* <OurMissionandVision/> */}
+      
       <div className="block sm:hidden">
         <AboutMobile/>
       </div>
       
-      {/* <div className="hidden sm:block">
-        <AchievementSection/>
-      </div> */}
+      <div className="hidden sm:block">
+        {/* <AchievementSection/> */}
+      </div>
       <div className="block sm:hidden">
         <AchievementMobile/>
       </div>
       {/* <Section5/> */}
+      <OurMissionandVision/>
       <StartupBacked/>
       <Heads/>
       {/* <Aboutsectiontesting/> */}
       {/* <About/> */}
       
       {/* <Events/> */}
+      <WhyEcell/>
       <Section6/>
+      {/* <Recurtiment/> */}
       
-      <Footer/>
+      {/* <Footer/> */}
+      
     </div>
     
   )

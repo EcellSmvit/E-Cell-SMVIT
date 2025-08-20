@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-
-
+import { cn } from "@/lib/utils";
+import { DotPattern } from "@/components/magicui/dot-pattern";
 
 function Footer() {
     const footerRef = useRef(null);
@@ -11,7 +11,6 @@ function Footer() {
     const menuRefs = useRef([]);
     const socialRefs = useRef([]);
     const contactRefs = useRef([]);
-
 
     const addToMenuRefs = (el) => {
         if (el && !menuRefs.current.includes(el)) {
@@ -45,12 +44,10 @@ function Footer() {
 
         let observer;
 
-
         const animateFooter = () => {
             const tl = gsap.timeline({
                 defaults: { ease: "power3.out", duration: 0.8 }
             });
-
 
             tl.fromTo(logoRef.current,
                 { scale: 0.8, opacity: 0 },
@@ -104,18 +101,11 @@ function Footer() {
             ref={footerRef}
             className="flex overflow-hidden relative flex-col justify-between w-full min-h-screen font-sans text-white bg-black select-none"
         >
-            <div
-                className="absolute inset-0 z-0"
-                style={{
-                    background: 'linear-gradient(180deg, #000000 0%, #3d26a7 100%)'
-                }}
-            />
-
-            <img
-                ref={logoRef}
-                className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[65vw] md:w-[30rem] opacity-0 z-10 pointer-events-none'
-                src="https://www.ecellsmvit.in/images/Ecell%20Logo%20Vector.svg"
-                alt="E-Cell Background Logo"
+            {/* DotPattern as background */}
+            <DotPattern
+                className={cn(
+                    "absolute inset-0 z-0 pointer-events-none [mask-image:radial-gradient(500px_circle_at_center,white,transparent)]"
+                )}
             />
 
             <div className="flex relative z-20 flex-col flex-grow px-6 py-12 mx-auto w-full max-w-7xl md:px-8 md:py-16">
@@ -171,17 +161,14 @@ function Footer() {
                         <div className="flex flex-col gap-2">
                             <p ref={addToContactRefs} className="text-lg text-gray-200 transition-colors duration-300 cursor-pointer hover:text-white">
                                 Email: ecellsmvit@gmail.com
-                                
                             </p>
                             <p ref={addToContactRefs} className="text-lg text-gray-200 transition-colors duration-300 cursor-pointer hover:text-white">
                             For partnerships: connect.ecellsmvit@gmail.com
-                                
                             </p>
                         </div>
                     </div>
                 </div>
 
-                
                 <div className="flex flex-grow justify-center items-center my-10 text-center">
                     <h1 ref={h1Ref} className="text-white font-['Anton',_sans-serif] text-[18vw] md:text-[14vw] lg:text-[15rem] leading-none tracking-normal">
                         E-CELL SMVIT
@@ -197,11 +184,4 @@ function Footer() {
     );
 }
 
-
-export default function App() {
-  return (
-    <main>
-      <Footer />
-    </main>
-  );
-}
+export default Footer;

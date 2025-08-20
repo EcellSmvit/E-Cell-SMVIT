@@ -68,7 +68,7 @@ function Home() {
       <Section6/>
       {/* <Recurtiment/> */}
       
-      {/* <Footer/> */}
+      <Footer/>
       
     </div>
     

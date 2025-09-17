@@ -87,7 +87,7 @@ const Login = () => {
       <div className="w-[50vw] h-[100vh] relative bg-gradient-to-br from-blue-900 to-indigo-800">
         <img
           className="absolute top-4 left-4 z-10 w-24"
-          src="https://www.ecellsmvit.in/images/ecellwhite.png"
+          src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
           alt="E-Cell SMVIT Logo"
         />
         <Background />

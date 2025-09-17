@@ -10,7 +10,7 @@ import AdminButton from "@/components/AdminButton";
 // import RegistrationForm from "@/components/RegistrationForm";
 
 const ECELL_LOGO_URL =
-  "https://ecell.smvitae.org/assets/img/logo/ecell_logo_white.png";
+  "https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039";
 
 const Dashboard = () => {
   const { userData, setIsLogin } = useContext(AppContext);
@@ -30,7 +30,7 @@ const Dashboard = () => {
       <div
         className="flex justify-center items-center min-h-screen"
         style={{
-          background: "radial-gradient(circle at 50% 30%, #4F46E5 0%, #000 100%)",
+          background: "linear-gradient(135deg, #000 0%, #fff 100%)",
         }}
       >
         <div className="text-xl font-semibold text-white">Loading...</div>
@@ -42,14 +42,14 @@ const Dashboard = () => {
     <div
       className="flex flex-col min-h-screen text-white"
       style={{
-        background: "radial-gradient(circle at 50% 30%, #4F46E5 0%, #000 100%)",
+        background: "linear-gradient(135deg, #000 0%, #fff 100%)",
       }}
     >
       {/* <div className="w-[100%]">
         <RegistrationForm/>
       </div> */}
       <nav
-        className="flex fixed top-0 left-0 z-50 justify-between items-center px-6 py-3 w-full border-b border-indigo-700 backdrop-blur-md bg-indigo-900/80"
+        className="flex fixed top-0 left-0 z-50 justify-between items-center px-6 py-3 w-full border-b border-gray-700 backdrop-blur-md bg-black/80"
         style={{
           boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.18)",
         }}
@@ -66,14 +66,14 @@ const Dashboard = () => {
           {userData ? (
             <button
               onClick={handleLogout}
-              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded transition hover:bg-blue-700"
+              className="px-4 py-2 font-semibold text-white bg-black rounded transition hover:bg-gray-800"
             >
               <LogOut />
             </button>
           ) : (
             <button
               onClick={handleLogin}
-              className="px-4 py-2 font-semibold text-white bg-blue-600 rounded transition hover:bg-blue-700"
+              className="px-4 py-2 font-semibold text-white bg-black rounded transition hover:bg-gray-800"
             >
               Login
             </button>

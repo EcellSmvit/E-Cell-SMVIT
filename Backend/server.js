@@ -21,7 +21,10 @@ const PORT = process.env.PORT || 4000
 
 connectDB()
 
-const allowedOrigins = ['https://e-cell-smvit.onrender.com/']
+const allowedOrigins = [
+    'https://e-cell-smvit.onrender.com',
+    'https://www.ecellsmvit.in'
+  ]
 
 
 const corsOptions = {

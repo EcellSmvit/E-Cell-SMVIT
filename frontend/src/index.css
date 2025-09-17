@@ -11,6 +11,24 @@ html, body {
 @layer base {
   .theme {
     --animate-grid: grid 15s linear infinite;
+    --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+    --animate-shimmer-slide: shimmer-slide var(--speed) ease-in-out infinite alternate;
+    --animate-spin-around: spin-around calc(var(--speed) * 2) infinite linear;
+    --animate-pulse: pulse var(--duration) ease-out infinite;
+  }
+  :root {
+    --color-1: oklch(66.2% 0.225 25.9);
+    --color-2: oklch(60.4% 0.26 302);
+    --color-3: oklch(69.6% 0.165 251);
+    --color-4: oklch(80.2% 0.134 225);
+    --color-5: oklch(90.7% 0.231 133);
+  }
+  .dark {
+    --color-1: oklch(66.2% 0.225 25.9);
+    --color-2: oklch(60.4% 0.26 302);
+    --color-3: oklch(69.6% 0.165 251);
+    --color-4: oklch(80.2% 0.134 225);
+    --color-5: oklch(90.7% 0.231 133);
   }
 }
 
@@ -23,27 +41,63 @@ html, body {
   }
 }
 
-/* @theme inline {
+@layer utilities {
+  /* Grid animation */
   @keyframes grid {
-  0% {
-    transform: translateY(-50%);
+    0% {
+      transform: translateY(-50%);
     }
-  100% {
-    transform: translateY(0);
-    }
-  } */
-  @layer utilities {
-    @keyframes grid {
-      0% {
-        transform: translateY(-50%);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-  
-    .animate-grid {
-      animation: grid 15s linear infinite;
+    100% {
+      transform: translateY(0);
     }
   }
-  
+  .animate-grid {
+    animation: grid 15s linear infinite;
+  }
+
+  /* Rainbow animation */
+  @keyframes rainbow {
+    0% {
+      background-position: 0%;
+    }
+    100% {
+      background-position: 200%;
+    }
+  }
+
+  /* Shimmer animation */
+  @keyframes shimmer-slide {
+    to {
+      transform: translate(calc(100cqw - 100%), 0);
+    }
+  }
+
+  /* Spin around animation */
+  @keyframes spin-around {
+    0% {
+      transform: translateZ(0) rotate(0);
+    }
+    15%, 35% {
+      transform: translateZ(0) rotate(90deg);
+    }
+    65%, 85% {
+      transform: translateZ(0) rotate(270deg);
+    }
+    100% {
+      transform: translateZ(0) rotate(360deg);
+    }
+  }
+
+  /* Pulse animation (fixed box-shadow syntax) */
+  @keyframes pulse {
+    0%, 100% {
+      box-shadow: 0 0 0 0 var(--pulse-color);
+    }
+    50% {
+      box-shadow: 0 0 0 8px var(--pulse-color);
+    }
+  }
+  .animate-pulse-custom {
+    animation: pulse var(--duration, 2s) ease-out infinite;
+  }
+}

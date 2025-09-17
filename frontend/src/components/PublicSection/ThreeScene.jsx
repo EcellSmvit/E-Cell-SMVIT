@@ -8,6 +8,8 @@ import { MorphoTextFlip } from "@/components/ui/morphotextflip";
 import Background from "../PublicSection/Background";
 import SocialMedia from "./SocialMedia";
 
+// import { PulsatingButton } from "../magicui/pulsating-button";
+
 const ThreeScene = () => {
   const canvasRef = useRef(null);
 
@@ -92,7 +94,7 @@ const ThreeScene = () => {
         <div className="absolute inset-0 z-0">
           <Background />
         </div>
-  
+        
         <section className="flex z-10 flex-col justify-center items-start p-8 ml-8 w-1/2">
           <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
           WHERE ASPIRATION MEETS OPPORTUNITY
@@ -115,7 +117,16 @@ const ThreeScene = () => {
           />
         </div>
       </div>
-  
+      <div>
+        
+      </div >
+      <div className="absolute bottom-1/4 left-1/2 z-10 text-white transform -translate-x-1/2">
+        {/* <PulsatingButton onClick={() => window.location.href = "/recruitment"}>
+          Recruitment
+        </PulsatingButton> */}
+      </div>
+      
+      
       <div className="block sm:hidden">
         <ScrollButton />
       </div>

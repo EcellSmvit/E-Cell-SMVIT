@@ -23,6 +23,7 @@ import Aboutsectiontesting from '@/components/Aboutsectiontesting';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
 import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 import WhyEcell from '@/components/PublicSection/WhyEcell';
+
 // import Recurtiment from '@/components/EventsFormHandling/Recurtiment';
 
 
@@ -35,6 +36,7 @@ function Home() {
       </div>
       {/* <TextHome/> */}
       {/* <Background/> */}
+      
       <ThreeScene />
       
       <InfinityComponent/>

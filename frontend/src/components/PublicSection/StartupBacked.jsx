@@ -8,7 +8,7 @@ import { WordRotate } from "@/components/magicui/word-rotate";
 const startups = [
   {
     bg: "#FFAB76",
-    img: "https://www.ecellsmvit.in/brand%20images/Artboard%2018%20copy%205_3%20(3).svg",
+    img: "https://ik.imagekit.io/es6xialea/Artboard%2018%20copy%205_3%20(3).svg?updatedAt=1758128361100",
     name: "Raahe.co",
     founder: "TANISH RAJ",
     founderRole: "Founder",
@@ -26,7 +26,7 @@ const startups = [
   },
   {
     bg: "#50E3C2",
-    img: "https://www.ecellsmvit.in/brand%20images/aers2.png",
+    img: "https://ik.imagekit.io/es6xialea/aers2.png?updatedAt=1758128295486",
     name: "AERS",
     founder: "SATVIK GUPTA",
     founderRole: "Founder",

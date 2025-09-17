@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
+
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -91,13 +92,13 @@ function Navbar() {
         <div className="flex absolute top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2">
   <img
     className="w-8 transition-all duration-500"
-    src="https://www.ecellsmvit.in/images/ecellwhite.png"
+    src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
     alt="Ecell Logo"
   />
 </div>
         </div>
         <div className={`flex flex-1 justify-end items-center transition-all duration-500 ${expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-          
+
           <InteractiveHoverButton
           
             onClick={() => navigate('/login')}

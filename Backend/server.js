@@ -21,35 +21,34 @@ const PORT = process.env.PORT || 4000
 
 connectDB()
 
+const allowedOrigins = [
+  'https://e-cell-smvit.onrender.com',
+  'https://www.ecellsmvit.in',
+  'https://ecellsmvit.in'
+]
 
 const corsOptions = {
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true)
-  
-      const allowed = [
-        'https://e-cell-smvit.onrender.com',
-        'https://www.ecellsmvit.in',
-        'https://ecellsmvit.in'
-      ]
-  
-      if (allowed.includes(origin)) {
-        callback(null, true)
-      } else {
-        callback(new Error('Not allowed by CORS'))
-      }
-    },
-    credentials: true,
-  }
-  
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
 
-// ✅ Now use it
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error(`CORS blocked: ${origin} not allowed`))
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200
+}
+
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
 
 app.use(express.json())
 app.use(cookieParser())
 
-// API routes
 app.use('/api/auth', AuthRouter)
 app.use('/api/user', UserRouter)
 app.use('/api/v1/posts', postRouter)
@@ -57,21 +56,18 @@ app.use('/api/profile', profileRouter)
 app.use('/api/admin', adminRoutes)
 app.use('/api/registrations', registrationRoutes)
 
-// Serve frontend
 app.use(express.static(path.join(__dirname, 'dist')))
 app.get(/^(?!.*api).*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
 
-// 404 handler
 app.use((req, res) => {
   res.status(404).json({ error: 'Resource not found' })
 })
 
-// Optional: error handler (good for debugging)
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).json({ error: 'Something went wrong!' })
+  console.error('❌ Error:', err.message)
+  res.status(500).json({ error: err.message || 'Something went wrong!' })
 })
 
 app.listen(PORT, () => {

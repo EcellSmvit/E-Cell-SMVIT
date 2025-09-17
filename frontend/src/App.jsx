@@ -17,6 +17,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 import { Navigate } from "react-router-dom";
 import Ouralumni from './pages/Ouralumni'
 import Recruitment from './pages/Recruitment'
+import MeetOurTeam from './pages/MeetOurTeam'
 
 const App = () => {
   const { userData } = useContext(AppContext);
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/verify-email" element={<VerifyRoute />} />
         <Route path='/reset-passsword' element={<ResetPassword/>}/>
         <Route path='/recruitment' element={<Recruitment/>}/>
+        <Route path ='/ourteam' element={<MeetOurTeam/>}/>
         <Route path='/alumni' element={<Ouralumni/>}/>
         <Route path="/dashboard" element={ <ProtectedRoute> <Dashboard /></ProtectedRoute>}/>
         <Route path='/feed' element={<Feed />} />

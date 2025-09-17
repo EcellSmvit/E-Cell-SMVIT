@@ -75,7 +75,7 @@ function Navbar() {
             </li>
             <li
               className="cursor-pointer relative after:content-[''] after:block after:h-[2px] after:bg-[#4F46E5] after:w-0 after:transition-all after:duration-300 hover:after:w-full"
-              onClick={() => handleScrollToSection('our-teams')}
+              onClick={() =>  navigate('/ourteam')}
             >
               Our Teams
             </li>

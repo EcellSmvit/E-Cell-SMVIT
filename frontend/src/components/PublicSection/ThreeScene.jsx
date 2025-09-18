@@ -6,11 +6,15 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { MorphoTextFlip } from "@/components/ui/morphotextflip";
 import Background from "../PublicSection/Background";
 import SocialMedia from "./SocialMedia";
+// import { PulsatingButton } from "../magicui/pulsating-button";
 
 const ThreeScene = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
+    // Only initialize Three.js on desktop/tablet (sm and up)
+    if (window.innerWidth < 640) return;
+
     let renderer, scene, camera, controls, animationId, loadedModel = null;
     const canvas = canvasRef.current;
     const container = canvas.parentElement;
@@ -19,7 +23,12 @@ const ThreeScene = () => {
     scene.background = null;
 
     const { clientWidth, clientHeight } = container;
-    camera = new THREE.PerspectiveCamera(75, clientWidth / clientHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(
+      75,
+      clientWidth / clientHeight,
+      0.1,
+      1000
+    );
     camera.position.z = 8;
 
     renderer = new THREE.WebGLRenderer({
@@ -67,11 +76,14 @@ const ThreeScene = () => {
     animate();
 
     const handleResize = () => {
+      // Only handle resize for desktop/tablet
+      if (window.innerWidth < 640) return;
       const { clientWidth, clientHeight } = container;
       camera.aspect = clientWidth / clientHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(clientWidth, clientHeight);
     };
+
     window.addEventListener("resize", handleResize);
 
     return () => {
@@ -85,45 +97,59 @@ const ThreeScene = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen flex flex-col items-center justify-between overflow-hidden text-center">
-      <div className="absolute inset-0 z-0">
-        <Background />
-      </div>
-
-      {/* Top 3D Logo */}
-      <div className="z-10 w-full flex items-center justify-center pt-8">
-        <div className="w-[70vw] md:w-[40vw] max-w-md aspect-square">
-          <canvas
-            ref={canvasRef}
-            id="world"
-            style={{
-              background: "transparent",
-              pointerEvents: "auto",
-              width: "100%",
-              height: "100%",
-              display: "block",
-            }}
-          />
+    <>
+      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Background />
+        </div>
+        {/* Desktop/tablet layout */}
+        <div className="hidden sm:flex flex-row w-full h-full z-10 items-center justify-center">
+          <section className="flex flex-col justify-center items-start p-8 ml-8 w-1/2">
+            <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
+              WHERE ASPIRATION MEETS OPPORTUNITY
+            </h1>
+            <MorphoTextFlip
+              words={["EMPOWER", "INNOVATE", "LEAD", "SUCCEED"]}
+              textClassName="text-4xl md:text-7xl text-white font-bold mt-1"
+              animationType="fadeScale"
+            />
+          </section>
+          <div className="z-10 w-1/2 h-full flex items-center justify-center">
+            <canvas
+              ref={canvasRef}
+              id="world"
+              style={{
+                background: "transparent",
+                pointerEvents: "auto",
+                width: "100%",
+                height: "100%",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+        {/* Mobile layout: center text and social media, no 3D logo */}
+        <div className="flex flex-col sm:hidden w-full h-full z-10 items-center justify-center">
+          <div className="w-full flex flex-col items-center justify-center px-4 mt-12">
+            <h1 className="mb-3 text-2xl font-bold text-white text-center">
+              WHERE ASPIRATION MEETS OPPORTUNITY
+            </h1>
+            <MorphoTextFlip
+              words={["EMPOWER", "INNOVATE", "LEAD", "SUCCEED"]}
+              textClassName="text-3xl text-white font-bold mt-1 text-center"
+              animationType="fadeScale"
+            />
+          </div>
+          <div className="w-full flex justify-center mt-8">
+            <SocialMedia />
+          </div>
         </div>
       </div>
-
-      {/* Center Text */}
-      <div className="z-10 px-4 flex flex-col items-center justify-center">
-        <h1 className="mb-4 text-2xl md:text-5xl font-bold text-white">
-          WHERE ASPIRATION MEETS OPPORTUNITY
-        </h1>
-        <MorphoTextFlip
-          words={["EMPOWER", "INNOVATE", "LEAD", "SUCCEED"]}
-          textClassName="text-2xl md:text-6xl text-white font-bold mt-2"
-          animationType="fadeScale"
-        />
-      </div>
-
-      {/* Bottom Social Media */}
-      <div className="z-10 w-full flex justify-center pb-8">
+      {/* Desktop/tablet social media at bottom */}
+      <div className="hidden sm:block absolute bottom-8 left-1/2 z-10 transform -translate-x-1/2">
         <SocialMedia />
       </div>
-    </div>
+    </>
   );
 };
 

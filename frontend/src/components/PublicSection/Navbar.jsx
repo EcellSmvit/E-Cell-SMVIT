@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { InteractiveHoverButton } from "@/components/magicui/interactive-hover-button";
 
-
 function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,6 +58,7 @@ function Navbar() {
       }}
     >
       <div className={`flex items-center w-full transition-all duration-500 ${expanded ? "justify-between" : "justify-center"}`}>
+        {/* Left nav links (desktop only) */}
         <div className={`hidden md:flex flex-1 transition-all duration-500 ${expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
           <ul className="flex gap-6 justify-evenly items-center w-full text-sm md:gap-8 md:text-base">
             <li
@@ -84,25 +84,50 @@ function Navbar() {
               onClick={() => navigate('/alumni')}
             >
               Our Alumni
-              
             </li>
           </ul>
         </div>
-        <div className={`flex ${expanded ? "flex-1 justify-center" : "justify-center"} transition-all duration-500`}>
-        <div className="flex absolute top-1/2 left-1/2 justify-center items-center -translate-x-1/2 -translate-y-1/2">
-  <img
-    className="w-8 transition-all duration-500"
-    src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
-    alt="Ecell Logo"
-  />
-</div>
+        {/* Logo */}
+        <div
+          className={
+            expanded
+              ? "flex flex-1 items-center transition-all duration-500"
+              : "flex justify-center transition-all duration-500"
+          }
+        >
+          <div
+            className={
+              // On mobile: when expanded, shift logo a bit more left; on desktop, keep as before
+              expanded
+                ? "flex items-center justify-start w-full pl-2 md:justify-center md:pl-0"
+                : "absolute top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2"
+            }
+            style={
+              expanded
+                ? { position: 'relative', left: 'unset', top: 'unset', transform: 'none' }
+                : undefined
+            }
+          >
+            <img
+              className="w-8 transition-all duration-500"
+              src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
+              alt="Ecell Logo"
+            />
+          </div>
         </div>
-        <div className={`flex flex-1 justify-end items-center transition-all duration-500 ${expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}>
-
+        {/* Login/Signup button */}
+        <div
+          className={
+            `flex flex-1 justify-end items-center transition-all duration-500 ${
+              expanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+            }`
+          }
+        >
           <InteractiveHoverButton
-          
             onClick={() => navigate('/login')}
-          >Login/Signup</InteractiveHoverButton>
+          >
+            Login/Signup
+          </InteractiveHoverButton>
         </div>
       </div>
     </div>

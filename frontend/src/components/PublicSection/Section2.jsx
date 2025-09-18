@@ -49,7 +49,7 @@ const Section2 = () => {
             loop
             preload="auto"
             aria-label="Promotional video for leadership program"
-            className="w-[80%] max-w-[90vw] max-h-[80vh] aspect-video object-cover rounded-[1vw] "
+            className="w-[80%] max-w-[90vw] max-h-[80vh] aspect-video object-cover rounded-[1vw] hidden sm:block"
           />
         </div>
 

@@ -1,25 +1,25 @@
 import React from 'react'
 
-import About from '../components/PublicSection/About'
-import Background from '../components/PublicSection/Background';
+// import About from '../components/PublicSection/About'
+// import Background from '../components/PublicSection/Background';
 import Navbar from '../components/PublicSection/Navbar'
 // import Particles from './components/Particlesbackground';
-import TextHome from '../components/PublicSection/TextHome';
+// import TextHome from '../components/PublicSection/TextHome';
 import ThreeScene from '../components/PublicSection/ThreeScene';
 import Section2 from '../components/PublicSection/Section2';
 // import AchievementSection from '../components/PublicSection/AchievementSection';
 import Section5 from '../components/PublicSection/Section5';
 import Section6 from '../components/PublicSection/Section6';
-import ImageSection from '@/components/PublicSection/Image';
+// import ImageSection from '@/components/PublicSection/Image';
 import Text from '@/components/PublicSection/Text';
 import InfinityComponent from '@/components/PublicSection/Infinity';
 import Footer from '@/components/PublicSection/Footer';
 import AchievementMobile from '@/components/ResponsiveComponent/AchievementMobile';
 import AboutMobile from '@/components/ResponsiveComponent/AboutMobile';
-import Gallery from '@/components/PublicSection/Gallery';
-import Events from '@/components/PublicSection/Events';
+// import Gallery from '@/components/PublicSection/Gallery';
+// import Events from '@/components/PublicSection/Events';
 import Heads from '@/components/PublicSection/Heads';
-import Aboutsectiontesting from '@/components/Aboutsectiontesting';
+// import Aboutsectiontesting from '@/components/Aboutsectiontesting';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
 import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 import WhyEcell from '@/components/PublicSection/WhyEcell';

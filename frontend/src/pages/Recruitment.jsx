@@ -85,32 +85,32 @@ function Recruitment() {
               </Step>
               <Step>
                 <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
-                <div className='flex flex-wrap gap-8 justify-around items-start'>
-                  <ul>
-                    <li className="font-bold text-[#5227FF]">Operational Manager</li>
-                    <li>- Arranging Logistics and Permissions</li>
-                    <li>- Documenting operations and events</li>
+                <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
+                  <ul className="p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-md">
+                    <li className="font-bold text-[#5227FF] mb-2">Operational Manager</li>
+                    <li className="text-white">- Arranging Logistics and Permissions</li>
+                    <li className="text-white">- Documenting operations and events</li>
                   </ul>
-                  <ul>
-                    <li className="font-bold text-[#5227FF]">Events & PR Manager</li>
-                    <li>- Conducting of Events</li>
-                    <li>- Gathering and Influencing People</li>
+                  <ul className="p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-md">
+                    <li className="font-bold text-[#5227FF] mb-2">Events & PR Manager</li>
+                    <li className="text-white">- Conducting of Events</li>
+                    <li className="text-white">- Gathering and Influencing People</li>
                   </ul>
-                  <ul>
-                    <li className="font-bold text-[#5227FF]">Corporate Relations Manager</li>
-                    <li>- Arranging Sponsorships</li>
-                    <li>- Making funding sources from companies</li>
+                  <ul className="p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-md">
+                    <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Manager</li>
+                    <li className="text-white">- Arranging Sponsorships</li>
+                    <li className="text-white">- Making funding sources from companies</li>
                   </ul>
-                  <ul>
-                    <li className="font-bold text-[#5227FF]">Marketing Manager</li>
-                    <li>- Advertising and Marketing Events</li>
-                    <li>- Influencing Students</li>
+                  <ul className="p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-md">
+                    <li className="font-bold text-[#5227FF] mb-2">Marketing Manager</li>
+                    <li className="text-white">- Advertising and Marketing Events</li>
+                    <li className="text-white">- Influencing Students</li>
                   </ul>
-                  <ul>
-                    <li className="font-bold text-[#5227FF]">Design Media Manager</li>
-                    <li>- Posting and planning Media</li>
-                    <li>- Social Media Growth Strategy</li>
-                    <li>- Designing Social Content</li>
+                  <ul className="p-4 w-full max-w-xs bg-gray-900 rounded-lg shadow-md">
+                    <li className="font-bold text-[#5227FF] mb-2">Design Media Manager</li>
+                    <li className="text-white">- Posting and planning Media</li>
+                    <li className="text-white">- Social Media Growth Strategy</li>
+                    <li className="text-white">- Designing Social Content</li>
                   </ul>
                 </div>
               </Step>

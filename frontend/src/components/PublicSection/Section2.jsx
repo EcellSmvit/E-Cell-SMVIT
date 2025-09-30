@@ -36,7 +36,11 @@ const Section2 = () => {
   return (
     <div id="main">
       <div id="pages" className="relative z-[1]">
-
+        <img
+          src="https://ik.imagekit.io/96gea10vb/Gallery%20Images/NEC%20IIT%20Bombay-7.avif?updatedAt=1747310815568"
+          alt=""
+          className="block sm:hidden"
+        />
         {/* Page 6 - Video with margin below */}
         <div
           id="page6"

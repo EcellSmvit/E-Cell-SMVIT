@@ -127,9 +127,7 @@ const ThreeScene = () => {
             />
           </div>
         </div>
-        {/* Mobile layout: center text and social media, no 3D logo */}
         <div className="flex z-10 flex-col justify-center items-center w-full h-full sm:hidden">
-          {/* To show the image on mobile, add the <img> here: */}
           <img 
             src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039" 
             alt="logo"

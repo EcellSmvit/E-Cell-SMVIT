@@ -16,9 +16,22 @@ function Recruitment() {
   return (
     <div>
       <SignedOut>
-        <div className="relative w-full min-h-screen bg-[#18191D]">
-          {/* Dark Dot Matrix */}
-          <div className="absolute inset-0 z-0 hero-background" />
+        <div className="min-h-screen w-full bg-[#f9fafb] relative">
+          {/* Diagonal Fade Grid Background - Top Right */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, #d1d5db 1px, transparent 1px),
+                linear-gradient(to bottom, #d1d5db 1px, transparent 1px)
+              `,
+              backgroundSize: "32px 32px",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
+              maskImage:
+                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
+            }}
+          />
           {/* Header */}
           <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
             <img
@@ -31,7 +44,7 @@ function Recruitment() {
             </div>
           </div>
           {/* Hero Content */}
-          <div className="flex relative z-10 flex-col justify-center items-center px-4 mt-24 text-white sm:mt-32 md:mt-48">
+          <div className="flex relative z-10 flex-col justify-center items-center px-4 mt-24 text-[#18191D] sm:mt-32 md:mt-48">
             <div className="text-3xl font-medium text-center sm:text-5xl md:text-6xl">
               <h1>Welcome to</h1>
             </div>

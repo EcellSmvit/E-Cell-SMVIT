@@ -76,7 +76,6 @@ const ThreeScene = () => {
     animate();
 
     const handleResize = () => {
-      // Only handle resize for desktop/tablet
       if (window.innerWidth < 640) return;
       const { clientWidth, clientHeight } = container;
       camera.aspect = clientWidth / clientHeight;
@@ -98,12 +97,12 @@ const ThreeScene = () => {
 
   return (
     <>
-      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden">
+      <div className="flex overflow-hidden relative justify-center items-center w-full h-screen">
         <div className="absolute inset-0 z-0">
           <Background />
         </div>
         {/* Desktop/tablet layout */}
-        <div className="hidden sm:flex flex-row w-full h-full z-10 items-center justify-center">
+        <div className="hidden z-10 flex-row justify-center items-center w-full h-full sm:flex">
           <section className="flex flex-col justify-center items-start p-8 ml-8 w-1/2">
             <h1 className="mb-4 text-4xl font-bold text-white md:text-6xl">
               WHERE ASPIRATION MEETS OPPORTUNITY
@@ -114,7 +113,7 @@ const ThreeScene = () => {
               animationType="fadeScale"
             />
           </section>
-          <div className="z-10 w-1/2 h-full flex items-center justify-center">
+          <div className="flex z-10 justify-center items-center w-1/2 h-full">
             <canvas
               ref={canvasRef}
               id="world"
@@ -129,9 +128,16 @@ const ThreeScene = () => {
           </div>
         </div>
         {/* Mobile layout: center text and social media, no 3D logo */}
-        <div className="flex flex-col sm:hidden w-full h-full z-10 items-center justify-center">
-          <div className="w-full flex flex-col items-center justify-center px-4 mt-12">
-            <h1 className="mb-3 text-2xl font-bold text-white text-center">
+        <div className="flex z-10 flex-col justify-center items-center w-full h-full sm:hidden">
+          {/* To show the image on mobile, add the <img> here: */}
+          <img 
+            src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039" 
+            alt="logo"
+            className="w-24"
+            style={{ maxWidth: "40vw" }}
+          />
+          <div className="flex flex-col justify-center items-center px-4 mt-4 w-full">
+            <h1 className="mb-3 text-2xl font-bold text-center text-white">
               WHERE ASPIRATION MEETS OPPORTUNITY
             </h1>
             <MorphoTextFlip
@@ -140,13 +146,13 @@ const ThreeScene = () => {
               animationType="fadeScale"
             />
           </div>
-          <div className="w-full flex justify-center mt-8">
+          <div className="flex justify-center mt-8 w-full">
             <SocialMedia />
           </div>
         </div>
       </div>
       {/* Desktop/tablet social media at bottom */}
-      <div className="hidden sm:block absolute bottom-8 left-1/2 z-10 transform -translate-x-1/2">
+      <div className="hidden absolute bottom-8 left-1/2 z-10 transform -translate-x-1/2 sm:block">
         <SocialMedia />
       </div>
     </>

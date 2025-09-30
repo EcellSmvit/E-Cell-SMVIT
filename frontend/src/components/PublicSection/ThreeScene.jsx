@@ -133,8 +133,8 @@ const ThreeScene = () => {
           <img 
             src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039" 
             alt="logo"
-            className="w-24"
-            style={{ maxWidth: "40vw" }}
+            className="p-4 mt-28 w-52"
+            style={{ maxWidth: "60vw" }}
           />
           <div className="flex flex-col justify-center items-center px-4 mt-4 w-full">
             <h1 className="mb-3 text-2xl font-bold text-center text-white">

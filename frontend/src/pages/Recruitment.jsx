@@ -70,7 +70,7 @@ function Recruitment() {
               }}
               onFinalStepCompleted={async () => {
                 try {
-                  await submitApplication({ name, year, usn, gender, q1, q2, q3, q4 });
+                  await submitApplication({ name, year, usn, gender, q1, q2, q3, q4, filledByUser: user?.username || user?.id, });
                   alert("Application submitted successfully!");
                 } catch (error) {
                   alert("Error submitting form. Check console.");

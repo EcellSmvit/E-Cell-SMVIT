@@ -23,7 +23,8 @@ import Heads from '@/components/PublicSection/Heads';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
 import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 import WhyEcell from '@/components/PublicSection/WhyEcell';
-
+import Stepperform from './Stepperform';
+import { SignedIn } from '@clerk/clerk-react';
 // import Recurtiment from '@/components/EventsFormHandling/Recurtiment';
 
 
@@ -71,7 +72,9 @@ function Home() {
       {/* <Recurtiment/> */}
       
       <Footer/>
-      
+      <SignedIn>
+        <Stepperform/>
+      </SignedIn>
     </div>
     
   )

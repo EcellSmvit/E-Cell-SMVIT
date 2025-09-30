@@ -16,7 +16,7 @@ function Recruitment() {
   return (
     <div>
       <SignedOut>
-        <div className="relative w-full min-h-screen">
+        <div className="relative w-full min-h-screen bg-[#18191D]">
           {/* Dark Dot Matrix */}
           <div className="absolute inset-0 z-0 hero-background" />
           {/* Header */}

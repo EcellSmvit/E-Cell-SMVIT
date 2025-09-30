@@ -1,4 +1,5 @@
-import { databases, ID } from "./appwriteConfig";
+import { databases } from "./appwriteConfig";
+import { ID } from "appwrite";
 
 const DATABASE_ID = "68daf89900282089d321";
 const COLLECTION_ID = "ecell_recruitment_data";

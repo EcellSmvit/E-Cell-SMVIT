@@ -21,7 +21,7 @@ function OurMissionandVision() {
       </div>
       {/* Right Side: Our Vision */}
       <div className="flex flex-col justify-center items-end w-full h-auto md:pl-8 md:w-1/2 md:h-full">
-        <div className="flex gap-2 justify-center items-center mb-4 w-full md:gap-4 md:mb-6">
+        <div className="flex gap-2 items-center mb-4 w-full md:gap-4 md:mb-6">
           <span className="bg-[#6D4DFE] text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold px-3 md:px-4 py-1.5 md:py-2 rounded-lg shadow">
             OUR
           </span>

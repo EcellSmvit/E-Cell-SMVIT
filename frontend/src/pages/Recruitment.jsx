@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { SignedOut, SignInButton, SignedIn, UserButton, useUser } from '@clerk/clerk-react'
 import Stepper, { Step } from '../components/ui/Components/Stepper/Stepper';
-import { submitApplication } from '@/lib/api';
+import { submitApplication } from '../lib/api.js';
 
 function Recruitment() {
   const { user } = useUser();

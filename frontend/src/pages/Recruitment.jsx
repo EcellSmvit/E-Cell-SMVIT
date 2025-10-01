@@ -127,7 +127,7 @@ function Recruitment() {
                       userId: user?.id,
                     });
                     toast.success("Application submitted successfully!");
-                    setAlreadySubmitted(true); // Lock the form
+                    setAlreadySubmitted(true);
                   } catch (error) {
                     toast.error("Error submitting form. Please try again.");
                   }

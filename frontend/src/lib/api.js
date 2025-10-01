@@ -10,7 +10,12 @@ export const checkIfSubmitted = async (userId) => {
     const response = await databases.listDocuments(
       DATABASE_ID,
       COLLECTION_ID,
-      [Query.equal("filledByUser", userId)]
+      [
+        Query.or(
+          Query.equal("userId", userId),
+          Query.equal("filledByUser", userName)
+        )
+      ]
     );
     return response.total > 0;
   } catch (error) {

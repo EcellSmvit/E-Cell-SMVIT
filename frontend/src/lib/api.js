@@ -13,7 +13,7 @@ export const checkIfSubmitted = async (userId) => {
       [
         Query.or(
           Query.equal("userId", userId),
-          Query.equal("filledByUser", userName)
+          Query.equal("filledByUser", userId)
         )
       ]
     );

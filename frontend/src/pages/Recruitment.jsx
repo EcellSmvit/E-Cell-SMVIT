@@ -20,6 +20,10 @@ function Recruitment() {
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
+
+  // Add a state to control Stepper's complete button
+  const isFormComplete = name && year && usn && gender && q1 && q2 && q3 && q4;
+
   useEffect(() => {
     if (user) {
       checkIfSubmitted(user.id).then((submitted) => {
@@ -109,7 +113,7 @@ function Recruitment() {
                   console.log(step);
                 }}
                 onFinalStepCompleted={async () => {
-                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                  if (!isFormComplete) {
                     toast.warn("Please fill all required fields before submitting.");
                     return;
                   }
@@ -133,6 +137,13 @@ function Recruitment() {
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
+                // Pass a prop to control the "Complete" button's disabled state
+                completeButtonProps={{
+                  disabled: !isFormComplete,
+                  style: !isFormComplete
+                    ? { opacity: 0.5, cursor: 'not-allowed' }
+                    : {}
+                }}
               >
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>

@@ -87,7 +87,7 @@ function Recruitment() {
         </div>
 
         {alreadySubmitted ? (
-          <div className="p-10 text-center">
+          <div className="p-10 text-center bg-[#f9fafb]">
             <h1 className="text-6xl font-bold text-green-400">
               You have submitted your application.
             </h1>
@@ -96,8 +96,8 @@ function Recruitment() {
             </p>
           </div>
         ) : (
-          <div>
-            <div className="p-4 text-4xl font-bold text-white">
+          <div className='bg-[#f9fafb] text-black'>
+            <div className="p-4 text-4xl font-bold">
               <h1>
                 Welcome <span className="text-[#5227FF]">{user?.firstName}</span> <br />
                 to E-Cell Smvit Recruitment 2025

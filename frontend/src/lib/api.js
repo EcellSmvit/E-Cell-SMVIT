@@ -1,11 +1,10 @@
-import { databases} from "./appwriteConfig";
+import { databases } from "./appwriteConfig";
 import { ID } from "appwrite";
 import { Query } from "appwrite";
 
 const DATABASE_ID = "68daf89900282089d321";
 const COLLECTION_ID = "ecell_recruitment_data";
 
-// ✅ Check if user has already submitted
 export const checkIfSubmitted = async (userId) => {
   try {
     const response = await databases.listDocuments(
@@ -13,16 +12,19 @@ export const checkIfSubmitted = async (userId) => {
       COLLECTION_ID,
       [Query.equal("filledByUser", userId)]
     );
-    return response.total > 0; // true if user already submitted
+    return response.total > 0;
   } catch (error) {
     console.error("Error checking submission", error);
     throw error;
   }
 };
 
-// ✅ Submit application
 export const submitApplication = async (formData) => {
   try {
+    const alreadySubmitted = await checkIfSubmitted(formData.userId);
+    if (alreadySubmitted) {
+      throw new Error("You have already submitted an application.");
+    }
     const response = await databases.createDocument(
       DATABASE_ID,
       COLLECTION_ID,

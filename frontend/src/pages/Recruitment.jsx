@@ -355,7 +355,7 @@ function Recruitment() {
                     </p>
                   </div>
                   <div className="mt-6">
-                    <p className="font-bold text-green-400">Thank you for your interest in joining E-Cell!</p>
+                    <p className="font-bold text-green-400">Please review your application. After clicking the continue button, you won't be able to edit it.</p>
                   </div>
                 </Step>
               </Stepper>

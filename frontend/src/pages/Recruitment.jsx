@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { SignedOut, SignInButton, SignedIn, UserButton, useUser } from '@clerk/clerk-react'
 import Stepper, { Step } from '../components/ui/Components/Stepper/Stepper';
 import { submitApplication } from '../lib/api.js';
+import OpeningPost from '@/components/OpeningPost';
+import Position from '@/components/Position';
 
 function Recruitment() {
   const { user } = useUser();
@@ -66,6 +68,8 @@ function Recruitment() {
           </div>
         </div>
       </div>
+      <OpeningPost/>
+      <Position/>
       </SignedOut>
       <SignedIn>
         <div className='flex justify-between items-center p-4'>

@@ -187,6 +187,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -200,6 +201,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         >
                           <option value="">Select Year</option>
                           <option value="2nd">2nd</option>
@@ -219,6 +221,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -234,6 +237,7 @@ function Recruitment() {
                               onCopy={e => e.preventDefault()}
                               onCut={e => e.preventDefault()}
                               onPaste={e => e.preventDefault()}
+                              disabled={alreadySubmitted}
                             />
                             Male
                           </label>
@@ -247,6 +251,7 @@ function Recruitment() {
                               onCopy={e => e.preventDefault()}
                               onCut={e => e.preventDefault()}
                               onPaste={e => e.preventDefault()}
+                              disabled={alreadySubmitted}
                             />
                             Female
                           </label>
@@ -269,6 +274,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -286,6 +292,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                     </div>
@@ -305,6 +312,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -322,6 +330,7 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
+                          disabled={alreadySubmitted}
                         />
                       </div>
                     </div>

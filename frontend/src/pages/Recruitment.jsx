@@ -124,6 +124,7 @@ function Recruitment() {
                       q2,
                       q3,
                       q4,
+                      filledByUser: user?.firstName,
                       userId: user?.id, // Make sure this matches your Appwrite collection attribute
                     });
                     toast.success("Application submitted successfully!");

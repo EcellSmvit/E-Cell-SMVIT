@@ -87,7 +87,7 @@ function Recruitment() {
         {alreadySubmitted ? (
           <div className="p-10 text-center text-white">
             <h1 className="text-6xl font-bold text-green-400">
-              You have already submitted your application.
+              You have submitted your application.
             </h1>
             <p className="mt-4 text-gray-300">
               Our team will contact you soon. Thank you for applying!

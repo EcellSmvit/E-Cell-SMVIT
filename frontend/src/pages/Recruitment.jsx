@@ -77,9 +77,9 @@ function Recruitment() {
       </SignedOut>
 
       <SignedIn>
-        <div className="flex justify-between items-center p-4">
+        <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">
           <img
-            src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
+            src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
             alt=""
             className="w-12"
           />
@@ -87,12 +87,11 @@ function Recruitment() {
         </div>
 
         {alreadySubmitted ? (
-          // ✅ Show message if already submitted
-          <div className="p-10 text-center text-white">
+          <div className="p-10 text-center">
             <h1 className="text-6xl font-bold text-green-400">
               You have submitted your application.
             </h1>
-            <p className="mt-4 text-gray-300">
+            <p className="mt-4">
               Our team will contact you soon. Thank you for applying!
             </p>
           </div>

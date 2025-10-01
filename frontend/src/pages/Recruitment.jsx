@@ -50,9 +50,13 @@ function Recruitment() {
         {/* Hero Content */}
         <div className="flex relative z-10 justify-center items-center px-6 sm:px-14 h-[50vh] sm:h-[90vh] text-center sm:text-left">
           <div>
+            <SignInButton>
             <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
-            <SignInButton/>
+            {/* <SignInButton/> */}
+            join Our Team
             </button>
+            </SignInButton>
+            
             <p className="font-medium text-[#111111] text-4xl sm:text-8xl">
               E-CELL SMVIT
             </p>

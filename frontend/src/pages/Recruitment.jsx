@@ -106,236 +106,238 @@ function Recruitment() {
               </h1>
             </div>
             <div className="text-white">
-              <Stepper
-                initialStep={1}
-                onStepChange={(step) => console.log(step)}
-                onFinalStepCompleted={async () => {
-                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
-                    toast.warn("Please fill all required fields before submitting.");
-                    return;
-                  }
-                  try {
-                    await submitApplication({
-                      name,
-                      year,
-                      usn,
-                      gender,
-                      q1,
-                      q2,
-                      q3,
-                      q4,
-                      filledByUser: user?.firstName,
-                      userId: user?.id, // Make sure this matches your Appwrite collection attribute
-                    });
-                    toast.success("Application submitted successfully!");
-                    setAlreadySubmitted(true); // Lock the form
-                  } catch (error) {
-                    toast.error("Error submitting form. Please try again.");
-                  }
-                }}
-                backButtonText="Previous"
-                nextButtonText="Next"
-              >
-                {/* Step 1 */}
-                <Step>
-                  <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
-                  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
-                </Step>
+              {!alreadySubmitted && (
+                <Stepper
+                  initialStep={1}
+                  onStepChange={(step) => console.log(step)}
+                  onFinalStepCompleted={async () => {
+                    if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                      toast.warn("Please fill all required fields before submitting.");
+                      return;
+                    }
+                    try {
+                      await submitApplication({
+                        name,
+                        year,
+                        usn,
+                        gender,
+                        q1,
+                        q2,
+                        q3,
+                        q4,
+                        filledByUser: user?.firstName,
+                        userId: user?.id,
+                      });
+                      toast.success("Application submitted successfully!");
+                      setAlreadySubmitted(true); // Lock the form and hide Stepper
+                    } catch (error) {
+                      toast.error("Error submitting form. Please try again.");
+                    }
+                  }}
+                  backButtonText="Previous"
+                  nextButtonText="Next"
+                >
+                  {/* Step 1 */}
+                  <Step>
+                    <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
+                  </Step>
 
-                {/* Step 2 */}
-                <Step>
-                  <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
-                  <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Operational Manager</li>
-                      <li className="text-white">- Arranging Logistics and Permissions</li>
-                      <li className="text-white">- Documenting operations and events</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Events & PR Manager</li>
-                      <li className="text-white">- Conducting of Events</li>
-                      <li className="text-white">- Gathering and Influencing People</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Manager</li>
-                      <li className="text-white">- Arranging Sponsorships</li>
-                      <li className="text-white">- Making funding sources from companies</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Marketing Manager</li>
-                      <li className="text-white">- Advertising and Marketing Events</li>
-                      <li className="text-white">- Influencing Students</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Design Media Manager</li>
-                      <li className="text-white">- Posting and planning Media</li>
-                      <li className="text-white">- Social Media Growth Strategy</li>
-                      <li className="text-white">- Designing Social Content</li>
-                    </ul>
-                  </div>
-                </Step>
+                  {/* Step 2 */}
+                  <Step>
+                    <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
+                    <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
+                      <ul className="p-4 w-full max-w-xs">
+                        <li className="font-bold text-[#5227FF] mb-2">Operational Manager</li>
+                        <li className="text-white">- Arranging Logistics and Permissions</li>
+                        <li className="text-white">- Documenting operations and events</li>
+                      </ul>
+                      <ul className="p-4 w-full max-w-xs">
+                        <li className="font-bold text-[#5227FF] mb-2">Events & PR Manager</li>
+                        <li className="text-white">- Conducting of Events</li>
+                        <li className="text-white">- Gathering and Influencing People</li>
+                      </ul>
+                      <ul className="p-4 w-full max-w-xs">
+                        <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Manager</li>
+                        <li className="text-white">- Arranging Sponsorships</li>
+                        <li className="text-white">- Making funding sources from companies</li>
+                      </ul>
+                      <ul className="p-4 w-full max-w-xs">
+                        <li className="font-bold text-[#5227FF] mb-2">Marketing Manager</li>
+                        <li className="text-white">- Advertising and Marketing Events</li>
+                        <li className="text-white">- Influencing Students</li>
+                      </ul>
+                      <ul className="p-4 w-full max-w-xs">
+                        <li className="font-bold text-[#5227FF] mb-2">Design Media Manager</li>
+                        <li className="text-white">- Posting and planning Media</li>
+                        <li className="text-white">- Social Media Growth Strategy</li>
+                        <li className="text-white">- Designing Social Content</li>
+                      </ul>
+                    </div>
+                  </Step>
 
-                {/* Step 3: Application Form */}
-                <Step>
-                  <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
-                  <form className="flex flex-col gap-4" autoComplete="off">
-                    {/* Name, Year, USN, Gender */}
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="name">Name</label>
-                        <input
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Your name"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          autoComplete="off"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="year">Year</label>
-                        <select
-                          id="year"
-                          value={year}
-                          onChange={(e) => setYear(e.target.value)}
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          autoComplete="off"
-                        >
-                          <option value="">Select Year</option>
-                          <option value="2nd">2nd</option>
-                          <option value="3rd">3rd</option>
-                        </select>
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="usn">USN</label>
-                        <input
-                          id="usn"
-                          type="text"
-                          value={usn}
-                          onChange={(e) => setUsn(e.target.value)}
-                          placeholder="Your USN"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          autoComplete="off"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white">Gender</label>
-                        <div className="flex gap-4">
-                          <label className="flex gap-1 items-center text-white">
-                            <input
-                              type="radio"
-                              name="gender"
-                              value="male"
-                              checked={gender === "male"}
-                              onChange={() => setGender("male")}
-                            />
-                            Male
-                          </label>
-                          <label className="flex gap-1 items-center text-white">
-                            <input
-                              type="radio"
-                              name="gender"
-                              value="female"
-                              checked={gender === "female"}
-                              onChange={() => setGender("female")}
-                            />
-                            Female
-                          </label>
+                  {/* Step 3: Application Form */}
+                  <Step>
+                    <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
+                    <form className="flex flex-col gap-4" autoComplete="off">
+                      {/* Name, Year, USN, Gender */}
+                      <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="name">Name</label>
+                          <input
+                            id="name"
+                            type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Your name"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            autoComplete="off"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="year">Year</label>
+                          <select
+                            id="year"
+                            value={year}
+                            onChange={(e) => setYear(e.target.value)}
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            autoComplete="off"
+                          >
+                            <option value="">Select Year</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                          </select>
+                        </div>
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="usn">USN</label>
+                          <input
+                            id="usn"
+                            type="text"
+                            value={usn}
+                            onChange={(e) => setUsn(e.target.value)}
+                            placeholder="Your USN"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            autoComplete="off"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white">Gender</label>
+                          <div className="flex gap-4">
+                            <label className="flex gap-1 items-center text-white">
+                              <input
+                                type="radio"
+                                name="gender"
+                                value="male"
+                                checked={gender === "male"}
+                                onChange={() => setGender("male")}
+                              />
+                              Male
+                            </label>
+                            <label className="flex gap-1 items-center text-white">
+                              <input
+                                type="radio"
+                                name="gender"
+                                value="female"
+                                checked={gender === "female"}
+                                onChange={() => setGender("female")}
+                              />
+                              Female
+                            </label>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Questions */}
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="q1">
-                          Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
-                        </label>
-                        <textarea
-                          id="q1"
-                          value={q1}
-                          onChange={(e) => setQ1(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
+                      {/* Questions */}
+                      <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="q1">
+                            Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
+                          </label>
+                          <textarea
+                            id="q1"
+                            value={q1}
+                            onChange={(e) => setQ1(e.target.value)}
+                            placeholder="Your answer"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            rows={3}
+                            autoComplete="off"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="q2">
+                            Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
+                          </label>
+                          <textarea
+                            id="q2"
+                            value={q2}
+                            onChange={(e) => setQ2(e.target.value)}
+                            placeholder="Your answer"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            rows={3}
+                            autoComplete="off"
+                          />
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="q2">
-                          Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
-                        </label>
-                        <textarea
-                          id="q2"
-                          value={q2}
-                          onChange={(e) => setQ2(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                    </div>
 
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="q3">
-                          Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
-                        </label>
-                        <textarea
-                          id="q3"
-                          value={q3}
-                          onChange={(e) => setQ3(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
+                      <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="q3">
+                            Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
+                          </label>
+                          <textarea
+                            id="q3"
+                            value={q3}
+                            onChange={(e) => setQ3(e.target.value)}
+                            placeholder="Your answer"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            rows={3}
+                            autoComplete="off"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <label className="block mb-1 font-semibold text-white" htmlFor="q4">
+                            Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
+                          </label>
+                          <textarea
+                            id="q4"
+                            value={q4}
+                            onChange={(e) => setQ4(e.target.value)}
+                            placeholder="Your answer"
+                            className="px-3 py-2 w-full text-white bg-gray-800 rounded"
+                            rows={3}
+                            autoComplete="off"
+                          />
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="q4">
-                          Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
-                        </label>
-                        <textarea
-                          id="q4"
-                          value={q4}
-                          onChange={(e) => setQ4(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-white bg-gray-800 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                    </div>
-                  </form>
-                </Step>
+                    </form>
+                  </Step>
 
-                {/* Step 4: Final */}
-                <Step>
-                  <h2 className="mb-2 text-2xl font-bold">Final Step</h2>
-                  <p className="mb-4">You made it!</p>
-                  <div className="mb-4">
-                    <p className="text-white">
-                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
-                    </p>
-                    <ul className="mt-2 list-disc list-inside text-gray-300">
-                      <li>Double-check your contact details.</li>
-                      <li>Ensure your answers reflect your true experiences and aspirations.</li>
-                      <li>Once you submit, you will not be able to edit your responses.</li>
-                    </ul>
-                  </div>
-                  <div className="mb-4">
-                    <p className="font-semibold text-white">What happens next?</p>
-                    <p className="text-gray-300">
-                      Our team will review your application and contact you via email regarding the next steps. Keep an eye on your inbox!
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <p className="font-bold text-green-400">Please review your application. After clicking the complete button, you won't be able to edit it.</p>
-                  </div>
-                </Step>
-              </Stepper>
+                  {/* Step 4: Final */}
+                  <Step>
+                    <h2 className="mb-2 text-2xl font-bold">Final Step</h2>
+                    <p className="mb-4">You made it!</p>
+                    <div className="mb-4">
+                      <p className="text-white">
+                        Please review your answers before submitting your application. Make sure all information is accurate and complete.
+                      </p>
+                      <ul className="mt-2 list-disc list-inside text-gray-300">
+                        <li>Double-check your contact details.</li>
+                        <li>Ensure your answers reflect your true experiences and aspirations.</li>
+                        <li>Once you submit, you will not be able to edit your responses.</li>
+                      </ul>
+                    </div>
+                    <div className="mb-4">
+                      <p className="font-semibold text-white">What happens next?</p>
+                      <p className="text-gray-300">
+                        Our team will review your application and contact you via email regarding the next steps. Keep an eye on your inbox!
+                      </p>
+                    </div>
+                    <div className="mt-6">
+                      <p className="font-bold text-green-400">Please review your application. After clicking the complete button, you won't be able to edit it.</p>
+                    </div>
+                  </Step>
+                </Stepper>
+              )}
             </div>
           </div>
         )}

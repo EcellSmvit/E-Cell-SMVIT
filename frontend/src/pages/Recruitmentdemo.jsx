@@ -1,3 +1,4 @@
+import Facingtrouble from '@/components/Facingtrouble'
 import OpeningPost from '@/components/OpeningPost'
 import Position from '@/components/Position'
 import React from 'react'
@@ -58,6 +59,7 @@ function Recruitmentdemo() {
 
       <OpeningPost />
       <Position />
+      <Facingtrouble/>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import OpeningPost from '@/components/OpeningPost';
 import Position from '@/components/Position';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Facingtrouble from '@/components/Facingtrouble';
 
 function Recruitment() {
   const { user } = useUser();
@@ -74,6 +75,7 @@ function Recruitment() {
         </div>
         <OpeningPost />
         <Position />
+        <Facingtrouble/>
       </SignedOut>
 
       <SignedIn>
@@ -170,8 +172,6 @@ function Recruitment() {
                     </ul>
                   </div>
                 </Step>
-
-                {/* Step 3: Application Form */}
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form className="flex flex-col gap-4" autoComplete="off">

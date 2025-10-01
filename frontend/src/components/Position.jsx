@@ -2,7 +2,7 @@ import React from 'react'
 
 function Position() {
   return (
-    <div className="w-full h-auto text-black bg-[#F9FAFB]">
+    <div className="w-full h-auto text-black bg-[#F9FAFB] p-4">
       <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl md:text-8xl">
         <h1>
           E-CELL SMVIT Recruitment <br className="hidden sm:block" /> Team Roles

@@ -16,53 +16,56 @@ function Recruitment() {
   return (
     <div>
       <SignedOut>
-        <div className="min-h-screen w-full bg-[#f9fafb] relative">
-          {/* Diagonal Fade Grid Background - Top Right */}
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, #d1d5db 1px, transparent 1px),
-                linear-gradient(to bottom, #d1d5db 1px, transparent 1px)
-              `,
-              backgroundSize: "32px 32px",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
-              maskImage:
-                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
-            }}
+      <div className=" sm:h-[100vh] h-[70vh] w-full bg-[#f9fafb] relative">
+        {/* Background Grid */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(to right, #d1d5db 1px, transparent 1px),
+              linear-gradient(to bottom, #d1d5db 1px, transparent 1px)
+            `,
+            backgroundSize: "32px 32px",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
+            maskImage:
+              "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
+          }}
+        />
+
+        {/* Header */}
+        <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
+          <img
+            src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
+            className="w-10 sm:w-12"
+            alt="logo"
           />
-          {/* Header */}
-          <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
-            <img
-              src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
-              className="w-10 sm:w-12"
-              alt=""
-            />
-            <div className="text-white bg-[#6D4DFE] w-auto px-4 sm:px-6 py-2 rounded-md">
-              <SignInButton />
-            </div>
-          </div>
-          {/* Hero Content */}
-          <div className="flex relative z-10 flex-col justify-center items-center px-4 mt-24 text-[#18191D] sm:mt-32 md:mt-48">
-            <div className="text-3xl font-medium text-center sm:text-5xl md:text-6xl">
-              <h1>Welcome to</h1>
-            </div>
-            <div className="flex flex-col gap-4 justify-center items-center mt-4 sm:flex-row sm:gap-8 sm:mt-6">
-              <h1 className="text-4xl font-black text-center sm:text-7xl md:text-9xl sm:text-left">
-                E-CELL SMVIT
-              </h1>
-              <img
-                src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
-                className="p-2 w-16 sm:w-24 md:w-28"
-                alt="E-CELL SMVIT Logo"
-              />
-            </div>
-            <div className="mt-4 text-2xl font-medium text-center sm:text-4xl md:text-6xl">
-              Recruitment 2025
-            </div>
+          <div className="text-xl font-bold text-black sm:text-2xl">
+            2025
           </div>
         </div>
+
+        {/* Hero Content */}
+        <div className="flex relative z-10 justify-center items-center px-6 sm:px-14 h-[50vh] sm:h-[90vh] text-center sm:text-left">
+          <div>
+            <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
+            <SignInButton />
+            </button>
+            <p className="font-medium text-[#111111] text-4xl sm:text-8xl">
+              E-CELL SMVIT
+            </p>
+            <p className="font-black text-[#111111] text-6xl sm:text-[12rem] leading-[1]">
+              Recruiting!
+            </p>
+            <p className="text-[#545554] text-base sm:text-2xl font-medium w-full sm:w-2/3 mt-6 sm:mt-10 mx-auto sm:mx-0">
+              Are you ready to take charge, innovate, and create impact on campus? E-Cell SMVIT is recruiting enthusiastic minds like YOU!
+            </p>
+          </div>
+          <div className="hidden sm:block">
+            {/* You can re-enable the image here if needed */}
+          </div>
+        </div>
+      </div>
       </SignedOut>
       <SignedIn>
         <div className='flex justify-between items-center p-4'>

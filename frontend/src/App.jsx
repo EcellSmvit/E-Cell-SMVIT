@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import Ouralumni from './pages/Ouralumni'
 import Recruitment from './pages/Recruitment'
 import MeetOurTeam from './pages/MeetOurTeam'
+import Recruitmentdemo from './pages/Recruitmentdemo'
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/recruitment' element={<Recruitment />} />
         <Route path='/ourteam' element={<MeetOurTeam />} />
         <Route path='/alumni' element={<Ouralumni />} />
+        <Route path='/recruitmentdemo' element={<Recruitmentdemo/>}/>
       </Routes>
     </BrowserRouter>
   )

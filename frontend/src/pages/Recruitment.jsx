@@ -7,7 +7,6 @@ import Position from '@/components/Position';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
@@ -20,6 +19,7 @@ function Recruitment() {
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
+
   useEffect(() => {
     if (user) {
       checkIfSubmitted(user.id).then((submitted) => {
@@ -75,6 +75,7 @@ function Recruitment() {
         <OpeningPost />
         <Position />
       </SignedOut>
+
       <SignedIn>
         <div className="flex justify-between items-center p-4">
           <img
@@ -84,7 +85,9 @@ function Recruitment() {
           />
           <UserButton />
         </div>
+
         {alreadySubmitted ? (
+          // ✅ Show message if already submitted
           <div className="p-10 text-center text-white">
             <h1 className="text-6xl font-bold text-green-400">
               You have submitted your application.
@@ -94,6 +97,7 @@ function Recruitment() {
             </p>
           </div>
         ) : (
+          // ✅ Show Stepper and form if not submitted
           <div>
             <div className="p-4 text-4xl font-bold text-white">
               <h1>
@@ -101,13 +105,10 @@ function Recruitment() {
                 to E-Cell Smvit Recruitment 2025
               </h1>
             </div>
-
             <div className="text-white">
               <Stepper
                 initialStep={1}
-                onStepChange={(step) => {
-                  console.log(step);
-                }}
+                onStepChange={(step) => console.log(step)}
                 onFinalStepCompleted={async () => {
                   if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
                     toast.warn("Please fill all required fields before submitting.");
@@ -123,11 +124,10 @@ function Recruitment() {
                       q2,
                       q3,
                       q4,
-                      filledByUser: user?.firstName,
-                      userId: user?.id,
+                      userId: user?.id, // Make sure this matches your Appwrite collection attribute
                     });
                     toast.success("Application submitted successfully!");
-                    setAlreadySubmitted(true);
+                    setAlreadySubmitted(true); // Lock the form
                   } catch (error) {
                     toast.error("Error submitting form. Please try again.");
                   }
@@ -135,10 +135,13 @@ function Recruitment() {
                 backButtonText="Previous"
                 nextButtonText="Next"
               >
+                {/* Step 1 */}
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
                 </Step>
+
+                {/* Step 2 */}
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
                   <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
@@ -170,9 +173,12 @@ function Recruitment() {
                     </ul>
                   </div>
                 </Step>
+
+                {/* Step 3: Application Form */}
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form className="flex flex-col gap-4" autoComplete="off">
+                    {/* Name, Year, USN, Gender */}
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-white" htmlFor="name">Name</label>
@@ -184,10 +190,6 @@ function Recruitment() {
                           placeholder="Your name"
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -198,10 +200,6 @@ function Recruitment() {
                           onChange={(e) => setYear(e.target.value)}
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         >
                           <option value="">Select Year</option>
                           <option value="2nd">2nd</option>
@@ -218,10 +216,6 @@ function Recruitment() {
                           placeholder="Your USN"
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -234,10 +228,6 @@ function Recruitment() {
                               value="male"
                               checked={gender === "male"}
                               onChange={() => setGender("male")}
-                              onCopy={e => e.preventDefault()}
-                              onCut={e => e.preventDefault()}
-                              onPaste={e => e.preventDefault()}
-                              disabled={alreadySubmitted}
                             />
                             Male
                           </label>
@@ -248,16 +238,14 @@ function Recruitment() {
                               value="female"
                               checked={gender === "female"}
                               onChange={() => setGender("female")}
-                              onCopy={e => e.preventDefault()}
-                              onCut={e => e.preventDefault()}
-                              onPaste={e => e.preventDefault()}
-                              disabled={alreadySubmitted}
                             />
                             Female
                           </label>
                         </div>
                       </div>
                     </div>
+
+                    {/* Questions */}
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-white" htmlFor="q1">
@@ -271,10 +259,6 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           rows={3}
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -289,13 +273,10 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           rows={3}
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                     </div>
+
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-white" htmlFor="q3">
@@ -309,10 +290,6 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           rows={3}
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                       <div className="flex-1">
@@ -327,15 +304,13 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-white bg-gray-800 rounded"
                           rows={3}
                           autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                          disabled={alreadySubmitted}
                         />
                       </div>
                     </div>
                   </form>
                 </Step>
+
+                {/* Step 4: Final */}
                 <Step>
                   <h2 className="mb-2 text-2xl font-bold">Final Step</h2>
                   <p className="mb-4">You made it!</p>

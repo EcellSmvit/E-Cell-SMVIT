@@ -87,7 +87,7 @@ function Recruitment() {
         </div>
 
         {alreadySubmitted ? (
-          <div className="p-10 text-center bg-[#f9fafb]">
+          <div className="p-10 text-center bg-[#f9fafb] w-screen h-screen">
             <h1 className="text-6xl font-bold text-green-400">
               You have submitted your application.
             </h1>
@@ -185,7 +185,7 @@ function Recruitment() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your name"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                         />
                       </div>
@@ -195,7 +195,7 @@ function Recruitment() {
                           id="year"
                           value={year}
                           onChange={(e) => setYear(e.target.value)}
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                         >
                           <option value="">Select Year</option>
@@ -211,7 +211,7 @@ function Recruitment() {
                           value={usn}
                           onChange={(e) => setUsn(e.target.value)}
                           placeholder="Your USN"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                         />
                       </div>
@@ -253,7 +253,7 @@ function Recruitment() {
                           value={q1}
                           onChange={(e) => setQ1(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
                         />
@@ -267,7 +267,7 @@ function Recruitment() {
                           value={q2}
                           onChange={(e) => setQ2(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
                         />
@@ -284,7 +284,7 @@ function Recruitment() {
                           value={q3}
                           onChange={(e) => setQ3(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
                         />
@@ -298,7 +298,7 @@ function Recruitment() {
                           value={q4}
                           onChange={(e) => setQ4(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-400 rounded"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
                         />

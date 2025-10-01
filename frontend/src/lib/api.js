@@ -11,10 +11,10 @@ export const checkIfSubmitted = async (userId) => {
       DATABASE_ID,
       COLLECTION_ID,
       [
-        Query.or(
+        Query.or([
           Query.equal("userId", userId),
           Query.equal("filledByUser", userId)
-        )
+        ])
       ]
     );
     return response.total > 0;

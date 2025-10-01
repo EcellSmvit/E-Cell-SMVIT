@@ -53,7 +53,7 @@ function Recruitment() {
             <SignInButton>
             <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
             {/* <SignInButton/> */}
-            join Our Team
+            Join Our Team
             </button>
             </SignInButton>
             

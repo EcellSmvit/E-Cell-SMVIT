@@ -4,6 +4,9 @@ import Stepper, { Step } from '../components/ui/Components/Stepper/Stepper';
 import { submitApplication, checkIfSubmitted } from '../lib/api.js';
 import OpeningPost from '@/components/OpeningPost';
 import Position from '@/components/Position';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function Recruitment() {
   const { user } = useUser();
@@ -17,8 +20,6 @@ function Recruitment() {
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-
-  // ✅ Check if user already submitted
   useEffect(() => {
     if (user) {
       checkIfSubmitted(user.id).then((submitted) => {
@@ -29,10 +30,9 @@ function Recruitment() {
 
   return (
     <div>
-      {/* ✅ When user is not signed in */}
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       <SignedOut>
         <div className=" sm:h-[100vh] h-[70vh] w-full bg-[#f9fafb] relative">
-          {/* Background Grid */}
           <div
             className="absolute inset-0 z-0"
             style={{
@@ -47,8 +47,6 @@ function Recruitment() {
                 "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
             }}
           />
-
-          {/* Header */}
           <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
             <img
               src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
@@ -57,8 +55,6 @@ function Recruitment() {
             />
             <div className="text-xl font-bold text-black sm:text-2xl">2025</div>
           </div>
-
-          {/* Hero Content */}
           <div className="flex relative z-10 justify-center items-center px-6 sm:px-14 h-[50vh] sm:h-[90vh] text-center sm:text-left">
             <div>
               <SignInButton>
@@ -79,8 +75,6 @@ function Recruitment() {
         <OpeningPost />
         <Position />
       </SignedOut>
-
-      {/* ✅ When user is signed in */}
       <SignedIn>
         <div className="flex justify-between items-center p-4">
           <img
@@ -90,12 +84,10 @@ function Recruitment() {
           />
           <UserButton />
         </div>
-
-        {/* ✅ If user already submitted */}
         {alreadySubmitted ? (
           <div className="p-10 text-center text-white">
-            <h1 className="text-3xl font-bold text-green-400">
-              ✅ You have already submitted your application.
+            <h1 className="text-6xl font-bold text-green-400">
+              You have already submitted your application.
             </h1>
             <p className="mt-4 text-gray-300">
               Our team will contact you soon. Thank you for applying!
@@ -117,6 +109,10 @@ function Recruitment() {
                   console.log(step);
                 }}
                 onFinalStepCompleted={async () => {
+                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                    toast.warn("Please fill all required fields before submitting.");
+                    return;
+                  }
                   try {
                     await submitApplication({
                       name,
@@ -127,24 +123,21 @@ function Recruitment() {
                       q2,
                       q3,
                       q4,
-                      filledByUser: user?.id, // ✅ Clerk User ID
+                      filledByUser: user?.id,
                     });
-                    alert("Application submitted successfully!");
+                    toast.success("Application submitted successfully!");
                     setAlreadySubmitted(true);
                   } catch (error) {
-                    alert("Error submitting form. Check console.");
+                    toast.error("Error submitting form. Please try again.");
                   }
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
               >
-                {/* ✅ STEP 1 */}
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
                 </Step>
-
-                {/* ✅ STEP 2 */}
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
                   <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
@@ -176,8 +169,6 @@ function Recruitment() {
                     </ul>
                   </div>
                 </Step>
-
-                {/* ✅ STEP 3 (FORM) */}
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form className="flex flex-col gap-4" autoComplete="off">

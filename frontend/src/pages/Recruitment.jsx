@@ -317,7 +317,7 @@ function Recruitment() {
             </Stepper>
           </div>
         </div>
-      </SignedIn>
+      
         <div className='flex justify-between items-center p-4'>
           <img src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039" alt="" className='w-12' />
           <UserButton />

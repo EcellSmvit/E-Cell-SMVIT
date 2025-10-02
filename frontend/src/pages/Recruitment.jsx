@@ -103,7 +103,7 @@ function Recruitment() {
           />
           {/* Your Content/Components */}
           <div className="relative z-10">
-            <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">
+            <div className="flex justify-between items-center p-4  text-black">
               <img
                 src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
                 alt=""

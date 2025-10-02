@@ -16,15 +16,14 @@
 @media (min-width: 640px) {
   .outer-container {
     aspect-ratio: 4 / 3;
-    /* margin-top: -60px; Move more upward on larger screens */
+    margin-top: -60px; /* Move more upward on larger screens */
   }
 }
 
 @media (min-width: 768px) {
   .outer-container {
     aspect-ratio: 2 / 1;
-    /* margin-top: -50px; */
-     /* Move even more upward on larger screens */
+    margin-top: -50px; /* Move even more upward on larger screens */
   }
 }
 

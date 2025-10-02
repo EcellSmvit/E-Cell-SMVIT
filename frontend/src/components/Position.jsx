@@ -5,7 +5,7 @@ function Position() {
     <div className="w-full h-auto text-black bg-[#F9FAFB] p-4">
       <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl md:text-8xl">
         <h1>
-          E-CELL SMVIT Recruitment <br className="hidden sm:block" /> Team Roles
+             Team Roles
         </h1>
       </div>
       <div className="flex flex-col gap-8 justify-center items-center px-2 sm:px-6 md:px-12">

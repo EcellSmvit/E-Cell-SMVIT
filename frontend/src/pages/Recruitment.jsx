@@ -7,6 +7,8 @@ import Position from '@/components/Position';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Facingtrouble from '@/components/Facingtrouble';
+import AchievmentRecru from '@/components/AchievmentRecru';
+import FooterRecu from '@/components/FooterRecu';
 
 function Recruitment() {
   const { user } = useUser();
@@ -76,6 +78,8 @@ function Recruitment() {
         <OpeningPost />
         <Position />
         <Facingtrouble/>
+        <AchievmentRecru/>
+        <FooterRecu/>
       </SignedOut>
 
       <SignedIn>

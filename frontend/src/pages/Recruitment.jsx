@@ -85,267 +85,287 @@ function Recruitment() {
         </SignedOut>
 
       <SignedIn>
-        <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">
-          <img
-            src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
-            alt=""
-            className="w-12"
+        <div className="min-h-screen w-full bg-[#f8fafc] relative">
+          {/* Bottom Fade Grid Background */}
+          <div
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px)
+              `,
+              backgroundSize: "20px 30px",
+              WebkitMaskImage:
+                "radial-gradient(ellipse 70% 60% at 50% 100%, #000 60%, transparent 100%)",
+              maskImage:
+                "radial-gradient(ellipse 70% 60% at 50% 100%, #000 60%, transparent 100%)",
+            }}
           />
-          <UserButton />
-        </div>
-
-        {alreadySubmitted ? (
-          <div className="p-10 text-center bg-[#f9fafb] w-screen h-screen">
-            <h1 className="text-6xl font-bold text-green-400">
-              You have submitted your application.
-            </h1>
-            <p className="mt-4">
-              Our team will contact you soon. Thank you for applying!
-            </p>
-          </div>
-        ) : (
-          <div className='bg-[#f9fafb] text-black'>
-            <div className="p-4 text-2xl font-bold">
-              <h1>
-                Welcome <span className="text-[#5227FF]">{user?.firstName}</span>
-                to E-Cell Smvit Recruitment 2025
-              </h1>
+          {/* Your Content/Components */}
+          <div className="relative z-10">
+            <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">
+              <img
+                src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
+                alt=""
+                className="w-12"
+              />
+              <UserButton />
             </div>
-            <div className="text-white">
-              <Stepper
-                initialStep={1}
-                onStepChange={(step) => console.log(step)}
-                onFinalStepCompleted={async () => {
-                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
-                    toast.warn("Please fill all required fields before submitting.");
-                    return;
-                  }
-                  try {
-                    await submitApplication({
-                      name,
-                      year,
-                      usn,
-                      gender,
-                      q1,
-                      q2,
-                      q3,
-                      q4,
-                      filledByUser: user?.firstName,
-                      userId: user?.id,
-                    });
-                    toast.success("Application submitted successfully!");
-                    setAlreadySubmitted(true);
-                  } catch (error) {
-                    toast.error("Error submitting form. Please try again.");
-                  }
-                }}
-                backButtonText="Previous"
-                nextButtonText="Next"
-              >
-                {/* Step 1 */}
-                <Step>
-                  <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
-                  <p className='text-black'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
-                </Step>
-                <Step >
-                  <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
-                  <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Operational Manager</li>
-                      <li className="text-black">- Arranging Logistics and Permissions</li>
-                      <li className="text-black">- Documenting operations and events</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Events & PR Manager</li>
-                      <li className="text-black">- Conducting of Events</li>
-                      <li className="text-black">- Gathering and Influencing People</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Manager</li>
-                      <li className="text-black">- Arranging Sponsorships</li>
-                      <li className="text-black">- Making funding sources from companies</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Marketing Manager</li>
-                      <li className="text-black">- Advertising and Marketing Events</li>
-                      <li className="text-black">- Influencing Students</li>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Design Media Manager</li>
-                      <li className="text-black">- Posting and planning Media</li>
-                      <li className="text-black">- Social Media Growth Strategy</li>
-                      <li className="text-black">- Designing Social Content</li>
-                    </ul>
-                  </div>
-                </Step>
-                <Step>
-                  <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
-                  <form className="flex flex-col gap-4" autoComplete="off">
-                    {/* Name, Year, USN, Gender */}
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="name">Name</label>
-                        <input
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Your name"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                        />
+
+            {alreadySubmitted ? (
+              <div className="p-10 text-center bg-[#f9fafb] w-screen h-screen">
+                <h1 className="text-6xl font-bold text-green-400">
+                  You have submitted your application.
+                </h1>
+                <p className="mt-4">
+                  Our team will contact you soon. Thank you for applying!
+                </p>
+              </div>
+            ) : (
+              <div className='bg-[#f9fafb] text-black'>
+                <div className="p-4 text-2xl font-bold">
+                  <h1>
+                    Welcome <span className="text-[#5227FF]">{user?.firstName}</span>
+                    to E-Cell Smvit Recruitment 2025
+                  </h1>
+                </div>
+                <div className="text-white">
+                  <Stepper
+                    initialStep={1}
+                    onStepChange={(step) => console.log(step)}
+                    onFinalStepCompleted={async () => {
+                      if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                        toast.warn("Please fill all required fields before submitting.");
+                        return;
+                      }
+                      try {
+                        await submitApplication({
+                          name,
+                          year,
+                          usn,
+                          gender,
+                          q1,
+                          q2,
+                          q3,
+                          q4,
+                          filledByUser: user?.firstName,
+                          userId: user?.id,
+                        });
+                        toast.success("Application submitted successfully!");
+                        setAlreadySubmitted(true);
+                      } catch (error) {
+                        toast.error("Error submitting form. Please try again.");
+                      }
+                    }}
+                    backButtonText="Previous"
+                    nextButtonText="Next"
+                  >
+                    {/* Step 1 */}
+                    <Step>
+                      <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
+                      <p className='text-black'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
+                    </Step>
+                    <Step >
+                      <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
+                      <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
+                        <ul className="p-4 w-full max-w-xs">
+                          <li className="font-bold text-[#5227FF] mb-2">Operational Manager</li>
+                          <li className="text-black">- Arranging Logistics and Permissions</li>
+                          <li className="text-black">- Documenting operations and events</li>
+                        </ul>
+                        <ul className="p-4 w-full max-w-xs">
+                          <li className="font-bold text-[#5227FF] mb-2">Events & PR Manager</li>
+                          <li className="text-black">- Conducting of Events</li>
+                          <li className="text-black">- Gathering and Influencing People</li>
+                        </ul>
+                        <ul className="p-4 w-full max-w-xs">
+                          <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Manager</li>
+                          <li className="text-black">- Arranging Sponsorships</li>
+                          <li className="text-black">- Making funding sources from companies</li>
+                        </ul>
+                        <ul className="p-4 w-full max-w-xs">
+                          <li className="font-bold text-[#5227FF] mb-2">Marketing Manager</li>
+                          <li className="text-black">- Advertising and Marketing Events</li>
+                          <li className="text-black">- Influencing Students</li>
+                        </ul>
+                        <ul className="p-4 w-full max-w-xs">
+                          <li className="font-bold text-[#5227FF] mb-2">Design Media Manager</li>
+                          <li className="text-black">- Posting and planning Media</li>
+                          <li className="text-black">- Social Media Growth Strategy</li>
+                          <li className="text-black">- Designing Social Content</li>
+                        </ul>
                       </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="year">Year</label>
-                        <select
-                          id="year"
-                          value={year}
-                          onChange={(e) => setYear(e.target.value)}
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                        >
-                          <option value="">Select Year</option>
-                          <option value="2nd">2nd</option>
-                          <option value="3rd">3rd</option>
-                        </select>
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="usn">USN</label>
-                        <input
-                          id="usn"
-                          type="text"
-                          value={usn}
-                          onChange={(e) => setUsn(e.target.value)}
-                          placeholder="Your USN"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black">Gender</label>
-                        <div className="flex gap-4">
-                          <label className="flex gap-1 items-center text-black">
+                    </Step>
+                    <Step>
+                      <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
+                      <form className="flex flex-col gap-4" autoComplete="off">
+                        {/* Name, Year, USN, Gender */}
+                        <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="name">Name</label>
                             <input
-                              type="radio"
-                              name="gender"
-                              value="male"
-                              checked={gender === "male"}
-                              onChange={() => setGender("male")}
+                              id="name"
+                              type="text"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              placeholder="Your name"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              autoComplete="off"
                             />
-                            Male
-                          </label>
-                          <label className="flex gap-1 items-center text-black">
+                          </div>
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="year">Year</label>
+                            <select
+                              id="year"
+                              value={year}
+                              onChange={(e) => setYear(e.target.value)}
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              autoComplete="off"
+                            >
+                              <option value="">Select Year</option>
+                              <option value="2nd">2nd</option>
+                              <option value="3rd">3rd</option>
+                            </select>
+                          </div>
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-white" htmlFor="usn">USN</label>
                             <input
-                              type="radio"
-                              name="gender"
-                              value="female"
-                              checked={gender === "female"}
-                              onChange={() => setGender("female")}
+                              id="usn"
+                              type="text"
+                              value={usn}
+                              onChange={(e) => setUsn(e.target.value)}
+                              placeholder="Your USN"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              autoComplete="off"
                             />
-                            Female
-                          </label>
+                          </div>
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black">Gender</label>
+                            <div className="flex gap-4">
+                              <label className="flex gap-1 items-center text-black">
+                                <input
+                                  type="radio"
+                                  name="gender"
+                                  value="male"
+                                  checked={gender === "male"}
+                                  onChange={() => setGender("male")}
+                                />
+                                Male
+                              </label>
+                              <label className="flex gap-1 items-center text-black">
+                                <input
+                                  type="radio"
+                                  name="gender"
+                                  value="female"
+                                  checked={gender === "female"}
+                                  onChange={() => setGender("female")}
+                                />
+                                Female
+                              </label>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
 
-                    {/* Questions */}
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q1">
-                          Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
-                        </label>
-                        <textarea
-                          id="q1"
-                          value={q1}
-                          onChange={(e) => setQ1(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q2">
-                          Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
-                        </label>
-                        <textarea
-                          id="q2"
-                          value={q2}
-                          onChange={(e) => setQ2(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                    </div>
+                        {/* Questions */}
+                        <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="q1">
+                              Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
+                            </label>
+                            <textarea
+                              id="q1"
+                              value={q1}
+                              onChange={(e) => setQ1(e.target.value)}
+                              placeholder="Your answer"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              rows={3}
+                              autoComplete="off"
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="q2">
+                              Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
+                            </label>
+                            <textarea
+                              id="q2"
+                              value={q2}
+                              onChange={(e) => setQ2(e.target.value)}
+                              placeholder="Your answer"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              rows={3}
+                              autoComplete="off"
+                            />
+                          </div>
+                        </div>
 
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q3">
-                          Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
-                        </label>
-                        <textarea
-                          id="q3"
-                          value={q3}
-                          onChange={(e) => setQ3(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q4">
-                          Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
-                        </label>
-                        <textarea
-                          id="q4"
-                          value={q4}
-                          onChange={(e) => setQ4(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                        />
-                      </div>
-                    </div>
-                  </form>
-                </Step>
+                        <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="q3">
+                              Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
+                            </label>
+                            <textarea
+                              id="q3"
+                              value={q3}
+                              onChange={(e) => setQ3(e.target.value)}
+                              placeholder="Your answer"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              rows={3}
+                              autoComplete="off"
+                            />
+                          </div>
+                          <div className="flex-1">
+                            <label className="block mb-1 font-semibold text-black" htmlFor="q4">
+                              Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
+                            </label>
+                            <textarea
+                              id="q4"
+                              value={q4}
+                              onChange={(e) => setQ4(e.target.value)}
+                              placeholder="Your answer"
+                              className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                              rows={3}
+                              autoComplete="off"
+                            />
+                          </div>
+                        </div>
+                      </form>
+                    </Step>
 
-                {/* Step 4: Final */}
-                <Step>
-                  <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
-                  <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
-                  <div className="mb-4">
-                    <p className="text-black">
-                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
-                    </p>
-                    <ul className="mt-2 list-disc list-inside text-gray-800">
-                      <li>Double-check your name, year, USN, and gender.</li>
-                      <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
-                      <li>Once you submit, you will not be able to edit your responses.</li>
-                    </ul>
-                  </div>
-                  <div className="mb-4">
-                    <p className="font-semibold text-black">What happens next?</p>
-                    <p className="text-gray-800">
-                      Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <p className="font-bold text-green-400">
-                      Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
-                    </p>
-                    <p className="mt-2 text-black">
-                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://instagram.com/ecell.smvit" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
-                    </p>
-                  </div>
-                </Step>
-              </Stepper>
-            </div>
+                    {/* Step 4: Final */}
+                    <Step>
+                      <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
+                      <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
+                      <div className="mb-4">
+                        <p className="text-black">
+                          Please review your answers before submitting your application. Make sure all information is accurate and complete.
+                        </p>
+                        <ul className="mt-2 list-disc list-inside text-gray-800">
+                          <li>Double-check your name, year, USN, and gender.</li>
+                          <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
+                          <li>Once you submit, you will not be able to edit your responses.</li>
+                        </ul>
+                      </div>
+                      <div className="mb-4">
+                        <p className="font-semibold text-black">What happens next?</p>
+                        <p className="text-gray-800">
+                          Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
+                        </p>
+                      </div>
+                      <div className="mt-6">
+                        <p className="font-bold text-green-400">
+                          Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
+                        </p>
+                        <p className="mt-2 text-black">
+                          For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://instagram.com/ecell.smvit" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
+                        </p>
+                      </div>
+                    </Step>
+                  </Stepper>
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </SignedIn>
     </div>
   )

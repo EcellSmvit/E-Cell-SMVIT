@@ -9,8 +9,6 @@
   align-items: center;
   padding: 1rem;
   width: 100%;
-  /* Always start lower, let content push upward if needed */
-  margin-top: 60vh;
   min-height: 100vh;
   justify-content: flex-start;
 }
@@ -18,14 +16,14 @@
 @media (min-width: 640px) {
   .outer-container {
     aspect-ratio: 4 / 3;
-    margin-top: 70vh; /* Move even more downward on larger screens */
+    margin-top: -60px; /* Move more upward on larger screens */
   }
 }
 
 @media (min-width: 768px) {
   .outer-container {
     aspect-ratio: 2 / 1;
-    margin-top: 80vh; /* Move further downward on larger screens */
+    margin-top: -50px; /* Move even more upward on larger screens */
   }
 }
 

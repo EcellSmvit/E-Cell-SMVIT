@@ -105,9 +105,9 @@ function Recruitment() {
           </div>
         ) : (
           <div className='bg-[#f9fafb] text-black'>
-            <div className="p-4 text-4xl font-bold">
+            <div className="p-4 text-2xl font-bold">
               <h1>
-                Welcome <span className="text-[#5227FF]">{user?.firstName}</span> <br />
+                Welcome <span className="text-[#5227FF]">{user?.firstName}</span>
                 to E-Cell Smvit Recruitment 2025
               </h1>
             </div>

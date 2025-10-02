@@ -1,4 +1,5 @@
 import AchievmentRecru from '@/components/AchievmentRecru'
+import EventsRecru from '@/components/EventsRecru'
 import Facingtrouble from '@/components/Facingtrouble'
 import FooterRecu from '@/components/FooterRecu'
 import OpeningPost from '@/components/OpeningPost'
@@ -63,6 +64,7 @@ function Recruitmentdemo() {
       <Position />
       <Facingtrouble/>
       <AchievmentRecru/>
+      <EventsRecru/>
       <FooterRecu/>
     </div>
   )

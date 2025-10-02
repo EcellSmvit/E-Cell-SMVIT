@@ -48,13 +48,13 @@ function AchievmentRecru() {
   return (
     <div className="w-full flex flex-col items-center py-12 bg-[#F9FAFB]">
       <h2 className="mb-8 text-3xl font-bold text-center text-black sm:text-6xl">Our Achievements</h2>
-      <div className="flex flex-wrap gap-8 justify-center w-full max-w-6xl">
+      <div className="flex flex-wrap gap-10 justify-center w-full max-w-6xl">
         {achievements.map((member, idx) => (
           <div
             key={idx}
-            className="flex overflow-hidden flex-col w-64 bg-[#111111] rounded-xl shadow-lg"
+            className="flex overflow-hidden flex-col w-64 bg-white rounded-xl shadow-lg"
           >
-            <div className="flex justify-center items-center w-full h-48 bg-[#111111]">
+            <div className="flex justify-center items-center w-full h-48 bg-white">
               <img
                 src={member.image}
                 alt={member.college}
@@ -62,8 +62,8 @@ function AchievmentRecru() {
               />
             </div>
             <div className="flex flex-col flex-1 p-6">
-              <p className="mb-2 text-sm text-gray-300">{member.college}</p>
-              <p className="text-base text-white">{member.achievement}</p>
+              <p className="mb-2 text-sm text-gray-500">{member.college}</p>
+              <p className="text-base text-black">{member.achievement}</p>
             </div>
           </div>
         ))}

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Facingtrouble from '@/components/Facingtrouble';
 import AchievmentRecru from '@/components/AchievmentRecru';
 import FooterRecu from '@/components/FooterRecu';
+import EventsRecru from '@/components/EventsRecru';
 
 function Recruitment() {
   const { user } = useUser();
@@ -79,8 +80,9 @@ function Recruitment() {
         <Position />
         <Facingtrouble/>
         <AchievmentRecru/>
+        <EventsRecru/>
         <FooterRecu/>
-      </SignedOut>
+        </SignedOut>
 
       <SignedIn>
         <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">

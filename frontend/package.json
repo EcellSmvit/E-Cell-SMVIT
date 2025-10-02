@@ -12,6 +12,7 @@
   "dependencies": {
     "@barba/core": "^2.10.3",
     "@clerk/clerk-react": "^5.49.0",
+    "@clerk/themes": "^2.4.23",
     "@emailjs/browser": "^4.4.1",
     "@react-three/drei": "^10.4.2",
     "@react-three/fiber": "^9.2.0",

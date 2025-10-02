@@ -16,7 +16,6 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
         <ClerkProvider publishableKey={PUBLISHABLE_KEY}
         appearance={{
-          theme: 'simple',
           layout: {
             unsafe_disableDevelopmentModeWarnings: true,
           },

@@ -91,20 +91,19 @@ function StartupBacked() {
             "[mask-image:linear-gradient(to_bottom_right,white,transparent,transparent)] "
           )}
         />
-        <div className="flex gap-20 justify-around items-center w-full">
+        <div className="flex flex-col gap-10 justify-around items-center w-full md:flex-row md:gap-20">
           
-          <div className="flex flex-col flex-1 justify-center items-start min-h-full">
+          <div className="flex flex-col flex-1 justify-center items-start mb-8 min-h-full md:mb-0">
             <SparklesText
               sparklesCount={15}
-              className={"text-white"}
+              className="text-base font-semibold text-white sm:text-lg md:text-xl lg:text-6xl"
             >
               STARTUP BACKED BY
             </SparklesText>
-            <h1 className="text-6xl font-black text-white bg-[#6D4DFE] p-4 w-[28rem]">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white bg-[#6D4DFE] p-2 sm:p-4 w-full md:w-[28rem]">
               E-CELL SMVIT
             </h1>
           </div>
-          
           
           <div className="flex flex-col flex-1 justify-center items-center w-full">
             <div

@@ -17,10 +17,10 @@ export const TextReveal = ({ children, className }) => {
   const words = children.split(" ");
 
   return (
-    <div ref={targetRef} className={cn("relative z-0 h-[100vh]", className)}>
+    <div ref={targetRef} className={cn("relative z-0 h-[50vh]", className)}>
       <div
         className={
-          "flex sticky top-0 justify-center items-center mx-auto bg-transparent h-[100vh] w-[90vw] px-[1rem] py-[5rem]"
+          "flex sticky top-0 justify-center items-center mx-auto text-justify bg-transparent h-[50vh] w-[90vw] px-[1rem] py-[5rem]"
         }
       >
         <span
@@ -30,7 +30,7 @@ export const TextReveal = ({ children, className }) => {
         >
           {words.map((word, i) => {
             const start = i / words.length;
-            const end = (i + 1) / words.length;
+            const end = (i + 0.5) / words.length;
             return (
               <Word key={i} progress={scrollYProgress} range={[start, end]}>
                 {word}
@@ -46,7 +46,7 @@ export const TextReveal = ({ children, className }) => {
 const Word = ({ children, progress, range }) => {
   const opacity = useTransform(progress, range, [0, 1]);
   return (
-    <span className="xl:lg-3 relative mx-1 lg:mx-1.5">
+    <span className="xl:lg-3 relative mx-1 lg:mx-1.5 ">
       <span className="absolute opacity-30">{children}</span>
       <motion.span style={{ opacity }} className={"text-white dark:text-white"}>
         {children}

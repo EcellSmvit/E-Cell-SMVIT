@@ -9,7 +9,7 @@ import Section6 from '../components/PublicSection/Section6';
 import Text from '@/components/PublicSection/Text';
 import InfinityComponent from '@/components/PublicSection/Infinity';
 import Footer from '@/components/PublicSection/Footer';
-// import Heads from '@/components/PublicSection/Heads';
+import Heads from '@/components/PublicSection/Heads';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
 import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 import WhyEcell from '@/components/PublicSection/WhyEcell';
@@ -32,7 +32,7 @@ function Home() {
       {/* <OurMissionandVisionpart/> */}
       <OurMissionandVision/>
       <StartupBacked/>
-      {/* <Heads/> */}
+      <Heads/>
       <WhyEcell/>
       <Section6/>
       <Footer/>

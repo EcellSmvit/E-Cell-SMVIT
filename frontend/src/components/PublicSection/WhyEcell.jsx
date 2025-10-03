@@ -20,9 +20,9 @@ function WhyEcell() {
         )}
       />
       <div>
-        <div className='flex gap-4 justify-center items-center text-6xl font-black text-white'>
-            <h1>WHY </h1>
-            <h1 className='bg-[#6D4DFE] p-4'>E-CELL?</h1>
+        <div className="flex flex-wrap gap-2 justify-center items-center text-3xl font-black text-white sm:gap-4 sm:text-5xl md:text-6xl">
+            <h1>WHY</h1>
+            <h1 className="bg-[#6D4DFE] px-3 py-2 sm:px-4 sm:py-4 rounded-md">E-CELL?</h1>
         </div>
         <div style={{ height: '600px', position: 'relative' }}>
   <CircularGallery
@@ -34,10 +34,8 @@ function WhyEcell() {
    />
 </div>
 
-        <TextReveal 
-   
-    >
-       E-Cell SMVIT  is the hub for innovation and entrepreneurship on campus. We empower students to transform ideas into impactful ventures through mentorship, workshops, competitions, and industry collaborations. Our mission is to nurture future leaders, foster a startup culture, and bridge the gap between students and the entrepreneurial ecosystem.
+        <TextReveal>
+       E-Cell SMVIT is the campus hub for innovation and entrepreneurship. We help students turn ideas into real ventures through mentorship, events, and industry connections—nurturing future leaders and a strong startup culture.
     </TextReveal>
     </div>
     

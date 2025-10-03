@@ -145,7 +145,7 @@ function Recruitment() {
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>
                   <p className="text-black">
-                    E-Cell SMVIT is more than just a student club—it’s a launchpad for 
+                    E-Cell SMVIT is more than just a student club - it’s a launchpad for 
                     innovators, entrepreneurs, and changemakers. By joining, you’ll gain 
                     hands-on experience in leadership, teamwork, and problem-solving while 
                     working on real-world projects and competitions. From networking with 

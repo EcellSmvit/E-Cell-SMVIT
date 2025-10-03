@@ -24,9 +24,6 @@ function Recruitment() {
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
 
-  // Track current step for validation
-  const [currentStep, setCurrentStep] = useState(1);
-
   useEffect(() => {
     if (user) {
       checkIfSubmitted(user.id).then((submitted) => {
@@ -34,33 +31,6 @@ function Recruitment() {
       });
     }
   }, [user]);
-
-  // Validation for application form step
-  const isApplicationFormValid = () => {
-    return (
-      name.trim() !== '' &&
-      year.trim() !== '' &&
-      usn.trim() !== '' &&
-      gender.trim() !== '' &&
-      q1.trim() !== '' &&
-      q2.trim() !== '' &&
-      q3.trim() !== '' &&
-      q4.trim() !== ''
-    );
-  };
-
-  // Custom onNext handler for Stepper
-  const handleStepChange = (nextStep, prevStep, goToStep) => {
-    setCurrentStep(nextStep);
-    // If moving from Application Form step (step 3) to next, validate
-    if (prevStep === 3 && nextStep === 4) {
-      if (!isApplicationFormValid()) {
-        toast.warn("Please fill all required fields before proceeding to the next step.");
-        // Prevent moving to next step
-        goToStep(3);
-      }
-    }
-  };
 
   return (
     <div>
@@ -143,9 +113,9 @@ function Recruitment() {
             <div className="text-white">
               <Stepper
                 initialStep={1}
-                onStepChange={(step, prevStep, goToStep) => handleStepChange(step, prevStep, goToStep)}
+                onStepChange={(step) => console.log(step)}
                 onFinalStepCompleted={async () => {
-                  if (!isApplicationFormValid()) {
+                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
                     toast.warn("Please fill all required fields before submitting.");
                     return;
                   }
@@ -211,7 +181,10 @@ function Recruitment() {
                   <form className="flex flex-col gap-4" autoComplete="off">
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="name">Name</label>
+                        <label className="block mb-1 font-semibold text-black" htmlFor="name">
+                          Name
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
                         <input
                           id="name"
                           type="text"
@@ -223,7 +196,10 @@ function Recruitment() {
                         />
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="year">Year</label>
+                        <label className="block mb-1 font-semibold text-black" htmlFor="year">
+                          Year
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
                         <select
                           id="year"
                           value={year}
@@ -237,7 +213,10 @@ function Recruitment() {
                         </select>
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="usn">USN</label>
+                        <label className="block mb-1 font-semibold text-white" htmlFor="usn">
+                          USN
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
                         <input
                           id="usn"
                           type="text"
@@ -249,7 +228,10 @@ function Recruitment() {
                         />
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black">Gender</label>
+                        <label className="block mb-1 font-semibold text-black">
+                          Gender
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
                         <div className="flex gap-4">
                           <label className="flex gap-1 items-center text-black">
                             <input
@@ -278,6 +260,7 @@ function Recruitment() {
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q1">
                           Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
+                          <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea
                           id="q1"
@@ -292,6 +275,7 @@ function Recruitment() {
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q2">
                           Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
+                          <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea
                           id="q2"
@@ -309,6 +293,7 @@ function Recruitment() {
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q3">
                           Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
+                          <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea
                           id="q3"
@@ -323,6 +308,7 @@ function Recruitment() {
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q4">
                           Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
+                          <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea
                           id="q4"

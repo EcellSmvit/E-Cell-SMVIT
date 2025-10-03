@@ -24,6 +24,17 @@ function Recruitment() {
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
 
+  // For controlling the Next button on the Application Form step
+  const isFormFilled =
+    name.trim() &&
+    year.trim() &&
+    usn.trim() &&
+    gender.trim() &&
+    q1.trim() &&
+    q2.trim() &&
+    q3.trim() &&
+    q4.trim();
+
   useEffect(() => {
     if (user) {
       checkIfSubmitted(user.id).then((submitted) => {
@@ -93,7 +104,6 @@ function Recruitment() {
           />
           <UserButton />
         </div>
-
         {alreadySubmitted ? (
           <div className="p-10 text-center bg-[#f9fafb] w-screen h-screen">
             <h1 className="text-6xl font-bold text-green-400">
@@ -141,13 +151,33 @@ function Recruitment() {
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
+                // Custom next button logic for the Application Form step (3rd step, index 2)
+                renderNextButton={({ currentStep }) => {
+                  // The Application Form step is the third step (index 2)
+                  if (currentStep === 2) {
+                    return (
+                      <button
+                        type="button"
+                        className={`px-6 py-2 rounded-full font-semibold transition ${
+                          isFormFilled
+                            ? 'bg-[#5227FF] text-white hover:bg-[#3a1bb3]'
+                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        }`}
+                        disabled={!isFormFilled}
+                      >
+                        Next
+                      </button>
+                    );
+                  }
+                  // For other steps, use default
+                  return null;
+                }}
               >
-                {/* Step 1 */}
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
                   <p className='text-black'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
                 </Step>
-                <Step >
+                <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
                   <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
                     <ul className="p-4 w-full max-w-xs">
@@ -181,7 +211,6 @@ function Recruitment() {
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form className="flex flex-col gap-4" autoComplete="off">
-                    {/* Name, Year, USN, Gender */}
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="name">Name</label>
@@ -247,8 +276,6 @@ function Recruitment() {
                         </div>
                       </div>
                     </div>
-
-                    {/* Questions */}
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q1">
@@ -312,8 +339,6 @@ function Recruitment() {
                     </div>
                   </form>
                 </Step>
-
-                {/* Step 4: Final */}
                 <Step>
                   <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
                   <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>

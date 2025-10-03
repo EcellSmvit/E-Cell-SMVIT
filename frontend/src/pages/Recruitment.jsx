@@ -176,9 +176,30 @@ function Recruitment() {
                     </ul>
                   </div>
                 </Step>
-                <Step>
+                <Step
+                  onNext={(_, goNext, setStepError) => {
+                    // Validation logic
+                    const errors = {};
+                    if (!name.trim()) errors.name = true;
+                    if (!year.trim()) errors.year = true;
+                    if (!usn.trim()) errors.usn = true;
+                    if (!gender.trim()) errors.gender = true;
+                    if (!q1.trim()) errors.q1 = true;
+                    if (!q2.trim()) errors.q2 = true;
+                    if (!q3.trim()) errors.q3 = true;
+                    if (!q4.trim()) errors.q4 = true;
+
+                    setFormErrors(errors);
+
+                    if (Object.keys(errors).length === 0) {
+                      goNext();
+                    } else {
+                      setStepError("Please fill all required fields.");
+                    }
+                  }}
+                >
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
-                  <form className="flex flex-col gap-4" autoComplete="off">
+                  <form className="flex flex-col gap-4" autoComplete="off" onSubmit={e => e.preventDefault()}>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="name">
@@ -189,11 +210,17 @@ function Recruitment() {
                           id="name"
                           type="text"
                           value={name}
-                          onChange={(e) => setName(e.target.value)}
+                          onChange={(e) => {
+                            setName(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, name: false }));
+                          }}
                           placeholder="Your name"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.name ? 'border-2 border-red-500' : ''}`}
                           autoComplete="off"
                         />
+                        {formErrors?.name && (
+                          <span className="text-sm text-red-500">Name is required</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="year">
@@ -203,17 +230,23 @@ function Recruitment() {
                         <select
                           id="year"
                           value={year}
-                          onChange={(e) => setYear(e.target.value)}
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          onChange={(e) => {
+                            setYear(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, year: false }));
+                          }}
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.year ? 'border-2 border-red-500' : ''}`}
                           autoComplete="off"
                         >
                           <option value="">Select Year</option>
                           <option value="2nd">2nd</option>
                           <option value="3rd">3rd</option>
                         </select>
+                        {formErrors?.year && (
+                          <span className="text-sm text-red-500">Year is required</span>
+                        )}
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-white" htmlFor="usn">
+                        <label className="block mb-1 font-semibold text-black" htmlFor="usn">
                           USN
                           <span className="ml-1 text-red-500">*</span>
                         </label>
@@ -221,11 +254,17 @@ function Recruitment() {
                           id="usn"
                           type="text"
                           value={usn}
-                          onChange={(e) => setUsn(e.target.value)}
+                          onChange={(e) => {
+                            setUsn(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, usn: false }));
+                          }}
                           placeholder="Your USN"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.usn ? 'border-2 border-red-500' : ''}`}
                           autoComplete="off"
                         />
+                        {formErrors?.usn && (
+                          <span className="text-sm text-red-500">USN is required</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black">
@@ -239,7 +278,10 @@ function Recruitment() {
                               name="gender"
                               value="male"
                               checked={gender === "male"}
-                              onChange={() => setGender("male")}
+                              onChange={() => {
+                                setGender("male");
+                                setFormErrors((prev) => ({ ...prev, gender: false }));
+                              }}
                             />
                             Male
                           </label>
@@ -249,11 +291,17 @@ function Recruitment() {
                               name="gender"
                               value="female"
                               checked={gender === "female"}
-                              onChange={() => setGender("female")}
+                              onChange={() => {
+                                setGender("female");
+                                setFormErrors((prev) => ({ ...prev, gender: false }));
+                              }}
                             />
                             Female
                           </label>
                         </div>
+                        {formErrors?.gender && (
+                          <span className="text-sm text-red-500">Gender is required</span>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
@@ -265,12 +313,18 @@ function Recruitment() {
                         <textarea
                           id="q1"
                           value={q1}
-                          onChange={(e) => setQ1(e.target.value)}
+                          onChange={(e) => {
+                            setQ1(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, q1: false }));
+                          }}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.q1 ? 'border-2 border-red-500' : ''}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors?.q1 && (
+                          <span className="text-sm text-red-500">This answer is required</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q2">
@@ -280,12 +334,18 @@ function Recruitment() {
                         <textarea
                           id="q2"
                           value={q2}
-                          onChange={(e) => setQ2(e.target.value)}
+                          onChange={(e) => {
+                            setQ2(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, q2: false }));
+                          }}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.q2 ? 'border-2 border-red-500' : ''}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors?.q2 && (
+                          <span className="text-sm text-red-500">This answer is required</span>
+                        )}
                       </div>
                     </div>
 
@@ -298,12 +358,18 @@ function Recruitment() {
                         <textarea
                           id="q3"
                           value={q3}
-                          onChange={(e) => setQ3(e.target.value)}
+                          onChange={(e) => {
+                            setQ3(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, q3: false }));
+                          }}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.q3 ? 'border-2 border-red-500' : ''}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors?.q3 && (
+                          <span className="text-sm text-red-500">This answer is required</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q4">
@@ -313,12 +379,18 @@ function Recruitment() {
                         <textarea
                           id="q4"
                           value={q4}
-                          onChange={(e) => setQ4(e.target.value)}
+                          onChange={(e) => {
+                            setQ4(e.target.value);
+                            setFormErrors((prev) => ({ ...prev, q4: false }));
+                          }}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${formErrors?.q4 ? 'border-2 border-red-500' : ''}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors?.q4 && (
+                          <span className="text-sm text-red-500">This answer is required</span>
+                        )}
                       </div>
                     </div>
                   </form>

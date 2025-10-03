@@ -14,6 +14,7 @@ import EventsRecru from '@/components/EventsRecru';
 function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
 
   const [name, setName] = useState('');
   const [year, setYear] = useState('');

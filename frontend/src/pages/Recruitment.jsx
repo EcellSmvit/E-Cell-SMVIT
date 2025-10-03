@@ -107,7 +107,7 @@ function Recruitment() {
           <div className='bg-[#f9fafb] text-black'>
             <div className="p-4 text-2xl font-bold">
               <h1>
-                Welcome <span className="text-[#5227FF]">{user?.firstName}</span>
+                Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}
                 to E-Cell Smvit Recruitment 2025
               </h1>
             </div>
@@ -143,9 +143,19 @@ function Recruitment() {
                 nextButtonText="Next"
               >
                 <Step>
-                  <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>
-                  <p className='text-black'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor neque vel veritatis mollitia officiis quae! Maxime eius totam obcaecati atque nostrum soluta harum quos repellendus quis itaque temporibus neque, culpa inventore dolore cumque error expedita autem quod rerum at? Excepturi, incidunt magnam. Pariatur architecto ipsa molestiae neque cumque placeat minus corrupti asperiores dolores, iste assumenda vitae esse explicabo fugiat cum nulla reiciendis eligendi culpa reprehenderit quo itaque labore ipsam. Cum iusto minima aspernatur voluptatem perferendis laudantium nulla distinctio eveniet! Nostrum sint saepe blanditiis quisquam magnam nulla ipsum quas voluptates amet, reiciendis perferendis tenetur facere, atque et natus cupiditate qui aspernatur.</p>
+                  <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>
+                  <p className="text-black">
+                    E-Cell SMVIT is more than just a student club—it’s a launchpad for 
+                    innovators, entrepreneurs, and changemakers. By joining, you’ll gain 
+                    hands-on experience in leadership, teamwork, and problem-solving while 
+                    working on real-world projects and competitions. From networking with 
+                    industry leaders and startup founders to showcasing your ideas at national 
+                    events, E-Cell gives you the platform, mentorship, and resources to turn 
+                    your vision into impact. Whether you’re a developer, designer, or 
+                    strategist, E-Cell SMVIT empowers you to create, collaborate, and grow.
+                  </p>
                 </Step>
+
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
                   <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>

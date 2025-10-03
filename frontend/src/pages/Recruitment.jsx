@@ -24,16 +24,8 @@ function Recruitment() {
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
 
-  // For controlling the Next button on the Application Form step
-  const isFormFilled =
-    name.trim() &&
-    year.trim() &&
-    usn.trim() &&
-    gender.trim() &&
-    q1.trim() &&
-    q2.trim() &&
-    q3.trim() &&
-    q4.trim();
+  // Track current step for validation
+  const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
     if (user) {
@@ -42,6 +34,33 @@ function Recruitment() {
       });
     }
   }, [user]);
+
+  // Validation for application form step
+  const isApplicationFormValid = () => {
+    return (
+      name.trim() !== '' &&
+      year.trim() !== '' &&
+      usn.trim() !== '' &&
+      gender.trim() !== '' &&
+      q1.trim() !== '' &&
+      q2.trim() !== '' &&
+      q3.trim() !== '' &&
+      q4.trim() !== ''
+    );
+  };
+
+  // Custom onNext handler for Stepper
+  const handleStepChange = (nextStep, prevStep, goToStep) => {
+    setCurrentStep(nextStep);
+    // If moving from Application Form step (step 3) to next, validate
+    if (prevStep === 3 && nextStep === 4) {
+      if (!isApplicationFormValid()) {
+        toast.warn("Please fill all required fields before proceeding to the next step.");
+        // Prevent moving to next step
+        goToStep(3);
+      }
+    }
+  };
 
   return (
     <div>
@@ -124,9 +143,9 @@ function Recruitment() {
             <div className="text-white">
               <Stepper
                 initialStep={1}
-                onStepChange={(step) => console.log(step)}
+                onStepChange={(step, prevStep, goToStep) => handleStepChange(step, prevStep, goToStep)}
                 onFinalStepCompleted={async () => {
-                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                  if (!isApplicationFormValid()) {
                     toast.warn("Please fill all required fields before submitting.");
                     return;
                   }
@@ -151,27 +170,6 @@ function Recruitment() {
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
-                // Custom next button logic for the Application Form step (3rd step, index 2)
-                renderNextButton={({ currentStep }) => {
-                  // The Application Form step is the third step (index 2)
-                  if (currentStep === 2) {
-                    return (
-                      <button
-                        type="button"
-                        className={`px-6 py-2 rounded-full font-semibold transition ${
-                          isFormFilled
-                            ? 'bg-[#5227FF] text-white hover:bg-[#3a1bb3]'
-                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        }`}
-                        disabled={!isFormFilled}
-                      >
-                        Next
-                      </button>
-                    );
-                  }
-                  // For other steps, use default
-                  return null;
-                }}
               >
                 <Step>
                   <h2 className='text-2xl font-bold text-[#5227FF]'>Why E-CELL SMVIT?</h2>

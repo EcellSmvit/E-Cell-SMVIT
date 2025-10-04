@@ -200,9 +200,12 @@ function Recruitment() {
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="Your name"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${name === "" && showValidation ? "border border-red-500" : ""}`}
                           autoComplete="off"
                         />
+                        {showValidation && name === "" && (
+                          <span className="text-xs text-red-500">Name is required.</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="year">
@@ -213,13 +216,16 @@ function Recruitment() {
                           id="year"
                           value={year}
                           onChange={(e) => setYear(e.target.value)}
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${year === "" && showValidation ? "border border-red-500" : ""}`}
                           autoComplete="off"
                         >
                           <option value="">Select Year</option>
                           <option value="2nd">2nd</option>
                           <option value="3rd">3rd</option>
                         </select>
+                        {showValidation && year === "" && (
+                          <span className="text-xs text-red-500">Year is required.</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="usn">
@@ -232,9 +238,12 @@ function Recruitment() {
                           value={usn}
                           onChange={(e) => setUsn(e.target.value)}
                           placeholder="Your USN"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${usn === "" && showValidation ? "border border-red-500" : ""}`}
                           autoComplete="off"
                         />
+                        {showValidation && usn === "" && (
+                          <span className="text-xs text-red-500">USN is required.</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black">
@@ -263,6 +272,9 @@ function Recruitment() {
                             Female
                           </label>
                         </div>
+                        {showValidation && gender === "" && (
+                          <span className="text-xs text-red-500">Gender is required.</span>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
@@ -276,10 +288,13 @@ function Recruitment() {
                           value={q1}
                           onChange={(e) => setQ1(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${q1 === "" && showValidation ? "border border-red-500" : ""}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {showValidation && q1 === "" && (
+                          <span className="text-xs text-red-500">This answer is required.</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q2">
@@ -291,10 +306,13 @@ function Recruitment() {
                           value={q2}
                           onChange={(e) => setQ2(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${q2 === "" && showValidation ? "border border-red-500" : ""}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {showValidation && q2 === "" && (
+                          <span className="text-xs text-red-500">This answer is required.</span>
+                        )}
                       </div>
                     </div>
 
@@ -309,10 +327,13 @@ function Recruitment() {
                           value={q3}
                           onChange={(e) => setQ3(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${q3 === "" && showValidation ? "border border-red-500" : ""}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {showValidation && q3 === "" && (
+                          <span className="text-xs text-red-500">This answer is required.</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q4">
@@ -324,10 +345,13 @@ function Recruitment() {
                           value={q4}
                           onChange={(e) => setQ4(e.target.value)}
                           placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className={`px-3 py-2 w-full text-black bg-gray-200 rounded ${q4 === "" && showValidation ? "border border-red-500" : ""}`}
                           rows={3}
                           autoComplete="off"
                         />
+                        {showValidation && q4 === "" && (
+                          <span className="text-xs text-red-500">This answer is required.</span>
+                        )}
                       </div>
                     </div>
                   </form>

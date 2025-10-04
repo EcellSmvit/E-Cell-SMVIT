@@ -191,6 +191,34 @@ function Recruitment() {
                   </div>
                 </Step>
                 <Step>
+                  <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
+                  <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
+                  <div className="mb-4">
+                    <p className="text-black">
+                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
+                    </p>
+                    <ul className="mt-2 list-disc list-inside text-gray-800">
+                      <li>Double-check your name, year, USN, and gender.</li>
+                      <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
+                      <li>Once you submit, you will not be able to edit your responses.</li>
+                    </ul>
+                  </div>
+                  <div className="mb-4">
+                    <p className="font-semibold text-black">What happens next?</p>
+                    <p className="text-gray-800">
+                      Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <p className="font-bold text-green-400">
+                      Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
+                    </p>
+                    <p className="mt-2 text-black">
+                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
+                    </p>
+                  </div>
+                </Step>
+                <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form className="flex flex-col gap-4" autoComplete="off">
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
@@ -337,34 +365,7 @@ function Recruitment() {
                     </div>
                   </form>
                 </Step>
-                <Step>
-                  <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
-                  <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
-                  <div className="mb-4">
-                    <p className="text-black">
-                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
-                    </p>
-                    <ul className="mt-2 list-disc list-inside text-gray-800">
-                      <li>Double-check your name, year, USN, and gender.</li>
-                      <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
-                      <li>Once you submit, you will not be able to edit your responses.</li>
-                    </ul>
-                  </div>
-                  <div className="mb-4">
-                    <p className="font-semibold text-black">What happens next?</p>
-                    <p className="text-gray-800">
-                      Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <p className="font-bold text-green-400">
-                      Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
-                    </p>
-                    <p className="mt-2 text-black">
-                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
-                    </p>
-                  </div>
-                </Step>
+                
               </Stepper>
             </div>
           </div>

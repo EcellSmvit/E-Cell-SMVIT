@@ -140,10 +140,6 @@ function Recruitment() {
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
-                nextButtonProps={{
-                  disabled: !isFormValid && currentStep === 3,
-                }}
-                
               >
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>

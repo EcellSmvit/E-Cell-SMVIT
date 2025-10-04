@@ -33,6 +33,43 @@ function Recruitment() {
     }
   }, [user]);
 
+  // Validation logic for steps
+  const validateStep = (step) => {
+    let errors = {};
+    // Step 3 (index 2): Application Form
+    if (step === 2) {
+      if (!name) errors.name = "Name is required";
+      if (!year) errors.year = "Year is required";
+      if (!usn) errors.usn = "USN is required";
+      if (!gender) errors.gender = "Gender is required";
+      if (!q1) errors.q1 = "This answer is required";
+      if (!q2) errors.q2 = "This answer is required";
+      if (!q3) errors.q3 = "This answer is required";
+      if (!q4) errors.q4 = "This answer is required";
+    }
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  // Handler for step change, to prevent going to next step if not filled
+  const handleStepChange = (nextStep, prevStep) => {
+    // If moving forward to step 3 (index 2), validate step 2 (index 1)
+    // If moving forward to step 4 (index 3), validate step 3 (index 2)
+    // Our steps: 0: Why, 1: Roles, 2: Form, 3: Final
+    if (nextStep === 2) {
+      // Moving to Application Form, no validation needed
+      return true;
+    }
+    if (nextStep === 3) {
+      // Moving to Final Step, validate Application Form
+      if (!validateStep(2)) {
+        toast.warn("Please fill all required fields before proceeding.");
+        return false;
+      }
+    }
+    return true;
+  };
+
   return (
     <div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
@@ -114,10 +151,20 @@ function Recruitment() {
             <div className="text-white">
               <Stepper
                 initialStep={1}
-                onStepChange={(step) => console.log(step)}
+                onStepChange={handleStepChange}
                 onFinalStepCompleted={async () => {
                   if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
                     toast.warn("Please fill all required fields before submitting.");
+                    setFormErrors({
+                      name: !name ? "Name is required" : undefined,
+                      year: !year ? "Year is required" : undefined,
+                      usn: !usn ? "USN is required" : undefined,
+                      gender: !gender ? "Gender is required" : undefined,
+                      q1: !q1 ? "This answer is required" : undefined,
+                      q2: !q2 ? "This answer is required" : undefined,
+                      q3: !q3 ? "This answer is required" : undefined,
+                      q4: !q4 ? "This answer is required" : undefined,
+                    });
                     return;
                   }
                   try {
@@ -205,6 +252,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                         />
+                        {formErrors.name && (
+                          <span className="text-sm text-red-500">{formErrors.name}</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="year">
@@ -222,6 +272,9 @@ function Recruitment() {
                           <option value="2nd">2nd</option>
                           <option value="3rd">3rd</option>
                         </select>
+                        {formErrors.year && (
+                          <span className="text-sm text-red-500">{formErrors.year}</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="usn">
@@ -237,6 +290,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                         />
+                        {formErrors.usn && (
+                          <span className="text-sm text-red-500">{formErrors.usn}</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black">
@@ -265,6 +321,9 @@ function Recruitment() {
                             Female
                           </label>
                         </div>
+                        {formErrors.gender && (
+                          <span className="text-sm text-red-500">{formErrors.gender}</span>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
@@ -282,6 +341,9 @@ function Recruitment() {
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors.q1 && (
+                          <span className="text-sm text-red-500">{formErrors.q1}</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q2">
@@ -297,6 +359,9 @@ function Recruitment() {
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors.q2 && (
+                          <span className="text-sm text-red-500">{formErrors.q2}</span>
+                        )}
                       </div>
                     </div>
 
@@ -315,6 +380,9 @@ function Recruitment() {
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors.q3 && (
+                          <span className="text-sm text-red-500">{formErrors.q3}</span>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q4">
@@ -330,6 +398,9 @@ function Recruitment() {
                           rows={3}
                           autoComplete="off"
                         />
+                        {formErrors.q4 && (
+                          <span className="text-sm text-red-500">{formErrors.q4}</span>
+                        )}
                       </div>
                     </div>
                   </form>

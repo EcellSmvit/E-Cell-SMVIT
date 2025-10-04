@@ -14,8 +14,6 @@ import EventsRecru from '@/components/EventsRecru';
 function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
-  const [formErrors, setFormErrors] = useState({});
-
   const [name, setName] = useState('');
   const [year, setYear] = useState('');
   const [usn, setUsn] = useState('');
@@ -143,12 +141,9 @@ function Recruitment() {
                 backButtonText="Previous"
                 nextButtonText="Next"
                 nextButtonProps={{
-                  disabled:
-                    !(
-                      (name && year && usn && gender && q1 && q2 && q3 && q4) ||
-                      true 
-                    ),
+                  disabled: !isFormValid && currentStep === 3,
                 }}
+                
               >
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>

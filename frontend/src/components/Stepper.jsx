@@ -26,6 +26,7 @@ export default function Stepper({
   const totalSteps = stepsArray.length;
   const isCompleted = currentStep > totalSteps;
   const isLastStep = currentStep === totalSteps;
+  
 
   const updateStep = newStep => {
     setCurrentStep(newStep);
@@ -111,11 +112,22 @@ export default function Stepper({
                 </button>
               )}
               <button
-                onClick={isLastStep ? handleComplete : handleNext}
-                className="next-button"
-                {...nextButtonProps}>
-                {isLastStep ? 'Complete' : nextButtonText}
+                      onClick={() => {
+                        if (!nextButtonProps.disabled) {
+                          if (isLastStep) handleComplete();
+                          else handleNext();
+                        }
+                      }}
+                      className={`next-button ${
+                        nextButtonProps.disabled
+                          ? 'opacity-50 cursor-not-allowed'
+                          : 'hover:bg-[#3b1ce1]'
+                      }`}
+                      disabled={nextButtonProps.disabled}
+                    >
+                      {isLastStep ? 'Complete' : nextButtonText}
               </button>
+
             </div>
           </div>
         )}

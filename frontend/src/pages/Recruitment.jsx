@@ -24,6 +24,7 @@ function Recruitment() {
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
+  const isFormValid = name && year && usn && gender && q1 && q2 && q3 && q4;
 
   useEffect(() => {
     if (user) {
@@ -116,7 +117,7 @@ function Recruitment() {
                 initialStep={1}
                 onStepChange={(step) => console.log(step)}
                 onFinalStepCompleted={async () => {
-                  if (!name || !year || !usn || !gender || !q1 || !q2 || !q3 || !q4) {
+                  if (!isFormValid) {
                     toast.warn("Please fill all required fields before submitting.");
                     return;
                   }
@@ -141,6 +142,13 @@ function Recruitment() {
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
+                nextButtonProps={{
+                  disabled:
+                    !(
+                      (name && year && usn && gender && q1 && q2 && q3 && q4) ||
+                      true 
+                    ),
+                }}
               >
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>

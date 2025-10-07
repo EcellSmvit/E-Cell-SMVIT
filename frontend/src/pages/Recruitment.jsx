@@ -208,7 +208,13 @@ function Recruitment() {
                 </div>
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
-                  <form className="flex flex-col gap-4" autoComplete="off">
+                  <form
+                    className="flex flex-col gap-4"
+                    autoComplete="off"
+                    onCopy={e => e.preventDefault()}
+                    onCut={e => e.preventDefault()}
+                    onPaste={e => e.preventDefault()}
+                  >
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="name">
@@ -223,6 +229,9 @@ function Recruitment() {
                           placeholder="Your name"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                       <div className="flex-1">
@@ -236,6 +245,9 @@ function Recruitment() {
                           onChange={(e) => setYear(e.target.value)}
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         >
                           <option value="">Select Year</option>
                           <option value="2nd">2nd</option>
@@ -255,6 +267,9 @@ function Recruitment() {
                           placeholder="Your USN"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                       <div className="flex-1">
@@ -270,6 +285,9 @@ function Recruitment() {
                               value="male"
                               checked={gender === "male"}
                               onChange={() => setGender("male")}
+                              onCopy={e => e.preventDefault()}
+                              onCut={e => e.preventDefault()}
+                              onPaste={e => e.preventDefault()}
                             />
                             Male
                           </label>
@@ -280,6 +298,9 @@ function Recruitment() {
                               value="female"
                               checked={gender === "female"}
                               onChange={() => setGender("female")}
+                              onCopy={e => e.preventDefault()}
+                              onCut={e => e.preventDefault()}
+                              onPaste={e => e.preventDefault()}
                             />
                             Female
                           </label>
@@ -300,6 +321,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                       <div className="flex-1">
@@ -315,6 +339,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                     </div>
@@ -333,6 +360,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                       <div className="flex-1">
@@ -348,6 +378,9 @@ function Recruitment() {
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           rows={3}
                           autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                     </div>

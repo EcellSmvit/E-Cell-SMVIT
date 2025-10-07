@@ -149,69 +149,45 @@ function Recruitment() {
                 <Step>
                   <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>
                   <p className="text-black">
-                    E-Cell SMVIT is more than just a student club - it’s a launchpad for 
-                    innovators, entrepreneurs, and changemakers. By joining, you’ll gain 
-                    hands-on experience in leadership, teamwork, and problem-solving while 
-                    working on real-world projects and competitions. From networking with 
-                    industry leaders and startup founders to showcasing your ideas at national 
-                    events, E-Cell gives you the platform, mentorship, and resources to turn 
+                    <span className="font-bold">E-Cell SMVIT is more than just a student club</span> - it’s a launchpad for 
+                    innovators, entrepreneurs, and changemakers. By joining, <span className="font-bold">you’ll gain 
+                    hands-on experience in leadership, teamwork, and problem-solving</span> while 
+                    working on real-world projects and competitions. From <span className="font-bold">networking with 
+                    industry leaders and startup founders</span> to <span className="font-bold">showcasing your ideas at national 
+                    events</span>, E-Cell gives you the platform, mentorship, and resources to turn 
                     your vision into impact. Whether you’re a developer, designer, or 
-                    strategist, E-Cell SMVIT empowers you to create, collaborate, and grow.
+                    strategist, <span className="font-bold">E-Cell SMVIT empowers you to create, collaborate, and grow.</span>
                   </p>
                 </Step>
                 <Step>
-                  <h2 className="text-3xl font-extrabold text-[#5227FF] mb-8 text-center">Team Roles</h2>
-                  <div className="flex flex-wrap gap-8 justify-center w-full">
-                    {/* Left Column */}
-                    <div className="flex flex-col gap-8">
-                      {/* Operations Executive */}
-                      <div className="bg-white rounded-2xl border-l-8 border-[#5227FF] shadow-md p-6 w-80">
-                        <div className="font-bold text-[#5227FF] text-xl mb-2">Operations Executive</div>
-                        <ul className="space-y-1 text-base list-disc list-inside text-black">
-                          <li>Arranging logistics and permissions</li>
-                          <li>Documenting operations and events</li>
-                        </ul>
-                      </div>
-                      {/* Tech Executive */}
-                      <div className="bg-white rounded-2xl border-l-8 border-[#5227FF] shadow-md p-6 w-80">
-                        <div className="font-bold text-[#5227FF] text-xl mb-2">Tech Executive</div>
-                        <ul className="space-y-1 text-base list-disc list-inside text-black">
-                          <li>Developing and maintaining websites</li>
-                          <li>Planning designs and development strategies</li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* Center Column */}
-                    <div className="flex flex-col gap-8 justify-center">
-                      {/* Events & Marketing Executive */}
-                      <div className="bg-white rounded-2xl border-t-8 border-[#5227FF] shadow-md p-6 w-80">
-                        <div className="font-bold text-[#5227FF] text-xl mb-2">Events &amp; Marketing Executive</div>
-                        <ul className="space-y-1 text-base list-disc list-inside text-black">
-                          <li>Conducting events</li>
-                          <li>Gathering and influencing people</li>
-                        </ul>
-                      </div>
-                      {/* Design & Media Executive */}
-                      <div className="bg-white rounded-2xl border-t-8 border-[#5227FF] shadow-md p-6 w-80">
-                        <div className="font-bold text-[#5227FF] text-xl mb-2">Design &amp; Media Executive</div>
-                        <ul className="space-y-1 text-base list-disc list-inside text-black">
-                          <li>Posting and planning media</li>
-                          <li>Social media growth strategy</li>
-                          <li>Designing social content</li>
-                        </ul>
-                      </div>
-                    </div>
-                    {/* Right Column */}
-                    <div className="flex flex-col gap-8 justify-center">
-                      {/* Corporate Executive */}
-                      <div className="bg-white rounded-2xl border-r-8 border-[#5227FF] shadow-md p-6 w-80">
-                        <div className="font-bold text-[#5227FF] text-xl mb-2">Corporate Executive</div>
-                        <ul className="space-y-1 text-base list-disc list-inside text-black">
-                          <li>Arranging sponsorships</li>
-                          <li>Securing funding from companies</li>
-                        </ul>
-                      </div>
-                    </div>
+                  <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
+                  <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
+                    <ul className="p-4 w-full max-w-xs">
+                      <li className="font-bold text-[#5227FF] mb-2">Operations Executive</li>
+                      <li className="text-black">- Arranging Logistics and Permissions</li>
+                      <li className="text-black">- Documenting operations and events</li>
+                    </ul>
+                    <ul className="p-4 w-full max-w-xs">
+                      <li className="font-bold text-[#5227FF] mb-2">Events & Marketing Executive</li>
+                      <li className="text-black">- Conducting of Events</li>
+                      <li className="text-black">- Gathering and Influencing People</li>
+                    </ul>
+                    <ul className="p-4 w-full max-w-xs">
+                      <li className="font-bold text-[#5227FF] mb-2">Corporate Executive</li>
+                      <li className="text-black">- Arranging Sponsorships</li>
+                      <li className="text-black">- Making funding sources from companies</li>
+                    </ul>
+                    <ul className="p-4 w-full max-w-xs">
+                      <li className="font-bold text-[#5227FF] mb-2">Tech Executive</li>
+                      <li className="text-black">- Developing and Maintaining Websites</li>
+                      <li className="text-black">- Planning Designs and Strategies for Development</li>
+                    </ul>
+                    <ul className="p-4 w-full max-w-xs">
+                      <li className="font-bold text-[#5227FF] mb-2">Design and Media Executive</li>
+                      <li className="text-black">- Posting and planning Media</li>
+                      <li className="text-black">- Social Media Growth Strategy</li>
+                      <li className="text-black">- Designing Social Content</li>
+                    </ul>
                   </div>
                 </Step>
 

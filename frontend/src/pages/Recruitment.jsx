@@ -192,8 +192,8 @@ function Recruitment() {
                 </Step>
 
                 <div className="p-4 mb-6">
-                  <h2 className="mb-2 text-lg font-semibold text-yellow-700">Instructions while filling the form</h2>
-                  <ul className="space-y-1 list-disc list-inside text-yellow-800">
+                  <h2 className="mb-2 text-lg font-semibold text-[#5227FF]">Instructions while filling the form</h2>
+                  <ul className="space-y-1 list-disc list-inside text-black">
                     <li>Fill in all required fields marked with <span className="text-red-500">*</span>.</li>
                     <li>Double-check your name, year, USN, and gender for accuracy.</li>
                     <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>

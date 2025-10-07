@@ -15,14 +15,14 @@ function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
+  const [mobilenumber,setMobilenumber] = useState('');
   const [teamrole,setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
-  const [gender, setGender] = useState('');
   const [q1, setQ1] = useState('');
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-  const isFormValid = name && teamrole && usn && gender && q1 && q2 && q3 && q4;
+  const isFormValid = name && teamrole && mobilenumber && usn && q1 && q2 && q3 && q4;
   const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
@@ -124,8 +124,8 @@ function Recruitment() {
                     await submitApplication({
                       name,
                       usn,
-                      gender,
                       teamrole,
+                      mobilenumber,
                       q1,
                       q2,
                       q3,
@@ -195,7 +195,7 @@ function Recruitment() {
                   <h2 className="mb-2 text-lg font-semibold text-[#5227FF]">Instructions while filling the form</h2>
                   <ul className="space-y-1 list-disc list-inside text-black">
                     <li>Fill in all required fields marked with <span className="text-red-500">*</span>.</li>
-                    <li>Double-check your name, USN, and gender for accuracy.</li>
+                    <li>Double-check your name, USN,Team Role and Mobile No. for accuracy.</li>
                     <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>
                     <li>Once you submit the form, you will not be able to edit your responses.</li>
                     <li>
@@ -276,38 +276,24 @@ function Recruitment() {
                         />
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black">
-                          Gender
+                        <label className="block mb-1 font-semibold text-black" htmlFor="mobilenumber">
+                          Mobile Number
                           <span className="ml-1 text-red-500">*</span>
                         </label>
-                        <div className="flex gap-4">
-                          <label className="flex gap-1 items-center text-black">
-                            <input
-                              type="radio"
-                              name="gender"
-                              value="male"
-                              checked={gender === "male"}
-                              onChange={() => setGender("male")}
-                              onCopy={e => e.preventDefault()}
-                              onCut={e => e.preventDefault()}
-                              onPaste={e => e.preventDefault()}
-                            />
-                            Male
-                          </label>
-                          <label className="flex gap-1 items-center text-black">
-                            <input
-                              type="radio"
-                              name="gender"
-                              value="female"
-                              checked={gender === "female"}
-                              onChange={() => setGender("female")}
-                              onCopy={e => e.preventDefault()}
-                              onCut={e => e.preventDefault()}
-                              onPaste={e => e.preventDefault()}
-                            />
-                            Female
-                          </label>
-                        </div>
+                        <input
+                          id="mobile"
+                          type="tel"
+                          value={mobilenumber}
+                          onChange={(e) => setMobilenumber(e.target.value)}
+                          placeholder="Your mobile number"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
+                          pattern="[0-9]{10}"
+                          maxLength={10}
+                        />
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">

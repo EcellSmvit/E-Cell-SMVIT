@@ -15,7 +15,7 @@ function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
-  const [mobilenumber, setMobilenumber] = useState(0);
+  const [mobilenumber, setMobilenumber] = useState('');
   const [teamrole,setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
   const [q1, setQ1] = useState('');
@@ -281,8 +281,8 @@ function Recruitment() {
                           <span className="ml-1 text-red-500">*</span>
                         </label>
                         <input
-                          id="mobile"
-                          type="tel"
+                          id="mobilenumber"
+                          type="text"
                           value={mobilenumber}
                           onChange={(e) => setMobilenumber(e.target.value)}
                           placeholder="Your mobile number"

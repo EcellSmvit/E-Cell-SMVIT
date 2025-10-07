@@ -15,7 +15,7 @@ function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
-  const [mobilenumber,setMobilenumber] = useState('');
+  const [mobilenumber, setMobilenumber] = useState(0);
   const [teamrole,setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
   const [q1, setQ1] = useState('');

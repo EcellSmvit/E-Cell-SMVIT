@@ -3,7 +3,7 @@ import React from 'react'
 function Position() {
   return (
     <div className="w-full h-auto text-black bg-[#F9FAFB] p-4">
-      <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl md:text-8xl">
+      <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl ">
         <h1>
              Team Roles
         </h1>
@@ -18,7 +18,7 @@ function Position() {
                 className="object-contain w-32 h-24 sm:w-40 sm:h-32"
               />
             </div>
-            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Operational</h2>
+            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Operations</h2>
             <p className="text-base text-center text-gray-700">
               Arranging logistics and permissions, documenting operations and events.
             </p>
@@ -31,7 +31,7 @@ function Position() {
                 className="object-contain w-32 h-24 sm:w-40 sm:h-32"
               />
             </div>
-            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Events and PR</h2>
+            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Events & Marketing</h2>
             <p className="text-base text-center text-gray-700">
               Conducting events, gathering and influencing people.
             </p>
@@ -59,9 +59,9 @@ function Position() {
                 className="object-contain w-32 h-24 sm:w-40 sm:h-32"
               />
             </div>
-            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Marketing Manager</h2>
+            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Tech</h2>
             <p className="text-base text-center text-gray-700">
-              Promoting events, managing social media, and outreach.
+              Developing and Maintaing Website
             </p>
           </div>
           <div className="flex flex-col items-center p-6 mx-auto w-full max-w-xs bg-white rounded-xl border border-gray-200 shadow-lg sm:p-8">
@@ -72,7 +72,7 @@ function Position() {
                 className="object-contain w-32 h-24 sm:w-40 sm:h-32"
               />
             </div>
-            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Design Media</h2>
+            <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Design and Media</h2>
             <p className="text-base text-center text-gray-700">
               Creating posters, videos, and digital content for events and promotions.
             </p>

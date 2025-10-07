@@ -44,7 +44,7 @@ function EventsRecru() {
     <div className="bg-[#111111] min-h-screen w-full py-20">
       {/* Heading */}
       <div className="flex justify-center items-center mb-16">
-        <h1 className="text-white text-4xl sm:text-6xl font-semibold text-center tracking-tight">
+        <h1 className="text-white text-4xl sm:text-6xl font-medium text-center tracking-tight">
           Events Conducted by{" "} E-Cell SMVIT
         </h1>
       </div>

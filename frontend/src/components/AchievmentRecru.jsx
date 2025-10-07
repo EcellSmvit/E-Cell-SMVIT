@@ -47,7 +47,7 @@ const achievements = [
 function AchievmentRecru() {
   return (
     <div className="w-full flex flex-col items-center py-12 bg-[#F9FAFB]">
-      <h2 className="mb-8 text-3xl font-bold text-center text-black sm:text-6xl">Our Achievements</h2>
+      <h2 className="mb-8 text-3xl font-medium text-center text-black sm:text-6xl">Our Achievements</h2>
       <div className="flex flex-wrap gap-10 justify-center w-full max-w-6xl">
         {achievements.map((member, idx) => (
           <div

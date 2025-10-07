@@ -69,7 +69,7 @@ function Recruitment() {
                 E-Cell SMVIT is recruiting enthusiastic minds like YOU!
               </p>
                 <SignInButton>
-                  <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
+                  <button className="px-4 py-2 rounded-full border-2 text-[#111111] mt-4 sm:mb-6">
                     Join Our Team
                   </button>
               </SignInButton>
@@ -163,29 +163,33 @@ function Recruitment() {
                   <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
                     <ul className="p-4 w-full max-w-xs">
                       <li className="font-bold text-[#5227FF] mb-2">Operations Executive</li>
-                      <li className="text-black">- Arranging Logistics and Permissions</li>
-                      <li className="text-black">- Documenting operations and events</li>
+                      <p className='text-black'>
+                        Coordinating logistics, obtaining necessary permissions, and managing documentation of operations and events.
+                      </p>
                     </ul>
                     <ul className="p-4 w-full max-w-xs">
                       <li className="font-bold text-[#5227FF] mb-2">Events & Marketing Executive</li>
-                      <li className="text-black">- Conducting of Events</li>
-                      <li className="text-black">- Gathering and Influencing People</li>
+                      <p className='text-black'>
+                        Planning and organizing events, as well as promoting and marketing them.
+                      </p>
                     </ul>
                     <ul className="p-4 w-full max-w-xs">
                       <li className="font-bold text-[#5227FF] mb-2">Corporate Executive</li>
-                      <li className="text-black">- Arranging Sponsorships</li>
-                      <li className="text-black">- Making funding sources from companies</li>
+                      <p className='text-black'>
+                        Managing sponsorships and building funding partnerships with companies.
+                      </p>
                     </ul>
                     <ul className="p-4 w-full max-w-xs">
                       <li className="font-bold text-[#5227FF] mb-2">Tech Executive</li>
-                      <li className="text-black">- Developing and Maintaining Websites</li>
-                      <li className="text-black">- Planning Designs and Strategies for Development</li>
+                      <p className='text-black'>
+                        Developing and maintaining websites, and planning designs and strategies for development.
+                      </p>
                     </ul>
                     <ul className="p-4 w-full max-w-xs">
                       <li className="font-bold text-[#5227FF] mb-2">Design and Media Executive</li>
-                      <li className="text-black">- Posting and planning Media</li>
-                      <li className="text-black">- Social Media Growth Strategy</li>
-                      <li className="text-black">- Designing Social Content</li>
+                      <p className='text-black'>
+                        Planning and managing media posts, creating designs, and growing social media reach.
+                      </p>
                     </ul>
                   </div>
                 </Step>

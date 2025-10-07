@@ -62,18 +62,17 @@ function Recruitment() {
           </div>
           <div className="flex relative z-10 justify-center items-center px-6 sm:px-14 h-[50vh] sm:h-[90vh] text-center sm:text-left">
             <div>
-              <SignInButton>
-                <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
-                  Join Our Team
-                </button>
-              </SignInButton>
-
               <p className="font-medium text-[#111111] text-4xl sm:text-8xl">E-CELL SMVIT</p>
               <p className="font-black text-[#111111] text-6xl sm:text-[12rem] leading-[1]">Recruiting!</p>
               <p className="text-[#545554] text-base sm:text-2xl font-medium w-full sm:w-2/3 mt-6 sm:mt-10 mx-auto sm:mx-0">
                 Are you ready to take charge, innovate, and create impact on campus? 
                 E-Cell SMVIT is recruiting enthusiastic minds like YOU!
               </p>
+                <SignInButton>
+                  <button className="px-4 py-2 rounded-full border-2 text-[#111111] mb-4 sm:mb-6">
+                    Join Our Team
+                  </button>
+              </SignInButton>
             </div>
           </div>
         </div>

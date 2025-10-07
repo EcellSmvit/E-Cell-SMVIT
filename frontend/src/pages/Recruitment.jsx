@@ -160,48 +160,57 @@ function Recruitment() {
                   </p>
                 </Step>
                 <Step>
-                  <h2 className="text-3xl font-extrabold text-[#5227FF] mb-6 text-center drop-shadow-sm">Team Roles</h2>
-                  <div className="grid grid-cols-1 gap-8 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3">
-                    {/* Operations Executive */}
-                    <div className="flex flex-col items-center p-6 w-full max-w-xs bg-white rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-                      <div className="text-[#5227FF] font-bold text-lg mb-2">Operations Executive</div>
-                      <ul className="space-y-1 text-base list-disc list-inside text-black">
-                        <li>Arranging logistics and permissions</li>
-                        <li>Documenting operations and events</li>
-                      </ul>
+                  <h2 className="text-3xl font-extrabold text-[#5227FF] mb-8 text-center">Team Roles</h2>
+                  <div className="flex flex-wrap gap-8 justify-center w-full">
+                    {/* Left Column */}
+                    <div className="flex flex-col gap-8">
+                      {/* Operations Executive */}
+                      <div className="bg-white rounded-2xl border-l-8 border-[#5227FF] shadow-md p-6 w-80">
+                        <div className="font-bold text-[#5227FF] text-xl mb-2">Operations Executive</div>
+                        <ul className="space-y-1 text-base list-disc list-inside text-black">
+                          <li>Arranging logistics and permissions</li>
+                          <li>Documenting operations and events</li>
+                        </ul>
+                      </div>
+                      {/* Tech Executive */}
+                      <div className="bg-white rounded-2xl border-l-8 border-[#5227FF] shadow-md p-6 w-80">
+                        <div className="font-bold text-[#5227FF] text-xl mb-2">Tech Executive</div>
+                        <ul className="space-y-1 text-base list-disc list-inside text-black">
+                          <li>Developing and maintaining websites</li>
+                          <li>Planning designs and development strategies</li>
+                        </ul>
+                      </div>
                     </div>
-                    {/* Events & Marketing Executive */}
-                    <div className="flex flex-col items-center p-6 w-full max-w-xs bg-white rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-                      <div className="text-[#5227FF] font-bold text-lg mb-2">Events &amp; Marketing Executive</div>
-                      <ul className="space-y-1 text-base list-disc list-inside text-black">
-                        <li>Conducting events</li>
-                        <li>Gathering and influencing people</li>
-                      </ul>
+                    {/* Center Column */}
+                    <div className="flex flex-col gap-8 justify-center">
+                      {/* Events & Marketing Executive */}
+                      <div className="bg-white rounded-2xl border-t-8 border-[#5227FF] shadow-md p-6 w-80">
+                        <div className="font-bold text-[#5227FF] text-xl mb-2">Events &amp; Marketing Executive</div>
+                        <ul className="space-y-1 text-base list-disc list-inside text-black">
+                          <li>Conducting events</li>
+                          <li>Gathering and influencing people</li>
+                        </ul>
+                      </div>
+                      {/* Design & Media Executive */}
+                      <div className="bg-white rounded-2xl border-t-8 border-[#5227FF] shadow-md p-6 w-80">
+                        <div className="font-bold text-[#5227FF] text-xl mb-2">Design &amp; Media Executive</div>
+                        <ul className="space-y-1 text-base list-disc list-inside text-black">
+                          <li>Posting and planning media</li>
+                          <li>Social media growth strategy</li>
+                          <li>Designing social content</li>
+                        </ul>
+                      </div>
                     </div>
-                    {/* Corporate Executive */}
-                    <div className="flex flex-col items-center p-6 w-full max-w-xs bg-white rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-                      <div className="text-[#5227FF] font-bold text-lg mb-2">Corporate Executive</div>
-                      <ul className="space-y-1 text-base list-disc list-inside text-black">
-                        <li>Arranging sponsorships</li>
-                        <li>Securing funding from companies</li>
-                      </ul>
-                    </div>
-                    {/* Tech Executive */}
-                    <div className="flex flex-col items-center p-6 w-full max-w-xs bg-white rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-                      <div className="text-[#5227FF] font-bold text-lg mb-2">Tech Executive</div>
-                      <ul className="space-y-1 text-base list-disc list-inside text-black">
-                        <li>Developing and maintaining websites</li>
-                        <li>Planning designs and development strategies</li>
-                      </ul>
-                    </div>
-                    {/* Design and Media Executive */}
-                    <div className="flex flex-col items-center p-6 w-full max-w-xs bg-white rounded-xl shadow-lg transition-transform duration-200 hover:scale-105">
-                      <div className="text-[#5227FF] font-bold text-lg mb-2">Design &amp; Media Executive</div>
-                      <ul className="space-y-1 text-base list-disc list-inside text-black">
-                        <li>Posting and planning media</li>
-                        <li>Social media growth strategy</li>
-                        <li>Designing social content</li>
-                      </ul>
+                    {/* Right Column */}
+                    <div className="flex flex-col gap-8 justify-center">
+                      {/* Corporate Executive */}
+                      <div className="bg-white rounded-2xl border-r-8 border-[#5227FF] shadow-md p-6 w-80">
+                        <div className="font-bold text-[#5227FF] text-xl mb-2">Corporate Executive</div>
+                        <ul className="space-y-1 text-base list-disc list-inside text-black">
+                          <li>Arranging sponsorships</li>
+                          <li>Securing funding from companies</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </Step>

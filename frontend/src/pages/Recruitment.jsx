@@ -199,7 +199,7 @@ function Recruitment() {
                     <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>
                     <li>Once you submit the form, you will not be able to edit your responses.</li>
                     <li>
-                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
+                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecellsmvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecellsmvit</a>.
                     </li>
                     <li>
                       If you're facing technical issues or queries, you can also WhatsApp us at <a href="https://wa.me/917903897660" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">7903897660</a>.

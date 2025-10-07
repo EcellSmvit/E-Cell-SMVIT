@@ -291,8 +291,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          pattern="[0-9]{10}"
-                          maxLength={10}
                         />
                       </div>
                     </div>

@@ -15,14 +15,14 @@ function Recruitment() {
   const { user } = useUser();
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
-  const [year, setYear] = useState('');
+  const [teamrole,setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
   const [gender, setGender] = useState('');
   const [q1, setQ1] = useState('');
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-  const isFormValid = name && year && usn && gender && q1 && q2 && q3 && q4;
+  const isFormValid = name && teamrole && usn && gender && q1 && q2 && q3 && q4;
   const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
@@ -123,9 +123,9 @@ function Recruitment() {
                   try {
                     await submitApplication({
                       name,
-                      year,
                       usn,
                       gender,
+                      teamrole,
                       q1,
                       q2,
                       q3,
@@ -195,7 +195,7 @@ function Recruitment() {
                   <h2 className="mb-2 text-lg font-semibold text-[#5227FF]">Instructions while filling the form</h2>
                   <ul className="space-y-1 list-disc list-inside text-black">
                     <li>Fill in all required fields marked with <span className="text-red-500">*</span>.</li>
-                    <li>Double-check your name, year, USN, and gender for accuracy.</li>
+                    <li>Double-check your name, USN, and gender for accuracy.</li>
                     <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>
                     <li>Once you submit the form, you will not be able to edit your responses.</li>
                     <li>
@@ -235,23 +235,26 @@ function Recruitment() {
                         />
                       </div>
                       <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="year">
-                          Year
+                        <label className="block mb-1 font-semibold text-black" htmlFor="teamrole">
+                          Team Role you want apply
                           <span className="ml-1 text-red-500">*</span>
                         </label>
                         <select
-                          id="year"
-                          value={year}
-                          onChange={(e) => setYear(e.target.value)}
+                          id="teamrole"
+                          value={teamrole}
+                          onChange={(e) => setTeamrole(e.target.value)}
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
                         >
-                          <option value="">Select Year</option>
-                          <option value="2nd">2nd</option>
-                          <option value="3rd">3rd</option>
+                          <option value="">Select Team Role</option>
+                          <option value="operations_executive">Operations Executive</option>
+                          <option value="eventsandmarketing_executive">Events and Marketing Executive</option>
+                          <option value="corporate_executive">Corporate Executive</option>
+                          <option value="tech_executive">Tech Executive</option>
+                          <option value="designandmedia_executive">Design and Media Executive</option>
                         </select>
                       </div>
                       <div className="flex-1">

@@ -59,7 +59,8 @@ export default function Stepper({
     <div className="outer-container" {...rest}>
       <div
         className={`step-circle-container ${stepCircleContainerClassName}`}
-        style={{ border: '1px solid #222' }}>
+        style={{ border: '1px solid #222' }}
+      >
         <div className={`step-indicator-row ${stepContainerClassName}`}>
           {stepsArray.map((_, index) => {
             const stepNumber = index + 1;
@@ -83,7 +84,8 @@ export default function Stepper({
                     onClickStep={clicked => {
                       setDirection(clicked > currentStep ? 1 : -1);
                       updateStep(clicked);
-                    }} />
+                    }}
+                  />
                 )}
                 {isNotLastStep && <StepConnector isComplete={currentStep > stepNumber} />}
               </React.Fragment>
@@ -95,7 +97,8 @@ export default function Stepper({
           isCompleted={isCompleted}
           currentStep={currentStep}
           direction={direction}
-          className={`step-content-default ${contentClassName}`}>
+          className={`step-content-default ${contentClassName}`}
+        >
           {stepsArray[currentStep - 1]}
         </StepContentWrapper>
 
@@ -106,14 +109,16 @@ export default function Stepper({
                 <button
                   onClick={handleBack}
                   className={`back-button ${currentStep === 1 ? 'inactive' : ''}`}
-                  {...backButtonProps}>
+                  {...backButtonProps}
+                >
                   {backButtonText}
                 </button>
               )}
               <button
                 onClick={isLastStep ? handleComplete : handleNext}
                 className="next-button"
-                {...nextButtonProps}>
+                {...nextButtonProps}
+              >
                 {isLastStep ? 'Complete' : nextButtonText}
               </button>
             </div>
@@ -132,13 +137,15 @@ function StepContentWrapper({ isCompleted, currentStep, direction, children, cla
       className={className}
       style={{ position: 'relative', overflow: 'hidden' }}
       animate={{ height: isCompleted ? 0 : parentHeight }}
-      transition={{ type: 'spring', duration: 0.4 }}>
+      transition={{ type: 'spring', duration: 0.4 }}
+    >
       <AnimatePresence initial={false} mode="sync" custom={direction}>
         {!isCompleted && (
           <SlideTransition
             key={currentStep}
             direction={direction}
-            onHeightReady={h => setParentHeight(h)}>
+            onHeightReady={h => setParentHeight(h)}
+          >
             {children}
           </SlideTransition>
         )}
@@ -163,7 +170,8 @@ function SlideTransition({ children, direction, onHeightReady }) {
       animate="center"
       exit="exit"
       transition={{ duration: 0.4 }}
-      style={{ position: 'absolute', left: 0, right: 0, top: 0 }}>
+      style={{ position: 'absolute', left: 0, right: 0, top: 0 }}
+    >
       {children}
     </motion.div>
   );
@@ -200,7 +208,8 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
       onClick={handleClick}
       className="step-indicator"
       animate={status}
-      initial={false}>
+      initial={false}
+    >
       <motion.div
         variants={{
           inactive: { scale: 1, backgroundColor: '#222', color: '#a3a3a3' },
@@ -208,7 +217,8 @@ function StepIndicator({ step, currentStep, onClickStep, disableStepIndicators }
           complete: { scale: 1, backgroundColor: '#5227FF', color: '#3b82f6' }
         }}
         transition={{ duration: 0.3 }}
-        className="step-indicator-inner">
+        className="step-indicator-inner"
+      >
         {status === 'complete' ? (
           <CheckIcon className="check-icon" />
         ) : status === 'active' ? (
@@ -234,7 +244,8 @@ function StepConnector({ isComplete }) {
         variants={lineVariants}
         initial={false}
         animate={isComplete ? 'complete' : 'incomplete'}
-        transition={{ duration: 0.4 }} />
+        transition={{ duration: 0.4 }}
+      />
     </div>
   );
 }
@@ -246,14 +257,16 @@ function CheckIcon(props) {
       fill="none"
       stroke="currentColor"
       strokeWidth={2}
-      viewBox="0 0 24 24">
+      viewBox="0 0 24 24"
+    >
       <motion.path
         initial={{ pathLength: 0 }}
         animate={{ pathLength: 1 }}
         transition={{ delay: 0.1, type: 'tween', ease: 'easeOut', duration: 0.3 }}
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M5 13l4 4L19 7" />
+        d="M5 13l4 4L19 7"
+      />
     </svg>
   );
 }

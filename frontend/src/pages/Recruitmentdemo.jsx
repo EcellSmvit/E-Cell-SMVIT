@@ -27,13 +27,13 @@ function Recruitmentdemo() {
         />
 
         {/* Header */}
-        <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
+        <div className="relative z-10 flex items-center justify-between px-4 py-4 sm:px-8 md:px-14">
           <img
             src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
             className="w-10 sm:w-12"
             alt="logo"
           />
-          <div className="text-xl font-bold text-black sm:text-2xl">
+          <div className="text-xl font-bold text-[#8B5CF6] sm:text-2xl">
             2025
           </div>
         </div>

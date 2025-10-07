@@ -23,6 +23,7 @@ function Recruitment() {
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
   const isFormValid = name && year && usn && gender && q1 && q2 && q3 && q4;
+  const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
     if (user) {
@@ -113,7 +114,7 @@ function Recruitment() {
             <div className="text-white">
               <Stepper
                 initialStep={1}
-                onStepChange={(step) => console.log(step)}
+                onStepChange={(step) => setCurrentStep(step)}
                 onFinalStepCompleted={async () => {
                   if (!isFormValid) {
                     toast.warn("Please fill all required fields before submitting.");
@@ -137,6 +138,10 @@ function Recruitment() {
                   } catch (error) {
                     toast.error("Error submitting form. Please try again.");
                   }
+                }}
+                nextButtonProps={{
+                  disabled: currentStep === 4 ? !isFormValid : false,
+                  style: currentStep === 4 && !isFormValid ? { opacity: 0.5, cursor: "not-allowed" } : {},
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
@@ -183,6 +188,35 @@ function Recruitment() {
                       <li className="text-black">- Social Media Growth Strategy</li>
                       <li className="text-black">- Designing Social Content</li>
                     </ul>
+                  </div>
+                </Step>
+
+                <Step>
+                  <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
+                  <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
+                  <div className="mb-4">
+                    <p className="text-black">
+                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
+                    </p>
+                    <ul className="mt-2 list-disc list-inside text-gray-800">
+                      <li>Double-check your name, year, USN, and gender.</li>
+                      <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
+                      <li>Once you submit, you will not be able to edit your responses.</li>
+                    </ul>
+                  </div>
+                  <div className="mb-4">
+                    <p className="font-semibold text-black">What happens next?</p>
+                    <p className="text-gray-800">
+                      Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
+                    </p>
+                  </div>
+                  <div className="mt-6">
+                    <p className="font-bold text-green-400">
+                      Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
+                    </p>
+                    <p className="mt-2 text-black">
+                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
+                    </p>
                   </div>
                 </Step>
                 <Step>
@@ -331,34 +365,6 @@ function Recruitment() {
                       </div>
                     </div>
                   </form>
-                </Step>
-                <Step>
-                  <h2 className="mb-2 text-2xl font-bold text-black">Final Step</h2>
-                  <p className="mb-4 text-black">You made it to the final step of your E-Cell SMVIT Recruitment 2025 application!</p>
-                  <div className="mb-4">
-                    <p className="text-black">
-                      Please review your answers before submitting your application. Make sure all information is accurate and complete.
-                    </p>
-                    <ul className="mt-2 list-disc list-inside text-gray-800">
-                      <li>Double-check your name, year, USN, and gender.</li>
-                      <li>Ensure your answers to all questions reflect your true experiences and aspirations.</li>
-                      <li>Once you submit, you will not be able to edit your responses.</li>
-                    </ul>
-                  </div>
-                  <div className="mb-4">
-                    <p className="font-semibold text-black">What happens next?</p>
-                    <p className="text-gray-800">
-                      Our team will review your application and contact you via the email associated with your account regarding the next steps. Please check your inbox and spam folder regularly.
-                    </p>
-                  </div>
-                  <div className="mt-6">
-                    <p className="font-bold text-green-400">
-                      Please review your application carefully. After clicking the complete button, you will not be able to make any changes.
-                    </p>
-                    <p className="mt-2 text-black">
-                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecell.smvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecell.smvit</a>.
-                    </p>
-                  </div>
                 </Step>
               </Stepper>
             </div>

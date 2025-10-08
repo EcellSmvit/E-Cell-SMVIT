@@ -104,7 +104,7 @@ function Recruitment() {
             </p>
           </div>
         ) : (
-          <div className="bg-[#fbf9f9] text-black min-h-screen sm:min-h-screen lg:min-h-screen">
+          <div className="bg-[#fbf9f9] text-black min-h-[120vh] sm:min-h-[120vh] lg:min-h-[120vh]">
             <div className="p-4 text-2xl font-bold">
               <h1>
                 Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}

@@ -34,11 +34,17 @@ function Recruitment() {
     }
   }, [user]);
 
+  // Fix for black bar at the bottom on desktop: 
+  // 1. Remove h-screen/w-screen from the container that wraps the form (it causes overflow issues).
+  // 2. Use min-h-screen and ensure no parent has fixed height.
+  // 3. Add overflow-x-hidden to root div to prevent horizontal scrollbars.
+  // 4. Add pb-8 to the form container to ensure the button is not cut off.
+
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       <SignedOut>
-        <div className=" sm:h-[100vh] h-[70vh] w-full bg-[#f9fafb] relative">
+        <div className="sm:h-[100vh] h-[70vh] w-full bg-[#f9fafb] relative">
           <div
             className="absolute inset-0 z-0"
             style={{

@@ -105,7 +105,7 @@ function Recruitment() {
             </p>
           </div>
         ) : (
-          <div className='bg-[#f9fafb] text-black'>
+          <div className='bg-[#f9fafb] text-black h-auto'>
             <div className="p-4 text-2xl font-bold">
               <h1>
                 Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}
@@ -314,10 +314,6 @@ function Recruitment() {
                           onChange={(e) => setLinkedin(e.target.value)}
                           placeholder="https://www.linkedin.com/in/your-profile"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
                         />
                       </div>
                     </div>

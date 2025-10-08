@@ -19,11 +19,12 @@ function Recruitment() {
   const [teamrole, setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
   const [linkedin, setLinkedin] = useState('');
+  const [year, setYear] = useState(''); // NEW: year state
   const [q1, setQ1] = useState('');
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-  const isFormValid = name && teamrole && mobilenumber && usn && linkedin && q1 && q2 && q3 && q4;
+  const isFormValid = name && teamrole && mobilenumber && usn && linkedin && year && q1 && q2 && q3 && q4;
   const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
@@ -104,7 +105,7 @@ function Recruitment() {
             </p>
           </div>
         ) : (
-          <div className="bg-[#fbf9f9] text-black min-h-[120vh] sm:min-h-[120vh] lg:min-h-[120vh]">
+          <div className="bg-[#fbf9f9] text-black min-h-[120vh] sm:min-h-[130vh] lg:min-h-[130vh]">
             <div className="p-4 text-2xl font-bold">
               <h1>
                 Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}
@@ -127,6 +128,7 @@ function Recruitment() {
                       teamrole,
                       mobilenumber,
                       linkedin,
+                      year,
                       q1,
                       q2,
                       q3,
@@ -295,6 +297,7 @@ function Recruitment() {
                         />
                       </div>
                     </div>
+                    {/* LinkedIn and Year side by side */}
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="linkedin">
@@ -309,6 +312,22 @@ function Recruitment() {
                           placeholder="https://www.linkedin.com/in/your-profile"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                         />
+                      </div>
+                      <div className="flex-1">
+                        <label className="block mb-1 font-semibold text-black" htmlFor="year">
+                          Year
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
+                        <select
+                          id="year"
+                          value={year}
+                          onChange={(e) => setYear(e.target.value)}
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                        >
+                          <option value="">Select Year</option>
+                          <option value="2nd">2nd Year</option>
+                          <option value="3rd">3rd Year</option>
+                        </select>
                       </div>
                     </div>
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">

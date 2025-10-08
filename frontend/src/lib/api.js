@@ -40,7 +40,7 @@ export const submitApplication = async (formData) => {
 
     await fetch(GOOGLE_SHEET_WEBAPP_URL, {
       method: "POST",
-      mode: "no-cors", // prevents CORS issues
+      mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });

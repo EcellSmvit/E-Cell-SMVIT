@@ -3,7 +3,7 @@ import React from 'react'
 function Position() {
   return (
     <div className="w-full h-auto text-black bg-[#F9FAFB] p-4">
-      <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl ">
+      <div className="flex justify-center items-center p-4 text-4xl font-medium text-center sm:text-6xl">
         <h1>
              Team Roles
         </h1>
@@ -61,7 +61,7 @@ function Position() {
             </div>
             <h2 className="mb-2 text-xl font-bold text-center sm:text-2xl">Tech</h2>
             <p className="text-base text-center text-gray-700">
-              Developing and Maintaing Website
+              Developing and Maintaining Website
             </p>
           </div>
           <div className="flex flex-col items-center p-6 mx-auto w-full max-w-xs bg-white rounded-xl border border-gray-200 shadow-lg sm:p-8">

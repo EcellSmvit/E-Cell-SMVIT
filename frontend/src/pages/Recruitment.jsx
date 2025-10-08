@@ -108,7 +108,7 @@ function Recruitment() {
             <div className="p-4 text-2xl font-bold">
               <h1>
                 Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}
-                to E-Cell Smvit Recruitment 2025
+                to E-Cell SMVIT Recruitment 2025
               </h1>
             </div>
             <div className="text-white">
@@ -176,7 +176,7 @@ function Recruitment() {
                       </p>
                     </ul>
                     <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Corporate Executive</li>
+                      <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Executive</li>
                       <p className='text-black'>
                         Managing sponsorships and building funding partnerships with companies.
                       </p>
@@ -200,7 +200,7 @@ function Recruitment() {
                   <h2 className="mb-2 text-lg font-semibold text-[#5227FF]">Instructions while filling the form</h2>
                   <ul className="space-y-1 list-disc list-inside text-black">
                     <li>Fill in all required fields marked with <span className="text-red-500">*</span>.</li>
-                    <li>Double-check your name, USN,Team Role and Mobile No. for accuracy.</li>
+                    <li>Double-check your name, USN, Team Role and Mobile .</li>
                     <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>
                     <li>Once you submit the form, you will not be able to edit your responses.</li>
                     <li>
@@ -237,7 +237,7 @@ function Recruitment() {
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="teamrole">
-                          Team Role you want apply
+                          Team Role you want to apply for
                           <span className="ml-1 text-red-500">*</span>
                         </label>
                         <select
@@ -353,7 +353,7 @@ function Recruitment() {
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q3">
-                          Describe a situation where you faced a challenge in a team project or initiative. How did you handle it, and what was the outcome?
+                        If you were given the opportunity to lead one new event, workshop, or project for E-Cell, what would it be and what value would it bring to the student community?
                           <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea
@@ -371,7 +371,7 @@ function Recruitment() {
                       </div>
                       <div className="flex-1">
                         <label className="block mb-1 font-semibold text-black" htmlFor="q4">
-                          Share an innovative idea or project you have worked on. How did you execute it, and what impact did it have?
+                        Describe a student-run startup you would launch to solve a specific problem on our campus. What is the problem, and how would your startup specifically help fellow students?
                           <span className="ml-1 text-red-500">*</span>
                         </label>
                         <textarea

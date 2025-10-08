@@ -216,10 +216,10 @@ function Recruitment() {
                   <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
                   <form
                     className="flex flex-col gap-4"
-                    autoComplete="off"
-                    onCopy={e => e.preventDefault()}
-                    onCut={e => e.preventDefault()}
-                    onPaste={e => e.preventDefault()}
+                    // autoComplete="off"
+                    // onCopy={e => e.preventDefault()}
+                    // onCut={e => e.preventDefault()}
+                    // onPaste={e => e.preventDefault()}
                   >
                     <div className="flex flex-col gap-4 md:flex-row md:gap-4">
                       <div className="flex-1">

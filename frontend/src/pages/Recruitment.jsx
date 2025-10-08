@@ -115,7 +115,7 @@ function Recruitment() {
             <div className="text-white">
               {isSubmitting && (
                 <div className="flex justify-center items-center mb-4">
-                  <span className="text-[#5227FF] font-semibold text-lg bg-white px-4 py-2 rounded shadow">
+                  <span className="text-[#5227FF] font-semibold text-lg  px-4 py-2">
                     Wait while submitting your response...
                   </span>
                 </div>

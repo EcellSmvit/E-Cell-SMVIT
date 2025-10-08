@@ -16,13 +16,15 @@ function Recruitment() {
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
   const [mobilenumber, setMobilenumber] = useState('');
-  const [teamrole,setTeamrole] = useState('');
+  const [teamrole, setTeamrole] = useState('');
   const [usn, setUsn] = useState('');
+  const [linkedin, setLinkedin] = useState('');
   const [q1, setQ1] = useState('');
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-  const isFormValid = name && teamrole && mobilenumber && usn && q1 && q2 && q3 && q4;
+  // Add linkedin to form validation
+  const isFormValid = name && teamrole && mobilenumber && usn && linkedin && q1 && q2 && q3 && q4;
   const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
@@ -125,6 +127,7 @@ function Recruitment() {
                       usn,
                       teamrole,
                       mobilenumber,
+                      linkedin, // Pass linkedin to API
                       q1,
                       q2,
                       q3,
@@ -289,6 +292,27 @@ function Recruitment() {
                           value={mobilenumber}
                           onChange={(e) => setMobilenumber(e.target.value)}
                           placeholder="Your mobile number"
+                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          autoComplete="off"
+                          onCopy={e => e.preventDefault()}
+                          onCut={e => e.preventDefault()}
+                          onPaste={e => e.preventDefault()}
+                        />
+                      </div>
+                    </div>
+                    {/* LinkedIn Profile URL Field */}
+                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
+                      <div className="flex-1">
+                        <label className="block mb-1 font-semibold text-black" htmlFor="linkedin">
+                          LinkedIn Profile URL
+                          <span className="ml-1 text-red-500">*</span>
+                        </label>
+                        <input
+                          id="linkedin"
+                          type="url"
+                          value={linkedin}
+                          onChange={(e) => setLinkedin(e.target.value)}
+                          placeholder="https://www.linkedin.com/in/your-profile"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
                           autoComplete="off"
                           onCopy={e => e.preventDefault()}

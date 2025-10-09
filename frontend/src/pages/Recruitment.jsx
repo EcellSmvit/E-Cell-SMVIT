@@ -25,7 +25,6 @@ function Recruitment() {
   const [q4, setQ4] = useState('');
   const isFormValid = name && teamrole && mobilenumber && usn && q1 && q2 && q3 && q4;
   const [currentStep, setCurrentStep] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -113,13 +112,6 @@ function Recruitment() {
               </h1>
             </div>
             <div className="text-white">
-              {isSubmitting && (
-                <div className="flex justify-center items-center mb-4">
-                  <span className="text-[#5227FF] font-semibold text-lg  px-4 py-2">
-                    Wait while submitting your response...
-                  </span>
-                </div>
-              )}
               <Stepper
                 initialStep={1}
                 onStepChange={(step) => setCurrentStep(step)}
@@ -128,7 +120,6 @@ function Recruitment() {
                     toast.warn("Please fill all required fields before submitting.");
                     return;
                   }
-                  setIsSubmitting(true);
                   try {
                     await submitApplication({
                       name,
@@ -147,13 +138,11 @@ function Recruitment() {
                     setAlreadySubmitted(true);
                   } catch (error) {
                     toast.error("Error submitting form. Please try again.");
-                  } finally {
-                    setIsSubmitting(false);
                   }
                 }}
                 nextButtonProps={{
-                  disabled: isSubmitting || (currentStep === 4 ? !isFormValid : false),
-                  style: (isSubmitting || (currentStep === 4 && !isFormValid)) ? { opacity: 0.5, cursor: "not-allowed" } : {},
+                  disabled: (currentStep === 4 ? !isFormValid : false),
+                  style: ((currentStep === 4 && !isFormValid)) ? { opacity: 0.5, cursor: "not-allowed" } : {},
                 }}
                 backButtonText="Previous"
                 nextButtonText="Next"
@@ -244,7 +233,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="flex-1">
@@ -261,7 +249,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         >
                           <option value="">Select Team Role</option>
                           <option value="operations_executive">Operations Executive</option>
@@ -287,7 +274,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="flex-1">
@@ -306,7 +292,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -323,7 +308,6 @@ function Recruitment() {
                           onChange={(e) => setLinkedin(e.target.value)}
                           placeholder="https://www.linkedin.com/in/your-profile"
                           className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -344,7 +328,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="flex-1">
@@ -363,7 +346,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                     </div>
@@ -385,7 +367,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                       <div className="flex-1">
@@ -404,7 +385,6 @@ function Recruitment() {
                           onCopy={e => e.preventDefault()}
                           onCut={e => e.preventDefault()}
                           onPaste={e => e.preventDefault()}
-                          disabled={isSubmitting}
                         />
                       </div>
                     </div>

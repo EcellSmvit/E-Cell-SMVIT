@@ -41,13 +41,12 @@ const Section2 = () => {
           alt=""
           className="block sm:hidden"
         />
-        {/* Page 6 - Video with margin below */}
         <div
           id="page6"
           className="flex relative justify-center items-center w-full bg-black h-fit sm:min-h-screen mb-[10vh]"
         >
           <video
-            src="https://ik.imagekit.io/96gea10vb/images/videos/ecellintro.mp4?updatedAt=1747323394315"
+            src="https://ik.imagekit.io/es6xialea/Ecell.mov/ik-video.mp4?updatedAt=1763052632603"
             autoPlay
             muted
             loop
@@ -57,7 +56,6 @@ const Section2 = () => {
           />
         </div>
 
-        {/* Page 7 - About Section */}
         <div
           id="page7"
           className="flex justify-start items-start py-16 w-full bg-black sm:min-h-screen"
@@ -79,14 +77,12 @@ const Section2 = () => {
                 dynamic platform
               </Highlighter>{" "}
               for aspiring entrepreneurs.{" "}
-              <Highlighter action="circle" color="#4CAF50">
                 Re-established in 2021
-              </Highlighter>
+              
               , it has represented SMVIT at top events like{" "}
-              <Highlighter action="box" color="#E91E63">
                 NEC by IIT Madras & Bombay
-              </Highlighter>
-              , securing{" "}
+             
+              
               <Highlighter action="bracket" color="#9C27B0">
                 16th place at IIT Bombay
               </Highlighter>

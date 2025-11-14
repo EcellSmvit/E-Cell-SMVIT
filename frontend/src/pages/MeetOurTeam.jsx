@@ -1,10 +1,8 @@
 import React from "react";
 import { cn } from "../lib/utils.js";
 import { DotPattern } from "../components/magicui/dot-pattern.jsx";
-
-// LinkedIn Lucide Icon
 const LinkedInLucideIcon = (props) => (
-  // Lucide's LinkedIn icon SVG (https://lucide.dev/icons/linkedin)
+
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -25,23 +23,22 @@ const LinkedInLucideIcon = (props) => (
   </svg>
 );
 
-// TeamCard component
 const TeamCard = ({ image, title, subtitle, url }) => (
-  <div className="relative flex flex-col items-center justify-center p-6 bg-card text-white rounded-xl shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl w-full max-w-xs z-20">
+  <div className="flex relative z-20 flex-col justify-center items-center p-6 w-full max-w-xs text-white rounded-xl shadow-lg transition-transform transform bg-card hover:scale-105 hover:shadow-2xl">
     <img
       src={image}
       alt={title}
-      className="w-64 h-80 rounded-xl object-cover mb-4"
+      className="object-cover mb-4 w-64 h-80 rounded-xl"
       style={{ objectPosition: "center" }}
     />
     <h3 className="text-xl font-bold">{title}</h3>
-    <p className="text-muted-foreground mb-4 text-white/80">{subtitle}</p>
+    <p className="mb-4 text-muted-foreground text-white/80">{subtitle}</p>
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`LinkedIn profile of ${title}`}
-      className="text-white hover:text-primary transition-colors"
+      className="text-white transition-colors hover:text-primary"
     >
       <LinkedInLucideIcon className="w-6 h-6" />
     </a>
@@ -132,25 +129,25 @@ const teamMembers = [
 
 function MeetOurTeam() {
   return (
-    <div className="relative w-full flex-col items-center justify-center overflow-hidden rounded-lg bg-background py-20 md:py-28 text-white z-10">
+    <div className="overflow-hidden relative z-10 flex-col justify-center items-center py-20 w-full text-white rounded-lg bg-background md:py-28">
       <div className="absolute top-6 left-6 z-30">
         <img
           src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
           alt="E-Cell Logo"
-          className="h-16 w-auto"
+          className="w-auto h-16"
           style={{ maxWidth: "140px" }}
         />
       </div>
-      <div className="container mx-auto px-4 z-20">
-        <div className="text-center mb-12 z-20">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white z-20">
+      <div className="container z-20 px-4 mx-auto">
+        <div className="z-20 mb-12 text-center">
+          <h2 className="z-20 text-4xl font-bold tracking-tight text-white md:text-5xl">
             Meet Our Team
           </h2>
-          <p className="mt-4 text-lg text-white/80 z-20">
+          <p className="z-20 mt-4 text-lg text-white/80">
             The creative minds behind our success.
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center z-20">
+        <div className="grid z-20 grid-cols-1 gap-8 justify-items-center md:grid-cols-2 lg:grid-cols-3">
           {teamMembers.map((member, idx) => (
             <TeamCard
               key={member.title + idx}

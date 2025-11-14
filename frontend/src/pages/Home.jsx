@@ -15,6 +15,7 @@ import OurMissionandVision from '@/components/PublicSection/OurMissionandVision'
 import WhyEcell from '@/components/PublicSection/WhyEcell';
 import Stepperform from './Stepperform';
 import { SignedIn } from '@clerk/clerk-react';
+import Cohead from '@/components/PublicSection/Cohead';
 // import OurMissionandVisionpart from '@/components/PublicSection/OurMissionandVisionpart';
 
 
@@ -33,6 +34,7 @@ function Home() {
       <OurMissionandVision/>
       <StartupBacked/>
       <Heads/>
+      <Cohead/>
       <WhyEcell/>
       <Section6/>
       <Footer/>

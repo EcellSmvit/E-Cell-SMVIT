@@ -3,34 +3,34 @@ import { Linkedin } from "lucide-react";
 
 const headsList = [
   {
-    name: "Satvik Gupta",
-    img: "https://ik.imagekit.io/es6xialea/SATVIK%20GUPTA_V5fYEhb1R?updatedAt=1754730346851",
-    linkedin: "https://www.linkedin.com/in/satvik--gupta/",
-    batch: "Corporate Relations Head",
+    name: "Ayush Thakur",
+    img: "https://ik.imagekit.io/es6xialea/P1200524.JPG?updatedAt=1754731371987",
+    linkedin: "https://www.linkedin.com/in/ayush-thakur015/",
+    batch: "Corporate Relations Co-Head",
   },
   {
-    name: "Anant Srivastava",
-    img: "https://ik.imagekit.io/es6xialea/ANANT%20SRIVASTAVA_Iu1HINsCv?updatedAt=1754731226619",
-    linkedin: "https://www.linkedin.com/in/anant-srivastava-709174293/",
-    batch: "Operations Head",
+    name: "Sarthak Tripathi",
+    img: "https://ik.imagekit.io/es6xialea/SARTHAK%20TRIPATHI_NoysExme7k?updatedAt=1754730569364",
+    linkedin: "https://www.linkedin.com/in/sarthak-tripathi-b11458295/",
+    batch: "Operations Co-Head",
   },
   {
-    name: "Bhoomi Nayak",
-    img: "https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
-    linkedin: "https://www.linkedin.com/in/bhoomi-nayak-943083305/",
-    batch: "Events & Marketing Head",
+    name: "Anuj Kumar Dixit",
+    img: "https://ik.imagekit.io/es6xialea/ANUJ%20KUMAR%20DIXIT_aHyMWdDia?updatedAt=1754730905215",
+    linkedin: "https://www.linkedin.com/in/anuj-kumar-dixit-668437280/",
+    batch: "Events & Marketing Co-Head",
   },
   {
-    name: "Shashwat Shaurya",
-    img: "https://ik.imagekit.io/96gea10vb/images/webp/shashwatS.webp?updatedAt=1747321667249",
-    linkedin: "https://www.linkedin.com/in/shashwat-shaurya-0828a5207/",
-    batch: "Design & Media Head",
+    name: "Mariam Shuaib",
+    img: "https://ik.imagekit.io/96gea10vb/NewTeamImage4_XdCP9rn0Z?updatedAt=1751669076681",
+    linkedin: "https://www.linkedin.com/in/mariam-shuaib-003362328/",
+    batch: "Events & Marketing Co-Head",
   },
   {
-    name: "Bikesh Kumar",
-    img: "https://ik.imagekit.io/es6xialea/Bikesh_-y-WYu2bvh?updatedAt=1754730133391",
-    linkedin: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/",
-    batch: "Tech Head",
+    name: "Shashwat Ranjan",
+    img: "https://ik.imagekit.io/96gea10vb/images/webp/ShashwatR.webp?updatedAt=1747321667103",
+    linkedin: "https://www.linkedin.com/in/shashwat-ranjan-140908227/",
+    batch: "Design & Media Co-Head",
   }
 ];
 
@@ -80,12 +80,12 @@ function HeadCard({ name, img, linkedin, batch }) {
   );
 }
 
-function Heads() {
+function Cohead() {
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-black">
+    <div className="flex flex-col justify-start items-center min-h-screen bg-black">
       <div className="flex flex-row gap-2 items-center mt-8 mb-8">
         <h1 className="mb-2 text-5xl font-black text-white sm:text-6xl">OUR</h1>
-        <h2 className="bg-[#6D4DFE] px-6 py-2 rounded-lg text-white text-5xl font-black sm:text-6xl">HEADS</h2>
+        <h2 className="bg-[#6D4DFE] px-6 py-2 rounded-lg text-white text-5xl font-black sm:text-6xl">CO-HEADS</h2>
       </div>
       <div className="flex flex-wrap gap-3 justify-center items-center">
         {headsList.map((head, idx) => (
@@ -102,4 +102,4 @@ function Heads() {
   );
 }
 
-export default Heads;
+export default Cohead;

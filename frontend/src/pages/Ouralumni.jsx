@@ -2,7 +2,6 @@ import React from "react";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 import { Linkedin } from "lucide-react";
 
-// Alumni data array
 const alumniList = [
   {
     name: "Abhishek Thakur",
@@ -98,13 +97,11 @@ function AlumniCard({ name, photo, batch, linkedin }) {
 
   return (
     <div className="relative w-[280px] h-[380px] rounded-xl overflow-hidden shadow-lg flex flex-col justify-end p-6 m-4 group hover:scale-105 transition-transform">
-      {/* Background image */}
       <img
         src={photo}
         alt={name}
         className="object-cover object-top absolute inset-0 w-full h-full transition-transform duration-500 group-hover:scale-110"
       />
-      {/* Dark overlay */}
       <div
         className="absolute inset-0"
         style={{
@@ -113,7 +110,6 @@ function AlumniCard({ name, photo, batch, linkedin }) {
         }}
       />
 
-      {/* Social icons */}
       <div className="flex absolute right-6 bottom-32 z-10 flex-col gap-4 text-white/80">
         <a
           href={linkedin}
@@ -125,8 +121,6 @@ function AlumniCard({ name, photo, batch, linkedin }) {
           <Linkedin />
         </a>
       </div>
-
-      {/* Card Content */}
       <div className="relative z-10 mt-auto">
         <div className="mb-2">
           <span className="block text-2xl font-bold leading-tight text-white">
@@ -146,7 +140,6 @@ function AlumniCard({ name, photo, batch, linkedin }) {
   );
 }
 
-// Simple Footer Component
 function Footer() {
   return (
     <footer className="w-full bg-[#18181b] text-white py-6 mt-12 flex flex-col items-center">
@@ -181,7 +174,6 @@ function Ouralumni() {
     <div className="flex flex-col justify-center items-center w-full min-h-screen bg-background">
        
       <div className="flex overflow-hidden relative flex-col justify-center items-center w-full min-h-screen rounded-lg border bg-background">
-        {/* Background effect */}
         <FlickeringGrid
           className="absolute inset-0 z-0 [mask-image:radial-gradient(450px_circle_at_center,white,transparent)]"
           squareSize={4}
@@ -192,14 +184,10 @@ function Ouralumni() {
           height={800}
           width={1200}
         />
-
-        {/* Heading */}
         <div className="flex relative z-10 gap-4 justify-center items-center p-4 text-5xl font-black text-white sm:text-6xl">
           <h1>MEET OUR</h1>
           <h1 className="bg-[#6D4DFE] px-6 py-2 rounded-lg">ALUMNI</h1>
         </div>
-
-        {/* Description */}
         <p className="relative z-10 px-6 mt-4 mb-10 max-w-3xl text-lg text-center text-white/80">
           Our alumni are the pillars of inspiration, carrying forward the legacy of 
           innovation, leadership, and excellence. Their journeys motivate the next 

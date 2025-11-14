@@ -6,13 +6,10 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { MorphoTextFlip } from "@/components/ui/morphotextflip";
 import Background from "../PublicSection/Background";
 import SocialMedia from "./SocialMedia";
-// import { PulsatingButton } from "../magicui/pulsating-button";
-
 const ThreeScene = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    // Only initialize Three.js on desktop/tablet (sm and up)
     if (window.innerWidth < 640) return;
 
     let renderer, scene, camera, controls, animationId, loadedModel = null;
@@ -60,7 +57,7 @@ const ThreeScene = () => {
     );
 
     const loader = new GLTFLoader();
-    loader.load("/model.gltf", (gltf) => {
+    loader.load("https://ik.imagekit.io/es6xialea/model.gltf?updatedAt=1763135832104", (gltf) => {
       const targetScale = 0.07;
       gltf.scene.scale.set(targetScale, targetScale, targetScale);
       scene.add(gltf.scene);

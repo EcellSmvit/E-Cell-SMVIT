@@ -1,131 +1,241 @@
 import React from "react";
 import { cn } from "../lib/utils.js";
 import { DotPattern } from "../components/magicui/dot-pattern.jsx";
-const LinkedInLucideIcon = (props) => (
+import { Linkedin } from "lucide-react"
 
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={2}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <rect width="16" height="16" x="4" y="4" rx="2" />
-    <line x1="8" x2="8" y1="11" y2="16" />
-    <line x1="8" x2="8" y1="8" y2="8.01" />
-    <line x1="12" x2="12" y1="16" y2="11" />
-    <path d="M16 16v-3a2 2 0 0 0-4 0" />
-  </svg>
-);
 
-const TeamCard = ({ image, title, subtitle, url }) => (
+
+const TeamCard = ({ image, name, role, url }) => (
   <div className="flex relative z-20 flex-col justify-center items-center p-6 w-full max-w-xs text-white rounded-xl shadow-lg transition-transform transform bg-card hover:scale-105 hover:shadow-2xl">
     <img
       src={image}
-      alt={title}
+      alt={name}
       className="object-cover mb-4 w-64 h-80 rounded-xl"
       style={{ objectPosition: "center" }}
     />
-    <h3 className="text-xl font-bold">{title}</h3>
-    <p className="mb-4 text-muted-foreground text-white/80">{subtitle}</p>
-    <a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`LinkedIn profile of ${title}`}
-      className="text-white transition-colors hover:text-primary"
-    >
-      <LinkedInLucideIcon className="w-6 h-6" />
-    </a>
+    <h3 className="text-xl font-bold">{name}</h3>
+    <p className="mb-4 text-muted-foreground text-white/80">{role}</p>
+    {url && (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`LinkedIn profile of ${name}`}
+        className="text-white transition-colors hover:text-primary"
+      >
+        <Linkedin className="w-6 h-6" />
+      </a>
+    )}
   </div>
 );
 
-// Team members data from About.jsx
-const teamMembers = [
+const teamStructure = [
   {
-    image: "https://ik.imagekit.io/es6xialea/Bikesh_-y-WYu2bvh?updatedAt=1754730133391",
-    title: "BIKESH KUMAR",
-    subtitle: "Corporate Relations Executive",
-    url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+    title: "Corporate Relations",
+    members: [
+      {
+        name: "Tanish Raj",
+        role: "Director, Corporate Relations",
+        image: "https://ik.imagekit.io/es6xialea/TANISH%20RAJ_TMGOU9Rzo?updatedAt=1754729813985",
+        url: "https://www.linkedin.com/in/tanish-raj-598617224/"
+      },
+      {
+        name: "Satvik Gupta",
+        role: "Head, Corporate Relations",
+        image: "https://ik.imagekit.io/es6xialea/SATVIK%20GUPTA_V5fYEhb1R?updatedAt=1754730346851",
+        url: "https://www.linkedin.com/in/satvik--gupta/"
+      },
+      {
+        name: "Ayush Thakur",
+        role: "Co-head, Corporate Relations",
+        image:
+          "https://ik.imagekit.io/es6xialea/P1200524.JPG?updatedAt=1754731371987",
+        url: "https://www.linkedin.com/in/ayush-thakur015/"
+      },
+      {
+        name: "Bhavishya C D",
+        role: "Executive, Corporate Relations",
+        image:
+          "https://ik.imagekit.io/es6xialea/WhatsApp%20Image%202025-11-14%20at%2023.01.54_513bbd8f.jpg?updatedAt=1763141731667",
+        url: "https://www.linkedin.com/in/bhavishya-c-d-b03738391/"
+      },
+      {
+        name: "Nandini Sharma ",
+        role: "Executive, Corporate Relations",
+        image:
+          "https://ik.imagekit.io/es6xialea/IMG_20251106_171747%20-%20Nandini%20Sharma.jpg?updatedAt=1763141366466",
+        url: "https://www.linkedin.com/in/nandinisharma-doc/"
+      },
+      {
+        name: "Helika D'Souza",
+        role: "Executive, Corporate Relations",
+        image:
+          "https://ik.imagekit.io/es6xialea/photo%20-%20Helika%20D'Souza_page-0001.jpg?updatedAt=1763141642125",
+        url: "https://www.linkedin.com/in/helika-d-souza-4a0901381/"
+      },
+      {
+        name: "Riya Mehta",
+        role: "Executive, Corporate Relations",
+        image:
+          "https://ik.imagekit.io/es6xialea/image%20-%20Riya.jpg?updatedAt=1763141909967",
+        url: "https://www.linkedin.com/in/riya-mehta-59b66a319/"
+      }
+    ]
   },
   {
-    image: "https://ik.imagekit.io/96gea10vb/NewTeamImage4_XdCP9rn0Z?updatedAt=1751669076681",
-    title: "MARIAM SHUAIB",
-    subtitle: "Corporate Relations Executive",
-    url: "https://www.linkedin.com/in/mariam-shuaib-003362328/"
+    title: "Events & Marketing",
+    members: [
+      {
+        name: "Hansikha V",
+        role: "Director, Events & Marketing",
+        image: "https://ik.imagekit.io/es6xialea/DirectorEvents_xx?dummy=1",
+        url: "https://www.linkedin.com/in/hansikha-venkatesh/"
+      },
+      {
+        name: "Bhoomi Nayak",
+        role: "Head, Events & Marketing",
+        image:"https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
+        url: "https://www.linkedin.com/in/bhoomi-nayak-943083305/"
+      },
+      {
+        name: "ANUJ DIXIT",
+        role: "Co-head, Events & Marketing",
+        image:
+          "https://ik.imagekit.io/es6xialea/ANUJ%20KUMAR%20DIXIT_aHyMWdDia?updatedAt=1754730905215",
+        url: "https://www.linkedin.com/in/anuj-kumar-dixit-668437280/"
+      },
+      {
+        name: "Mariam Shuaib",
+        role: "Co-head, Events & Marketing",
+        image:"https://ik.imagekit.io/96gea10vb/NewTeamImage4_XdCP9rn0Z?updatedAt=1751669076681",
+        url: "https://www.linkedin.com/in/mariam-shuaib-003362328/"
+      },
+      {
+        name: "Yashi Jaiswal",
+        role: "Executive, Events & Marketing",
+        image: "https://ik.imagekit.io/es6xialea/IMG-20251113-WA0011(1)%20-%20Yashi%20Jaiswal.jpg?updatedAt=1763142380256",
+        url: "https://www.linkedin.com/in/yashi-jaiswal-7a2bb7360/"
+      },
+    
+    ]
   },
   {
-    image: "https://ik.imagekit.io/es6xialea/SATVIK%20GUPTA_V5fYEhb1R?updatedAt=1754730346851",
-    title: "SATVIK GUPTA",
-    subtitle: "Corporate Relations Executive",
-    url: "https://www.linkedin.com/in/satvik--gupta/"
+    title: "Operations",
+    members: [
+      {
+        name: "Kanishk chaudhary",
+        role: "Director, Operations",
+        image: "https://ik.imagekit.io/es6xialea/KANISHK%20CHAUDHARY_0qGgdIniO?updatedAt=1754729675615",
+        url: "https://www.linkedin.com/in/kanishk-chaudhary-917731278/"
+      },
+      {
+        name: "Anant Srivastava",
+        role: "Head, Operations",
+        image: "https://ik.imagekit.io/es6xialea/ANANT%20SRIVASTAVA_Iu1HINsCv?updatedAt=1754731226619",
+        url: "https://www.linkedin.com/in/anant-srivastava-709174293/"
+      },
+      {
+        name: "Sarthak Tripathi",
+        role: "Co-head, Operations",
+        image:
+          "https://ik.imagekit.io/es6xialea/SARTHAK%20TRIPATHI_NoysExme7k?updatedAt=1754730569364",
+        url: "https://www.linkedin.com/in/sarthak-tripathi-b11458295/"
+      },
+      {
+        name: "Neha V",
+        role: "Executive, Operations",
+        image:
+          "https://ik.imagekit.io/es6xialea/IMG_20251112_181300%20-%20Neha%20Venkat.jpg?updatedAt=1763143182832",
+        url: "https://www.linkedin.com/in/neha-v-7a01aa290/"
+      },
+      {
+        name: "Kripa Chhajer",
+        role: "Executive, Operations",
+        image:
+          "https://ik.imagekit.io/es6xialea/1000092845_1_%20-%20Kripa%20Chhajer.jpg?updatedAt=1763143357893",
+        url: "https://www.linkedin.com/in/kripa-chhajer-57585b33b/"
+      },
+      {
+        name: "Krishnaditya Prakash",
+        role: "Executive, Operations",
+        image:
+          "https://ik.imagekit.io/es6xialea/WhatsApp%20Image%202025-11-13%20at%207.58.19%20PM%20-%20Krishnaditya%20Prakash.jpeg?updatedAt=1763143500125",
+        url: "https://www.linkedin.com/in/krishnaditya-prakash-868a83277/"
+      }
+    ]
   },
   {
-    image: "https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
-    title: "BHOOMI NAYAK",
-    subtitle: "Operations Executive",
-    url: "https://www.linkedin.com/in/bhoomi-nayak-943083305/"
+    title: "Tech",
+    members: [
+      {
+        name: "Bikesh Kumar",
+        role: "Head, Tech",
+        image: "https://ik.imagekit.io/es6xialea/Bikesh_-y-WYu2bvh?updatedAt=1754730133391",
+        url: "https://www.linkedin.com/in/bikesh-kumar-37b71428b/"
+      },
+      {
+        name: "Srujan Raj",
+        role: "Executive, Tech",
+        image: "https://ik.imagekit.io/es6xialea/IMG_4636%20-%20Srujan%20Raj.JPG?updatedAt=1763143977606",
+        url: "https://www.linkedin.com/in/nramsrujanraj/"
+      },
+    ]
   },
   {
-    image: "https://ik.imagekit.io/es6xialea/SARTHAK%20TRIPATHI_NoysExme7k?updatedAt=1754730569364",
-    title: "SARTHAK TRIPATHI",
-    subtitle: "Operations Executive",
-    url: "https://www.linkedin.com/in/sarthak-tripathi-b11458295/"
-  },
-  {
-    image: "https://ik.imagekit.io/es6xialea/ANUJ%20KUMAR%20DIXIT_aHyMWdDia?updatedAt=1754730905215",
-    title: "ANUJ DIXIT",
-    subtitle: "Events & Marketing Executive",
-    url: "https://www.linkedin.com/in/anuj-kumar-dixit-668437280/"
-  },
-  {
-    image: "https://ik.imagekit.io/es6xialea/DHRUV%20KUMAR_MpsbwOCE-3?updatedAt=1754731084940",
-    title: "DHRUV KUMAR",
-    subtitle: "Events & Marketing Executive",
-    url: "https://www.linkedin.com/in/dhruv-kumar-589a33314/"
-  },
-  {
-    image: "https://ik.imagekit.io/es6xialea/ANANT%20SRIVASTAVA_Iu1HINsCv?updatedAt=1754731226619",
-    title: "ANANT",
-    subtitle: "Corporate Relations Executive",
-    url: "https://www.linkedin.com/in/anant-srivastava-709174293/"
-  },
-  {
-    image: "https://ik.imagekit.io/es6xialea/ASHISH%20NARAYAN_esUOKHDOI?updatedAt=1754734225398",
-    title: "ASHISH NARAYAN",
-    subtitle: "Events & PR Executive",
-    url: "https://www.linkedin.com/in/ashish-narayan-1051b4299/"
-  },
-  {
-    image: "https://ik.imagekit.io/96gea10vb/images/webp/shashwatS.webp?updatedAt=1747321667249",
-    title: "SHASHWAT",
-    subtitle: "Design & Media Executive",
-    url: "https://www.linkedin.com/in/shashwat-shaurya-0828a5207/"
-  },
-  {
-    image: "https://ik.imagekit.io/96gea10vb/images/webp/ShashwatR.webp?updatedAt=1747321667103",
-    title: "SHASHWAT",
-    subtitle: "Design & Media Executive",
-    url: "https://www.linkedin.com/in/shashwat-ranjan-140908227/"
-  },
-  {
-    image: "https://ik.imagekit.io/96gea10vb/NewTeamImage7_W3oI3NhNh?updatedAt=1751669417474",
-    title: "VAIBHAV",
-    subtitle: "Design & Media Executive",
-    url: "https://www.linkedin.com/in/raun07/"
-  },
-  {
-    image: "https://ik.imagekit.io/es6xialea/AYUSH%20THAKUR_tTTgGaRDn?updatedAt=1754731438531",
-    title: "AYUSH THAKUR",
-    subtitle: "Events and Marketing",
-    url: "https://www.linkedin.com/in/ayush-thakur015/"
+    title: "Design & Media",
+    members: [
+      {
+        name: "Carol D'silva",
+        role: "Director, Design & Media",
+        image: "https://ik.imagekit.io/es6xialea/CAROL%20DSILVA_w_vU-4aXI?updatedAt=1754729990685",
+        url: "https://www.linkedin.com/in/caroldsillva/"
+      },
+      {
+        name: "Shashwat Shaurya",
+        role: "Head, Design & Media",
+        image: "https://ik.imagekit.io/96gea10vb/images/webp/shashwatS.webp?updatedAt=1747321667249",
+        url: "https://www.linkedin.com/in/shashwat-shaurya-0828a5207/"
+      },
+      {
+        name: "Shashwat Ranjan",
+        role: "Co-head, Design & Media",
+        image:
+          "https://ik.imagekit.io/96gea10vb/images/webp/ShashwatR.webp?updatedAt=1747321667103",
+        url: "https://www.linkedin.com/in/shashwat-ranjan-140908227/"
+      },
+      {
+        name: "Divyansh Singh",
+        role: "Executive, Design & Media",
+        image:
+          "https://ik.imagekit.io/es6xialea/SAVE_20251108_243313%20-%20Divyansh%20Singh.jpg?updatedAt=1763145512654",
+        url: "https://www.linkedin.com/in/divyansh-singh-694ab5277/"
+      },
+      {
+        name: "Sharanamma Patil",
+        role: "Executive, Design & Media",
+        image:
+          "https://ik.imagekit.io/es6xialea/IMG_5369%20-%20Sharanamma%20Patil.jpeg?updatedAt=1763145697059",
+        url: "https://www.linkedin.com/in/sharanamma-patil-18a03134a/"
+      }
+    ]
   }
 ];
+
+
+function Footer() {
+  return (
+    <footer className="w-full bg-background border-t border-t-white/10 mt-24 py-6 flex flex-col items-center z-30 relative">
+      <div className="max-w-3xl w-full flex flex-col items-center px-6 gap-2">
+        <span className="text-sm text-white/70">
+          &copy; {new Date().getFullYear()} E-Cell | All Rights Reserved
+        </span>
+        <span className="text-xs text-white/40">
+          Designed & Built by E-Cell Team
+        </span>
+      </div>
+    </footer>
+  );
+}
 
 function MeetOurTeam() {
   return (
@@ -147,15 +257,22 @@ function MeetOurTeam() {
             The creative minds behind our success.
           </p>
         </div>
-        <div className="grid z-20 grid-cols-1 gap-8 justify-items-center md:grid-cols-2 lg:grid-cols-3">
-          {teamMembers.map((member, idx) => (
-            <TeamCard
-              key={member.title + idx}
-              image={member.image}
-              title={member.title}
-              subtitle={member.subtitle}
-              url={member.url}
-            />
+        <div className="flex flex-col z-20 gap-16">
+          {teamStructure.map((section, sectionIdx) => (
+            <div key={section.title} className="w-full">
+              <h3 className="mb-6 text-3xl font-semibold text-center text-primary tracking-tight uppercase">{section.title}</h3>
+              <div className="grid grid-cols-1 gap-8 justify-items-center md:grid-cols-2 lg:grid-cols-4">
+                {section.members.map((member, idx) => (
+                  <TeamCard
+                    key={member.name + idx}
+                    name={member.name}
+                    image={member.image}
+                    role={member.role}
+                    url={member.url}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -172,6 +289,7 @@ function MeetOurTeam() {
           pointerEvents: "none"
         }}
       />
+      <Footer />
     </div>
   );
 }

@@ -4,19 +4,19 @@ import { Linkedin } from "lucide-react";
 const headsList = [
   {
     name: "Ayush Thakur",
-    img: "https://ik.imagekit.io/es6xialea/P1200524.JPG?updatedAt=1754731371987",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Ayush.jpg?updatedAt=1763209006308",
     linkedin: "https://www.linkedin.com/in/ayush-thakur015/",
     batch: "Corporate Relations Co-Head",
   },
   {
     name: "Sarthak Tripathi",
-    img: "https://ik.imagekit.io/es6xialea/SARTHAK%20TRIPATHI_NoysExme7k?updatedAt=1754730569364",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Sarthak.jpg?updatedAt=1763209006675",
     linkedin: "https://www.linkedin.com/in/sarthak-tripathi-b11458295/",
     batch: "Operations Co-Head",
   },
   {
     name: "Anuj Kumar Dixit",
-    img: "https://ik.imagekit.io/es6xialea/ANUJ%20KUMAR%20DIXIT_aHyMWdDia?updatedAt=1754730905215",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Anuj.jpg?updatedAt=1763209005175",
     linkedin: "https://www.linkedin.com/in/anuj-kumar-dixit-668437280/",
     batch: "Events & Marketing Co-Head",
   },
@@ -28,7 +28,7 @@ const headsList = [
   },
   {
     name: "Shashwat Ranjan",
-    img: "https://ik.imagekit.io/96gea10vb/images/webp/ShashwatR.webp?updatedAt=1747321667103",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Shashwat%20Ranjan.jpg?updatedAt=1763209006082",
     linkedin: "https://www.linkedin.com/in/shashwat-ranjan-140908227/",
     batch: "Design & Media Co-Head",
   }

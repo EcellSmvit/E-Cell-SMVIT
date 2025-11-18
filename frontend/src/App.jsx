@@ -7,6 +7,8 @@ import Ouralumni from './pages/Ouralumni'
 import Recruitment from './pages/Recruitment'
 import MeetOurTeam from './pages/MeetOurTeam'
 import Recruitmentdemo from './pages/Recruitmentdemo'
+import NewMeetOurTeam from './pages/NewMeetOurTeam'
+import Landingpage from './pages/Starpitch/Landingpage'
 
 const App = () => {
   return (
@@ -18,6 +20,8 @@ const App = () => {
         <Route path='/ourteam' element={<MeetOurTeam />} />
         <Route path='/alumni' element={<Ouralumni />} />
         <Route path='/recruitmentdemo' element={<Recruitmentdemo/>}/>
+        <Route path='/newteam' element={<NewMeetOurTeam/>}/>
+        <Route path='/starpitch' element={<Landingpage/>}/>
       </Routes>
     </BrowserRouter>
   )

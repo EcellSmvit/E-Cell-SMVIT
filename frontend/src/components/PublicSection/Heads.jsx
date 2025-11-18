@@ -4,25 +4,25 @@ import { Linkedin } from "lucide-react";
 const headsList = [
   {
     name: "Satvik Gupta",
-    img: "https://ik.imagekit.io/es6xialea/SATVIK%20GUPTA_V5fYEhb1R?updatedAt=1754730346851",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Satvik.jpg?updatedAt=1763209006644",
     linkedin: "https://www.linkedin.com/in/satvik--gupta/",
     batch: "Corporate Relations Head",
   },
   {
     name: "Anant Srivastava",
-    img: "https://ik.imagekit.io/es6xialea/ANANT%20SRIVASTAVA_Iu1HINsCv?updatedAt=1754731226619",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Anant.jpg?updatedAt=1763209004736",
     linkedin: "https://www.linkedin.com/in/anant-srivastava-709174293/",
     batch: "Operations Head",
   },
   {
     name: "Bhoomi Nayak",
-    img: "https://ik.imagekit.io/96gea10vb/images/webp/bhoomi.webp?updatedAt=1747321659931",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Bhoomi.jpg?updatedAt=1763209006562",
     linkedin: "https://www.linkedin.com/in/bhoomi-nayak-943083305/",
     batch: "Events & Marketing Head",
   },
   {
     name: "Shashwat Shaurya",
-    img: "https://ik.imagekit.io/96gea10vb/images/webp/shashwatS.webp?updatedAt=1747321667249",
+    img: "https://ik.imagekit.io/es6xialea/drive-download-20251115T121438Z-1-001/Shashwat%20Shaurya.jpg?updatedAt=1763209005937",
     linkedin: "https://www.linkedin.com/in/shashwat-shaurya-0828a5207/",
     batch: "Design & Media Head",
   },

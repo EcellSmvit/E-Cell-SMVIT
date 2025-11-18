@@ -8,7 +8,8 @@ import Recruitment from './pages/Recruitment'
 import MeetOurTeam from './pages/MeetOurTeam'
 import Recruitmentdemo from './pages/Recruitmentdemo'
 import NewMeetOurTeam from './pages/NewMeetOurTeam'
-import Landingpage from './pages/Starpitch/Landingpage'
+import StarPitch from './pages/Starpitch'
+
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route path='/alumni' element={<Ouralumni />} />
         <Route path='/recruitmentdemo' element={<Recruitmentdemo/>}/>
         <Route path='/newteam' element={<NewMeetOurTeam/>}/>
-        <Route path='/starpitch' element={<Landingpage/>}/>
+        <Route path='/starpitch' element={<StarPitch/>}/>
       </Routes>
     </BrowserRouter>
   )

@@ -97,7 +97,6 @@ function Navbar() {
         >
           <div
             className={
-              // On mobile: when expanded, shift logo a bit more left; on desktop, keep as before
               expanded
                 ? "flex items-center justify-start w-full pl-2 md:justify-center md:pl-0"
                 : "absolute top-1/2 left-1/2 flex justify-center items-center -translate-x-1/2 -translate-y-1/2"

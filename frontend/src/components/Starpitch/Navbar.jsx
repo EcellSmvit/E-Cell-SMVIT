@@ -2,7 +2,7 @@ import React from 'react';
 
 function Navbar() {
   return (
-    <nav className="w-[95vw] fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-white/10 backdrop-blur-md shadow-lg flex items-center justify-between px-8 py-3 rounded-full">
+    <nav className="w-[95vw] fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-white/10 backdrop-blur-md shadow-lg flex items-center justify-between px-8 py-2 rounded-full">
       <div className="flex-shrink-0">
         <img
           src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"

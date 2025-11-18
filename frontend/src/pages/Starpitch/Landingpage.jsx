@@ -5,7 +5,7 @@ export default function Landingpage() {
     <div className="w-full h-screen bg-gray-900 relative flex justify-center items-center">
       <div className="absolute  z-10">
         <h1
-          className="font-[Modak] text-white text-5xl md:text-[12rem] drop-shadow-lg select-none text-center"
+          className="font-[Modak] text-white text-7xl md:text-[12rem] drop-shadow-lg select-none text-center"
           style={{ fontFamily: "'Modak', cursive" }}
         >
           StarPitch 3.0

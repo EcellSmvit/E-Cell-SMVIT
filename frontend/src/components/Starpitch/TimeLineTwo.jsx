@@ -28,11 +28,11 @@ const timelineEvents = [
   },
 ];
 
-function Timeline() {
+function TimelineTwo() {
   return (
-    <div className="w-full max-w-full py-8 sm:py-12 md:py-16 flex flex-col items-center gap-8 sm:gap-10 md:gap-12 relative z-10 pointer-events-none">
-      <h1 className="font-black text-3xl sm:text-4xl md:text-5xl text-white pointer-events-auto mb-3 sm:mb-4 drop-shadow-lg text-center">Timeline</h1>
-      <div className="w-full max-w-2xl sm:max-w-3xl md:max-w-4xl flex flex-col gap-8 sm:gap-10 md:gap-12 pointer-events-auto relative px-0 xs:px-1 sm:px-3 md:px-4">
+    <div className="flex relative z-10 flex-col gap-8 items-center py-8 w-full max-w-full pointer-events-none sm:py-12 md:py-16 sm:gap-10 md:gap-12">
+      <h1 className="mb-3 text-3xl font-black text-center text-white drop-shadow-lg pointer-events-auto sm:text-4xl md:text-5xl sm:mb-4">Timeline</h1>
+      <div className="flex relative flex-col gap-8 px-0 w-full max-w-2xl pointer-events-auto sm:max-w-3xl md:max-w-4xl sm:gap-10 md:gap-12 xs:px-1 sm:px-3 md:px-4">
         {/* Central line for md+ screens */}
         <div className="hidden md:block absolute left-1/2 top-0 h-full border-l-[4px] border-purple-400 opacity-40 z-0" />
         {timelineEvents.map((event, idx) => (
@@ -45,15 +45,12 @@ function Timeline() {
           >
             {/* Timeline dot for all screens */}
             <div
-              className={`
-                absolute md:static left-1/2 md:left-auto transform md:transform-none
-                -translate-x-1/2 md:translate-x-0 z-20
-              `}
+              className={`absolute left-1/2 z-20 transform -translate-x-1/2 md:static md:left-auto md:transform-none md:translate-x-0`}
               style={{ minWidth: 60 }}
             >
-              <div className="relative flex flex-col items-center">
-                <span className="absolute animate-ping w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-purple-400 opacity-50 z-0" />
-                <div className="w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-br from-purple-400 to-purple-700 rounded-full border-2 sm:border-4 border-white shadow-lg flex items-center justify-center relative z-10 transition-transform group-hover:scale-110">
+              <div className="flex relative flex-col items-center">
+                <span className="absolute z-0 w-7 h-7 bg-purple-400 rounded-full opacity-50 animate-ping sm:w-8 sm:h-8" />
+                <div className="flex relative z-10 justify-center items-center w-5 h-5 bg-gradient-to-br from-purple-400 to-purple-700 rounded-full border-2 border-white shadow-lg transition-transform sm:w-6 sm:h-6 sm:border-4 group-hover:scale-110">
                   {idx === 0 ? (
                     <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 20 20"><path strokeLinecap="round" strokeLinejoin="round" d="M6 12l4 4 4-4m-4-9v13" /></svg>
                   ) : idx === timelineEvents.length - 1 ? (
@@ -64,7 +61,7 @@ function Timeline() {
                 </div>
                 {/* Connecting line: only on desktop */}
                 {idx < timelineEvents.length - 1 && (
-                  <div className="hidden md:block w-1 h-20 lg:h-24 bg-purple-400/30"></div>
+                  <div className="hidden w-1 h-20 md:block lg:h-24 bg-purple-400/30"></div>
                 )}
                 {/* Connecting line: for mobile */}
                 {idx < timelineEvents.length - 1 && (
@@ -78,14 +75,10 @@ function Timeline() {
               w-full
               flex flex-col items-center md:items-stretch
             `}>
-              <div className={`
-                bg-white/10 backdrop-blur-lg rounded-lg sm:rounded-xl px-4 py-4 sm:px-6 sm:py-5 md:py-6 shadow-xl border border-white/20 relative
-                transition-transform duration-300 group-hover:scale-105
-                w-full max-w-md md:max-w-none
-              `}>
-                <span className="text-xs sm:text-sm tracking-wide uppercase text-purple-200 font-semibold opacity-80 block">{event.date}</span>
-                <h2 className="text-xl sm:text-2xl font-bold text-purple-100 mt-1 sm:mt-2 mb-1 drop-shadow-sm">{event.title}</h2>
-                <p className="text-white text-sm sm:text-base opacity-90">{event.description}</p>
+              <div className={`relative px-4 py-4 w-full max-w-md rounded-lg border shadow-xl backdrop-blur-lg transition-transform duration-300 bg-white/10 sm:rounded-xl sm:px-6 sm:py-5 md:py-6 border-white/20 group-hover:scale-105 md:max-w-none`}>
+                <span className="block text-xs font-semibold tracking-wide text-purple-200 uppercase opacity-80 sm:text-sm">{event.date}</span>
+                <h2 className="mt-1 mb-1 text-xl font-bold text-purple-100 drop-shadow-sm sm:text-2xl sm:mt-2">{event.title}</h2>
+                <p className="text-sm text-white opacity-90 sm:text-base">{event.description}</p>
                 <span className="hidden sm:block absolute -top-2 right-6 w-8 h-0.5 bg-gradient-to-r from-purple-400/60 via-white/30 to-purple-600/60 rounded blur-[1px] animate-pulse" />
               </div>
             </div>
@@ -94,10 +87,10 @@ function Timeline() {
           </div>
         ))}
         {/* Faded overlay for possible trailing effect */}
-        <div className="pointer-events-none absolute left-0 bottom-0 w-full h-10 sm:h-20 md:h-28" />
+        <div className="absolute bottom-0 left-0 w-full h-10 pointer-events-none sm:h-20 md:h-28" />
       </div>
     </div>
   );
 }
 
-export default Timeline;
+export default TimelineTwo;

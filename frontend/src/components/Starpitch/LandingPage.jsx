@@ -7,7 +7,7 @@ import Eventdetails from './Eventdetails';
 import Footer from './Footer';
 import About from './About';
 import Faq from './Faq';
-import Timeline from './Timeline';
+import TimelineTwo from './TimeLineTwo';
 
 
 function Landingpage() {
@@ -15,14 +15,14 @@ function Landingpage() {
     <div className="w-full h-full">
         <Firstsection/>
         <Background/>
-        <Timeline/>
+        <TimelineTwo/>
         <Eventdetails/>
         <Prizepool/>
         <About/>
         <Sponser/>
         <Faq/>
         <Footer/>
-      <div className="fixed right-5 bottom-5 w-48 h-10 bg-black rounded shadow-lg text-white flex items-center justify-center z-20">
+      <div className="flex fixed right-5 bottom-5 z-20 justify-center items-center w-48 h-10 text-white bg-blue-700 rounded shadow-lg">
         Made by E-CELL with ❤️
       </div>
     </div>

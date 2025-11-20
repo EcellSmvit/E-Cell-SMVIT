@@ -32,7 +32,7 @@ function Footer() {
         <div className="flex flex-col items-center gap-2 pointer-events-auto py-2">
           <div className="flex items-center gap-4">
             <img
-              src="https://ik.imagekit.io/es6xialea/logowithoutname_FRoJAY4ve?updatedAt=1755297005039"
+              src="https://ik.imagekit.io/es6xialea/ecellwhite.png?updatedAt=1755296937326"
               alt="ecell logo"
               className="h-16 object-contain"
               style={{filter: 'drop-shadow(0 1px 0.5px #0009)'}}

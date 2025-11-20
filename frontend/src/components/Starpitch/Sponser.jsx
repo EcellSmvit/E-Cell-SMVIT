@@ -8,7 +8,7 @@ function Sponser() {
       <h1 className="font-black text-5xl p-4 text-white">
         POWERED BY
       </h1>
-      <img className='w-52 bg-white p-2 rounded-xl shadow-lg' src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/svg/unstop-logo.svg" alt="Unstop Logo" />
+      <img className='w-52' src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/svg/unstop-logo-white.svg" alt="Unstop Logo" />
     </div>
   )
 }

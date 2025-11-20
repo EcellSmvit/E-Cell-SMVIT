@@ -14,7 +14,6 @@ function Navbar() {
         <a href="#" className="text-white text-lg  hover:text-yellow-400 transition">Home</a>
         <a href="#event" className="text-white text-lg  hover:text-yellow-400 transition">Event Details</a>
         <a href="#about" className="text-white text-lg  hover:text-yellow-400 transition">About</a>
-        <a href="#team" className="text-white text-lg  hover:text-yellow-400 transition">Team</a>
         <a href="#contact" className="text-white text-lg  hover:text-yellow-400 transition">Contact</a>
       </div>
       <div className="flex-shrink-0">

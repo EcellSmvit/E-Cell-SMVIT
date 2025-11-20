@@ -10,7 +10,7 @@ function Eventdetails() {
         Event Details
       </h1>
       <div className="grid grid-cols-1 gap-10 w-full max-w-5xl pointer-events-auto md:grid-cols-2">
-        <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20">
+        <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20 pointer-events-none">
           <div className="flex gap-2 items-baseline">
             <span className="text-2xl font-bold text-blue-400">Solution Sprint</span>
           </div>
@@ -44,7 +44,7 @@ function Eventdetails() {
             </ul>
           </div>
         </div>
-        <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20">
+        <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20 pointer-events-none">
           <div className="flex gap-2 items-baseline">
             <span className="text-2xl font-bold text-blue-400">Startup Showcase</span>
           </div>

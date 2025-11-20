@@ -12,7 +12,7 @@ function Firstsection() {
           StarPitch 3.0
         </h1>
         <div className='flex items-center justify-center gap-6 text-white font-bold text-xl drop-shadow-2xl select-none'>Powered By 
-            <img className='w-44 bg-white p-2 rounded-xl' src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/svg/unstop-logo.svg" alt="" />
+            <img className='w-44 ' src="https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/svg/unstop-logo-white.svg" alt="" />
         </div>
       </div>
     </div>

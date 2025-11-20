@@ -11,7 +11,7 @@ function Navbar() {
         />
       </div>
       <div className=" space-x-7 md:flex hidden">
-        <a href="/" className="text-white text-lg  hover:text-yellow-400 transition">Home</a>
+        <a href="#" className="text-white text-lg  hover:text-yellow-400 transition">Home</a>
         <a href="#event" className="text-white text-lg  hover:text-yellow-400 transition">Event Details</a>
         <a href="#about" className="text-white text-lg  hover:text-yellow-400 transition">About</a>
         <a href="#team" className="text-white text-lg  hover:text-yellow-400 transition">Team</a>
@@ -19,7 +19,7 @@ function Navbar() {
       </div>
       <div className="flex-shrink-0">
         <a
-          href="#register"
+          href="https://unstop.com/o/50i4Ume?lb=R9NCF68A&utm_medium=Share&utm_source=Bikesh2571&utm_campaign=Competitions"
           className="bg-white/20 border border-white/30 hover:bg-white/40 text-white px-6 py-2 rounded-full  text-lg backdrop-blur-2xl shadow transition"
           style={{
             boxShadow: '0 4px 32px 0 rgba(31, 38, 135, 0.20), 0 4px 12px 0 rgba(255, 255, 255, 0.10)'

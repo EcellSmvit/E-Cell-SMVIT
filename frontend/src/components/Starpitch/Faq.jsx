@@ -7,7 +7,7 @@ const questions = [
   },
   {
     q: "Who can participate?",
-    a: "The event is open to all undergraduate and postgraduate students from any faculty or discipline."
+    a: "The event is open to all undergraduate students from any faculty or discipline."
   },
   {
     q: "How do I register?",
@@ -23,7 +23,7 @@ const questions = [
   },
   {
     q: "What are the prizes?",
-    a: "Exciting prizes, internship opportunities, and certificates await the winning teams."
+    a: "Exciting prizes and certificates await the winning teams."
   }
 ];
 

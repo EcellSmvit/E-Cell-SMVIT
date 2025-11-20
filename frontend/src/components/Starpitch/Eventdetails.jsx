@@ -12,28 +12,66 @@ function Eventdetails() {
       <div className="grid grid-cols-1 gap-10 w-full max-w-5xl pointer-events-auto md:grid-cols-2">
         <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20">
           <div className="flex gap-2 items-baseline">
-            <span className="text-2xl font-bold text-blue-400">Round 1</span>
-            <span className="text-base font-medium text-white/80">| 23rd March 2024</span>
+            <span className="text-2xl font-bold text-blue-400">Solution Sprint</span>
           </div>
           <div className="my-2 border-t border-white/10"></div>
           <div>
-            <h2 className="mb-1 text-lg font-semibold text-white md:text-xl">Preliminary Pitch (Online)</h2>
-            <p className="text-base leading-relaxed text-white/90 md:text-lg">
-              Teams submit their pitch decks online, presenting ideas ranging from innovative products to new business models. Judges will evaluate based on creativity, viability, and impact. Shortlisted teams will be notified for progression to the next round.
-            </p>
+            <ul className="space-y-3">
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Format:</span>{" "}
+                A real-world problem will be released 24 hours before the event.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Team Task:</span>{" "}
+                Analyze the problem & present an innovative and feasible solution.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Presentation Time:</span>{" "}
+                5 minutes.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Q&amp;A:</span>{" "}
+                2–3 minutes.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Number of Winners:</span>{" "}
+                Top 3 teams
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Judging Criteria:</span>{" "}
+                Creativity, Feasibility, Problem Understanding, Presentation, Business Potential
+              </li>
+            </ul>
           </div>
         </div>
         <div className="bg-white/10 rounded-2xl shadow-lg px-8 py-6 flex flex-col gap-4 transition hover:scale-[1.02] backdrop-blur-sm border border-white/20">
           <div className="flex gap-2 items-baseline">
-            <span className="text-2xl font-bold text-blue-400">Round 2</span>
-            <span className="text-base font-medium text-white/80">| 31st March 2024</span>
+            <span className="text-2xl font-bold text-blue-400">Startup Showcase</span>
           </div>
           <div className="my-2 border-t border-white/10"></div>
           <div>
-            <h2 className="mb-1 text-lg font-semibold text-white md:text-xl">Grand Finale (Onsite)</h2>
-            <p className="text-base leading-relaxed text-white/90 md:text-lg">
-              Finalists deliver live, in-person pitches at StarPitch 3.0 before a panel of esteemed judges and an audience. This round emphasizes clarity, innovation, and presentation skills. Winners will be awarded prizes, mentorship, and recognition on stage.
-            </p>
+            <ul className="space-y-3">
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Format:</span>{" "}
+                Participants pitch their own original startup idea.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Presentation Time:</span>{" "}
+                5 minutes.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Q&amp;A:</span>{" "}
+                3–4 minutes.
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Number of Winners:</span>{" "}
+                Single top team
+              </li>
+              <li className="text-white">
+                <span className="font-bold text-yellow-400">Judging Criteria:</span>{" "}
+                Innovation, Market Potential, Feasibility, Pitch Quality, Scalability
+              </li>
+            </ul>
           </div>
         </div>
       </div>

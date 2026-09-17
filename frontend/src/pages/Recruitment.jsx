@@ -10,6 +10,7 @@ import Facingtrouble from '@/components/Facingtrouble';
 import AchievmentRecru from '@/components/AchievmentRecru';
 import FooterRecu from '@/components/FooterRecu';
 import EventsRecru from '@/components/EventsRecru';
+import RecruitmentHero from '@/components/RecruitmentHero';
 
 function Recruitment() {
   const { user } = useUser();
@@ -38,359 +39,821 @@ function Recruitment() {
     <div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
       <SignedOut>
-        <div className=" sm:h-[100vh] h-[70vh] w-full bg-[#f9fafb] relative">
-          <div
-            className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `
-                linear-gradient(to right, #d1d5db 1px, transparent 1px),
-                linear-gradient(to bottom, #d1d5db 1px, transparent 1px)
-              `,
-              backgroundSize: "32px 32px",
-              WebkitMaskImage:
-                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
-              maskImage:
-                "radial-gradient(ellipse 80% 80% at 100% 0%, #000 50%, transparent 90%)",
-            }}
-          />
-          <div className="flex relative z-10 justify-between items-center px-4 py-4 sm:px-8 md:px-14">
-            <img
-              src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
-              className="w-10 sm:w-12"
-              alt="logo"
-            />
-            <div className="text-xl font-bold text-black sm:text-2xl">2025</div>
-          </div>
-          <div className="flex relative z-10 justify-center items-center px-6 sm:px-14 h-[50vh] sm:h-[90vh] text-center sm:text-left">
-            <div>
-              <p className="font-medium text-[#111111] text-4xl sm:text-8xl">E-CELL SMVIT</p>
-              <p className="font-black text-[#111111] text-6xl sm:text-[12rem] leading-[1]">Recruiting!</p>
-              <p className="text-[#545554] text-base sm:text-2xl font-medium w-full sm:w-2/3 mt-6 sm:mt-10 mx-auto sm:mx-0">
-                Are you ready to take charge, innovate, and create impact on campus? 
-                E-Cell SMVIT is recruiting enthusiastic minds like YOU!
-              </p>
-                <SignInButton>
-                  <button className="px-4 py-2 rounded-full border-2 text-[#111111] mt-4 sm:mb-6">
-                    Join Our Team
-                  </button>
-              </SignInButton>
-            </div>
-          </div>
-        </div>
+        <RecruitmentHero />
         <OpeningPost />
         <Position />
-        <Facingtrouble/>
-        <AchievmentRecru/>
-        <EventsRecru/>
-        <FooterRecu/>
-        </SignedOut>
+        <Facingtrouble />
+        <AchievmentRecru />
+        <EventsRecru />
+        <FooterRecu />
+      </SignedOut>
 
       <SignedIn>
-        <div className="flex justify-between items-center p-4 bg-[#f9fafb] text-black">
-          <img
-            src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
-            alt=""
-            className="w-12"
-          />
+        {/* ================= HEADER ================= */}
+        <div className="flex items-center justify-between border-b border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-black sm:px-8 md:px-12">
+
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-black">
+              <img
+                src="https://ik.imagekit.io/es6xialea/blacklogo.svg?updatedAt=1759263103995"
+                alt="E-Cell SMVIT"
+                className="w-8 invert"
+              />
+            </div>
+
+            <div className="hidden sm:block">
+              <p className="text-sm font-black">E-Cell SMVIT</p>
+              <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-[#999791]">
+                Recruitment 2026
+              </p>
+            </div>
+          </div>
+
           <UserButton />
         </div>
+
+
+        {/* ================= ALREADY SUBMITTED ================= */}
         {alreadySubmitted ? (
-          <div className="p-10 text-center bg-[#f9fafb] w-screen h-screen">
-            <h1 className="text-6xl font-bold text-green-400">
-              You have submitted your application.
-            </h1>
-            <p className="mt-4">
-              Our team will contact you soon. Thank you for applying!
+          <div className="flex min-h-[85vh] w-full flex-col items-center justify-center bg-[#F7F5EF] px-5 text-center">
+
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#E21B12] text-2xl text-white">
+              ✓
+            </div>
+
+            <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.3em] text-[#999791]">
+              Application Received
             </p>
+
+            <h1 className="mt-3 max-w-2xl text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl">
+              Application
+              <span className="text-[#E21B12]"> Submitted.</span>
+            </h1>
+
+            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#77756F]">
+              Our team will contact you soon. Thank you for applying to E-Cell SMVIT.
+            </p>
+
           </div>
         ) : (
-          <div className="bg-[#fbf9f9] text-black min-h-[120vh] sm:min-h-[130vh] lg:min-h-[130vh]">
-            <div className="p-4 text-2xl font-bold">
-              <h1>
-                Welcome <span className="text-[#5227FF]">{user?.firstName}</span>{" "}
-                to E-Cell SMVIT Recruitment 2025
-              </h1>
-            </div>
-            <div className="text-white">
-              <Stepper
-                initialStep={1}
-                onStepChange={(step) => setCurrentStep(step)}
-                onFinalStepCompleted={async () => {
-                  if (!isFormValid) {
-                    toast.warn("Please fill all required fields before submitting.");
-                    return;
-                  }
-                  try {
-                    await submitApplication({
-                      name,
-                      usn,
-                      teamrole,
-                      mobilenumber,
-                      linkedin,
-                      q1,
-                      q2,
-                      q3,
-                      q4,
-                      filledByUser: user?.firstName,
-                      userId: user?.id,
-                    });
-                    toast.success("Application submitted successfully!");
-                    setAlreadySubmitted(true);
-                  } catch (error) {
-                    toast.error("Error submitting form. Please try again.");
-                  }
-                }}
-                nextButtonProps={{
-                  disabled: (currentStep === 4 ? !isFormValid : false),
-                  style: ((currentStep === 4 && !isFormValid)) ? { opacity: 0.5, cursor: "not-allowed" } : {},
-                }}
-                backButtonText="Previous"
-                nextButtonText="Next"
-              >
-                <Step>
-                  <h2 className="text-2xl font-bold text-[#5227FF]">Why E-CELL SMVIT?</h2>
-                  <p className="text-black">
-                    <span className="font-bold">E-Cell SMVIT is more than just a student club</span> - it’s a launchpad for 
-                    innovators, entrepreneurs, and changemakers. By joining, <span className="font-bold">you’ll gain 
-                    hands-on experience in leadership, teamwork, and problem-solving</span> while 
-                    working on real-world projects and competitions. From <span className="font-bold">networking with 
-                    industry leaders and startup founders</span> to <span className="font-bold">showcasing your ideas at national 
-                    events</span>, E-Cell gives you the platform, mentorship, and resources to turn 
-                    your vision into impact. Whether you’re a developer, designer, or 
-                    strategist, <span className="font-bold">E-Cell SMVIT empowers you to create, collaborate, and grow.</span>
-                  </p>
-                </Step>
-                <Step>
-                  <h2 className='text-2xl font-bold text-[#5227FF] mb-4 text-center'>Team Roles</h2>
-                  <div className='grid grid-cols-1 gap-6 justify-items-center w-full sm:grid-cols-2 md:grid-cols-3 md:gap-8'>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Operations Executive</li>
-                      <p className='text-black'>
-                        Coordinating logistics, obtaining necessary permissions, and managing documentation of operations and events.
-                      </p>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Events & Marketing Executive</li>
-                      <p className='text-black'>
-                        Planning and organizing events, as well as promoting and marketing them.
-                      </p>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Corporate Relations Executive</li>
-                      <p className='text-black'>
-                        Managing sponsorships and building funding partnerships with companies.
-                      </p>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Tech Executive</li>
-                      <p className='text-black'>
-                        Developing and maintaining websites, and planning designs and strategies for development.
-                      </p>
-                    </ul>
-                    <ul className="p-4 w-full max-w-xs">
-                      <li className="font-bold text-[#5227FF] mb-2">Design and Media Executive</li>
-                      <p className='text-black'>
-                        Planning and managing media posts, creating designs, and growing social media reach.
-                      </p>
-                    </ul>
-                  </div>
-                </Step>
 
-                <div className="p-4 mb-6">
-                  <h2 className="mb-2 text-lg font-semibold text-[#5227FF]">Instructions while filling the form</h2>
-                  <ul className="space-y-1 list-disc list-inside text-black">
-                    <li>Fill in all required fields marked with <span className="text-red-500">*</span>.</li>
-                    <li>Double-check your name, USN, Team Role and Mobile .</li>
-                    <li>Answer all questions honestly and thoughtfully to reflect your true experiences and aspirations.</li>
-                    <li>Once you submit the form, you will not be able to edit your responses.</li>
-                    <li>
-                      For any queries or issues, contact us at <a href="mailto:ecell.smvit@gmail.com" className="text-blue-600 underline">ecellsmvit@gmail.com</a> or reach out to our team on Instagram <a href="https://www.instagram.com/ecell_smvit/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">@ecellsmvit</a>.
-                    </li>
-                    <li>
-                      If you're facing technical issues or queries, you can also WhatsApp us at <a href="https://wa.me/917903897660" className="text-blue-600 underline" target="_blank" rel="noopener noreferrer">7903897660</a>.
-                    </li>
-                  </ul>
-                </div>
-                <Step>
-                  <h2 className="text-2xl font-bold text-[#5227FF] mb-4 text-center">Application Form</h2>
-                  <form
-                    className="flex flex-col gap-4"
-                  >
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="name">
-                          Name
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <input
-                          id="name"
-                          type="text"
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Your name"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="teamrole">
-                          Team Role you want to apply for
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <select
-                          id="teamrole"
-                          value={teamrole}
-                          onChange={(e) => setTeamrole(e.target.value)}
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        >
-                          <option value="">Select Team Role</option>
-                          <option value="operations_executive">Operations Executive</option>
-                          <option value="eventsandmarketing_executive">Events and Marketing Executive</option>
-                          <option value="corporate_executive">Corporate Executive</option>
-                          <option value="tech_executive">Tech Executive</option>
-                          <option value="designandmedia_executive">Design and Media Executive</option>
-                        </select>
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="usn">
-                          USN
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <input
-                          id="usn"
-                          type="text"
-                          value={usn}
-                          onChange={(e) => setUsn(e.target.value)}
-                          placeholder="Your USN"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="mobilenumber">
-                          Mobile Number
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <input
-                          id="mobilenumber"
-                          type="text"
-                          value={mobilenumber}
-                          onChange={(e) => setMobilenumber(e.target.value)}
-                          placeholder="Your mobile number"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
-                      </div>
+          /* ================= FORM PAGE ================= */
+          <div className="min-h-[100vh] bg-[#F7F5EF] px-4 py-8 text-black sm:px-8 sm:py-12">
+
+            {/* Welcome */}
+            <div className="mx-auto mb-8 max-w-6xl">
+
+              <div className="mb-3 flex items-center gap-3">
+                <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+
+                <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#999791]">
+                  E-Cell SMVIT
+                </span>
+              </div>
+
+              <h1 className="text-3xl font-black uppercase leading-none tracking-[-0.04em] sm:text-5xl">
+                Welcome{" "}
+                <span className="text-[#E21B12]">
+                  {user?.firstName}
+                </span>
+              </h1>
+
+              <p className="mt-2 text-sm text-[#77756F]">
+                Recruitment 2026 · Application Form
+              </p>
+
+            </div>
+
+
+            <div className="mx-auto w-full h-full max-w-6xl rounded-2xl border border-[#DDDAD2] bg-white p-4 sm:p-8">
+              <div className="text-black">
+
+                <Stepper
+                  initialStep={1}
+                  onStepChange={(step) => setCurrentStep(step)}
+                  onFinalStepCompleted={async () => {
+                    if (!isFormValid) {
+                      toast.warn("Please fill all required fields before submitting.");
+                      return;
+                    }
+
+                    try {
+                      await submitApplication({
+                        name,
+                        usn,
+                        teamrole,
+                        mobilenumber,
+                        linkedin,
+                        q1,
+                        q2,
+                        q3,
+                        q4,
+                        filledByUser: user?.firstName,
+                        userId: user?.id,
+                      });
+
+                      toast.success("Application submitted successfully!");
+                      setAlreadySubmitted(true);
+                    } catch {
+                      toast.error("Error submitting form. Please try again.");
+                    }
+                  }}
+
+                  nextButtonProps={{
+                    disabled: (currentStep === 5 ? !isFormValid : false),
+                    style:
+                      currentStep === 5 && !isFormValid
+                        ? {
+                          opacity: 0.5,
+                          cursor: "not-allowed",
+                        }
+                        : {},
+                  }}
+
+                  backButtonText="Previous"
+                  nextButtonText="Next"
+                >
+
+                  {/* ================= STEP 1 ================= */}
+                  <Step>
+
+                    <div className="mx-auto max-w-4xl">
+
+                      <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.25em] text-[#E21B12]">
+                        01 / Why Join
+                      </p>
+
+                      <h2 className="text-2xl font-black uppercase tracking-tight sm:text-3xl">
+                        Why E-Cell SMVIT?
+                      </h2>
+
+                      <div className="mt-4 h-1 w-10 bg-[#E21B12]" />
+
+                      <p className="mt-6 text-sm leading-7 text-[#55534E] sm:text-base">
+                        <span className="font-bold text-black">
+                          E-Cell SMVIT is more than just a student club
+                        </span>{" "}
+                        - it’s a launchpad for innovators, entrepreneurs, and changemakers.
+                        By joining,{" "}
+                        <span className="font-bold text-black">
+                          you’ll gain hands-on experience in leadership, teamwork, and
+                          problem-solving
+                        </span>{" "}
+                        while working on real-world projects and competitions.
+
+                        From{" "}
+                        <span className="font-bold text-black">
+                          networking with industry leaders and startup founders
+                        </span>{" "}
+                        to{" "}
+                        <span className="font-bold text-black">
+                          showcasing your ideas at national events
+                        </span>
+                        , E-Cell gives you the platform, mentorship, and resources to
+                        turn your vision into impact.
+                      </p>
+
                     </div>
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="linkedin">
+
+                  </Step>
+
+
+                  {/* ================= STEP 2 ================= */}
+                  <Step>
+
+                    <div className="mx-auto max-w-5xl">
+
+                      <p className="mb-2 text-center text-[9px] font-bold uppercase tracking-[0.25em] text-[#E21B12]">
+                        02 / Find Your Role
+                      </p>
+
+                      <h2 className="text-center text-2xl font-black uppercase tracking-tight sm:text-3xl">
+                        Team Roles
+                      </h2>
+
+                      <div className="mx-auto mt-4 h-1 w-10 bg-[#E21B12]" />
+
+                      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+                        {[
+                          [
+                            "01",
+                            "Operations Executive",
+                            "Coordinating logistics, obtaining permissions, and managing documentation of operations and events.",
+                          ],
+                          [
+                            "02",
+                            "Events & Marketing Executive",
+                            "Planning and organizing events, as well as promoting and marketing them.",
+                          ],
+                          [
+                            "03",
+                            "Corporate Relations Executive",
+                            "Managing sponsorships and building funding partnerships with companies.",
+                          ],
+                          [
+                            "04",
+                            "Tech Executive",
+                            "Developing and maintaining websites, and planning designs and strategies for development.",
+                          ],
+                          [
+                            "05",
+                            "Design & Media Executive",
+                            "Planning and managing media posts, creating designs, and growing social media reach.",
+                          ],
+                        ].map(([number, title, description]) => (
+                          <div
+                            key={number}
+                            className="rounded-xl border border-[#DDDAD2] bg-[#F7F5EF] p-5"
+                          >
+                            <span className="text-[9px] font-bold tracking-widest text-[#999791]">
+                              {number}
+                            </span>
+
+                            <h3 className="mt-4 text-base font-black uppercase leading-tight">
+                              {title}
+                            </h3>
+
+                            <div className="mt-3 h-0.5 w-8 bg-[#E21B12]" />
+
+                            <p className="mt-3 text-xs leading-relaxed text-[#77756F]">
+                              {description}
+                            </p>
+                          </div>
+                        ))}
+
+                      </div>
+
+                    </div>
+
+                  </Step>
+
+
+                  {/* ================= INSTRUCTIONS ================= */}
+                  <div className="mx-auto my-8 max-w-4xl overflow-hidden rounded-[24px] border border-[#DDDAD2] bg-white shadow-[0_8px_30px_rgba(17,17,17,0.04)]">
+
+  {/* HEADER */}
+  <div className="flex items-center justify-between border-b border-[#E5E2DA] px-5 py-5 sm:px-7">
+
+    <div className="flex items-center gap-3">
+      <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+
+      <p className="text-[10px] font-black uppercase tracking-[0.25em] text-[#111111]">
+        Before You Apply
+      </p>
+    </div>
+
+    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#AAA69D]">
+      Important
+    </span>
+
+  </div>
+
+
+  {/* INSTRUCTIONS */}
+  <div className="p-5 sm:p-7">
+
+    <div className="space-y-3">
+
+      {/* 01 */}
+      <div className="flex gap-4 rounded-2xl border border-[#E5E2DA] bg-[#F7F5EF] p-4 transition-all duration-300 hover:border-[#C8C5BC]">
+
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#111111] text-[9px] font-black text-white">
+          01
+        </span>
+
+        <p className="pt-1 text-xs leading-5 text-[#55534E]">
+          Fill in all required fields marked with{" "}
+          <span className="font-black text-[#E21B12]">*</span>.
+        </p>
+
+      </div>
+
+
+      {/* 02 */}
+      <div className="flex gap-4 rounded-2xl border border-[#E5E2DA] bg-[#F7F5EF] p-4 transition-all duration-300 hover:border-[#C8C5BC]">
+
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#111111] text-[9px] font-black text-white">
+          02
+        </span>
+
+        <p className="pt-1 text-xs leading-5 text-[#55534E]">
+          Double-check your name, USN, Team Role and Mobile Number.
+        </p>
+
+      </div>
+
+
+      {/* 03 */}
+      <div className="flex gap-4 rounded-2xl border border-[#E5E2DA] bg-[#F7F5EF] p-4 transition-all duration-300 hover:border-[#C8C5BC]">
+
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#111111] text-[9px] font-black text-white">
+          03
+        </span>
+
+        <p className="pt-1 text-xs leading-5 text-[#55534E]">
+          Answer all questions honestly and thoughtfully.
+        </p>
+
+      </div>
+
+
+      {/* 04 */}
+      <div className="flex gap-4 rounded-2xl border border-[#E5E2DA] bg-[#F7F5EF] p-4 transition-all duration-300 hover:border-[#C8C5BC]">
+
+        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#111111] text-[9px] font-black text-white">
+          04
+        </span>
+
+        <p className="pt-1 text-xs leading-5 text-[#55534E]">
+          Once submitted, you will not be able to edit your responses.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    {/* CONTACT */}
+    <div className="mt-5 grid gap-3 sm:grid-cols-2">
+
+      {/* EMAIL */}
+      <a
+        href="mailto:ecell.smvit@gmail.com"
+        className="group flex items-center justify-between rounded-2xl bg-[#111111] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+
+        <div>
+          <p className="mb-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#777777]">
+            Need Help?
+          </p>
+
+          <p className="text-xs font-bold text-white">
+            ecellsmvit@gmail.com
+          </p>
+        </div>
+
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E21B12] text-xs text-white transition-transform duration-300 group-hover:rotate-45">
+          ↗
+        </span>
+
+      </a>
+
+
+      {/* WHATSAPP */}
+      <a
+        href="https://wa.me/917903897660"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group flex items-center justify-between rounded-2xl bg-[#111111] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+      >
+
+        <div>
+          <p className="mb-1 text-[8px] font-bold uppercase tracking-[0.2em] text-[#777777]">
+            WhatsApp
+          </p>
+
+          <p className="text-xs font-bold text-white">
+            +91 7903897660
+          </p>
+        </div>
+
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E21B12] text-xs text-white transition-transform duration-300 group-hover:rotate-45">
+          ↗
+        </span>
+
+      </a>
+
+    </div>
+
+  </div>
+
+
+  {/* BOTTOM ACCENT */}
+  <div className="h-1 w-full bg-[#E21B12]" />
+
+</div>
+
+
+                  <Step>
+                    <div className="w-full rounded-[30px] border border-[#DDDAD2] bg-white p-5 shadow-[0_10px_40px_rgba(17,17,17,0.04)] sm:p-8 lg:p-10">
+
+                      {/* HEADER */}
+                      <div className="mb-10 border-b border-[#E5E2DA] pb-8">
+
+                        <div className="mb-5 flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+
+                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#999999]">
+                              E-Cell SMVIT
+                            </span>
+                          </div>
+
+                          <span className="text-[10px] font-bold tracking-[0.2em] text-[#B0ADA5]">
+                            04 / 05
+                          </span>
+                        </div>
+
+                        <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-[#111111] sm:text-5xl lg:text-6xl">
+                          Personal
+                          <br />
+                          <span className="text-[#E21B12]">Details</span>
+                        </h2>
+
+                        <div className="mt-6">
+                          <p className="max-w-xl text-sm leading-6 text-[#77756F]">
+                            Tell us a little about yourself before we get to know
+                            your ideas and experiences.
+                          </p>
+                        </div>
+                      </div>
+
+
+                      {/* PERSONAL DETAILS */}
+                      <div>
+
+                        <div className="mb-6 flex items-center gap-3">
+                          <span className="text-[10px] font-black text-[#E21B12]">
+                            01
+                          </span>
+
+                          <h3 className="text-xs font-black uppercase tracking-[0.18em]">
+                            Basic Information
+                          </h3>
+
+                          <div className="h-px flex-1 bg-[#E5E2DA]" />
+                        </div>
+
+
+                        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+
+                          {/* NAME */}
+                          <div>
+                            <label
+                              htmlFor="name"
+                              className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-[#333333]"
+                            >
+                              Name
+                              <span className="ml-1 text-[#E21B12]">*</span>
+                            </label>
+
+                            <input
+                              id="name"
+                              type="text"
+                              value={name}
+                              onChange={(e) => setName(e.target.value)}
+                              placeholder="Enter your full name"
+                              className="w-full rounded-2xl border border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-sm text-[#111111] outline-none transition-all duration-200 placeholder:text-[#AAA69D] hover:border-[#C8C5BC] focus:border-[#E21B12] focus:bg-white focus:ring-4 focus:ring-[#E21B12]/5"
+                              autoComplete="off"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+                          </div>
+
+
+                          {/* USN */}
+                          <div>
+                            <label
+                              htmlFor="usn"
+                              className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-[#333333]"
+                            >
+                              USN
+                              <span className="ml-1 text-[#E21B12]">*</span>
+                            </label>
+
+                            <input
+                              id="usn"
+                              type="text"
+                              value={usn}
+                              onChange={(e) => setUsn(e.target.value)}
+                              placeholder="Enter your USN"
+                              className="w-full rounded-2xl border border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-sm text-[#111111] outline-none transition-all duration-200 placeholder:text-[#AAA69D] hover:border-[#C8C5BC] focus:border-[#E21B12] focus:bg-white focus:ring-4 focus:ring-[#E21B12]/5"
+                              autoComplete="off"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+                          </div>
+
+
+                          {/* MOBILE */}
+                          <div>
+                            <label
+                              htmlFor="mobilenumber"
+                              className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-[#333333]"
+                            >
+                              Mobile Number
+                              <span className="ml-1 text-[#E21B12]">*</span>
+                            </label>
+
+                            <input
+                              id="mobilenumber"
+                              type="text"
+                              value={mobilenumber}
+                              onChange={(e) => setMobilenumber(e.target.value)}
+                              placeholder="Enter your mobile number"
+                              className="w-full rounded-2xl border border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-sm text-[#111111] outline-none transition-all duration-200 placeholder:text-[#AAA69D] hover:border-[#C8C5BC] focus:border-[#E21B12] focus:bg-white focus:ring-4 focus:ring-[#E21B12]/5"
+                              autoComplete="off"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+                          </div>
+
+
+                          {/* TEAM ROLE */}
+                          <div>
+                            <label
+                              htmlFor="teamrole"
+                              className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-[#333333]"
+                            >
+                              Team Role
+                              <span className="ml-1 text-[#E21B12]">*</span>
+                            </label>
+
+                            <select
+                              id="teamrole"
+                              value={teamrole}
+                              onChange={(e) => setTeamrole(e.target.value)}
+                              className="w-full appearance-none rounded-2xl border border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-sm text-[#111111] outline-none transition-all duration-200 hover:border-[#C8C5BC] focus:border-[#E21B12] focus:bg-white focus:ring-4 focus:ring-[#E21B12]/5"
+                              autoComplete="off"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            >
+                              <option value="">Select Team Role</option>
+
+                              <option value="operations_executive">
+                                Operations Executive
+                              </option>
+
+                              <option value="eventsandmarketing_executive">
+                                Events and Marketing Executive
+                              </option>
+
+                              <option value="corporate_executive">
+                                Corporate Executive
+                              </option>
+
+                              <option value="tech_executive">
+                                Tech Executive
+                              </option>
+
+                              <option value="designandmedia_executive">
+                                Design and Media Executive
+                              </option>
+                            </select>
+                          </div>
+
+                        </div>
+                      </div>
+
+
+                      {/* PROFESSIONAL */}
+                      <div className="mt-10">
+
+                        <div className="mb-6 flex items-center gap-3">
+                          <span className="text-[10px] font-black text-[#E21B12]">
+                            02
+                          </span>
+
+                          <h3 className="text-xs font-black uppercase tracking-[0.18em]">
+                            Professional Profile
+                          </h3>
+
+                          <div className="h-px flex-1 bg-[#E5E2DA]" />
+                        </div>
+
+
+                        <label
+                          htmlFor="linkedin"
+                          className="mb-2 block text-[11px] font-bold uppercase tracking-wide text-[#333333]"
+                        >
                           LinkedIn Profile URL
-                          <span className="ml-1 text-gray-400">(optional)</span>
+
+                          <span className="ml-2 text-[10px] font-normal normal-case text-[#999999]">
+                            Optional
+                          </span>
                         </label>
+
                         <input
                           id="linkedin"
                           type="url"
                           value={linkedin}
                           onChange={(e) => setLinkedin(e.target.value)}
                           placeholder="https://www.linkedin.com/in/your-profile"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
+                          className="w-full rounded-2xl border border-[#DDDAD2] bg-[#F7F5EF] px-4 py-4 text-sm text-[#111111] outline-none transition-all duration-200 placeholder:text-[#AAA69D] hover:border-[#C8C5BC] focus:border-[#E21B12] focus:bg-white focus:ring-4 focus:ring-[#E21B12]/5"
                         />
-                      </div>
-                    </div>
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q1">
-                          Why do you want to join the E-Cell, and what do you hope to contribute to our entrepreneurial community?
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <textarea
-                          id="q1"
-                          value={q1}
-                          onChange={(e) => setQ1(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q2">
-                          Do you have any prior experience in startups, entrepreneurship, or event management? Please elaborate.
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <textarea
-                          id="q2"
-                          value={q2}
-                          onChange={(e) => setQ2(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
-                      </div>
-                    </div>
 
-                    <div className="flex flex-col gap-4 md:flex-row md:gap-4">
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q3">
-                        If you were given the opportunity to lead one new event, workshop, or project for E-Cell, what would it be and what value would it bring to the student community?
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <textarea
-                          id="q3"
-                          value={q3}
-                          onChange={(e) => setQ3(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
                       </div>
-                      <div className="flex-1">
-                        <label className="block mb-1 font-semibold text-black" htmlFor="q4">
-                        Describe a student-run startup you would launch to solve a specific problem on our campus. What is the problem, and how would your startup specifically help fellow students?
-                          <span className="ml-1 text-red-500">*</span>
-                        </label>
-                        <textarea
-                          id="q4"
-                          value={q4}
-                          onChange={(e) => setQ4(e.target.value)}
-                          placeholder="Your answer"
-                          className="px-3 py-2 w-full text-black bg-gray-200 rounded"
-                          rows={3}
-                          autoComplete="off"
-                          onCopy={e => e.preventDefault()}
-                          onCut={e => e.preventDefault()}
-                          onPaste={e => e.preventDefault()}
-                        />
+
+
+                      {/* INFO */}
+                      <div className="mt-8 flex items-start gap-3 rounded-2xl bg-[#111111] p-5">
+
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E21B12] text-xs font-black text-white">
+                          →
+                        </span>
+
+                        <p className="text-xs leading-5 text-[#999999]">
+                          Make sure your personal information is accurate before
+                          moving to the next step.
+                        </p>
+
+                      </div>
+
+                    </div>
+                  </Step>
+                  <Step>
+                    <div className="w-full rounded-[30px] border border-[#DDDAD2] bg-white p-5 shadow-[0_10px_40px_rgba(17,17,17,0.04)] sm:p-8 lg:p-10">
+                      <div className="mb-10 border-b border-[#E5E2DA] pb-8">
+                        <div className="mb-5 flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+                            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-[#999999]">
+                              E-Cell SMVIT
+                            </span>
+                          </div>
+                          <span className="text-[10px] font-bold tracking-[0.2em] text-[#B0ADA5]">
+                            05 / 05
+                          </span>
+                        </div>
+                        <h2 className="text-4xl font-black uppercase leading-[0.9] tracking-[-0.05em] text-[#111111] sm:text-5xl lg:text-6xl">
+                          Question
+                          <br />
+                          <span className="text-[#E21B12]">& Answer</span>
+                        </h2>
+                        <div className="mt-6">
+                          <p className="max-w-xl text-sm leading-6 text-[#77756F]">
+                            This is your chance to show us how you think, create,
+                            and contribute.
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="mb-6 flex items-center gap-3">
+                          <span className="text-[10px] font-black text-[#E21B12]">
+                            01
+                          </span>
+                          <h3 className="text-xs font-black uppercase tracking-[0.18em]">
+                            Your Perspective
+                          </h3>
+                          <div className="h-px flex-1 bg-[#E5E2DA]" />
+                        </div>
+                        <div className="space-y-5">
+                          <div className="rounded-[22px] border border-[#DDDAD2] bg-[#F7F5EF] p-5 sm:p-6">
+                            <div className="mb-4 flex gap-4">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#111111] text-xs font-black text-white">
+                                01
+                              </div>
+                              <label
+                                htmlFor="q1"
+                                className="pt-1 text-sm font-bold leading-6 text-[#111111]"
+                              >
+                                Why do you want to join the E-Cell, and what do you
+                                hope to contribute to our entrepreneurial community?
+
+                                <span className="ml-1 text-[#E21B12]">
+                                  *
+                                </span>
+                              </label>
+
+                            </div>
+
+
+                            <textarea
+                              id="q1"
+                              value={q1}
+                              onChange={(e) => setQ1(e.target.value)}
+                              placeholder="Share your motivation and what you would like to contribute..."
+                              rows={5}
+                              autoComplete="off"
+                              className="w-full resize-y rounded-2xl border border-[#DDDAD2] bg-white px-4 py-4 text-sm leading-6 text-[#111111] outline-none transition-all placeholder:text-[#AAA69D] focus:border-[#E21B12] focus:ring-4 focus:ring-[#E21B12]/5"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+
+                          </div>
+                          <div className="rounded-[22px] border border-[#DDDAD2] bg-[#F7F5EF] p-5 sm:p-6">
+                            <div className="mb-4 flex gap-4">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#111111] text-xs font-black text-white">
+                                02
+                              </div>
+                              <label
+                                htmlFor="q2"
+                                className="pt-1 text-sm font-bold leading-6 text-[#111111]"
+                              >
+                                Do you have any prior experience in startups,
+                                entrepreneurship, or event management? Please
+                                elaborate.
+
+                                <span className="ml-1 text-[#E21B12]">
+                                  *
+                                </span>
+                              </label>
+
+                            </div>
+                            <textarea
+                              id="q2"
+                              value={q2}
+                              onChange={(e) => setQ2(e.target.value)}
+                              placeholder="Tell us about your experience..."
+                              rows={5}
+                              autoComplete="off"
+                              className="w-full resize-y rounded-2xl border border-[#DDDAD2] bg-white px-4 py-4 text-sm leading-6 text-[#111111] outline-none transition-all placeholder:text-[#AAA69D] focus:border-[#E21B12] focus:ring-4 focus:ring-[#E21B12]/5"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+                          </div>
+                          <div className="rounded-[22px] border border-[#DDDAD2] bg-[#F7F5EF] p-5 sm:p-6">
+                            <div className="mb-4 flex gap-4">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#111111] text-xs font-black text-white">
+                                03
+                              </div>
+                              <label
+                                htmlFor="q3"
+                                className="pt-1 text-sm font-bold leading-6 text-[#111111]"
+                              >
+                                If you were given the opportunity to lead one new
+                                event, workshop, or project for E-Cell, what would it
+                                be and what value would it bring to the student
+                                community?
+                                <span className="ml-1 text-[#E21B12]">
+                                  *
+                                </span>
+                              </label>
+                            </div>
+                            <textarea
+                              id="q3"
+                              value={q3}
+                              onChange={(e) => setQ3(e.target.value)}
+                              placeholder="Describe your idea..."
+                              rows={5}
+                              autoComplete="off"
+                              className="w-full resize-y rounded-2xl border border-[#DDDAD2] bg-white px-4 py-4 text-sm leading-6 text-[#111111] outline-none transition-all placeholder:text-[#AAA69D] focus:border-[#E21B12] focus:ring-4 focus:ring-[#E21B12]/5"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+
+                          </div>
+                          <div className="rounded-[22px] border border-[#DDDAD2] bg-[#F7F5EF] p-5 sm:p-6">
+                            <div className="mb-4 flex gap-4">
+                              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#111111] text-xs font-black text-white">
+                                04
+                              </div>
+                              <label
+                                htmlFor="q4"
+                                className="pt-1 text-sm font-bold leading-6 text-[#111111]"
+                              >
+                                Describe a student-run startup you would launch to
+                                solve a specific problem on our campus. What is the
+                                problem, and how would your startup specifically help
+                                fellow students?
+                                <span className="ml-1 text-[#E21B12]">
+                                  *
+                                </span>
+                              </label>
+                            </div>
+                            <textarea
+                              id="q4"
+                              value={q4}
+                              onChange={(e) => setQ4(e.target.value)}
+                              placeholder="Describe the problem and your startup idea..."
+                              rows={5}
+                              autoComplete="off"
+                              className="w-full resize-y rounded-2xl border border-[#DDDAD2] bg-white px-4 py-4 text-sm leading-6 text-[#111111] outline-none transition-all placeholder:text-[#AAA69D] focus:border-[#E21B12] focus:ring-4 focus:ring-[#E21B12]/5"
+                              onCopy={(e) => e.preventDefault()}
+                              onCut={(e) => e.preventDefault()}
+                              onPaste={(e) => e.preventDefault()}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-8 rounded-2xl bg-[#111111] p-5 sm:p-6">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E21B12] text-sm font-black text-white">
+                            !
+                          </div>
+                          <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.15em] text-white">
+                              Final Step
+                            </p>
+                            <p className="mt-2 text-xs leading-5 text-[#999999]">
+                              Review your answers carefully. Once submitted, your
+                              responses cannot be edited.
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </form>
-                </Step>
-              </Stepper>
+                  </Step>
+                </Stepper>
+              </div>
             </div>
           </div>
         )}
@@ -398,5 +861,4 @@ function Recruitment() {
     </div>
   )
 }
-
 export default Recruitment

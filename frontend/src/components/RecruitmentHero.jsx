@@ -16,7 +16,7 @@ const RecruitmentHero = () => {
           </div>
 
           <div className="hidden items-center gap-3 sm:flex">
-            <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+            <span className="h-2 w-2 rounded-full bg-[#6D4CFF]" />
 
             <span className="text-[10px] font-semibold tracking-[0.2em] text-[#92908B]">
               SMVIT
@@ -66,8 +66,8 @@ const RecruitmentHero = () => {
 
         <div className="text-center">
           <h1 className="text-[17vw] font-black uppercase leading-[0.78] tracking-[-0.06em] sm:text-[9vw]">
-            <span className="text-[#E21B12]">
-              E-CELL
+            <span className="text-[#6D4CFF]">
+              E-CELL SMVIT
             </span>
           </h1>
           <h2 className="mt-2 text-[12vw] font-black uppercase leading-[0.82] tracking-[-0.06em] sm:mt-1 sm:text-[7.5vw]">
@@ -81,7 +81,7 @@ const RecruitmentHero = () => {
             Join E-Cell SMVIT and turn your ideas into reality.
           </p>
           <SignInButton>
-            <button className="group flex items-center gap-3 rounded-full bg-black px-5 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-[#E21B12]">
+            <button className="group flex items-center gap-3 rounded-full bg-black px-5 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-[#6D4CFF]">
               Join Our Team
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform group-hover:rotate-45">
                 <ArrowUpRight size={13} />
@@ -98,7 +98,7 @@ const RecruitmentHero = () => {
             <p className="mt-5 text-xl font-black">
               IDEATE.
             </p>
-            <div className="mt-2 h-0.5 w-8 bg-[#E21B12]" />
+            <div className="mt-2 h-0.5 w-8 bg-[#6D4CFF]" />
           </div>
           <div className="hidden h-32 w-48 rotate-2 rounded-2xl bg-black p-5 text-white sm:block">
             <p className="text-[8px] font-bold tracking-widest text-[#777]">
@@ -108,7 +108,7 @@ const RecruitmentHero = () => {
               CREATE.
             </p>
           </div>
-          <div className="relative h-36 w-64 rounded-2xl bg-[#E21B12] p-5 text-white shadow-lg sm:h-40 sm:w-72">
+          <div className="relative h-36 w-64 rounded-2xl bg-[#6D4CFF] p-5 text-white shadow-lg sm:h-40 sm:w-72">
             <div className="flex items-start justify-between">
               <p className="text-[8px] font-bold tracking-widest">
                 E-CELL SMVIT
@@ -141,7 +141,7 @@ const RecruitmentHero = () => {
             <p className="mt-5 text-xl font-black">
               LEAD.
             </p>
-            <div className="mt-2 h-0.5 w-8 bg-[#E21B12]" />
+            <div className="mt-2 h-0.5 w-8 bg-[#6D4CFF]" />
           </div>
         </div>
       </div>

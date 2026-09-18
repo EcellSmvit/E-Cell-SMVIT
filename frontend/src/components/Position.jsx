@@ -79,7 +79,7 @@ function Position() {
       <div className="mx-auto max-w-6xl">
 
         <div className="mb-4 flex items-center gap-3">
-          <span className="h-2 w-2 rounded-full bg-[#E21B12]" />
+          <span className="h-2 w-2 rounded-full bg-[#6D4CFF]" />
 
           <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#8C8A85]">
             Find Your Place
@@ -90,7 +90,7 @@ function Position() {
 
           <h1 className="max-w-3xl text-5xl font-black uppercase leading-[0.9] tracking-[-0.05em] sm:text-6xl md:text-7xl">
             Team{" "}
-            <span className="text-[#E21B12]">
+            <span className="text-[#6D4CFF]">
               Roles
             </span>
           </h1>
@@ -128,7 +128,7 @@ function Position() {
                     {role.number}
                   </span>
 
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F2F0EA] transition-all duration-300 group-hover:bg-[#E21B12] group-hover:text-white">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F2F0EA] transition-all duration-300 group-hover:bg-[#6D4CFF] group-hover:text-white">
                     <Icon size={18} strokeWidth={1.8} />
                   </div>
 
@@ -140,40 +140,28 @@ function Position() {
                   {role.title}
                 </h2>
 
-                <div className="mt-4 h-1 w-10 bg-[#E21B12]" />
+                <div className="mt-4 h-1 w-10 bg-[#6D4CFF]" />
 
                 <p className="mt-5 text-sm leading-relaxed text-[#686762]">
                   {role.short}
                 </p>
-
               </div>
-
-
-              {/* Responsibilities */}
               <div className="mt-8 border-t border-[#E5E2DA] pt-5">
-
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-[0.2em] text-[#999791]">
                   What You'll Do
                 </p>
-
                 <ul className="space-y-2.5">
-
                   {role.responsibilities.map((item, index) => (
                     <li
                       key={index}
                       className="flex items-start gap-2 text-xs font-medium leading-relaxed text-[#44433F]"
                     >
-                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#E21B12]" />
+                      <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-[#6D4CFF]" />
                       {item}
                     </li>
                   ))}
-
                 </ul>
-
               </div>
-
-
-              {/* Hover Arrow */}
               <div className="absolute bottom-6 right-6 flex h-9 w-9 items-center justify-center rounded-full border border-[#DDDAD2] opacity-0 transition-all duration-300 group-hover:opacity-100">
                 <ArrowUpRight size={15} />
               </div>
@@ -183,9 +171,6 @@ function Position() {
         })}
 
       </div>
-
-
-      {/* ================= BOTTOM MESSAGE ================= */}
       <div className="mx-auto mt-12 max-w-6xl">
 
         <div className="flex flex-col items-start justify-between gap-5 rounded-2xl bg-[#111111] p-6 text-white sm:flex-row sm:items-center sm:p-8">
@@ -200,20 +185,15 @@ function Position() {
             </p>
           </div>
 
-          <button className="group flex items-center gap-3 rounded-full bg-[#E21B12] px-5 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black">
+          <button className="group flex items-center gap-3 rounded-full bg-[#6D4CFF] px-5 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black">
 
             Apply Now
-
             <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white text-black transition-transform group-hover:rotate-45">
               <ArrowUpRight size={13} />
             </span>
-
           </button>
-
         </div>
-
       </div>
-
     </section>
   );
 }

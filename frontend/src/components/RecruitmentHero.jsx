@@ -31,7 +31,7 @@ const RecruitmentHero = () => {
             HOME
           </a>
           <a
-            href="/about"
+            href="https://www.ecellsmvit.in/"
             className="rounded-full px-7 py-2.5 text-[10px] font-bold tracking-wide text-black transition hover:bg-white"
           >
             ABOUT
@@ -42,13 +42,13 @@ const RecruitmentHero = () => {
             ecellsmvit@gmail.com
           </span>
           <a
-            href="#"
+            href="https://www.ecellsmvit.in/"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[#DDDAD2] text-xs transition hover:bg-black hover:text-white"
           >
             <ArrowUpRight size={14} />
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/company/e-cell-sirmvit"
             className="flex h-10 w-10 items-center justify-center rounded-full border border-[#DDDAD2] text-[10px] font-semibold transition hover:bg-black hover:text-white"
           >
             in

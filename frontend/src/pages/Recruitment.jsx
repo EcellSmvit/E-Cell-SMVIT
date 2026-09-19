@@ -428,7 +428,7 @@ function Recruitment() {
                           </span>
                         </a>
                         <a
-                          href="https://wa.me/917903897660"
+                          href="https://wa.me/917338620007"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="group flex items-center justify-between rounded-2xl bg-[#111111] px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
@@ -438,7 +438,7 @@ function Recruitment() {
                               WhatsApp
                             </p>
                             <p className="text-xs font-bold text-white">
-                              +91 7903897660
+                              +91 7338620007
                             </p>
                           </div>
                           <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#6D4CFF] text-xs text-white transition-transform duration-300 group-hover:rotate-45">

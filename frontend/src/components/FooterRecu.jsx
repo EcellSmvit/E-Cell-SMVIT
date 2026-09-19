@@ -55,7 +55,7 @@ function FooterRecu() {
               Contact
             </a>
             <a
-              href="https://ecellsmvit.in"
+              href="https://www.ecellsmvit.in/"
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-2 text-xs font-semibold text-[#111111]"

@@ -7,6 +7,7 @@ import {
   Handshake,
   Palette,
 } from "lucide-react";
+import { SignInButton } from "@clerk/clerk-react";
 
 const positions = [
   {
@@ -184,7 +185,7 @@ function Position() {
               Your skills can create something bigger.
             </p>
           </div>
-
+          <SignInButton>
           <button className="group flex items-center gap-3 rounded-full bg-[#6D4CFF] px-5 py-2.5 text-[10px] font-bold uppercase tracking-wide text-white transition hover:bg-white hover:text-black">
 
             Apply Now
@@ -192,6 +193,7 @@ function Position() {
               <ArrowUpRight size={13} />
             </span>
           </button>
+          </SignInButton>
         </div>
       </div>
     </section>

@@ -41,7 +41,7 @@ const events = [
     name: "Startup Mela",
     description:
       "An entrepreneurship-focused platform where aspiring founders showcase their ideas, connect with fellow innovators, and gain valuable exposure.",
-    image: "https://ik.imagekit.io/es6xialea/501817145_18007795895755800_8048588466809766982_n.jpg?updatedAt=1759420800204",
+    image: "https://ik.imagekit.io/es6xialea/imgi_53_671218042_18045970802755800_3167397527092518767_n.webp",
   },
 ];
 

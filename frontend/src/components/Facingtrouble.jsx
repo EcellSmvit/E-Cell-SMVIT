@@ -58,7 +58,7 @@ function Facingtrouble() {
             </div>
           </a>
           <a
-            href="tel:+917903897660"
+            href="tel:+917338620007"
             className="group flex items-center justify-between rounded-2xl border border-[#292929] bg-white p-5 text-black transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(0,0,0,0.2)] sm:p-6"
           >
             <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ function Facingtrouble() {
                   Call Us
                 </p>
                 <p className="mt-1 text-sm font-bold sm:text-base">
-                  +91 7903897660
+                  +91 7338620007 / +91 7022616061
                 </p>
               </div>
             </div>

@@ -104,7 +104,14 @@ function Recruitment() {
               </p>
             </div>
             <div className="mx-auto w-full h-full max-w-6xl rounded-2xl border border-[#DDDAD2] bg-white p-4 sm:p-8">
-              <div className="text-black">
+              <div
+               onCopy={(e) => e.preventDefault()}
+              onCut={(e) => e.preventDefault()}
+              onPaste={(e) => e.preventDefault()}
+              onContextMenu={(e) => e.preventDefault()}
+              onDrop={(e) => e.preventDefault()}
+              onDragOver={(e) => e.preventDefault()}
+              className="text-black">
                 {isSubmitting && (
                   <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-5 backdrop-blur-sm">
                     <div className="w-full max-w-sm rounded-[28px] bg-white p-8 text-center shadow-2xl">

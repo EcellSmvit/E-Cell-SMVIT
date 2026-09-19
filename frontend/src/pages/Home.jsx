@@ -13,8 +13,6 @@ import Heads from '@/components/PublicSection/Heads';
 import StartupBacked from '@/components/PublicSection/StartupBacked';
 import OurMissionandVision from '@/components/PublicSection/OurMissionandVision';
 import WhyEcell from '@/components/PublicSection/WhyEcell';
-import Stepperform from './Stepperform';
-import { SignedIn } from '@clerk/clerk-react';
 import Cohead from '@/components/PublicSection/Cohead';
 // import OurMissionandVisionpart from '@/components/PublicSection/OurMissionandVisionpart';
 
@@ -23,14 +21,10 @@ import Cohead from '@/components/PublicSection/Cohead';
 function Home() {
   return (
     <div>     
-      {/* <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50 }}>
-        <Navbar />
-      </div> */}
       <ThreeScene />
       <InfinityComponent/>
       <Text/>
       <Section2/>
-      {/* <OurMissionandVisionpart/> */}
       <OurMissionandVision/>
       <StartupBacked/>
       <Heads/>
@@ -38,9 +32,6 @@ function Home() {
       <WhyEcell/>
       <Section6/>
       <Footer/>
-      <SignedIn>
-        <Stepperform/>
-      </SignedIn>
     </div>
     
   )

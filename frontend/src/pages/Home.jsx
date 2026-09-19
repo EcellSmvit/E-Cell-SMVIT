@@ -23,9 +23,9 @@ import Cohead from '@/components/PublicSection/Cohead';
 function Home() {
   return (
     <div>     
-      <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50 }}>
+      {/* <div style={{ position: "fixed", top: 0, left: 0, width: "100%", zIndex: 50 }}>
         <Navbar />
-      </div>
+      </div> */}
       <ThreeScene />
       <InfinityComponent/>
       <Text/>

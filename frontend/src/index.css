@@ -104,3 +104,34 @@ html, body {
     animation: pulse var(--duration, 2s) ease-out infinite;
   }
 }
+
+
+@keyframes background-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(40px, 30px) scale(1.08);
+  }
+}
+
+@keyframes background-float-reverse {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-35px, -25px) scale(1.06);
+  }
+}
+
+.animate-background-float {
+  animation: background-float 12s ease-in-out infinite;
+}
+
+.animate-background-float-reverse {
+  animation: background-float-reverse 15s ease-in-out infinite;
+}

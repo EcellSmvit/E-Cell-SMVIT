@@ -2,8 +2,8 @@ import { databases } from "./appwriteConfig";
 import { ID } from "appwrite";
 import { Query } from "appwrite";
 
-const DATABASE_ID = "68daf89900282089d321";
-const COLLECTION_ID = "ecell_recruitment_data";
+const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
+const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
 
 export const checkIfSubmitted = async (userId) => {
   try {

@@ -14,6 +14,7 @@ import RecruitmentHero from '@/components/RecruitmentHero';
 
 function Recruitment() {
   const { user } = useUser();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [name, setName] = useState('');
   const [mobilenumber, setMobilenumber] = useState('');
@@ -104,6 +105,39 @@ function Recruitment() {
             </div>
             <div className="mx-auto w-full h-full max-w-6xl rounded-2xl border border-[#DDDAD2] bg-white p-4 sm:p-8">
               <div className="text-black">
+                {isSubmitting && (
+                  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-5 backdrop-blur-sm">
+                    <div className="w-full max-w-sm rounded-[28px] bg-white p-8 text-center shadow-2xl">
+
+                      {/* Spinner */}
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#6D4CFF]/10">
+                        <div className="h-8 w-8 animate-spin rounded-full border-4 border-[#DDDAD2] border-t-[#6D4CFF]" />
+                      </div>
+
+                      {/* Text */}
+                      <p className="mt-6 text-[10px] font-black uppercase tracking-[0.3em] text-[#999791]">
+                        Please Wait
+                      </p>
+
+                      <h3 className="mt-2 text-xl font-black uppercase tracking-tight text-[#111111]">
+                        Submitting Your Response
+                      </h3>
+
+                      <p className="mt-3 text-xs leading-5 text-[#77756F]">
+                        Please don't close or refresh this page while we submit your
+                        application.
+                      </p>
+
+                      {/* Progress indication */}
+                      <div className="mt-6 flex items-center justify-center gap-2">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6D4CFF]" />
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6D4CFF] [animation-delay:150ms]" />
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#6D4CFF] [animation-delay:300ms]" />
+                      </div>
+
+                    </div>
+                  </div>
+                )}
                 <Stepper
                   initialStep={1}
                   onStepChange={(step) => setCurrentStep(step)}
@@ -112,6 +146,7 @@ function Recruitment() {
                       toast.warn("Please fill all required fields before submitting.");
                       return;
                     }
+                    setIsSubmitting(true);
                     try {
                       await submitApplication({
                         name,
@@ -131,9 +166,12 @@ function Recruitment() {
                     } catch {
                       toast.error("Error submitting form. Please try again.");
                     }
+                    finally {
+                      setIsSubmitting(false);
+                    }
                   }}
                   nextButtonProps={{
-                    disabled: (currentStep === 5 ? !isFormValid : false),
+                    disabled: isSubmitting || (currentStep === 5 ? !isFormValid : false),
                     style: currentStep === 5 && !isFormValid ? { opacity: 0.5, cursor: "not-allowed", } : {},
                   }}
                   backButtonText="Previous"

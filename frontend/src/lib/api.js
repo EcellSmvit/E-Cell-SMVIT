@@ -6,26 +6,29 @@ const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const COLLECTION_ID = import.meta.env.VITE_APPWRITE_COLLECTION_ID;
 
 export const checkIfSubmitted = async (userId) => {
+  if(!userId){
+    return false;
+  }
   try {
     const response = await databases.listDocuments(
       DATABASE_ID,
       COLLECTION_ID,
       [
-        Query.or([
           Query.equal("userId", userId),
-          Query.equal("filledByUser", userId)
-        ])
       ]
     );
     return response.total > 0;
   } catch (error) {
     console.error("Error checking submission", error);
-    throw error;
+    return false;
   }
 };
 
 export const submitApplication = async (formData) => {
   try {
+    if (!formData.userId) {
+      throw new Error("User is not authenticated.");
+    }
     const alreadySubmitted = await checkIfSubmitted(formData.userId);
     if (alreadySubmitted) {
       throw new Error(

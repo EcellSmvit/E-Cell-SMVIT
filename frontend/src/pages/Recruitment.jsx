@@ -25,7 +25,17 @@ function Recruitment() {
   const [q2, setQ2] = useState('');
   const [q3, setQ3] = useState('');
   const [q4, setQ4] = useState('');
-  const isFormValid = name && teamrole && mobilenumber && usn && q1 && q2 && q3 && q4;
+  const isFormValid =
+    Boolean(
+      name.trim() &&
+      teamrole.trim() &&
+      mobilenumber.trim() &&
+      usn.trim() &&
+      q1.trim() &&
+      q2.trim() &&
+      q3.trim() &&
+      q4.trim()
+    );
   const [currentStep, setCurrentStep] = useState(1);
 
   useEffect(() => {
@@ -105,13 +115,13 @@ function Recruitment() {
             </div>
             <div className="mx-auto w-full h-full max-w-6xl rounded-2xl border border-[#DDDAD2] bg-white p-4 sm:p-8">
               <div
-               onCopy={(e) => e.preventDefault()}
-              onCut={(e) => e.preventDefault()}
-              onPaste={(e) => e.preventDefault()}
-              onContextMenu={(e) => e.preventDefault()}
-              onDrop={(e) => e.preventDefault()}
-              onDragOver={(e) => e.preventDefault()}
-              className="text-black">
+                onCopy={(e) => e.preventDefault()}
+                onCut={(e) => e.preventDefault()}
+                onPaste={(e) => e.preventDefault()}
+                onContextMenu={(e) => e.preventDefault()}
+                onDrop={(e) => e.preventDefault()}
+                onDragOver={(e) => e.preventDefault()}
+                className="text-black">
                 {isSubmitting && (
                   <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-5 backdrop-blur-sm">
                     <div className="w-full max-w-sm rounded-[28px] bg-white p-8 text-center shadow-2xl">
@@ -148,32 +158,61 @@ function Recruitment() {
                 <Stepper
                   initialStep={1}
                   onStepChange={(step) => setCurrentStep(step)}
+
                   onFinalStepCompleted={async () => {
-                    if (!isFormValid) {
-                      toast.warn("Please fill all required fields before submitting.");
+                    if (!user?.id) {
+                      toast.error("User authentication not found. Please login again.");
                       return;
                     }
-                    setIsSubmitting(true);
-                    try {
-                      await submitApplication({
-                        name,
-                        usn,
-                        teamrole,
-                        mobilenumber,
-                        linkedin,
-                        q1,
-                        q2,
-                        q3,
-                        q4,
-                        filledByUser: user?.firstName,
-                        userId: user?.id,
-                      });
-                      toast.success("Application submitted successfully!");
-                      setAlreadySubmitted(true);
-                    } catch {
-                      toast.error("Error submitting form. Please try again.");
+
+                    if (!isFormValid) {
+                      toast.warn(
+                        "Please fill all required fields before submitting."
+                      );
+                      return;
                     }
-                    finally {
+
+                    setIsSubmitting(true);
+
+                    const applicationData = {
+                      name: name.trim(),
+                      usn: usn.trim(),
+                      teamrole: teamrole.trim(),
+                      mobilenumber: mobilenumber.trim(),
+                      linkedin: linkedin.trim(),
+                      q1: q1.trim(),
+                      q2: q2.trim(),
+                      q3: q3.trim(),
+                      q4: q4.trim(),
+
+                      // Clerk user information
+                      filledByUser: user.firstName || user.username || "",
+                      userId: user.id,
+                    };
+
+                    console.log("🚀 FINAL APPLICATION DATA:", applicationData);
+
+                    try {
+                      await submitApplication(applicationData);
+
+                      toast.success(
+                        "Application submitted successfully!"
+                      );
+
+                      setAlreadySubmitted(true);
+
+                    } catch (error) {
+                      console.error(
+                        "❌ Final submission error:",
+                        error
+                      );
+
+                      toast.error(
+                        error?.message ||
+                        "Error submitting form. Please try again."
+                      );
+
+                    } finally {
                       setIsSubmitting(false);
                     }
                   }}

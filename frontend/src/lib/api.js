@@ -89,6 +89,7 @@ export const getApplicationStatus = async (userId) => {
     return {
       name: application.name || "",
       selected: application.selected === true,
+      selectionStatus: application.selectionStatus || "pending",
       department: application.department || "",
     };
 

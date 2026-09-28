@@ -5,6 +5,7 @@ import { useUser } from "@clerk/clerk-react";
 import { getTaskById } from "../lib/tasksApi";
 import {
   getUserSubmission,
+  getRecruitmentApplicant,
   submitTask,
 } from "../lib/submissionApi";
 
@@ -18,6 +19,7 @@ const TaskDetails = () => {
 
   const [task, setTask] = useState(null);
   const [submission, setSubmission] = useState(null);
+  const [applicant, setApplicant] = useState(null);
 
   const [githubUrl, setGithubUrl] = useState("");
   const [description, setDescription] = useState("");
@@ -42,12 +44,14 @@ const TaskDetails = () => {
 
         setTask(taskData);
 
-        const existingSubmission = await getUserSubmission(
-          taskId,
-          user.id
-        );
+        const [existingSubmission, applicantData] =
+          await Promise.all([
+            getUserSubmission(taskId, user.id),
+            getRecruitmentApplicant(user.id),
+          ]);
 
         setSubmission(existingSubmission);
+        setApplicant(applicantData);
       } catch (error) {
         console.error("TASK DETAILS ERROR:", error);
         setError("Unable to load task.");
@@ -86,9 +90,19 @@ const TaskDetails = () => {
     try {
       setSubmitting(true);
 
+      if (!applicant) {
+        setError(
+          "Your recruitment application details could not be found."
+        );
+        return;
+      }
+
       const result = await submitTask({
         taskId,
         userId: user.id,
+        name: applicant.name || user.fullName || user.firstName || "",
+        usn: applicant.usn || "",
+        mobilenumber: applicant.mobilenumber || "",
         githubUrl: githubUrl.trim(),
         description: description.trim(),
       });

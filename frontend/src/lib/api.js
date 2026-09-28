@@ -65,3 +65,39 @@ export const submitApplication = async (formData) => {
     throw error;
   }
 };
+
+export const getApplicationStatus = async (userId) => {
+  if (!userId) {
+    return null;
+  }
+
+  try {
+    const response = await databases.listDocuments(
+      DATABASE_ID,
+      COLLECTION_ID,
+      [
+        Query.equal("userId", userId),
+      ]
+    );
+
+    if (response.documents.length === 0) {
+      return null;
+    }
+
+    const application = response.documents[0];
+
+    return {
+      name: application.name || "",
+      selected: application.selected === true,
+      department: application.department || "",
+    };
+
+  } catch (error) {
+    console.error(
+      "Error fetching application status:",
+      error
+    );
+
+    throw error;
+  }
+};

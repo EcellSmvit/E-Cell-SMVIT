@@ -79,20 +79,36 @@ function Recruitment() {
           <UserButton />
         </div>
         {alreadySubmitted ? (
-          <div className="flex min-h-[85vh] w-full flex-col items-center justify-center bg-[#F7F5EF] px-5 text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#6D4CFF] text-2xl text-white">
-              ✓
+          <div className="flex min-h-[70vh] items-center justify-center px-5">
+            <div className="max-w-2xl text-center">
+
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#999791]">
+                Recruitment 2026
+              </p>
+
+              <h1 className="mt-5 text-4xl font-black uppercase sm:text-6xl">
+                Application
+                <br />
+                <span className="text-[#6D4CFF]">
+                  Submitted.
+                </span>
+              </h1>
+
+              <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-[#77756F]">
+                Our team will review your application.
+                Thank you for applying to E-Cell SMVIT.
+              </p>
+
+              <button
+                onClick={() => {
+                  window.location.href = "/recruitment/task";
+                }}
+                className="mt-8 rounded-2xl bg-[#6D4CFF] px-7 py-4 text-sm font-black uppercase tracking-wide text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                Check Selection Status →
+              </button>
+
             </div>
-            <p className="mt-6 text-[10px] font-bold uppercase tracking-[0.3em] text-[#999791]">
-              Application Received
-            </p>
-            <h1 className="mt-3 max-w-2xl text-4xl font-black uppercase leading-[0.95] tracking-[-0.04em] sm:text-6xl">
-              Application
-              <span className="text-[#6D4CFF]"> Submitted.</span>
-            </h1>
-            <p className="mt-5 max-w-md text-sm leading-relaxed text-[#77756F]">
-              Our team will contact you soon. Thank you for applying to E-Cell SMVIT.
-            </p>
           </div>
         ) : (
           <div className="min-h-[100vh] bg-[#F7F5EF] px-4 py-8 text-black sm:px-8 sm:py-12">

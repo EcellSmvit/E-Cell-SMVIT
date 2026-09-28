@@ -6,10 +6,11 @@ import 'react-toastify/dist/ReactToastify.css'
 import Ouralumni from './pages/Ouralumni'
 import Recruitment from './pages/Recruitment'
 import MeetOurTeam from './pages/MeetOurTeam'
-import Recruitmentdemo from './pages/Recruitmentdemo'
 import NewMeetOurTeam from './pages/NewMeetOurTeam'
 import StarPitch from './pages/Starpitch'
-
+import Tasks from "./pages/Tasks";
+import TaskDetails from "./pages/TaskDetails";
+import RecruitmentTask from "./pages/RecruitmentTask";
 
 const App = () => {
   return (
@@ -20,9 +21,11 @@ const App = () => {
         <Route path='/recruitment' element={<Recruitment />} />
         <Route path='/ourteam' element={<MeetOurTeam />} />
         <Route path='/alumni' element={<Ouralumni />} />
-        <Route path='/recruitmentdemo' element={<Recruitmentdemo/>}/>
         <Route path='/newteam' element={<NewMeetOurTeam/>}/>
         <Route path='/starpitch' element={<StarPitch/>}/>
+        <Route path="/tasks" element={<Tasks />}/>
+        <Route path="/tasks/:taskId" element={<TaskDetails />}/>
+        <Route path="/recruitment/task" element={<RecruitmentTask />}/>
       </Routes>
     </BrowserRouter>
   )

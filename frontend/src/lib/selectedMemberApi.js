@@ -5,22 +5,16 @@ const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
 const RECRUITMENT_TABLE_ID =import.meta.env.VITE_APPWRITE_RECRUITMENT_TABLE_ID;
 
 export const getSelectedMember = async (userId) => {
+  if (!userId) return null;
+
   const response = await databases.listDocuments(
     DATABASE_ID,
     RECRUITMENT_TABLE_ID,
     [
       Query.equal("userId", userId),
+      Query.equal("selected", true),
     ]
   );
-  if (response.documents.length === 0) {
-    return null;
-  }
-  const member = response.documents[0];
-  if (
-    member.selected !== true &&
-    member.selectionStatus !== "selected"
-  ) {
-    return null;
-  }
-  return member;
+
+  return response.documents[0] || null;
 };

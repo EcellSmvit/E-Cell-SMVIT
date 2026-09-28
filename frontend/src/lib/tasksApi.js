@@ -2,11 +2,12 @@ import { Query } from "appwrite";
 import { databases } from "./appwriteConfig";
 
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
-
 const TASKS_TABLE_ID =
   import.meta.env.VITE_APPWRITE_TASKS_TABLE_ID;
 
 export const getTasksByDepartment = async (department) => {
+  if (!department) return [];
+
   const response = await databases.listDocuments(
     DATABASE_ID,
     TASKS_TABLE_ID,

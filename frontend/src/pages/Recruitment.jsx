@@ -79,38 +79,145 @@ function Recruitment() {
           <UserButton />
         </div>
         {alreadySubmitted ? (
-          <div className="flex min-h-[70vh] items-center justify-center px-5">
-            <div className="max-w-2xl text-center">
+  <div className="min-h-[70vh] flex items-center justify-center bg-[#F7F5EF] px-5">
+  <div className="w-full max-w-2xl text-center">
 
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-[#999791]">
-                Recruitment 2026
-              </p>
+    {/* LABEL */}
+    <div className="flex items-center justify-center gap-3">
+      <span className="h-px w-8 bg-black/20" />
 
-              <h1 className="mt-5 text-4xl font-black uppercase sm:text-6xl">
-                Application
-                <br />
-                <span className="text-[#6D4CFF]">
-                  Submitted.
-                </span>
-              </h1>
+      <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#999791]">
+        Recruitment 2026
+      </p>
 
-              <p className="mx-auto mt-6 max-w-xl text-sm leading-7 text-[#77756F]">
-                Our team will review your application.
-                Thank you for applying to E-Cell SMVIT.
-              </p>
+      <span className="h-px w-8 bg-black/20" />
+    </div>
 
-              <button
-                onClick={() => {
-                  window.location.href = "/recruitment/task";
-                }}
-                className="mt-8 rounded-2xl bg-[#6D4CFF] px-7 py-4 text-sm font-black uppercase tracking-wide text-white transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                Check Selection Status →
-              </button>
 
-            </div>
-          </div>
-        ) : (
+    {/* SUCCESS ICON */}
+    <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-[#6D4CFF]">
+      <span className="text-2xl font-black text-white">
+        ✓
+      </span>
+    </div>
+
+
+    {/* HEADING */}
+    <h1 className="mt-7 text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-black sm:text-7xl">
+      Application
+      <br />
+
+      <span className="text-[#6D4CFF]">
+        Submitted.
+      </span>
+    </h1>
+
+
+    {/* DESCRIPTION */}
+    <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[#77756F] sm:text-base">
+      Your application has been successfully submitted.
+      Our team will review your application and update your
+      selection status.
+    </p>
+
+
+    {/* STATUS */}
+    <div className="mx-auto mt-8 max-w-md rounded-2xl border border-black/10 bg-white/50 p-5">
+
+      <div className="flex items-center justify-between">
+
+        <div className="text-left">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999791]">
+            Application Status
+          </p>
+
+          <p className="mt-1 text-sm font-bold text-black">
+            Successfully Submitted
+          </p>
+        </div>
+
+
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#6D4CFF]/10">
+          <span className="text-sm font-black text-[#6D4CFF]">
+            ✓
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    {/* BUTTON */}
+    <button
+      onClick={() => {
+        window.location.href = "/recruitment/task";
+      }}
+      className="
+        group
+        mt-8
+        inline-flex
+        items-center
+        gap-5
+        rounded-full
+        bg-black
+        px-7
+        py-3.5
+        text-sm
+        font-black
+        uppercase
+        tracking-wide
+        text-white
+        transition-all
+        duration-300
+        hover:-translate-y-1
+        hover:bg-[#6D4CFF]
+        hover:shadow-lg
+      "
+    >
+      <span>
+        Check Selection Status
+      </span>
+
+      {/* CSS ARROW */}
+      <span
+        className="
+          flex
+          h-8
+          w-8
+          items-center
+          justify-center
+          rounded-full
+          bg-white
+          transition-transform
+          duration-300
+          group-hover:rotate-45
+        "
+      >
+        <span
+          className="
+            block
+            h-[9px]
+            w-[9px]
+            rotate-45
+            border-r-2
+            border-t-2
+            border-black
+          "
+        />
+      </span>
+
+    </button>
+
+
+    {/* TAGLINE */}
+    <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.25em] text-[#AAA8A1]">
+      Entrepreneurship • Innovation • Impact
+    </p>
+
+  </div>
+</div>
+): (
           <div className="min-h-[100vh] bg-[#F7F5EF] px-4 py-8 text-black sm:px-8 sm:py-12">
             <div className="mx-auto mb-8 max-w-6xl">
               <div className="mb-3 flex items-center gap-3">

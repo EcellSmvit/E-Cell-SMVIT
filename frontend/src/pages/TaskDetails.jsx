@@ -589,13 +589,6 @@ const TaskDetails = () => {
                           ? "SUBMITTING..."
                           : "SUBMIT TASK"}
                       </span>
-
-                      {!submitting && (
-                        <span className="text-lg">
-                          ↗
-                        </span>
-                      )}
-
                     </button>
 
                   </div>

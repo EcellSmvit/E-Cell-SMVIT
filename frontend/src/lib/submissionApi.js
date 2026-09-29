@@ -63,11 +63,10 @@ export const submitTask = async ({
   );
 
   try {
-    const googleSheetWebhook =
-      import.meta.env.VITE_GOOGLE_SHEET_WEBHOOK;
+    const taskSubmissionWebhook = import.meta.env.VITE_GOOGLE_SHEET_WEBHOOK;
 
-    if (googleSheetWebhook) {
-      await fetch(googleSheetWebhook, {
+    if (taskSubmissionWebhook) {
+      await fetch(taskSubmissionWebhook, {
         method: "POST",
         headers: {
           "Content-Type": "text/plain;charset=utf-8",

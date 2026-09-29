@@ -70,7 +70,7 @@ const TaskDetails = () => {
     setSuccess("");
 
     if (!githubUrl.trim()) {
-      setError("GitHub repository URL is required.");
+      setError("Google Drive URL is required.");
       return;
     }
 
@@ -456,7 +456,7 @@ const TaskDetails = () => {
                 <div className="mt-8">
 
                   <p className="text-[10px] tracking-[0.2em] uppercase text-black/40">
-                    GitHub Repository
+                    Google Drive link
                   </p>
 
                   <a
@@ -528,7 +528,7 @@ const TaskDetails = () => {
                   <div>
 
                     <label className="block text-xs font-bold tracking-[0.15em] uppercase mb-3">
-                      GitHub Repository
+                      Google Drive link
                     </label>
 
                     <input
@@ -537,12 +537,12 @@ const TaskDetails = () => {
                       onChange={(e) =>
                         setGithubUrl(e.target.value)
                       }
-                      placeholder="https://github.com/username/repository"
+                      placeholder="https://googledrive.com/username/"
                       className="w-full rounded-xl border border-black/10 bg-[#F7F5EF] px-5 py-4 outline-none text-sm placeholder:text-black/25 focus:border-[#6D4DFE] transition"
                     />
 
                     <p className="mt-2 text-xs text-black/35">
-                      Make sure your repository is accessible to
+                      Make sure your drive link is accessible to
                       the recruitment team.
                     </p>
 

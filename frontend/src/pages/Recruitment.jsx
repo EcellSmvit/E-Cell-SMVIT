@@ -79,81 +79,81 @@ function Recruitment() {
           <UserButton />
         </div>
         {alreadySubmitted ? (
-  <div className="min-h-[70vh] flex items-center justify-center bg-[#F7F5EF] px-5">
-  <div className="w-full max-w-2xl text-center">
+          <div className="min-h-[100vh] flex items-center justify-center bg-[#F7F5EF] px-5">
+            <div className="w-full max-w-2xl text-center">
 
-    {/* LABEL */}
-    <div className="flex items-center justify-center gap-3">
-      <span className="h-px w-8 bg-black/20" />
+              {/* LABEL */}
+              <div className="flex items-center justify-center gap-3">
+                <span className="h-px w-8 bg-black/20" />
 
-      <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#999791]">
-        Recruitment 2026
-      </p>
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-[#999791]">
+                  Recruitment 2026
+                </p>
 
-      <span className="h-px w-8 bg-black/20" />
-    </div>
-
-
-    {/* SUCCESS ICON */}
-    <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-[#6D4CFF]">
-      <span className="text-2xl font-black text-white">
-        ✓
-      </span>
-    </div>
+                <span className="h-px w-8 bg-black/20" />
+              </div>
 
 
-    {/* HEADING */}
-    <h1 className="mt-7 text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-black sm:text-7xl">
-      Application
-      <br />
-
-      <span className="text-[#6D4CFF]">
-        Submitted.
-      </span>
-    </h1>
+              {/* SUCCESS ICON */}
+              <div className="mx-auto mt-8 flex h-16 w-16 items-center justify-center rounded-full bg-[#6D4CFF]">
+                <span className="text-2xl font-black text-white">
+                  ✓
+                </span>
+              </div>
 
 
-    {/* DESCRIPTION */}
-    <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[#77756F] sm:text-base">
-      Your application has been successfully submitted.
-      Our team will review your application and update your
-      selection status.
-    </p>
+              {/* HEADING */}
+              <h1 className="mt-7 text-5xl font-black uppercase leading-[0.9] tracking-[-0.04em] text-black sm:text-7xl">
+                Application
+                <br />
+
+                <span className="text-[#6D4CFF]">
+                  Submitted.
+                </span>
+              </h1>
 
 
-    {/* STATUS */}
-    <div className="mx-auto mt-8 max-w-md rounded-2xl border border-black/10 bg-white/50 p-5">
-
-      <div className="flex items-center justify-between">
-
-        <div className="text-left">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999791]">
-            Application Status
-          </p>
-
-          <p className="mt-1 text-sm font-bold text-black">
-            Successfully Submitted
-          </p>
-        </div>
+              {/* DESCRIPTION */}
+              <p className="mx-auto mt-7 max-w-xl text-sm leading-7 text-[#77756F] sm:text-base">
+                Your application has been successfully submitted.
+                Our team will review your application and update your
+                selection status.
+              </p>
 
 
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#6D4CFF]/10">
-          <span className="text-sm font-black text-[#6D4CFF]">
-            ✓
-          </span>
-        </div>
+              {/* STATUS */}
+              <div className="mx-auto mt-8 max-w-md rounded-2xl border border-black/10 bg-white/50 p-5">
 
-      </div>
+                <div className="flex items-center justify-between">
 
-    </div>
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#999791]">
+                      Application Status
+                    </p>
+
+                    <p className="mt-1 text-sm font-bold text-black">
+                      Successfully Submitted
+                    </p>
+                  </div>
 
 
-    {/* BUTTON */}
-    <button
-      onClick={() => {
-        window.location.href = "/recruitment/task";
-      }}
-      className="
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#6D4CFF]/10">
+                    <span className="text-sm font-black text-[#6D4CFF]">
+                      ✓
+                    </span>
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              {/* BUTTON */}
+              <button
+                onClick={() => {
+                  window.location.href = "/recruitment/task";
+                }}
+                className="
         group
         mt-8
         inline-flex
@@ -174,14 +174,14 @@ function Recruitment() {
         hover:bg-[#6D4CFF]
         hover:shadow-lg
       "
-    >
-      <span>
-        Check Selection Status
-      </span>
+              >
+                <span>
+                  Check Selection Status
+                </span>
 
-      {/* CSS ARROW */}
-      <span
-        className="
+                {/* CSS ARROW */}
+                <span
+                  className="
           flex
           h-8
           w-8
@@ -193,9 +193,9 @@ function Recruitment() {
           duration-300
           group-hover:rotate-45
         "
-      >
-        <span
-          className="
+                >
+                  <span
+                    className="
             block
             h-[9px]
             w-[9px]
@@ -204,20 +204,20 @@ function Recruitment() {
             border-t-2
             border-black
           "
-        />
-      </span>
+                  />
+                </span>
 
-    </button>
+              </button>
 
 
-    {/* TAGLINE */}
-    <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.25em] text-[#AAA8A1]">
-      Entrepreneurship • Innovation • Impact
-    </p>
+              {/* TAGLINE */}
+              <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.25em] text-[#AAA8A1]">
+                Entrepreneurship • Innovation • Impact
+              </p>
 
-  </div>
-</div>
-): (
+            </div>
+          </div>
+        ) : (
           <div className="min-h-[100vh] bg-[#F7F5EF] px-4 py-8 text-black sm:px-8 sm:py-12">
             <div className="mx-auto mb-8 max-w-6xl">
               <div className="mb-3 flex items-center gap-3">
